@@ -1,0 +1,124 @@
+#!/bin/bash
+
+# Le docker network devono essere create anticipatamente su ogni VM
+# 	 docker network create -o "com.docker.network.bridge.name":"ros_bridge" --subnet="10.2.0.0/24" ros_driver
+# 	 docker network create -o "com.docker.network.bridge.name"="ros_bridge" --subnet="10.1.5.0/24" ros_controller
+# 	 docker network create -o "com.docker.network.bridge.name"="ros_bridge" --subnet="10.1.4.0/24" ros_state
+# 	 docker network create -o "com.docker.network.bridge.name"="ros_bridge" --subnet="10.1.3.0/24" ros_motionplanning
+# 	 docker network create -o "com.docker.network.bridge.name"="ros_bridge" --subnet="10.1.2.0/24" ros_command
+# 	 docker network create -o "com.docker.network.bridge.name"="ros_bridge" --subnet="10.1.1.0/24" ros_interface
+
+NOF_ACTIVE_ROBOTS=0
+
+declare -a Interface_IP_Set
+
+function start_robot () {
+
+	echo -e "\n\nSTEP $((6+2*(NOF_ACTIVE_ROBOTS-1))): robot activating"
+
+	NOF_ACTIVE_ROBOTS=$((NOF_ACTIVE_ROBOTS+1))
+	echo -e "\t -* Activating robot #$NOF_ACTIVE_ROBOTS ..."
+
+	sshpass -p$1 ssh $2@$3 "docker run -dit --rm --name driver_robot_$((NOF_ACTIVE_ROBOTS)) --hostname driver --add-host control:10.1.5.$((NOF_ACTIVE_ROBOTS+1)) --add-host state:10.1.4.$((NOF_ACTIVE_ROBOTS+1)) --add-host motion_planning:10.1.3.$((NOF_ACTIVE_ROBOTS+1)) --add-host robot_commander:10.1.2.$((NOF_ACTIVE_ROBOTS+1)) --add-host master:10.1.1.$((NOF_ACTIVE_ROBOTS+1)) --network ros_driver --ip 10.2.0.$((NOF_ACTIVE_ROBOTS+1)) robot driver"
+	DRIVER_IP=10.2.0.$((NOF_ACTIVE_ROBOTS+1))
+	echo -e "Diver IP: $DRIVER_IP"
+	# echo " "
+
+	sshpass -p$1 ssh $2@$4 "docker run -dit --rm --name controller_robot_$((NOF_ACTIVE_ROBOTS)) --hostname control --add-host driver:10.2.0.$((NOF_ACTIVE_ROBOTS+1))  --add-host state:10.1.4.$((NOF_ACTIVE_ROBOTS+1)) --add-host motion_planning:10.1.3.$((NOF_ACTIVE_ROBOTS+1)) --add-host robot_commander:10.1.2.$((NOF_ACTIVE_ROBOTS+1)) --add-host master:10.1.1.$((NOF_ACTIVE_ROBOTS+1)) --network ros_controller --ip 10.1.5.$((NOF_ACTIVE_ROBOTS+1)) robot control"
+	CONTROL_IP=10.1.5.$((NOF_ACTIVE_ROBOTS+1))
+	echo -e "Control IP: $CONTROL_IP"
+	# echo " "
+
+	sshpass -p$1 ssh $2@$5 "docker run -dit --rm --name state_robot_$((NOF_ACTIVE_ROBOTS)) --hostname state --add-host driver:10.2.0.$((NOF_ACTIVE_ROBOTS+1))  --add-host control:10.1.5.$((NOF_ACTIVE_ROBOTS+1)) --add-host motion_planning:10.1.3.$((NOF_ACTIVE_ROBOTS+1)) --add-host robot_commander:10.1.2.$((NOF_ACTIVE_ROBOTS+1)) --add-host master:10.1.1.$((NOF_ACTIVE_ROBOTS+1)) --network ros_state --ip 10.1.4.$((NOF_ACTIVE_ROBOTS+1)) robot state"
+	STATE_IP=10.1.4.$((NOF_ACTIVE_ROBOTS+1))
+	echo -e "State IP: $STATE_IP"
+	# echo " "
+
+	sshpass -p$1 ssh $2@$6 "docker run -dit --rm --name motionplanning_robot_$((NOF_ACTIVE_ROBOTS)) --hostname motion_planning --add-host driver:10.2.0.$((NOF_ACTIVE_ROBOTS+1))  --add-host control:10.1.5.$((NOF_ACTIVE_ROBOTS+1)) --add-host state:10.1.4.$((NOF_ACTIVE_ROBOTS+1)) --add-host robot_commander:10.1.2.$((NOF_ACTIVE_ROBOTS+1)) --add-host master:10.1.1.$((NOF_ACTIVE_ROBOTS+1)) --network ros_motionplanning --ip 10.1.3.$((NOF_ACTIVE_ROBOTS+1)) robot motion_planning"
+	MOTIONPLANNING_IP=10.1.3.$((NOF_ACTIVE_ROBOTS+1))
+	echo -e "Motion planning IP: $MOTIONPLANNING_IP"
+	# echo " "
+
+	sshpass -p$1 ssh $2@$7 "docker run -dit --rm --name commander_robot_$((NOF_ACTIVE_ROBOTS))  --hostname robot_commander --add-host driver:10.2.0.$((NOF_ACTIVE_ROBOTS+1))  --add-host control:10.1.5.$((NOF_ACTIVE_ROBOTS+1)) --add-host state:10.1.4.$((NOF_ACTIVE_ROBOTS+1)) --add-host motion_planning:10.1.3.$((NOF_ACTIVE_ROBOTS+1)) --add-host master:10.1.1.$((NOF_ACTIVE_ROBOTS+1)) --network ros_command --ip 10.1.2.$((NOF_ACTIVE_ROBOTS+1)) robot robot_commander"
+	ROBOTCOMMANDER_IP=10.1.2.$((NOF_ACTIVE_ROBOTS+1))
+	echo -e "Robot commander IP: $ROBOTCOMMANDER_IP"
+	# echo " "
+
+	sshpass -p$1 ssh $2@$8 "docker run -dit --rm --name interfacemaster_robot_$((NOF_ACTIVE_ROBOTS)) --hostname master --add-host driver:10.2.0.$((NOF_ACTIVE_ROBOTS+1))  --add-host control:10.1.5.$((NOF_ACTIVE_ROBOTS+1)) --add-host state:10.1.4.$((NOF_ACTIVE_ROBOTS+1)) --add-host motion_planning:10.1.3.$((NOF_ACTIVE_ROBOTS+1)) --add-host robot_commander:10.1.2.$((NOF_ACTIVE_ROBOTS+1)) --network ros_interface --ip 10.1.1.$((NOF_ACTIVE_ROBOTS+1)) robot interface_master"
+	INTERFACE_IP=10.1.1.$((NOF_ACTIVE_ROBOTS+1))
+	echo -e "Interface commander IP:  $INTERFACE_IP"
+	# echo " "
+
+	. ./mysleep.sh 30
+
+	echo -e "\n\nSTEP $((7+2*(NOF_ACTIVE_ROBOTS-1))): CPU measurements with VMs hosting idle containers"
+	echo "REMEMBER : already istantiated containers : $NOF_ACTIVE_ROBOTS"
+	read -p "Do you want to measure the CPU consumption of VMs hosting idle containers??`echo $'\n> '`If yes, press Y or y`echo $'\n> '`" -n 1 -r
+	echo " "
+	if [[ $REPLY =~ ^[Yy]$ ]]
+	then
+		echo -e "\t\t. . . CPU consumption of VMs hosting idle containers measuring . . ."
+		. ./CPU_measurements.sh CPUconsumption_IDLE_$((NOF_ACTIVE_ROBOTS))containers.out 300
+	else
+		echo -e "\t\t. . . CPU consumption of VMs hosting idle containers will not be measured . . ."
+	fi
+
+	Interface_IP_Set+=( $INTERFACE_IP )
+
+}
+
+INTERFACE_MASTER_VM_IP=10.0.1.162
+ROBOTCOMMANDER_VM_IP=10.0.1.161
+MOTIONPLANNING_VM_IP=10.0.1.160
+STATE_VM_IP=10.0.1.159
+CONTROLLER_VM_IP=10.0.1.158
+DRIVER_VM_IP=10.0.1.157
+
+VM_USERNAME=ros
+VM_PSW=ros
+
+n=0;
+read -p $'\nPress the number of robots to start\n' key
+
+echo -e "$key robots will be istantiated\n"
+
+while true; do
+    start_robot $VM_PSW $VM_USERNAME $DRIVER_VM_IP $CONTROLLER_VM_IP $STATE_VM_IP $MOTIONPLANNING_VM_IP $ROBOTCOMMANDER_VM_IP $INTERFACE_MASTER_VM_IP
+    n=$((n+1))
+    if [[ $n -eq $key ]]; then
+	break
+    fi
+done
+
+. ./mysleep.sh 30
+
+echo -e "\n\nSTEP $((7+2*(NOF_ACTIVE_ROBOTS))): Run python script to send move joint commands to the robot"
+read -p $'\nPress the frequency with which to send commands to the robot\n' freq_comm
+echo "A move joint command will be sent to the robots every $freq_comm seconds"
+
+sed -i "s/n.wait(\([0-9]\+\))/n.wait($freq_comm)/g" script.py
+
+for ipinterface in "${Interface_IP_Set[@]}"
+do
+	# echo "Sending script.py"
+	sshpass -p root scp ./script.py root@$ipinterface:/
+	# echo "Making script.py executable"
+	sshpass -p root ssh root@$ipinterface 'echo "root" | sudo -S chmod +x /script.py'
+	# echo "Running script.py"
+	nohup sshpass -p root ssh root@$ipinterface 'source /root/catkin_ws/devel/setup.bash && export PYTHONPATH=${PYTHONPATH}:/root/catkin_ws/src/niryo_one_python_api/src/niryo_python_api && python /script.py 1> outputlog.txt 2> errorslog.txt' & > script_output_$((NOF_ACTIVE_ROBOTS)).txt 2>&1
+	# &> script_output_((NOF_ACTIVE_ROBOTS)).txt
+done
+
+echo -e "\n\nSTEP $((7+2*(NOF_ACTIVE_ROBOTS)+1)): CPU measurements with VM hosting active containers (python script is running)"
+read -p "Do you want to measure the CPU consumption of VMs hosting active containers??`echo $'\n> '`If yes, press Y or y`echo $'\n> '`" -n 1 -r
+echo " "
+if [[ $REPLY =~ ^[Yy]$ ]]
+then
+	echo -e "\t\t. . . CPU consumption of VMs hosting active containers measuring . . ."
+	. ./CPU_measurements.sh CPUconsumption_$((NOF_ACTIVE_ROBOTS))ACTIVE_freq$((freq_comm)).out 300
+else
+	echo -e "\t\t. . . CPU consumption of VMs hosting active containers will not be measured . . ."
+fi
+
+echo "     ...     **Exit from the main script execution**     ...     "
+echo -e "\n\n"
