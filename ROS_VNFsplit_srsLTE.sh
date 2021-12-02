@@ -134,8 +134,8 @@ if [[ $# -eq 3 ]]; then
 			# sh ~/RAM_measurements.sh RAMusage_IDLE_nocontainers.out $measurement_iteration $measurement_period ROS_VNF_control 2>RAMerror.txt" 1>/dev/null  &
 		# sshpass -p ${VM_PSW} ssh ${VM_USERNAME}@$DRIVER_VM_IP "sh ~/CPU_measurements.sh CPUconsumption_IDLE_nocontainers.out $measurement_iteration $(echo $measurement_period | tr '.' ',') ROS_VNF_driver 2>CPUerror.txt &\
 			# sh ~/RAM_measurements.sh RAMusage_IDLE_nocontainers.out $measurement_iteration $measurement_period ROS_VNF_driver 2>RAMerror.txt" 1>/dev/null  &
-		# sh ./CPU_measurements.sh CPUconsumption_IDLE_nocontainers.out $measurement_iteration $(echo $measurement_period | tr '.' ',') LocalHost 1>/dev/null 2>CPUerror.txt &
-		# sh ./RAM_measurements.sh RAMusage_IDLE_nocontainers.out $measurement_iteration $measurement_period LocalHost 1>/dev/null  2>RAMerror.txt &
+		# sh ./CPU_measurements.sh ./Output/00_HostMetrics/CPUconsumption_IDLE_nocontainers.out $measurement_iteration $(echo $measurement_period | tr '.' ',') LocalHost 1>/dev/null 2>CPUerror.txt &
+		# sh ./RAM_measurements.sh ./Output/00_HostMetrics/RAMusage_IDLE_nocontainers.out $measurement_iteration $measurement_period LocalHost 1>/dev/null  2>RAMerror.txt &
 
 		# . ./mysleep.sh $(echo "$measurement_iteration*$measurement_period+20" | bc)
 	# else

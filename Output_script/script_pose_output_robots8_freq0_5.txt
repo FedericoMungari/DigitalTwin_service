@@ -1,7 +1,0 @@
---- Start
-Calibration finished !
-
-Learning mode activated? 
-False
-Goal has been aborted : Please restart the robot and try again.
---- End

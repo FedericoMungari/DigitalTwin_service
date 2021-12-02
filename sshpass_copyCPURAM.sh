@@ -1,6 +1,6 @@
 echo -e "\nSTEP 1"
-cp CPUc* ./Output/01_host/
-cp RAMu* ./Output/01_host/
+cp ./Output/00_HostMetrics/CPUc* ./Output/01_host/
+cp ./Output/00_HostMetrics/RAMu* ./Output/01_host/
 echo -e "\nSTEP 2"
 sshpass -p ros scp ros@10.0.1.175:./CPUc* ./Output/02_driver/
 sshpass -p ros scp ros@10.0.1.175:./RAMu* ./Output/02_driver/

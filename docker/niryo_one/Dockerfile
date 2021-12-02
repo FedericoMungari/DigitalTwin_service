@@ -2,7 +2,8 @@ FROM ros:kinetic
 
 RUN apt-get update && apt-get install -q -y --no-install-recommends ros-kinetic-robot-state-publisher ros-kinetic-moveit ros-kinetic-rosbridge-suite ros-kinetic-joy ros-kinetic-ros-control ros-kinetic-ros-controllers ros-kinetic-tf2-web-republisher python-jsonpickle lsof openssh-server && rm -rf /var/lib/apt/lists/*
 
-RUN mkdir -p ~/catkin_ws/src && cd ~/catkin_ws/src && git clone https://github.com/NiryoRobotics/niryo_one_ros.git . 
+RUN mkdir -p ~/catkin_ws/src && cd ~/catkin_ws/src && git clone https://github.com/NiryoRobotics/niryo_one_ros.git . && mkdir /Output_script
+
 RUN /bin/bash -c ". /opt/ros/kinetic/setup.bash && cd ~/catkin_ws && catkin_make && echo 'root:root' | chpasswd && sed -i 's/PermitRootLogin prohibit-password/PermitRootLogin yes/' /etc/ssh/sshd_config"
 
 COPY ./ros_entrypoint.sh /ros_entrypoint.sh

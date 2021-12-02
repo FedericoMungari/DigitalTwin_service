@@ -1,6 +1,6 @@
 echo -e "\nSTEP 1"
-rm ./CPUc*
-rm ./RAMu*
+rm ./Output/00_HostMetrics/CPUc*
+rm ./Output/00_HostMetrics/RAMu*
 echo -e "\nSTEP 2"
 sshpass -p ros ssh ros@10.0.1.175 "rm ./CPUc*"
 sshpass -p ros ssh ros@10.0.1.175 "rm ./RAMu*"

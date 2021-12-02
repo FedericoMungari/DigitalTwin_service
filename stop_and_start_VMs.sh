@@ -24,7 +24,7 @@ else
 	VBoxManage controlvm ROS_VNF_state poweroff &>/dev/null
 	sleep 2
 	echo -e "\n..Stopping the robot motion planning"
-	VBoxManage controlvm ROS_VNF_motionplanning poweroff &>/dev/null
+	sshpass -p${REMOTE_HOST_PASS} ssh $REMOTE_HOST_USER@$REMOTE_HOST_IP "VBoxManage controlvm ROS_VNF_motionplanning poweroff" &>/dev/null
 	sleep 2
 	echo -e "\n..Stopping the robot commander"
 	VBoxManage controlvm ROS_VNF_command poweroff &>/dev/null
@@ -36,7 +36,7 @@ else
 
 	# VMs STARTING
 	echo -e "\n..Starting the robot driver"
-	sshpass -p${REMOTE_HOST_PASS} ssh $REMOTE_HOST_USER@$REMOTE_HOST_IP "VBoxManage startvm ROS_VNF_driver --type headless" &>/dev/null &>/dev/null
+	sshpass -p${REMOTE_HOST_PASS} ssh $REMOTE_HOST_USER@$REMOTE_HOST_IP "VBoxManage startvm ROS_VNF_driver --type headless" &>/dev/null
 	sleep  1
 	echo -e "\n..Starting the robot control"
 	VBoxManage startvm ROS_VNF_control --type headless &>/dev/null
@@ -45,7 +45,7 @@ else
 	VBoxManage startvm ROS_VNF_state --type headless &>/dev/null
 	sleep 1
 	echo -e "\n..Starting the robot motion planning"
-	VBoxManage startvm ROS_VNF_motionplanning --type headless &>/dev/null
+	sshpass -p${REMOTE_HOST_PASS} ssh $REMOTE_HOST_USER@$REMOTE_HOST_IP "VBoxManage startvm ROS_VNF_motionplanning --type headless" &>/dev/null
 	sleep 1
 	echo -e "\n..Starting the robot commander"
 	VBoxManage startvm ROS_VNF_command --type headless &>/dev/null

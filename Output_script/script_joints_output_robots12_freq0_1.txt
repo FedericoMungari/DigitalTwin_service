@@ -1,9 +1,0 @@
---- Start
-Calibration finished !
-
-Learning mode activated? 
-False
-0,23.662095
-1,4.849023
-Action Server timeout : niryo_one/commander/robot_action
---- End
