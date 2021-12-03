@@ -1,7 +1,6 @@
 #!/bin/bash
 
 NUM_ROBOTS_LIST="1 2 4 6 8 10 12 14 16"
-NUM_ROBOTS_LIST="4 6 8 10 12 14 16"
 # NUM_ROBOTS_LIST="6 8 10 12"
 COMMAND_LIST="pose joints"
 WAITINGTIME_LIST="0"
@@ -19,7 +18,7 @@ for num_robots_value in $NUM_ROBOTS_LIST; do
 			echo "-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-"
 			echo "*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*"
 
-			. ./ROS_VNFsplit_srsLTE.sh $num_robots_value $command_value $waitingtime_value
+			. ./Script_startRobots/ROS_VNFsplit_srsLTE.sh $num_robots_value $command_value $waitingtime_value
 		done
 	done
 done
