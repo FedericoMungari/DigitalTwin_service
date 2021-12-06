@@ -20,7 +20,7 @@ n = NiryoOne()
 
 try:
 
-    seed(160)
+    seed(176)
 
     # Calibrate robot first
     n.calibrate_auto()
