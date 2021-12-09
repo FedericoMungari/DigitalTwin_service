@@ -1,8 +1,9 @@
 #!/bin/bash
 
 NUM_ROBOTS_LIST="1 2 4 6 8 10 12 14 16"
-# NUM_ROBOTS_LIST="6 8 10 12"
+# NUM_ROBOTS_LIST="6 8 10"
 COMMAND_LIST="pose joints"
+COMMAND_LIST="joints"
 WAITINGTIME_LIST="0"
 
 

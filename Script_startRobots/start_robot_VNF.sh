@@ -106,9 +106,9 @@ function start_robot () {
 
 INTERFACE_MASTER_VM_IP=10.0.1.162
 ROBOTCOMMANDER_VM_IP=10.0.1.161
-MOTIONPLANNING_VM_IP=10.0.1.185
+MOTIONPLANNING_VM_IP=10.0.1.160
 STATE_VM_IP=10.0.1.159
-CONTROLLER_VM_IP=10.0.1.158
+CONTROLLER_VM_IP=10.0.1.188
 DRIVER_VM_IP=10.0.1.175
 
 VM_USERNAME=ros
@@ -131,7 +131,7 @@ done
 
 commandname=$2
 
-if [[ $commandname ==  "pose" ]]; then
+if [[ $commandname ==  "niente" ]]; then
 
 	echo -e "\nIDLE containers: CPU and RAM measurement --> *_IDLE_$((n_robots))containers.out"
 	sshpass -p ${VM_PSW} ssh ${VM_USERNAME}@$INTERFACE_MASTER_VM_IP "sh ~/CPU_measurements.sh CPUconsumption_IDLE_$((n_robots))containers.out $measurement_iteration $(echo $measurement_period | tr '.' ',') ROS_VNF_interface &>/dev/null &\
