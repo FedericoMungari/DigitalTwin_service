@@ -1,0 +1,3 @@
+usage: script_ROSAPI_2.py [-h] [--filename FILENAME] [--duration DURATION]
+                          [--cmd_speed CMD_SPEED] [--key_offset KEY_OFFSET]
+script_ROSAPI_2.py: error: argument --duration: invalid int value: '2*6000*0.1'

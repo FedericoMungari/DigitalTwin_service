@@ -27,7 +27,7 @@
 #### IMPORTANT!! ###
 # - Check ssh fingerprint for root user for the twin machine before running
 
-if [[ $# -eq 3 ]]; then
+if [[ $# -eq 4 ]]; then
 
 	LOCAL_HOST_PASS=4646
 	LOCAL_HOST_PASS=k8snode
@@ -56,17 +56,32 @@ if [[ $# -eq 3 ]]; then
 	VM_USERNAME=ros
 	VM_PSW=ros
 
-	measurement_iteration="4000"
-	measurement_period="0.1"
+	# measurement_iteration="6000"
+	# measurement_period="0.1"
+
+	# ####################################################################################################################################
+	echo -e "\nPreliminary setup: run ptpd"
+	echo $LOCAL_HOST_PASS | sudo -S ptpd -i enp2s0 -m
+	sshpass -p$REMOTE_HOST_PASS ssh -t $REMOTE_HOST_USER@$REMOTE_HOST_IP "echo $REMOTE_HOST_PASS | sudo -S ptpd -i enp3s0 -m" &>/dev/null
+	echo "Started time sync services"
+
 
 	# ####################################################################################################################################
 	echo -e "\nSTEP 0: Check the number of already running VMs"
-	if [[ $(VBoxManage list runningvms |  wc -l) -eq 6 ]]; then n_vm_running=1; else n_vm_running=2; fi
-	n_vm_running=2
+	if [[ $(VBoxManage list runningvms |  wc -l) -eq 4  && $(sshpass -p${REMOTE_HOST_PASS} ssh $REMOTE_HOST_USER@$REMOTE_HOST_IP "VBoxManage list runningvms |  wc -l") -eq 2 ]]; 
+		then n_vm_running=1
+	else 
+		n_vm_running=2
+	fi
 
 	# ####################################################################################################################################
 	echo -e "\nSTEP 1: Stop prev executing VMs, and start new ones"
-	. ./Script_startRobots/stop_and_start_VMs.sh
+	if [[ n_vm_running -eq 2 ]]; then
+		. ./Script_startRobots/stop_and_start_VMs.sh
+	else
+		echo -e "\t . . . S k i p p i n g . . ."
+		echo -e "\t\tAll the VMs are already running"
+	fi
 
 	# ####################################################################################################################################
 	echo -e "\nSTEP 2: Stop prev executing containers on VMs"
@@ -93,21 +108,39 @@ if [[ $# -eq 3 ]]; then
 	echo -e "\t... the interface VM"
 	sshpass -p ${VM_PSW} scp ./Script_measurements/CPU_measurements.sh ${VM_USERNAME}@$INTERFACE_MASTER_VM_IP:~/
 	sshpass -p ${VM_PSW} scp ./Script_measurements/RAM_measurements.sh ${VM_USERNAME}@$INTERFACE_MASTER_VM_IP:~/
+	sshpass -p ${VM_PSW} scp ./Script_measurements/resources_psutil.py ${VM_USERNAME}@$INTERFACE_MASTER_VM_IP:~/
+	sshpass -p ${VM_PSW} scp ./Script_measurements/resources_dockerstats.sh ${VM_USERNAME}@$INTERFACE_MASTER_VM_IP:~/
+	sshpass -p ${VM_PSW} scp ./Script_measurements/resources_CPUtime.py ${VM_USERNAME}@$INTERFACE_MASTER_VM_IP:~/
 	echo -e "\t... the commander VM"
 	sshpass -p ${VM_PSW} scp ./Script_measurements/CPU_measurements.sh ${VM_USERNAME}@$ROBOTCOMMANDER_VM_IP:~/
 	sshpass -p ${VM_PSW} scp ./Script_measurements/RAM_measurements.sh ${VM_USERNAME}@$ROBOTCOMMANDER_VM_IP:~/
+	sshpass -p ${VM_PSW} scp ./Script_measurements/resources_psutil.py ${VM_USERNAME}@$ROBOTCOMMANDER_VM_IP:~/
+	sshpass -p ${VM_PSW} scp ./Script_measurements/resources_dockerstats.sh ${VM_USERNAME}@$ROBOTCOMMANDER_VM_IP:~/
+	sshpass -p ${VM_PSW} scp ./Script_measurements/resources_CPUtime.py ${VM_USERNAME}@$ROBOTCOMMANDER_VM_IP:~/
 	echo -e "\t... the motion planning VM"
 	sshpass -p ${VM_PSW} scp ./Script_measurements/CPU_measurements.sh ${VM_USERNAME}@$MOTIONPLANNING_VM_IP:~/
 	sshpass -p ${VM_PSW} scp ./Script_measurements/RAM_measurements.sh ${VM_USERNAME}@$MOTIONPLANNING_VM_IP:~/
+	sshpass -p ${VM_PSW} scp ./Script_measurements/resources_psutil.py ${VM_USERNAME}@$MOTIONPLANNING_VM_IP:~/
+	sshpass -p ${VM_PSW} scp ./Script_measurements/resources_dockerstats.sh ${VM_USERNAME}@$MOTIONPLANNING_VM_IP:~/
+	sshpass -p ${VM_PSW} scp ./Script_measurements/resources_CPUtime.py ${VM_USERNAME}@$MOTIONPLANNING_VM_IP:~/
 	echo -e "\t... the state VM"
 	sshpass -p ${VM_PSW} scp ./Script_measurements/CPU_measurements.sh ${VM_USERNAME}@$STATE_VM_IP:~/
 	sshpass -p ${VM_PSW} scp ./Script_measurements/RAM_measurements.sh ${VM_USERNAME}@$STATE_VM_IP:~/
+	sshpass -p ${VM_PSW} scp ./Script_measurements/resources_psutil.py ${VM_USERNAME}@$STATE_VM_IP:~/
+	sshpass -p ${VM_PSW} scp ./Script_measurements/resources_dockerstats.sh ${VM_USERNAME}@$STATE_VM_IP:~/
+	sshpass -p ${VM_PSW} scp ./Script_measurements/resources_CPUtime.py ${VM_USERNAME}@$STATE_VM_IP:~/
 	echo -e "\t... the control VM"
 	sshpass -p ${VM_PSW} scp ./Script_measurements/CPU_measurements.sh ${VM_USERNAME}@$CONTROLLER_VM_IP:~/
 	sshpass -p ${VM_PSW} scp ./Script_measurements/RAM_measurements.sh ${VM_USERNAME}@$CONTROLLER_VM_IP:~/
+	sshpass -p ${VM_PSW} scp ./Script_measurements/resources_psutil.py ${VM_USERNAME}@$CONTROLLER_VM_IP:~/
+	sshpass -p ${VM_PSW} scp ./Script_measurements/resources_dockerstats.sh ${VM_USERNAME}@$CONTROLLER_VM_IP:~/
+	sshpass -p ${VM_PSW} scp ./Script_measurements/resources_CPUtime.py ${VM_USERNAME}@$CONTROLLER_VM_IP:~/
 	echo -e "\t... the driver VM"
 	sshpass -p ${VM_PSW} scp ./Script_measurements/CPU_measurements.sh ${VM_USERNAME}@$DRIVER_VM_IP:~/
 	sshpass -p ${VM_PSW} scp ./Script_measurements/RAM_measurements.sh ${VM_USERNAME}@$DRIVER_VM_IP:~/
+	sshpass -p ${VM_PSW} scp ./Script_measurements/resources_psutil.py ${VM_USERNAME}@$DRIVER_VM_IP:~/
+	sshpass -p ${VM_PSW} scp ./Script_measurements/resources_dockerstats.sh ${VM_USERNAME}@$DRIVER_VM_IP:~/
+	sshpass -p ${VM_PSW} scp ./Script_measurements/resources_CPUtime.py ${VM_USERNAME}@$DRIVER_VM_IP:~/
 
 	# ####################################################################################################################################
 	echo -e "\n* * * * * * * * * * * * * * * * * * * * * *\nSTEP 5: CPU and RAM measurements with idle VM (containers were not even istantiated)"
@@ -153,7 +186,7 @@ if [[ $# -eq 3 ]]; then
 	echo -ne '..1 ..2 ..3\r'
 	sleep 1
 
-	/bin/bash ./Script_startRobots/start_robot_VNF.sh $1 $2 $3
+	/bin/bash ./Script_startRobots/start_robot_VNF.sh $1 $2 $3 $4
 	# sleep 20
 
 	echo -e "\nMAIN CODE ENDED"
@@ -180,6 +213,6 @@ if [[ $# -eq 3 ]]; then
 	# VBoxManage controlvm ROS_VNF_interface poweroff &>/dev/null
 
 
-	VBoxManage controlvm ROS_VNF_control poweroff
+	VBoxManage controlvm ROS_VNF_state poweroff
 
 fi

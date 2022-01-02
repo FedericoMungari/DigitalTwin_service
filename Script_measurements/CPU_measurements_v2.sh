@@ -19,8 +19,6 @@ count="${2:-$default_count}"
 default_name="machine_name"
 machine_name="${4:-$default_name}"
 
-count=$2
-
 sleepingtime_point=$(echo $sleepingtime | tr ',' '.')
 
 top -bn 1 | egrep '^%Cpu|buff/cache' > tmp2.txt

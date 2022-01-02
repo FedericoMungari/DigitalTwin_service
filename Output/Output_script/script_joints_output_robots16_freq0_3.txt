@@ -1,0 +1,7 @@
+--- Start
+Calibration finished !
+
+Learning mode activated? 
+False
+Action Server is not up : niryo_one/commander/robot_action
+--- End

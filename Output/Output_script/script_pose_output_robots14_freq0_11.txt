@@ -1,0 +1,7 @@
+--- Start
+Calibration finished !
+
+Learning mode activated? 
+False
+Goal has been aborted : Moveit failed to compute the plan.
+--- End
