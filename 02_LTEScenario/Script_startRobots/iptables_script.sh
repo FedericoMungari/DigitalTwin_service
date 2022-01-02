@@ -32,11 +32,11 @@ echo "iptable command on driver VM : add"
 sshpass -p${VM_PSW} ssh $VM_USERNAME@$DRIVER_VM_IP "echo $VM_PSW | sudo -S iptables -D DOCKER-USER -j ACCEPT &>/dev/null" &>/dev/null
 echo "iptable command on driver VM : rm"
 sshpass -p${VM_PSW} ssh $VM_USERNAME@$DRIVER_VM_IP "echo $VM_PSW | sudo -S iptables -I DOCKER-USER -j ACCEPT &>/dev/null" &>/dev/null
-echo "iptable command on LOCAL HOST : add"
-echo $LOCAL_HOST_PASS | sudo -S iptables -D DOCKER-USER -j ACCEPT &>/dev/null
-echo "iptable command on LOCAL HOST : rm"
-echo $LOCAL_HOST_PASS | sudo -S iptables -I DOCKER-USER -j ACCEPT &>/dev/null
-echo "iptable command on REMOTE HOST : add"
-sshpass -p${REMOTE_HOST_PASS} ssh $REMOTE_HOST_USER@$REMOTE_HOST_IP "echo $REMOTE_HOST_PASS | sudo -S iptables -D DOCKER-USER -j ACCEPT" &>/dev/null
-echo "iptable command on REMOTE HOST : rm"
-sshpass -p${REMOTE_HOST_PASS} ssh $REMOTE_HOST_USER@$REMOTE_HOST_IP "echo $REMOTE_HOST_PASS | sudo -S iptables -I DOCKER-USER -j ACCEPT" &>/dev/null
+echo "iptable command on ROBOT HOST : add"
+sshpass -p${ROBOT_HOST_PASS} ssh $ROBOT_HOST_USER@$ROBOT_HOST_IP_LOCAL "echo $ROBOT_HOST_PASS | sudo -S iptables -D DOCKER-USER -j ACCEPT &>/dev/null"
+echo "iptable command on ROBOT HOST : rm"
+sshpass -p${ROBOT_HOST_PASS} ssh $ROBOT_HOST_USER@$ROBOT_HOST_IP_LOCAL "echo $ROBOT_HOST_PASS | sudo -S iptables -I DOCKER-USER -j ACCEPT &>/dev/null"
+echo "iptable command on EDGE HOST : add"
+echo $EDGE_HOST_PASS | sudo -S iptables -D DOCKER-USER -j ACCEPT &>/dev/null
+echo "iptable command on EDGE HOST : rm"
+echo $EDGE_HOST_PASS | sudo -S iptables -I DOCKER-USER -j ACCEPT &>/dev/null

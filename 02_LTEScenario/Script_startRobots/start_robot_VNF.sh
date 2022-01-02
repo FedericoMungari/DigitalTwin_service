@@ -1,13 +1,5 @@
 #!/bin/bash
 
-# Le docker network devono essere create anticipatamente su ogni VM
-# 	 docker network create -o "com.docker.network.bridge.name":"ros_bridge" --subnet="10.2.0.0/24" ros_driver
-# 	 docker network create -o "com.docker.network.bridge.name"="ros_bridge" --subnet="10.1.5.0/24" ros_controller
-# 	 docker network create -o "com.docker.network.bridge.name"="ros_bridge" --subnet="10.1.4.0/24" ros_state
-# 	 docker network create -o "com.docker.network.bridge.name"="ros_bridge" --subnet="10.1.3.0/24" ros_motionplanning
-# 	 docker network create -o "com.docker.network.bridge.name"="ros_bridge" --subnet="10.1.2.0/24" ros_command
-# 	 docker network create -o "com.docker.network.bridge.name"="ros_bridge" --subnet="10.1.1.0/24" ros_interface
-
 measurement_iteration="3600"
 measurement_period="0.5"
 
@@ -69,60 +61,71 @@ function start_robot () {
 
 	. ./Script_startRobots/mysleep.sh 20
 
-	echo -e "\n\nSTEP $((8+2*(NOF_ACTIVE_ROBOTS-1))): CPU measurements and RAM usage with VMs hosting idle containers"
 	echo "REMEMBER : already istantiated containers : $NOF_ACTIVE_ROBOTS"
-	echo -e "\t\t. . . S k i p p i n g . . ."
-	# read -p "Do you want to measure the CPU consumption of VMs hosting $NOF_ACTIVE_ROBOTS idle containers??`echo $'\n> '`If yes, press Y or y`echo $'\n> '`" -n 1 -r
-	# echo " "
-	# if [[ $REPLY =~ ^[Yy]$ ]]
-	# then
-		# echo -e "\t\t. . . CPU consumption and RAM usage of VMs hosting $NOF_ACTIVE_ROBOTS idle containers measuring . . ."
-		# # . ./Script_measurements/CPU_measurements.sh CPUconsumption_IDLE_$((NOF_ACTIVE_ROBOTS))containers.out $measurement_iteration $measurement_iteration LocalHost && . ./RAM_measurements.sh RAMusage_IDLE_$((NOF_ACTIVE_ROBOTS))containers.out $measurement_iteration $measurement_iteration LocalHost
-
-		# sshpass -p ${VM_PSW} ssh ${VM_USERNAME}@$INTERFACE_MASTER_VM_IP "sh ~/CPU_measurements.sh CPUconsumption_IDLE_$((NOF_ACTIVE_ROBOTS))containers.out $measurement_iteration $(echo $measurement_period | tr '.' ',') ROS_VNF_interface &\
-			# sh ~/RAM_measurements.sh RAMusage_IDLE_$((NOF_ACTIVE_ROBOTS))containers.out $measurement_iteration $measurement_period ROS_VNF_interface" 1>/dev/null &
-		# sshpass -p ${VM_PSW} ssh ${VM_USERNAME}@$ROBOTCOMMANDER_VM_IP "sh ~/CPU_measurements.sh CPUconsumption_IDLE_$((NOF_ACTIVE_ROBOTS))containers.out $measurement_iteration $(echo $measurement_period | tr '.' ',') ROS_VNF_command &\
-			# sh ~/RAM_measurements.sh RAMusage_IDLE_$((NOF_ACTIVE_ROBOTS))containers.out $measurement_iteration $measurement_period ROS_VNF_command" 1>/dev/null &
-		# sshpass -p ${VM_PSW} ssh ${VM_USERNAME}@$MOTIONPLANNING_VM_IP "sh ~/CPU_measurements.sh CPUconsumption_IDLE_$((NOF_ACTIVE_ROBOTS))containers.out $measurement_iteration $(echo $measurement_period | tr '.' ',') ROS_VNF_motionplanning &\
-			# sh ~/RAM_measurements.sh RAMusage_IDLE_$((NOF_ACTIVE_ROBOTS))containers.out $measurement_iteration $measurement_period ROS_VNF_motionplanning" 1>/dev/null &
-		# sshpass -p ${VM_PSW} ssh ${VM_USERNAME}@$STATE_VM_IP "sh ~/CPU_measurements.sh CPUconsumption_IDLE_$((NOF_ACTIVE_ROBOTS))containers.out $measurement_iteration $(echo $measurement_period | tr '.' ',') ROS_VNF_state &\
-			# sh ~/RAM_measurements.sh RAMusage_IDLE_$((NOF_ACTIVE_ROBOTS))containers.out $measurement_iteration $measurement_period ROS_VNF_state" 1>/dev/null &
-		# sshpass -p ${VM_PSW} ssh ${VM_USERNAME}@$CONTROLLER_VM_IP "sh ~/CPU_measurements.sh CPUconsumption_IDLE_$((NOF_ACTIVE_ROBOTS))containers.out $measurement_iteration $(echo $measurement_period | tr '.' ',') ROS_VNF_control &\
-			# sh ~/RAM_measurements.sh RAMusage_IDLE_$((NOF_ACTIVE_ROBOTS))containers.out $measurement_iteration $measurement_period ROS_VNF_control" 1>/dev/null &
-		# sshpass -p ${VM_PSW} ssh ${VM_USERNAME}@$DRIVER_VM_IP "sh ~/CPU_measurements.sh CPUconsumption_IDLE_$((NOF_ACTIVE_ROBOTS))containers.out $measurement_iteration $(echo $measurement_period | tr '.' ',') ROS_VNF_driver &\
-			# sh ~/RAM_measurements.sh RAMusage_IDLE_$((NOF_ACTIVE_ROBOTS))containers.out $measurement_iteration $measurement_period ROS_VNF_driver" 1>/dev/null &
-		# sh ./Script_measurements/CPU_measurements.sh ./Output/00_HostMetrics/CPUconsumption_IDLE_$((NOF_ACTIVE_ROBOTS))containers.out $measurement_iteration $(echo $measurement_period | tr '.' ',') LocalHost 1>/dev/null &
-		# sh ./Script_measurements/RAM_measurements.sh ./Output/00_HostMetrics/RAMusage_IDLE_$((NOF_ACTIVE_ROBOTS))containers.out $measurement_iteration $measurement_period LocalHost 1>/dev/null &
-
-		
-	# sshpass -p ${VM_PSW} ssh ${VM_USERNAME}@$INTERFACE_MASTER_VM_IP "python3 -u ~/resources_psutil.py $measurement_iteration $measurement_period ROS_VNF_interface 1> resources_psutil_IDLE_$((NOF_ACTIVE_ROBOTS))containers.out" 1>/dev/null &
-	# sshpass -p ${VM_PSW} ssh ${VM_USERNAME}@$ROBOTCOMMANDER_VM_IP "python3 -u ~/resources_psutil.py $measurement_iteration $measurement_period ROS_VNF_command 1> resources_psutil_IDLE_$((NOF_ACTIVE_ROBOTS))containers.out" 1>/dev/null &
-	# sshpass -p ${VM_PSW} ssh ${VM_USERNAME}@$MOTIONPLANNING_VM_IP "python3 -u ~/resources_psutil.py $measurement_iteration $measurement_period ROS_VNF_motionplanning 1> resources_psutil_IDLE_$((NOF_ACTIVE_ROBOTS))containers.out" 1>/dev/null &
-	# sshpass -p ${VM_PSW} ssh ${VM_USERNAME}@$STATE_VM_IP "python3 -u ~/resources_psutil.py $measurement_iteration $measurement_period ROS_VNF_state 1> resources_psutil_IDLE_$((NOF_ACTIVE_ROBOTS))containers.out" 1>/dev/null &
-	# sshpass -p ${VM_PSW} ssh ${VM_USERNAME}@$CONTROLLER_VM_IP "python3 -u ~/resources_psutil.py $measurement_iteration $measurement_period ROS_VNF_control 1> resources_psutil_IDLE_$((NOF_ACTIVE_ROBOTS))containers.out" 1>/dev/null &
-	# sshpass -p ${VM_PSW} ssh ${VM_USERNAME}@$DRIVER_VM_IP "python3 -u ~/resources_psutil.py $measurement_iteration $measurement_period ROS_VNF_driver 1> resources_psutil_IDLE_$((NOF_ACTIVE_ROBOTS))containers.out" 1>/dev/null &
-	# python3 -u ./Script_measurements/resources_psutil.py $measurement_iteration $measurement_period LocalHost 1> ./Output/00_HostMetrics/resources_psutil_IDLE_$((NOF_ACTIVE_ROBOTS))containers.out &
-	# . ./Script_startRobots/mysleep.sh $(echo "$measurement_iteration*$measurement_period*3" | bc)
-
-
-
-	# else
-		# echo -e "\t\t. . . CPU consumption and RAM usage of VMs hosting $NOF_ACTIVE_ROBOTS idle containers will not be measured . . ."
-	# fi
 
 	Interface_IP_Set+=( $INTERFACE_IP )
 
 }
 
-INTERFACE_MASTER_VM_IP=10.0.1.162
-ROBOTCOMMANDER_VM_IP=10.0.1.161
-MOTIONPLANNING_VM_IP=10.0.1.160
-STATE_VM_IP=10.0.1.159
-CONTROLLER_VM_IP=10.0.1.188
-DRIVER_VM_IP=10.0.1.175
+if true
+then
+	# eNB network and host configuration
+	ENB_IP_PRIVATE=10.0.2.1 # ptpd
+	ENB_IP_LOCAL=10.0.1.44
+	ENB_IP_LTE=172.16.0.1
+	ENB_USER=k8s-enb-node
+	ENB_PASS=k8snode
 
-VM_USERNAME=ros
-VM_PSW=ros
+	# epc network and host configuration (==enb)
+	EPC_IP_PRIVATE=$ENB_IP_PRIVATE
+	EPC_IP_LOCAL=$ENB_IP_LOCAL
+	EPC_IP_LTE=$ENB_IP_LTE
+	EPC_USER=$ENB_USER
+	EPC_PASS=$ENB_PASS
+
+	# ue (robot driver) network and host configuration
+	UE_IP_PRIVATE=10.0.2.2
+	UE_IP_LOCAL=10.0.1.46
+	UE_IP_LTE=172.16.0.2
+	UE_PASS=4646
+	UE_USER=dell46
+
+	ROBOT_HOST_IP_PRIVATE=$UE_IP_PRIVATE
+	ROBOT_HOST_IP_LOCAL=$UE_IP_LOCAL
+	ROBOT_HOST_IP_LTE=$UE_IP_LTE # EDGE_GATEWAY
+	ROBOT_HOST_USER=$UE_USER
+	ROBOT_HOST_PASS=$UE_PASS
+
+	EDGE_HOST_IP_PRIVATE=$ENB_IP_PRIVATE
+	EDGE_HOST_IP_LOCAL=$ENB_IP_LOCAL
+	EDGE_HOST_IP_LTE=$ENB_IP_LTE # ROBOT_GATEWAY
+	EDGE_HOST_USER=$ENB_USER
+	EDGE_HOST_PASS=$ENB_PASS
+
+	INTERFACE_MASTER_DOCKER_SUBNET=10.1.1.0/24
+	ROBOTCOMMANDER_DOCKER_SUBNET=10.1.2.0/24
+	MOTIONPLANNING_DOCKER_SUBNET=10.1.3.0/24
+	STATE_DOCKER_SUBNET=10.1.4.0/24
+	CONTROLLER_DOCKER_SUBNET=10.1.5.0/24
+
+	EDGE_DOCKER_SUBNET=10.1.0.0/16
+
+	DRIVER_DOCKER_SUBNET=10.2.0.0/24
+
+	INTERFACE_MASTER_VM_IP=10.0.3.7
+	ROBOTCOMMANDER_VM_IP=10.0.3.6
+	MOTIONPLANNING_VM_IP=10.0.3.5
+	STATE_VM_IP=10.0.3.4
+	CONTROLLER_VM_IP=10.0.3.3
+	DRIVER_VM_IP=10.0.4.3
+	VM_USERNAME=ros
+	VM_PSW=ros
+
+	VM_EDGE_SUBNET=10.0.3.0/24
+	VM_EDGE_GW=10.0.3.1
+	VM_LOCAL_SUBNET=10.0.4.0/24
+	VM_LOCAL_GW=10.0.4.1
+fi
 
 n=0;
 # read -p $'\nPress the number of robots to start\n' key

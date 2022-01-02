@@ -14,10 +14,10 @@
 
 # VMs STOPPING
 echo -e "\n..Stopping the robot driver"
-sshpass -p${REMOTE_HOST_PASS} ssh $REMOTE_HOST_USER@$REMOTE_HOST_IP "VBoxManage controlvm ROS_VNF_driver poweroff" &>/dev/null
+sshpass -p${ROBOT_HOST_PASS} ssh $ROBOT_HOST_USER@$ROBOT_HOST_IP "VBoxManage controlvm ROS_VNF_driver poweroff" &>/dev/null
 sleep  2
 echo -e "\n..Stopping the robot control"
-sshpass -p${REMOTE_HOST_PASS} ssh $REMOTE_HOST_USER@$REMOTE_HOST_IP "VBoxManage controlvm ROS_VNF_control poweroff" &>/dev/null
+VBoxManage controlvm ROS_VNF_control poweroff &>/dev/null
 sleep 2
 echo -e "\n..Stopping the robot state"
 VBoxManage controlvm ROS_VNF_state poweroff &>/dev/null
@@ -38,7 +38,7 @@ echo -e "\n..Starting the robot driver"
 sshpass -p${REMOTE_HOST_PASS} ssh $REMOTE_HOST_USER@$REMOTE_HOST_IP "VBoxManage startvm ROS_VNF_driver --type headless" &>/dev/null
 sleep  1
 echo -e "\n..Starting the robot control"
-sshpass -p${REMOTE_HOST_PASS} ssh $REMOTE_HOST_USER@$REMOTE_HOST_IP "VBoxManage startvm ROS_VNF_control --type headless" &>/dev/null
+VBoxManage startvm ROS_VNF_control --type headless &>/dev/null
 sleep 1
 echo -e "\n..Starting the robot state"
 VBoxManage startvm ROS_VNF_state --type headless &>/dev/null
