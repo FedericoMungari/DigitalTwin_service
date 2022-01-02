@@ -1,0 +1,1 @@
+Exception in thread /niryo_one/robot_state (most likely raised during interpreter shutdown):Exception in thread /niryo_one/kits/conveyor_1_feedback (most likely raised during interpreter shutdown):

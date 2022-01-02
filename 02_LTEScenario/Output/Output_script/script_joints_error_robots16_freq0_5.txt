@@ -1,0 +1,8 @@
+Exception in thread /niryo_one/current_tool_id (most likely raised during interpreter shutdown):Exception in thread Thread-4 (most likely raised during interpreter shutdown):
+Traceback (most recent call last):
+  File "/usr/lib/python2.7/threading.py", line 801, in __bootstrap_inner
+  File "/usr/lib/python2.7/threading.py", line 754, in run
+  File "/opt/ros/kinetic/lib/python2.7/dist-packages/rospy/impl/tcpros_base.py", line 154, in runException in thread /niryo_one/kits/conveyor_1_feedback (most likely raised during interpreter shutdown):
+Traceback (most recent call last):
+  File "/usr/lib/python2.7/threading.py", line 801, in __bootstrap_inner
+  File "/usr/lib/python2.7/threading.py", line 754, in runException in thread /niryo_one/robot_state (most likely raised during interpreter shutdown):
