@@ -1,17 +1,5 @@
 #!/bin/bash
 
-# vartmp=0
-# if [[ $(VBoxManage list runningvms |  wc -l) -eq 6 ]]; then vartmp=1; fi
-
-# if [[ "$vartmp" -eq 1 ]]; then
-# {
-
-# 	echo "All the VMs are already running"
-
-# };
-# else
-# {
-
 # VMs STOPPING
 echo -e "\n..Stopping the robot driver"
 sshpass -p${ROBOT_HOST_PASS} ssh $ROBOT_HOST_USER@$ROBOT_HOST_IP "VBoxManage controlvm ROS_VNF_driver poweroff" &>/dev/null
@@ -56,9 +44,3 @@ VBoxManage startvm ROS_VNF_interface --type headless &>/dev/null
 
 echo -e "\n * * * All the VMs are now running * * *\n"
 echo -e "Remove background processes and services"
-
-# ./remove_background_processes_VM.sh $VM_PSW 
-# $VM_USERNAME $DRIVER_VM_IP $CONTROLLER_VM_IP $STATE_VM_IP $MOTIONPLANNING_VM_IP $ROBOTCOMMANDER_VM_IP $INTERFACE_MASTER_VM_IP 1>/dev/null 2>/dev/null
-
-# };
-# fi
