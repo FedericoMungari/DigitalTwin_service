@@ -1,1 +1,0 @@
-Exception in thread /niryo_one/current_tool_id (most likely raised during interpreter shutdown):

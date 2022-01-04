@@ -1,1 +1,0 @@
-Exception in thread /niryo_one/commander/robot_action/status (most likely raised during interpreter shutdown):

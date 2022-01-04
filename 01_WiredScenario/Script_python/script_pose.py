@@ -5,34 +5,53 @@ from niryo_one_python_api.niryo_one_api import *
 import rospy
 import time
 from math import radians
-# from random import uniform
 from random import randint,seed
 import sys
 from datetime import datetime
+import csv
+import argparse
+
+parser = argparse.ArgumentParser()
+parser.add_argument('--filename', help="name of the file in which data will be stored", type=str, default="/Output_script/"+name)
+args = parser.parse_args()
 
 rospy.init_node('niryo_one_example_python_api')
 
+filename=args.filename
+
+f = open(filename, 'w')
+log = csv.writer(f)
+log.writerow(["iteration,date,init_position,final_position,time"])
+
+def logging(eventnumb,curr_pos,old_pos,exectime):
+	datestring=datetime.datetime.now().strftime("%Y-%m-%d-%H:%M:%S")
+	log.writerow([eventnumb,\
+					datestring,\
+					old_pos,\
+					curr_pos,\
+					"{:.5f}".format(exectime)])
+  	sys.stdout.flush()
 
 if True:
 	
 	try:
 
-		print "--- Start"
+		# rint "--- Start"
 		n = NiryoOne()
 
-		seed(80)
+		seed(120)
 
 		# Calibrate robot first
 		n.calibrate_auto()
 		#n.calibrate_manual()
-		print "Calibration finished !\n"
+		# print "Calibration finished !\n"
 
 		time.sleep(1)
 
 		# Test learning mode
 		n.activate_learning_mode(False)
-		print "Learning mode activated? "
-		print n.get_learning_mode()
+		# print "Learning mode activated? "
+		# print n.get_learning_mode()
 
 		# Move
 		n.set_arm_max_velocity(100)
@@ -73,7 +92,7 @@ if True:
 		old_pos = -1
 		curr_pos = -1
 
-		print("iteration,date,init_position,final_position,time")
+		# print("iteration,date,init_position,final_position,time")
 
 
 		for i in range(10000):
@@ -87,7 +106,8 @@ if True:
 			# n.move_joints(p_tot[curr_pos])
 			n.move_pose(p_tot[curr_pos][0],p_tot[curr_pos][1],p_tot[curr_pos][2],p_tot[curr_pos][3],p_tot[curr_pos][4],p_tot[curr_pos][5])
 			datestring=datetime.now().strftime("%Y-%m-%d-%H:%M:%S")
-			print("%d,%s,%d,%d,%f" %(i,datestring,old_pos,curr_pos,time.time()-t1))
+			# print("%d,%s,%d,%d,%f" %(i,datestring,old_pos,curr_pos,time.time()-t1))
+			logging(i,curr_pos,old_pos,time.time()-t1)
 			n.wait(0)
 			old_pos = curr_pos
 

@@ -27,7 +27,7 @@
 #### IMPORTANT!! ###
 # - Check ssh fingerprint for root user for the twin machine before running
 
-if [[ $# -eq 4 ]]; then
+if [[ $# -eq 5 ]]; then
 
 	LOCAL_HOST_PASS=4646
 	LOCAL_HOST_PASS=k8snode
@@ -69,7 +69,7 @@ if [[ $# -eq 4 ]]; then
 	# ####################################################################################################################################
 	echo -e "\nSTEP 0: Check the number of already running VMs"
 	if [[ $(VBoxManage list runningvms |  wc -l) -eq 4  && $(sshpass -p${REMOTE_HOST_PASS} ssh $REMOTE_HOST_USER@$REMOTE_HOST_IP "VBoxManage list runningvms |  wc -l") -eq 2 ]]; 
-		then n_vm_running=1
+		then n_vm_running=2
 	else 
 		n_vm_running=2
 	fi
@@ -186,7 +186,7 @@ if [[ $# -eq 4 ]]; then
 	echo -ne '..1 ..2 ..3\r'
 	sleep 1
 
-	/bin/bash ./Script_startRobots/start_robot_VNF.sh $1 $2 $3 $4
+	/bin/bash ./Script_startRobots/start_robot_VNF.sh $1 $2 $3 $4 $5
 	# sleep 20
 
 	echo -e "\nMAIN CODE ENDED"
