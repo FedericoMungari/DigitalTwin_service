@@ -3,7 +3,7 @@
 echo "Stopping previously istantiated containers"
 
 echo "stop container command on driver VM"
-sshpass -p${VM_PSW} ssh $VM_USERNAME@$DRIVER_VM_IP "docker container ls -a | grep robot | cut -f 1 -d ' ' | xargs -r docker rm --force &>/dev/null" &>/dev/null
+sshpass -p${ROBOT_HOST_PASS} ssh $ROBOT_HOST_USER@$ROBOT_HOST_IP_LOCAL ". /home/dell46/Desktop/ROSNiryo/stop_prev_containers_DRIVER.sh ${VM_PSW} ${VM_USERNAME} ${DRIVER_VM_IP}"
 echo "stop container command on controller VM"
 sshpass -p${VM_PSW} ssh $VM_USERNAME@$CONTROLLER_VM_IP "docker container ls -a | grep robot | cut -f 1 -d ' ' | xargs -r docker rm --force &>/dev/null" &>/dev/null
 echo "stop container command on state VM"

@@ -62,9 +62,3 @@ for num_robots_value in $NUM_ROBOTS_LIST; do
 		done
 	done
 done
-
-
-# inter:	080027BC0A98
-# comm:		0800276753D2
-# mp:		0800270A3CC8
-# state: 	0800273C009C

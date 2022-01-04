@@ -1,2 +1,0 @@
-%Cpu(s):  3,8 us, 30,8 sy,  0,0 ni, 62,8 id,  1,2 wa,  0,0 hi,  1,4 si,  0,0 st
-KiB Mem : 16288164 total,   171080 free,  5803320 used, 10313764 buff/cache
