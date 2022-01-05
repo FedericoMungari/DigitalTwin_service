@@ -1,0 +1,570 @@
+---  Software Radio Systems LTE eNodeB  ---
+
+Reading configuration file /etc/srslte/enb.conf...
+WARNING: cpu0 scaling governor is not set to performance mode. Realtime processing could be compromised. Consider setting it to performance mode before running the application.
+
+Built in Release mode using commit f74ac6aa8 on branch HEAD.
+
+[31m/root/srsLTE/srsenb/src/enb_cfg_parser.cc.890: Force DL EARFCN for cell PCI=1 to 2850
+[0m
+Opening 1 channels in RF device=UHD with args=type=b200,num_recv_frames=256,num_send_frames=256
+[0;32m[INFO] [UHD] [0;39mlinux; GNU C++ version 7.5.0; Boost_106501; UHD_3.15.0.0-62-g7a3f1516
+[0;32m[INFO] [LOGGING] [0;39mFastpath logging disabled at runtime.
+Opening USRP channels=1, args: type=b200,num_recv_frames=256,num_send_frames=256,master_clock_rate=23.04e6
+[0;32m[INFO] [B200] [0;39mDetected Device: B210
+[0;32m[INFO] [B200] [0;39mOperating over USB 3.
+[0;32m[INFO] [B200] [0;39mInitialize CODEC control...
+[0;32m[INFO] [B200] [0;39mInitialize Radio control...
+[0;32m[INFO] [B200] [0;39mPerforming register loopback test... 
+[0;32m[INFO] [B200] [0;39mRegister loopback test passed
+[0;32m[INFO] [B200] [0;39mPerforming register loopback test... 
+[0;32m[INFO] [B200] [0;39mRegister loopback test passed
+[0;32m[INFO] [B200] [0;39mAsking for clock rate 23.040000 MHz... 
+[0;32m[INFO] [B200] [0;39mActually got clock rate 23.040000 MHz.
+Setting manual TX/RX offset to 100 samples
+Setting frequency: DL=2630.0 Mhz, UL=2510.0 MHz for cc_idx=0
+
+==== eNodeB started ===
+Type <t> to view trace
+RACH:  tti=3881, cc=0, preamble=26, offset=5, temp_crnti=0x46
+RACH:  tti=3971, cc=0, preamble=46, offset=5, temp_crnti=0x47
+RACH:  tti=3991, cc=0, preamble=19, offset=5, temp_crnti=0x48
+Disconnecting rnti=0x47.
+Disconnecting rnti=0x48.
+SCHED: Could not transmit RAR within the window (RA=3971, Window=[3974..3984], RAR=4022)
+SCHED: Could not transmit RAR within the window (RA=3991, Window=[3994..4004], RAR=4022)
+RACH:  tti=4011, cc=0, preamble=16, offset=5, temp_crnti=0x49
+SCHED: Could not transmit RAR within the window (RA=4011, Window=[4014..4024], RAR=4026)
+RACH:  tti=4031, cc=0, preamble=43, offset=5, temp_crnti=0x4a
+Disconnecting rnti=0x49.
+User 0x4a connected
+Disconnecting rnti=0x46.
+RACH:  tti=3921, cc=0, preamble=37, offset=7, temp_crnti=0x4b
+RACH:  tti=3921, cc=0, preamble=40, offset=12, temp_crnti=0x4c
+RACH:  tti=3921, cc=0, preamble=43, offset=18, temp_crnti=0x4d
+SCHED: Could not transmit RAR within the window (RA=3921, Window=[3924..3934], RAR=3936)
+RACH:  tti=3941, cc=0, preamble=51, offset=7, temp_crnti=0x4e
+RACH:  tti=3941, cc=0, preamble=54, offset=12, temp_crnti=0x4f
+RACH:  tti=3941, cc=0, preamble=57, offset=18, temp_crnti=0x50
+SCHED: Could not transmit RAR within the window (RA=3941, Window=[3944..3954], RAR=3957)
+RACH:  tti=3961, cc=0, preamble=0, offset=27, temp_crnti=0x51
+RACH:  tti=3961, cc=0, preamble=26, offset=3, temp_crnti=0x52
+RACH:  tti=3961, cc=0, preamble=29, offset=9, temp_crnti=0x53
+RACH:  tti=3981, cc=0, preamble=35, offset=7, temp_crnti=0x54
+RACH:  tti=3981, cc=0, preamble=38, offset=12, temp_crnti=0x55
+RACH:  tti=3981, cc=0, preamble=41, offset=18, temp_crnti=0x56
+Disconnecting rnti=0x4b.
+RACH:  tti=4001, cc=0, preamble=10, offset=16, temp_crnti=0x57
+RACH:  tti=4001, cc=0, preamble=13, offset=21, temp_crnti=0x58
+RACH:  tti=4001, cc=0, preamble=16, offset=27, temp_crnti=0x59
+Disconnecting rnti=0x4c.
+Disconnecting rnti=0x4d.
+RACH:  tti=4021, cc=0, preamble=1, offset=16, temp_crnti=0x5a
+RACH:  tti=4021, cc=0, preamble=4, offset=21, temp_crnti=0x5b
+Disconnecting rnti=0x4e.
+RACH:  tti=4021, cc=0, preamble=7, offset=27, temp_crnti=0x5c
+Disconnecting rnti=0x4f.
+Disconnecting rnti=0x50.
+RACH:  tti=4041, cc=0, preamble=22, offset=5, temp_crnti=0x5d
+Disconnecting rnti=0x51.
+RACH:  tti=4041, cc=0, preamble=25, offset=10, temp_crnti=0x5e
+Disconnecting rnti=0x52.
+RACH:  tti=4041, cc=0, preamble=28, offset=16, temp_crnti=0x5f
+Disconnecting rnti=0x53.
+Disconnecting rnti=0x54.
+RACH:  tti=4061, cc=0, preamble=0, offset=29, temp_crnti=0x60
+RACH:  tti=4061, cc=0, preamble=26, offset=5, temp_crnti=0x61
+Disconnecting rnti=0x55.
+RACH:  tti=4061, cc=0, preamble=29, offset=10, temp_crnti=0x62
+Disconnecting rnti=0x56.
+Disconnecting rnti=0x4a.
+Disconnecting rnti=0x57.
+RACH:  tti=4081, cc=0, preamble=1, offset=10, temp_crnti=0x63
+Disconnecting rnti=0x58.
+SCHED: Could not transmit RAR within the window (RA=4081, Window=[4084..4094], RAR=4139)
+RACH:  tti=4081, cc=0, preamble=4, offset=16, temp_crnti=0x64
+RACH:  tti=4081, cc=0, preamble=31, offset=40, temp_crnti=0x65
+Disconnecting rnti=0x59.
+RACH:  tti=4101, cc=0, preamble=41, offset=43, temp_crnti=0x66
+SCHED: Could not transmit RAR within the window (RA=4081, Window=[4084..4094], RAR=4140)
+SCHED: Could not transmit RAR within the window (RA=4101, Window=[4104..4114], RAR=4140)
+RACH:  tti=4101, cc=0, preamble=43, offset=1, temp_crnti=0x67
+RACH:  tti=4101, cc=0, preamble=46, offset=7, temp_crnti=0x68
+SCHED: Could not transmit RAR within the window (RA=4101, Window=[4104..4114], RAR=4143)
+RACH:  tti=4121, cc=0, preamble=19, offset=5, temp_crnti=0x69
+RACH:  tti=4121, cc=0, preamble=22, offset=10, temp_crnti=0x6a
+Disconnecting rnti=0x5a.
+Disconnecting rnti=0x5b.
+Disconnecting rnti=0x5c.
+SCHED: Could not transmit RAR within the window (RA=4121, Window=[4124..4134], RAR=4145)
+RACH:  tti=4121, cc=0, preamble=25, offset=16, temp_crnti=0x6b
+SCHED: Could not transmit RAR within the window (RA=4121, Window=[4124..4134], RAR=4147)
+RACH:  tti=4121, cc=0, preamble=28, offset=21, temp_crnti=0x6c
+RACH:  tti=4141, cc=0, preamble=47, offset=38, temp_crnti=0x6d
+SCHED: Could not transmit RAR within the window (RA=4121, Window=[4124..4134], RAR=4149)
+RACH:  tti=4141, cc=0, preamble=50, offset=43, temp_crnti=0x6e
+RACH:  tti=4141, cc=0, preamble=52, offset=1, temp_crnti=0x6f
+Disconnecting rnti=0x5d.
+Disconnecting rnti=0x5e.
+Disconnecting rnti=0x5f.
+RACH:  tti=4141, cc=0, preamble=55, offset=7, temp_crnti=0x70
+Disconnecting rnti=0x61.
+Disconnecting rnti=0x60.
+Disconnecting rnti=0x62.
+Disconnecting rnti=0x63.
+RACH:  tti=4161, cc=0, preamble=8, offset=5, temp_crnti=0x71
+Disconnecting rnti=0x64.
+RACH:  tti=4161, cc=0, preamble=11, offset=10, temp_crnti=0x72
+Disconnecting rnti=0x65.
+RACH:  tti=4161, cc=0, preamble=14, offset=16, temp_crnti=0x73
+Disconnecting rnti=0x66.
+RACH:  tti=4161, cc=0, preamble=17, offset=21, temp_crnti=0x74
+Disconnecting rnti=0x67.
+Disconnecting rnti=0x68.
+Disconnecting rnti=0x69.
+Disconnecting rnti=0x6a.
+RACH:  tti=4181, cc=0, preamble=21, offset=5, temp_crnti=0x75
+RACH:  tti=4181, cc=0, preamble=24, offset=10, temp_crnti=0x76
+RACH:  tti=4181, cc=0, preamble=27, offset=16, temp_crnti=0x77
+RACH:  tti=4181, cc=0, preamble=30, offset=21, temp_crnti=0x78
+Disconnecting rnti=0x6b.
+Disconnecting rnti=0x6c.
+Disconnecting rnti=0x6d.
+Disconnecting rnti=0x6e.
+Disconnecting rnti=0x6f.
+RACH:  tti=4201, cc=0, preamble=20, offset=12, temp_crnti=0x79
+RACH:  tti=4201, cc=0, preamble=23, offset=18, temp_crnti=0x7a
+RACH:  tti=4201, cc=0, preamble=26, offset=23, temp_crnti=0x7b
+Disconnecting rnti=0x70.
+RACH:  tti=4221, cc=0, preamble=24, offset=12, temp_crnti=0x7c
+RACH:  tti=4221, cc=0, preamble=27, offset=18, temp_crnti=0x7d
+RACH:  tti=4221, cc=0, preamble=30, offset=23, temp_crnti=0x7e
+Disconnecting rnti=0x71.
+Disconnecting rnti=0x72.
+Disconnecting rnti=0x73.
+Disconnecting rnti=0x74.
+Disconnecting rnti=0x75.
+Disconnecting rnti=0x76.
+Disconnecting rnti=0x77.
+Disconnecting rnti=0x78.
+Disconnecting rnti=0x79.
+Disconnecting rnti=0x7a.
+Disconnecting rnti=0x7b.
+Disconnecting rnti=0x7c.
+Disconnecting rnti=0x7d.
+Disconnecting rnti=0x7e.
+RACH:  tti=4661, cc=0, preamble=45, offset=5, temp_crnti=0x7f
+User 0x7f connected
+RACH:  tti=2081, cc=0, preamble=34, offset=9, temp_crnti=0x80
+RACH:  tti=2081, cc=0, preamble=37, offset=14, temp_crnti=0x81
+RACH:  tti=2101, cc=0, preamble=20, offset=25, temp_crnti=0x82
+RACH:  tti=2101, cc=0, preamble=23, offset=31, temp_crnti=0x83
+RACH:  tti=2121, cc=0, preamble=1, offset=43, temp_crnti=0x84
+RACH:  tti=2121, cc=0, preamble=30, offset=25, temp_crnti=0x85
+RACH:  tti=2141, cc=0, preamble=1, offset=43, temp_crnti=0x86
+RACH:  tti=2141, cc=0, preamble=30, offset=25, temp_crnti=0x87
+Disconnecting rnti=0x80.
+RACH:  tti=2161, cc=0, preamble=41, offset=9, temp_crnti=0x88
+RACH:  tti=2161, cc=0, preamble=44, offset=14, temp_crnti=0x89
+Disconnecting rnti=0x81.
+Disconnecting rnti=0x83.
+Disconnecting rnti=0x82.
+RACH:  tti=2181, cc=0, preamble=19, offset=25, temp_crnti=0x8a
+RACH:  tti=2181, cc=0, preamble=22, offset=31, temp_crnti=0x8b
+Disconnecting rnti=0x84.
+RACH:  tti=2201, cc=0, preamble=40, offset=9, temp_crnti=0x8c
+Disconnecting rnti=0x85.
+RACH:  tti=2201, cc=0, preamble=43, offset=14, temp_crnti=0x8d
+Disconnecting rnti=0x86.
+RACH:  tti=2221, cc=0, preamble=45, offset=9, temp_crnti=0x8e
+RACH:  tti=2221, cc=0, preamble=48, offset=14, temp_crnti=0x8f
+Disconnecting rnti=0x87.
+Disconnecting rnti=0x89.
+Disconnecting rnti=0x88.
+RACH:  tti=2241, cc=0, preamble=0, offset=38, temp_crnti=0x90
+RACH:  tti=2241, cc=0, preamble=3, offset=43, temp_crnti=0x91
+Disconnecting rnti=0x8a.
+RACH:  tti=2261, cc=0, preamble=42, offset=9, temp_crnti=0x92
+RACH:  tti=2261, cc=0, preamble=45, offset=14, temp_crnti=0x93
+Disconnecting rnti=0x8b.
+Disconnecting rnti=0x8c.
+RACH:  tti=2281, cc=0, preamble=39, offset=9, temp_crnti=0x94
+Disconnecting rnti=0x8d.
+RACH:  tti=2281, cc=0, preamble=42, offset=14, temp_crnti=0x95
+Disconnecting rnti=0x8f.
+Disconnecting rnti=0x8e.
+RACH:  tti=2301, cc=0, preamble=42, offset=9, temp_crnti=0x96
+RACH:  tti=2301, cc=0, preamble=45, offset=14, temp_crnti=0x97
+Disconnecting rnti=0x91.
+Disconnecting rnti=0x90.
+RACH:  tti=2321, cc=0, preamble=16, offset=25, temp_crnti=0x98
+RACH:  tti=2321, cc=0, preamble=19, offset=31, temp_crnti=0x99
+Disconnecting rnti=0x93.
+Disconnecting rnti=0x92.
+RACH:  tti=2341, cc=0, preamble=16, offset=25, temp_crnti=0x9a
+RACH:  tti=2341, cc=0, preamble=19, offset=31, temp_crnti=0x9b
+Disconnecting rnti=0x94.
+RACH:  tti=2361, cc=0, preamble=3, offset=38, temp_crnti=0x9c
+Disconnecting rnti=0x95.
+RACH:  tti=2361, cc=0, preamble=6, offset=43, temp_crnti=0x9d
+Disconnecting rnti=0x96.
+RACH:  tti=2381, cc=0, preamble=13, offset=25, temp_crnti=0x9e
+Disconnecting rnti=0x97.
+RACH:  tti=2381, cc=0, preamble=16, offset=31, temp_crnti=0x9f
+Disconnecting rnti=0x98.
+Disconnecting rnti=0x99.
+Disconnecting rnti=0x9a.
+Disconnecting rnti=0x9b.
+Disconnecting rnti=0x9c.
+Disconnecting rnti=0x9d.
+Disconnecting rnti=0x9e.
+Disconnecting rnti=0x9f.
+RACH:  tti=2661, cc=0, preamble=36, offset=9, temp_crnti=0xa0
+RACH:  tti=2661, cc=0, preamble=39, offset=14, temp_crnti=0xa1
+RACH:  tti=2681, cc=0, preamble=16, offset=25, temp_crnti=0xa2
+RACH:  tti=2681, cc=0, preamble=19, offset=31, temp_crnti=0xa3
+RACH:  tti=2701, cc=0, preamble=49, offset=9, temp_crnti=0xa4
+RACH:  tti=2701, cc=0, preamble=52, offset=14, temp_crnti=0xa5
+RACH:  tti=2721, cc=0, preamble=44, offset=9, temp_crnti=0xa6
+RACH:  tti=2721, cc=0, preamble=47, offset=14, temp_crnti=0xa7
+Disconnecting rnti=0xa0.
+RACH:  tti=2741, cc=0, preamble=9, offset=38, temp_crnti=0xa8
+RACH:  tti=2741, cc=0, preamble=12, offset=43, temp_crnti=0xa9
+Disconnecting rnti=0xa1.
+Disconnecting rnti=0xa2.
+RACH:  tti=2761, cc=0, preamble=4, offset=38, temp_crnti=0xaa
+RACH:  tti=2761, cc=0, preamble=7, offset=43, temp_crnti=0xab
+Disconnecting rnti=0xa3.
+Disconnecting rnti=0xa4.
+Disconnecting rnti=0xa5.
+RACH:  tti=2781, cc=0, preamble=2, offset=43, temp_crnti=0xac
+RACH:  tti=2781, cc=0, preamble=31, offset=25, temp_crnti=0xad
+Disconnecting rnti=0xa6.
+RACH:  tti=2801, cc=0, preamble=24, offset=25, temp_crnti=0xae
+RACH:  tti=2801, cc=0, preamble=27, offset=31, temp_crnti=0xaf
+Disconnecting rnti=0xa7.
+Disconnecting rnti=0xa9.
+Disconnecting rnti=0xa8.
+RACH:  tti=2821, cc=0, preamble=2, offset=38, temp_crnti=0xb0
+RACH:  tti=2821, cc=0, preamble=5, offset=43, temp_crnti=0xb1
+Disconnecting rnti=0xab.
+Disconnecting rnti=0xaa.
+RACH:  tti=2841, cc=0, preamble=22, offset=25, temp_crnti=0xb2
+RACH:  tti=2841, cc=0, preamble=25, offset=31, temp_crnti=0xb3
+Disconnecting rnti=0xad.
+Disconnecting rnti=0xac.
+Disconnecting rnti=0xae.
+Disconnecting rnti=0xaf.
+Disconnecting rnti=0xb0.
+Disconnecting rnti=0xb1.
+Disconnecting rnti=0xb2.
+Disconnecting rnti=0xb3.
+RACH:  tti=8671, cc=0, preamble=11, offset=25, temp_crnti=0xb4
+RACH:  tti=8671, cc=0, preamble=14, offset=31, temp_crnti=0xb5
+RACH:  tti=8691, cc=0, preamble=3, offset=38, temp_crnti=0xb6
+RACH:  tti=8691, cc=0, preamble=6, offset=43, temp_crnti=0xb7
+RACH:  tti=8711, cc=0, preamble=18, offset=25, temp_crnti=0xb8
+RACH:  tti=8711, cc=0, preamble=21, offset=31, temp_crnti=0xb9
+RACH:  tti=8731, cc=0, preamble=3, offset=38, temp_crnti=0xba
+RACH:  tti=8731, cc=0, preamble=6, offset=43, temp_crnti=0xbb
+Disconnecting rnti=0xb4.
+RACH:  tti=8751, cc=0, preamble=47, offset=9, temp_crnti=0xbc
+Disconnecting rnti=0xb5.
+RACH:  tti=8751, cc=0, preamble=50, offset=14, temp_crnti=0xbd
+Disconnecting rnti=0xb6.
+RACH:  tti=8771, cc=0, preamble=28, offset=25, temp_crnti=0xbe
+Disconnecting rnti=0xb7.
+RACH:  tti=8771, cc=0, preamble=31, offset=31, temp_crnti=0xbf
+Disconnecting rnti=0xb8.
+Disconnecting rnti=0xb9.
+RACH:  tti=8791, cc=0, preamble=36, offset=9, temp_crnti=0xc0
+RACH:  tti=8791, cc=0, preamble=39, offset=14, temp_crnti=0xc1
+Disconnecting rnti=0xba.
+RACH:  tti=8811, cc=0, preamble=25, offset=25, temp_crnti=0xc2
+Disconnecting rnti=0xbb.
+Disconnecting rnti=0xbc.
+RACH:  tti=8831, cc=0, preamble=39, offset=9, temp_crnti=0xc3
+Disconnecting rnti=0xbd.
+RACH:  tti=8831, cc=0, preamble=42, offset=14, temp_crnti=0xc4
+Disconnecting rnti=0xbe.
+RACH:  tti=8851, cc=0, preamble=10, offset=25, temp_crnti=0xc5
+Disconnecting rnti=0xbf.
+Disconnecting rnti=0xc0.
+Disconnecting rnti=0xc1.
+Disconnecting rnti=0xc2.
+Disconnecting rnti=0xc3.
+Disconnecting rnti=0xc4.
+Disconnecting rnti=0xc5.
+RACH:  tti=4431, cc=0, preamble=10, offset=25, temp_crnti=0xc6
+RACH:  tti=4431, cc=0, preamble=13, offset=31, temp_crnti=0xc7
+RACH:  tti=4451, cc=0, preamble=11, offset=25, temp_crnti=0xc8
+RACH:  tti=4451, cc=0, preamble=14, offset=31, temp_crnti=0xc9
+RACH:  tti=4471, cc=0, preamble=45, offset=9, temp_crnti=0xca
+RACH:  tti=4471, cc=0, preamble=48, offset=14, temp_crnti=0xcb
+RACH:  tti=4491, cc=0, preamble=0, offset=38, temp_crnti=0xcc
+RACH:  tti=4491, cc=0, preamble=3, offset=43, temp_crnti=0xcd
+Disconnecting rnti=0xc6.
+Disconnecting rnti=0xc7.
+RACH:  tti=4511, cc=0, preamble=44, offset=9, temp_crnti=0xce
+RACH:  tti=4511, cc=0, preamble=47, offset=14, temp_crnti=0xcf
+Disconnecting rnti=0xc9.
+Disconnecting rnti=0xc8.
+RACH:  tti=4531, cc=0, preamble=16, offset=25, temp_crnti=0xd0
+RACH:  tti=4531, cc=0, preamble=19, offset=31, temp_crnti=0xd1
+Disconnecting rnti=0xca.
+Disconnecting rnti=0xcb.
+RACH:  tti=4551, cc=0, preamble=21, offset=25, temp_crnti=0xd2
+RACH:  tti=4551, cc=0, preamble=24, offset=31, temp_crnti=0xd3
+Disconnecting rnti=0xcc.
+Disconnecting rnti=0xcd.
+RACH:  tti=4571, cc=0, preamble=3, offset=38, temp_crnti=0xd4
+RACH:  tti=4571, cc=0, preamble=6, offset=43, temp_crnti=0xd5
+Disconnecting rnti=0xcf.
+Disconnecting rnti=0xce.
+RACH:  tti=4591, cc=0, preamble=22, offset=25, temp_crnti=0xd6
+RACH:  tti=4591, cc=0, preamble=25, offset=31, temp_crnti=0xd7
+Disconnecting rnti=0xd0.
+Disconnecting rnti=0xd1.
+RACH:  tti=4611, cc=0, preamble=37, offset=9, temp_crnti=0xd8
+RACH:  tti=4611, cc=0, preamble=40, offset=14, temp_crnti=0xd9
+Disconnecting rnti=0xd3.
+Disconnecting rnti=0xd2.
+Disconnecting rnti=0xd5.
+Disconnecting rnti=0xd4.
+Disconnecting rnti=0xd7.
+Disconnecting rnti=0xd6.
+Disconnecting rnti=0xd8.
+Disconnecting rnti=0xd9.
+RACH:  tti=201, cc=0, preamble=14, offset=25, temp_crnti=0xda
+RACH:  tti=201, cc=0, preamble=17, offset=31, temp_crnti=0xdb
+RACH:  tti=221, cc=0, preamble=48, offset=9, temp_crnti=0xdc
+RACH:  tti=221, cc=0, preamble=51, offset=14, temp_crnti=0xdd
+RACH:  tti=241, cc=0, preamble=44, offset=9, temp_crnti=0xde
+RACH:  tti=241, cc=0, preamble=47, offset=14, temp_crnti=0xdf
+RACH:  tti=261, cc=0, preamble=11, offset=25, temp_crnti=0xe0
+RACH:  tti=261, cc=0, preamble=14, offset=31, temp_crnti=0xe1
+Disconnecting rnti=0xda.
+RACH:  tti=281, cc=0, preamble=25, offset=25, temp_crnti=0xe2
+Disconnecting rnti=0xdb.
+RACH:  tti=281, cc=0, preamble=28, offset=31, temp_crnti=0xe3
+Disconnecting rnti=0xdc.
+RACH:  tti=301, cc=0, preamble=51, offset=9, temp_crnti=0xe4
+Disconnecting rnti=0xdd.
+RACH:  tti=301, cc=0, preamble=54, offset=14, temp_crnti=0xe5
+Disconnecting rnti=0xde.
+RACH:  tti=321, cc=0, preamble=13, offset=25, temp_crnti=0xe6
+Disconnecting rnti=0xdf.
+RACH:  tti=321, cc=0, preamble=16, offset=31, temp_crnti=0xe7
+Disconnecting rnti=0xe0.
+RACH:  tti=341, cc=0, preamble=37, offset=9, temp_crnti=0xe8
+Disconnecting rnti=0xe1.
+RACH:  tti=341, cc=0, preamble=40, offset=14, temp_crnti=0xe9
+Disconnecting rnti=0xe2.
+RACH:  tti=361, cc=0, preamble=41, offset=9, temp_crnti=0xea
+Disconnecting rnti=0xe3.
+RACH:  tti=361, cc=0, preamble=44, offset=14, temp_crnti=0xeb
+Disconnecting rnti=0xe4.
+RACH:  tti=381, cc=0, preamble=13, offset=25, temp_crnti=0xec
+RACH:  tti=381, cc=0, preamble=16, offset=31, temp_crnti=0xed
+Disconnecting rnti=0xe5.
+Disconnecting rnti=0xe6.
+Disconnecting rnti=0xe7.
+Disconnecting rnti=0xe8.
+Disconnecting rnti=0xe9.
+Disconnecting rnti=0xea.
+Disconnecting rnti=0xeb.
+Disconnecting rnti=0xec.
+Disconnecting rnti=0xed.
+RACH:  tti=6211, cc=0, preamble=49, offset=9, temp_crnti=0xee
+RACH:  tti=6211, cc=0, preamble=52, offset=14, temp_crnti=0xef
+RACH:  tti=6231, cc=0, preamble=43, offset=9, temp_crnti=0xf0
+RACH:  tti=6231, cc=0, preamble=46, offset=14, temp_crnti=0xf1
+RACH:  tti=6251, cc=0, preamble=6, offset=38, temp_crnti=0xf2
+RACH:  tti=6251, cc=0, preamble=9, offset=43, temp_crnti=0xf3
+RACH:  tti=6271, cc=0, preamble=15, offset=25, temp_crnti=0xf4
+RACH:  tti=6271, cc=0, preamble=18, offset=31, temp_crnti=0xf5
+Disconnecting rnti=0xee.
+Disconnecting rnti=0xef.
+RACH:  tti=6291, cc=0, preamble=25, offset=25, temp_crnti=0xf6
+RACH:  tti=6291, cc=0, preamble=28, offset=31, temp_crnti=0xf7
+Disconnecting rnti=0xf0.
+RACH:  tti=6311, cc=0, preamble=52, offset=9, temp_crnti=0xf8
+RACH:  tti=6311, cc=0, preamble=55, offset=14, temp_crnti=0xf9
+Disconnecting rnti=0xf1.
+Disconnecting rnti=0xf2.
+Disconnecting rnti=0xf3.
+RACH:  tti=6331, cc=0, preamble=1, offset=38, temp_crnti=0xfa
+RACH:  tti=6331, cc=0, preamble=4, offset=43, temp_crnti=0xfb
+Disconnecting rnti=0xf5.
+Disconnecting rnti=0xf4.
+RACH:  tti=6351, cc=0, preamble=5, offset=38, temp_crnti=0xfc
+RACH:  tti=6351, cc=0, preamble=8, offset=43, temp_crnti=0xfd
+Disconnecting rnti=0xf6.
+Disconnecting rnti=0xf7.
+RACH:  tti=6371, cc=0, preamble=24, offset=25, temp_crnti=0xfe
+RACH:  tti=6371, cc=0, preamble=27, offset=31, temp_crnti=0xff
+Disconnecting rnti=0xf9.
+Disconnecting rnti=0xf8.
+RACH:  tti=6391, cc=0, preamble=38, offset=9, temp_crnti=0x100
+RACH:  tti=6391, cc=0, preamble=41, offset=14, temp_crnti=0x101
+Disconnecting rnti=0xfb.
+Disconnecting rnti=0xfa.
+Disconnecting rnti=0xfc.
+Disconnecting rnti=0xfd.
+Disconnecting rnti=0xfe.
+Disconnecting rnti=0xff.
+Disconnecting rnti=0x101.
+Disconnecting rnti=0x100.
+Disconnecting rnti=0x7f.
+RACH:  tti=1971, cc=0, preamble=5, offset=38, temp_crnti=0x102
+RACH:  tti=1971, cc=0, preamble=8, offset=43, temp_crnti=0x103
+RACH:  tti=1991, cc=0, preamble=43, offset=9, temp_crnti=0x104
+RACH:  tti=1991, cc=0, preamble=46, offset=14, temp_crnti=0x105
+RACH:  tti=2011, cc=0, preamble=39, offset=9, temp_crnti=0x106
+RACH:  tti=2011, cc=0, preamble=42, offset=14, temp_crnti=0x107
+RACH:  tti=2031, cc=0, preamble=48, offset=9, temp_crnti=0x108
+RACH:  tti=2031, cc=0, preamble=51, offset=14, temp_crnti=0x109
+Disconnecting rnti=0x102.
+RACH:  tti=2051, cc=0, preamble=22, offset=25, temp_crnti=0x10a
+Disconnecting rnti=0x103.
+RACH:  tti=2051, cc=0, preamble=25, offset=31, temp_crnti=0x10b
+Disconnecting rnti=0x104.
+Disconnecting rnti=0x105.
+RACH:  tti=2071, cc=0, preamble=15, offset=25, temp_crnti=0x10c
+RACH:  tti=2071, cc=0, preamble=18, offset=31, temp_crnti=0x10d
+Disconnecting rnti=0x106.
+RACH:  tti=2091, cc=0, preamble=11, offset=25, temp_crnti=0x10e
+Disconnecting rnti=0x107.
+Disconnecting rnti=0x108.
+RACH:  tti=2111, cc=0, preamble=1, offset=38, temp_crnti=0x10f
+Disconnecting rnti=0x109.
+RACH:  tti=2111, cc=0, preamble=4, offset=43, temp_crnti=0x110
+Disconnecting rnti=0x10a.
+RACH:  tti=2131, cc=0, preamble=8, offset=38, temp_crnti=0x111
+RACH:  tti=2131, cc=0, preamble=11, offset=43, temp_crnti=0x112
+Disconnecting rnti=0x10b.
+Disconnecting rnti=0x10c.
+RACH:  tti=2151, cc=0, preamble=43, offset=9, temp_crnti=0x113
+RACH:  tti=2151, cc=0, preamble=46, offset=14, temp_crnti=0x114
+Disconnecting rnti=0x10d.
+Disconnecting rnti=0x10e.
+Disconnecting rnti=0x10f.
+Disconnecting rnti=0x110.
+Disconnecting rnti=0x112.
+Disconnecting rnti=0x111.
+Disconnecting rnti=0x113.
+Disconnecting rnti=0x114.
+RACH:  tti=7991, cc=0, preamble=18, offset=25, temp_crnti=0x115
+RACH:  tti=7991, cc=0, preamble=21, offset=31, temp_crnti=0x116
+RACH:  tti=8011, cc=0, preamble=21, offset=25, temp_crnti=0x117
+RACH:  tti=8011, cc=0, preamble=24, offset=31, temp_crnti=0x118
+RACH:  tti=8031, cc=0, preamble=23, offset=25, temp_crnti=0x119
+RACH:  tti=8031, cc=0, preamble=26, offset=31, temp_crnti=0x11a
+RACH:  tti=8051, cc=0, preamble=5, offset=38, temp_crnti=0x11b
+RACH:  tti=8051, cc=0, preamble=8, offset=43, temp_crnti=0x11c
+Disconnecting rnti=0x115.
+Disconnecting rnti=0x116.
+RACH:  tti=8071, cc=0, preamble=41, offset=9, temp_crnti=0x11d
+RACH:  tti=8071, cc=0, preamble=44, offset=14, temp_crnti=0x11e
+Disconnecting rnti=0x117.
+Disconnecting rnti=0x118.
+RACH:  tti=8091, cc=0, preamble=6, offset=38, temp_crnti=0x11f
+RACH:  tti=8091, cc=0, preamble=9, offset=43, temp_crnti=0x120
+Disconnecting rnti=0x11a.
+Disconnecting rnti=0x119.
+RACH:  tti=8111, cc=0, preamble=11, offset=25, temp_crnti=0x121
+RACH:  tti=8111, cc=0, preamble=14, offset=31, temp_crnti=0x122
+Disconnecting rnti=0x11b.
+Disconnecting rnti=0x11c.
+RACH:  tti=8131, cc=0, preamble=44, offset=9, temp_crnti=0x123
+RACH:  tti=8131, cc=0, preamble=47, offset=14, temp_crnti=0x124
+Disconnecting rnti=0x11d.
+Disconnecting rnti=0x11e.
+RACH:  tti=8151, cc=0, preamble=22, offset=25, temp_crnti=0x125
+RACH:  tti=8151, cc=0, preamble=25, offset=31, temp_crnti=0x126
+Disconnecting rnti=0x11f.
+Disconnecting rnti=0x120.
+RACH:  tti=8171, cc=0, preamble=43, offset=9, temp_crnti=0x127
+RACH:  tti=8171, cc=0, preamble=46, offset=14, temp_crnti=0x128
+Disconnecting rnti=0x121.
+Disconnecting rnti=0x122.
+Disconnecting rnti=0x123.
+Disconnecting rnti=0x124.
+Disconnecting rnti=0x125.
+Disconnecting rnti=0x126.
+Disconnecting rnti=0x128.
+Disconnecting rnti=0x127.
+RACH:  tti=3751, cc=0, preamble=0, offset=38, temp_crnti=0x129
+RACH:  tti=3751, cc=0, preamble=3, offset=43, temp_crnti=0x12a
+RACH:  tti=3771, cc=0, preamble=38, offset=9, temp_crnti=0x12b
+RACH:  tti=3771, cc=0, preamble=41, offset=14, temp_crnti=0x12c
+RACH:  tti=3791, cc=0, preamble=18, offset=25, temp_crnti=0x12d
+RACH:  tti=3791, cc=0, preamble=21, offset=31, temp_crnti=0x12e
+RACH:  tti=3811, cc=0, preamble=5, offset=38, temp_crnti=0x12f
+RACH:  tti=3811, cc=0, preamble=8, offset=43, temp_crnti=0x130
+Disconnecting rnti=0x129.
+Disconnecting rnti=0x12a.
+RACH:  tti=3831, cc=0, preamble=28, offset=25, temp_crnti=0x131
+RACH:  tti=3831, cc=0, preamble=31, offset=31, temp_crnti=0x132
+Disconnecting rnti=0x12b.
+Disconnecting rnti=0x12c.
+RACH:  tti=3851, cc=0, preamble=52, offset=9, temp_crnti=0x133
+RACH:  tti=3851, cc=0, preamble=55, offset=14, temp_crnti=0x134
+Disconnecting rnti=0x12e.
+Disconnecting rnti=0x12d.
+RACH:  tti=3871, cc=0, preamble=4, offset=38, temp_crnti=0x135
+RACH:  tti=3871, cc=0, preamble=7, offset=43, temp_crnti=0x136
+Disconnecting rnti=0x12f.
+Disconnecting rnti=0x130.
+RACH:  tti=3891, cc=0, preamble=42, offset=9, temp_crnti=0x137
+RACH:  tti=3891, cc=0, preamble=45, offset=14, temp_crnti=0x138
+Disconnecting rnti=0x131.
+Disconnecting rnti=0x132.
+RACH:  tti=3911, cc=0, preamble=4, offset=38, temp_crnti=0x139
+RACH:  tti=3911, cc=0, preamble=7, offset=43, temp_crnti=0x13a
+Disconnecting rnti=0x133.
+Disconnecting rnti=0x134.
+RACH:  tti=3931, cc=0, preamble=26, offset=25, temp_crnti=0x13b
+RACH:  tti=3931, cc=0, preamble=29, offset=31, temp_crnti=0x13c
+Disconnecting rnti=0x135.
+Disconnecting rnti=0x136.
+Disconnecting rnti=0x137.
+Disconnecting rnti=0x138.
+Disconnecting rnti=0x139.
+Disconnecting rnti=0x13a.
+Disconnecting rnti=0x13b.
+Disconnecting rnti=0x13c.
+RACH:  tti=9781, cc=0, preamble=26, offset=5, temp_crnti=0x13d
+User 0x13d connected
+Stopping ..
+---  exiting  ---
+---  Software Radio Systems LTE eNodeB  ---
+
+Reading configuration file /etc/srslte/enb.conf...
+WARNING: cpu0 scaling governor is not set to performance mode. Realtime processing could be compromised. Consider setting it to performance mode before running the application.
+
+Built in Release mode using commit f74ac6aa8 on branch HEAD.
+
+[31m/root/srsLTE/srsenb/src/enb_cfg_parser.cc.890: Force DL EARFCN for cell PCI=1 to 2850
+[0m
+Opening 1 channels in RF device=UHD with args=type=b200,num_recv_frames=256,num_send_frames=256
+[0;32m[INFO] [UHD] [0;39mlinux; GNU C++ version 7.5.0; Boost_106501; UHD_3.15.0.0-62-g7a3f1516
+[0;32m[INFO] [LOGGING] [0;39mFastpath logging disabled at runtime.
+Opening USRP channels=1, args: type=b200,num_recv_frames=256,num_send_frames=256,master_clock_rate=23.04e6
+[0;32m[INFO] [B200] [0;39mDetected Device: B210
+[0;32m[INFO] [B200] [0;39mOperating over USB 3.
+[0;32m[INFO] [B200] [0;39mInitialize CODEC control...
+[0;32m[INFO] [B200] [0;39mInitialize Radio control...
+[0;32m[INFO] [B200] [0;39mPerforming register loopback test... 
+[0;32m[INFO] [B200] [0;39mRegister loopback test passed
+[0;32m[INFO] [B200] [0;39mPerforming register loopback test... 
+[0;32m[INFO] [B200] [0;39mRegister loopback test passed
+[0;32m[INFO] [B200] [0;39mAsking for clock rate 23.040000 MHz... 
+[0;32m[INFO] [B200] [0;39mActually got clock rate 23.040000 MHz.
+Setting manual TX/RX offset to 100 samples
+Setting frequency: DL=2630.0 Mhz, UL=2510.0 MHz for cc_idx=0
+
+==== eNodeB started ===
+Type <t> to view trace
+RACH:  tti=4991, cc=0, preamble=18, offset=5, temp_crnti=0x46
+User 0x46 connected

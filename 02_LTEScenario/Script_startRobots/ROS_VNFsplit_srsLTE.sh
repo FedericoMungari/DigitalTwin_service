@@ -27,7 +27,7 @@
 #### IMPORTANT!! ###
 # - Check ssh fingerprint for root user for the twin machine before running
 
-if [[ $# -eq 4 ]]; then
+if [[ $# -eq 5 ]]; then
 
 	# eNB network and host configuration
 	ENB_IP_PRIVATE=10.0.2.1 # ptpd
@@ -72,11 +72,11 @@ if [[ $# -eq 4 ]]; then
 
 	DRIVER_DOCKER_SUBNET=10.2.0.0/24
 
-	INTERFACE_MASTER_VM_IP=10.0.3.7
-	ROBOTCOMMANDER_VM_IP=10.0.3.6
+	INTERFACE_MASTER_VM_IP=10.0.3.3
+	ROBOTCOMMANDER_VM_IP=10.0.3.4
 	MOTIONPLANNING_VM_IP=10.0.3.5
-	STATE_VM_IP=10.0.3.4
-	CONTROLLER_VM_IP=10.0.3.3
+	STATE_VM_IP=10.0.3.6
+	CONTROLLER_VM_IP=10.0.3.7
 	DRIVER_VM_IP=10.0.4.3
 	VM_USERNAME=ros
 	VM_PSW=ros
@@ -136,6 +136,9 @@ if [[ $# -eq 4 ]]; then
 
 	# ####################################################################################################################################
 	echo -e "\n* * * * * * * * * * * * * * * * * * * * * *\nSTEP 5: Sending CPU and RAM measurement scripts to ..."
+	# NOTE 
+	# still cannot send the measurement scripts to the driver, since even if the iptunnel was istantiated, the radio link is not there.
+	# Solution: send the measurement scripts to the ROBOT HOST, which will forward them to the driver VM
 	echo -e "\t... the interface VM"
 	sshpass -p ${VM_PSW} scp ./Script_measurements/CPU_measurements.sh ${VM_USERNAME}@$INTERFACE_MASTER_VM_IP:~/
 	sshpass -p ${VM_PSW} scp ./Script_measurements/RAM_measurements.sh ${VM_USERNAME}@$INTERFACE_MASTER_VM_IP:~/
@@ -167,11 +170,12 @@ if [[ $# -eq 4 ]]; then
 	sshpass -p ${VM_PSW} scp ./Script_measurements/resources_dockerstats.sh ${VM_USERNAME}@$CONTROLLER_VM_IP:~/
 	sshpass -p ${VM_PSW} scp ./Script_measurements/resources_CPUtime.py ${VM_USERNAME}@$CONTROLLER_VM_IP:~/
 	echo -e "\t... the driver VM"
-	sshpass -p ${VM_PSW} scp ./Script_measurements/CPU_measurements.sh ${VM_USERNAME}@$DRIVER_VM_IP:~/
-	sshpass -p ${VM_PSW} scp ./Script_measurements/RAM_measurements.sh ${VM_USERNAME}@$DRIVER_VM_IP:~/
-	sshpass -p ${VM_PSW} scp ./Script_measurements/resources_psutil.py ${VM_USERNAME}@$DRIVER_VM_IP:~/
-	sshpass -p ${VM_PSW} scp ./Script_measurements/resources_dockerstats.sh ${VM_USERNAME}@$DRIVER_VM_IP:~/
-	sshpass -p ${VM_PSW} scp ./Script_measurements/resources_CPUtime.py ${VM_USERNAME}@$DRIVER_VM_IP:~/
+	sshpass -p ${ROBOT_HOST_PASS} scp ./Script_measurements/CPU_measurements.sh ${ROBOT_HOST_USER}@$ROBOT_HOST_IP_LOCAL:~/Desktop/ROSNiryo/
+	sshpass -p ${ROBOT_HOST_PASS} scp ./Script_measurements/RAM_measurements.sh ${ROBOT_HOST_USER}@$ROBOT_HOST_IP_LOCAL:~/Desktop/ROSNiryo/
+	sshpass -p ${ROBOT_HOST_PASS} scp ./Script_measurements/resources_psutil.py ${ROBOT_HOST_USER}@$ROBOT_HOST_IP_LOCAL:~/Desktop/ROSNiryo/
+	sshpass -p ${ROBOT_HOST_PASS} scp ./Script_measurements/resources_dockerstats.sh ${ROBOT_HOST_USER}@$ROBOT_HOST_IP_LOCAL:~/Desktop/ROSNiryo/
+	sshpass -p ${ROBOT_HOST_PASS} scp ./Script_measurements/resources_CPUtime.py ${ROBOT_HOST_USER}@$ROBOT_HOST_IP_LOCAL:~/Desktop/ROSNiryo/
+	sshpass -p ${ROBOT_HOST_PASS} ssh ${ROBOT_HOST_USER}@$ROBOT_HOST_IP_LOCAL ". /home/dell46/Desktop/ROSNiryo/send_measscripts_DRIVER.sh ${VM_PSW} ${VM_USERNAME} ${DRIVER_VM_IP}"
 
 	# ####################################################################################################################################
 	echo -e "\n* * * * * * * * * * * * * * * * * * * * * *\nSTEP 6: Starting time sync services between the LTE hosts"
@@ -309,7 +313,7 @@ if [[ $# -eq 4 ]]; then
 	echo -ne '..1 ..2 ..3\r'
 	sleep 1
 
-	/bin/bash ./Script_startRobots/start_robot_VNF.sh $1 $2 $3 $4
+	/bin/bash ./Script_startRobots/start_robot_VNF.sh $1 $2 $3 $4 $5
 	# sleep 20
 
 	echo -e "\nMAIN CODE ENDED"

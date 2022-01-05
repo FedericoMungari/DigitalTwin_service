@@ -1,5 +1,13 @@
 #!/bin/bash
 
+# Le docker network devono essere create anticipatamente su ogni VM
+# 	 docker network create -o "com.docker.network.bridge.name":"ros_bridge" --subnet="10.2.0.0/24" ros_driver
+# 	 docker network create -o "com.docker.network.bridge.name"="ros_bridge" --subnet="10.1.5.0/24" ros_controller
+# 	 docker network create -o "com.docker.network.bridge.name"="ros_bridge" --subnet="10.1.4.0/24" ros_state
+# 	 docker network create -o "com.docker.network.bridge.name"="ros_bridge" --subnet="10.1.3.0/24" ros_motionplanning
+# 	 docker network create -o "com.docker.network.bridge.name"="ros_bridge" --subnet="10.1.2.0/24" ros_command
+# 	 docker network create -o "com.docker.network.bridge.name"="ros_bridge" --subnet="10.1.1.0/24" ros_interface
+
 measurement_iteration="3600"
 measurement_period="0.5"
 
@@ -61,71 +69,74 @@ function start_robot () {
 
 	. ./Script_startRobots/mysleep.sh 20
 
+	echo -e "\n\nSTEP $((8+2*(NOF_ACTIVE_ROBOTS-1))): CPU measurements and RAM usage with VMs hosting idle containers"
 	echo "REMEMBER : already istantiated containers : $NOF_ACTIVE_ROBOTS"
+	echo -e "\t\t. . . S k i p p i n g . . ."
+	# read -p "Do you want to measure the CPU consumption of VMs hosting $NOF_ACTIVE_ROBOTS idle containers??`echo $'\n> '`If yes, press Y or y`echo $'\n> '`" -n 1 -r
+	# echo " "
+	# if [[ $REPLY =~ ^[Yy]$ ]]
+	# then
+		# echo -e "\t\t. . . CPU consumption and RAM usage of VMs hosting $NOF_ACTIVE_ROBOTS idle containers measuring . . ."
+		# # . ./Script_measurements/CPU_measurements.sh CPUconsumption_IDLE_$((NOF_ACTIVE_ROBOTS))containers.out $measurement_iteration $measurement_iteration LocalHost && . ./RAM_measurements.sh RAMusage_IDLE_$((NOF_ACTIVE_ROBOTS))containers.out $measurement_iteration $measurement_iteration LocalHost
+
+		# sshpass -p ${VM_PSW} ssh ${VM_USERNAME}@$INTERFACE_MASTER_VM_IP "sh ~/CPU_measurements.sh CPUconsumption_IDLE_$((NOF_ACTIVE_ROBOTS))containers.out $measurement_iteration $(echo $measurement_period | tr '.' ',') ROS_VNF_interface &\
+			# sh ~/RAM_measurements.sh RAMusage_IDLE_$((NOF_ACTIVE_ROBOTS))containers.out $measurement_iteration $measurement_period ROS_VNF_interface" 1>/dev/null &
+		# sshpass -p ${VM_PSW} ssh ${VM_USERNAME}@$ROBOTCOMMANDER_VM_IP "sh ~/CPU_measurements.sh CPUconsumption_IDLE_$((NOF_ACTIVE_ROBOTS))containers.out $measurement_iteration $(echo $measurement_period | tr '.' ',') ROS_VNF_command &\
+			# sh ~/RAM_measurements.sh RAMusage_IDLE_$((NOF_ACTIVE_ROBOTS))containers.out $measurement_iteration $measurement_period ROS_VNF_command" 1>/dev/null &
+		# sshpass -p ${VM_PSW} ssh ${VM_USERNAME}@$MOTIONPLANNING_VM_IP "sh ~/CPU_measurements.sh CPUconsumption_IDLE_$((NOF_ACTIVE_ROBOTS))containers.out $measurement_iteration $(echo $measurement_period | tr '.' ',') ROS_VNF_motionplanning &\
+			# sh ~/RAM_measurements.sh RAMusage_IDLE_$((NOF_ACTIVE_ROBOTS))containers.out $measurement_iteration $measurement_period ROS_VNF_motionplanning" 1>/dev/null &
+		# sshpass -p ${VM_PSW} ssh ${VM_USERNAME}@$STATE_VM_IP "sh ~/CPU_measurements.sh CPUconsumption_IDLE_$((NOF_ACTIVE_ROBOTS))containers.out $measurement_iteration $(echo $measurement_period | tr '.' ',') ROS_VNF_state &\
+			# sh ~/RAM_measurements.sh RAMusage_IDLE_$((NOF_ACTIVE_ROBOTS))containers.out $measurement_iteration $measurement_period ROS_VNF_state" 1>/dev/null &
+		# sshpass -p ${VM_PSW} ssh ${VM_USERNAME}@$CONTROLLER_VM_IP "sh ~/CPU_measurements.sh CPUconsumption_IDLE_$((NOF_ACTIVE_ROBOTS))containers.out $measurement_iteration $(echo $measurement_period | tr '.' ',') ROS_VNF_control &\
+			# sh ~/RAM_measurements.sh RAMusage_IDLE_$((NOF_ACTIVE_ROBOTS))containers.out $measurement_iteration $measurement_period ROS_VNF_control" 1>/dev/null &
+		# sshpass -p ${VM_PSW} ssh ${VM_USERNAME}@$DRIVER_VM_IP "sh ~/CPU_measurements.sh CPUconsumption_IDLE_$((NOF_ACTIVE_ROBOTS))containers.out $measurement_iteration $(echo $measurement_period | tr '.' ',') ROS_VNF_driver &\
+			# sh ~/RAM_measurements.sh RAMusage_IDLE_$((NOF_ACTIVE_ROBOTS))containers.out $measurement_iteration $measurement_period ROS_VNF_driver" 1>/dev/null &
+		# sh ./Script_measurements/CPU_measurements.sh ./Output/00_HostMetrics/CPUconsumption_IDLE_$((NOF_ACTIVE_ROBOTS))containers.out $measurement_iteration $(echo $measurement_period | tr '.' ',') LocalHost 1>/dev/null &
+		# sh ./Script_measurements/RAM_measurements.sh ./Output/00_HostMetrics/RAMusage_IDLE_$((NOF_ACTIVE_ROBOTS))containers.out $measurement_iteration $measurement_period LocalHost 1>/dev/null &
+
+		
+	# sshpass -p ${VM_PSW} ssh ${VM_USERNAME}@$INTERFACE_MASTER_VM_IP "python3 -u ~/resources_psutil.py $measurement_iteration $measurement_period ROS_VNF_interface 1> resources_psutil_IDLE_$((NOF_ACTIVE_ROBOTS))containers.out" 1>/dev/null &
+	# sshpass -p ${VM_PSW} ssh ${VM_USERNAME}@$ROBOTCOMMANDER_VM_IP "python3 -u ~/resources_psutil.py $measurement_iteration $measurement_period ROS_VNF_command 1> resources_psutil_IDLE_$((NOF_ACTIVE_ROBOTS))containers.out" 1>/dev/null &
+	# sshpass -p ${VM_PSW} ssh ${VM_USERNAME}@$MOTIONPLANNING_VM_IP "python3 -u ~/resources_psutil.py $measurement_iteration $measurement_period ROS_VNF_motionplanning 1> resources_psutil_IDLE_$((NOF_ACTIVE_ROBOTS))containers.out" 1>/dev/null &
+	# sshpass -p ${VM_PSW} ssh ${VM_USERNAME}@$STATE_VM_IP "python3 -u ~/resources_psutil.py $measurement_iteration $measurement_period ROS_VNF_state 1> resources_psutil_IDLE_$((NOF_ACTIVE_ROBOTS))containers.out" 1>/dev/null &
+	# sshpass -p ${VM_PSW} ssh ${VM_USERNAME}@$CONTROLLER_VM_IP "python3 -u ~/resources_psutil.py $measurement_iteration $measurement_period ROS_VNF_control 1> resources_psutil_IDLE_$((NOF_ACTIVE_ROBOTS))containers.out" 1>/dev/null &
+	# sshpass -p ${VM_PSW} ssh ${VM_USERNAME}@$DRIVER_VM_IP "python3 -u ~/resources_psutil.py $measurement_iteration $measurement_period ROS_VNF_driver 1> resources_psutil_IDLE_$((NOF_ACTIVE_ROBOTS))containers.out" 1>/dev/null &
+	# python3 -u ./Script_measurements/resources_psutil.py $measurement_iteration $measurement_period LocalHost 1> ./Output/00_HostMetrics/resources_psutil_IDLE_$((NOF_ACTIVE_ROBOTS))containers.out &
+	# . ./Script_startRobots/mysleep.sh $(echo "$measurement_iteration*$measurement_period*3" | bc)
+
+
+
+	# else
+		# echo -e "\t\t. . . CPU consumption and RAM usage of VMs hosting $NOF_ACTIVE_ROBOTS idle containers will not be measured . . ."
+	# fi
 
 	Interface_IP_Set+=( $INTERFACE_IP )
 
 }
 
-if true
-then
-	# eNB network and host configuration
-	ENB_IP_PRIVATE=10.0.2.1 # ptpd
-	ENB_IP_LOCAL=10.0.1.44
-	ENB_IP_LTE=172.16.0.1
-	ENB_USER=k8s-enb-node
-	ENB_PASS=k8snode
 
-	# epc network and host configuration (==enb)
-	EPC_IP_PRIVATE=$ENB_IP_PRIVATE
-	EPC_IP_LOCAL=$ENB_IP_LOCAL
-	EPC_IP_LTE=$ENB_IP_LTE
-	EPC_USER=$ENB_USER
-	EPC_PASS=$ENB_PASS
+# eNB network and host configuration
+ENB_IP_PRIVATE=10.0.2.1; ENB_IP_LOCAL=10.0.1.44; ENB_IP_LTE=172.16.0.1; ENB_USER=k8s-enb-node; ENB_PASS=k8snode
 
-	# ue (robot driver) network and host configuration
-	UE_IP_PRIVATE=10.0.2.2
-	UE_IP_LOCAL=10.0.1.46
-	UE_IP_LTE=172.16.0.2
-	UE_PASS=4646
-	UE_USER=dell46
+# epc network and host configuration (==enb)
+EPC_IP_PRIVATE=$ENB_IP_PRIVATE; EPC_IP_LOCAL=$ENB_IP_LOCAL; EPC_IP_LTE=$ENB_IP_LTE; EPC_USER=$ENB_USER; EPC_PASS=$ENB_PASS
 
-	ROBOT_HOST_IP_PRIVATE=$UE_IP_PRIVATE
-	ROBOT_HOST_IP_LOCAL=$UE_IP_LOCAL
-	ROBOT_HOST_IP_LTE=$UE_IP_LTE # EDGE_GATEWAY
-	ROBOT_HOST_USER=$UE_USER
-	ROBOT_HOST_PASS=$UE_PASS
+# ue (robot driver) network and host configuration
+UE_IP_PRIVATE=10.0.2.2; UE_IP_LOCAL=10.0.1.46; UE_IP_LTE=172.16.0.2; UE_PASS=4646; UE_USER=dell46
 
-	EDGE_HOST_IP_PRIVATE=$ENB_IP_PRIVATE
-	EDGE_HOST_IP_LOCAL=$ENB_IP_LOCAL
-	EDGE_HOST_IP_LTE=$ENB_IP_LTE # ROBOT_GATEWAY
-	EDGE_HOST_USER=$ENB_USER
-	EDGE_HOST_PASS=$ENB_PASS
+ROBOT_HOST_IP_PRIVATE=$UE_IP_PRIVATE; ROBOT_HOST_IP_LOCAL=$UE_IP_LOCAL; ROBOT_HOST_IP_LTE=$UE_IP_LTE; ROBOT_HOST_USER=$UE_USER; ROBOT_HOST_PASS=$UE_PASS
 
-	INTERFACE_MASTER_DOCKER_SUBNET=10.1.1.0/24
-	ROBOTCOMMANDER_DOCKER_SUBNET=10.1.2.0/24
-	MOTIONPLANNING_DOCKER_SUBNET=10.1.3.0/24
-	STATE_DOCKER_SUBNET=10.1.4.0/24
-	CONTROLLER_DOCKER_SUBNET=10.1.5.0/24
+EDGE_HOST_IP_PRIVATE=$ENB_IP_PRIVATE; EDGE_HOST_IP_LOCAL=$ENB_IP_LOCAL; EDGE_HOST_IP_LTE=$ENB_IP_LTE; EDGE_HOST_USER=$ENB_USER; EDGE_HOST_PASS=$ENB_PASS
 
-	EDGE_DOCKER_SUBNET=10.1.0.0/16
+INTERFACE_MASTER_DOCKER_SUBNET=10.1.1.0/24; ROBOTCOMMANDER_DOCKER_SUBNET=10.1.2.0/24; MOTIONPLANNING_DOCKER_SUBNET=10.1.3.0/24; STATE_DOCKER_SUBNET=10.1.4.0/24; CONTROLLER_DOCKER_SUBNET=10.1.5.0/24; EDGE_DOCKER_SUBNET=10.1.0.0/16
 
-	DRIVER_DOCKER_SUBNET=10.2.0.0/24
+DRIVER_DOCKER_SUBNET=10.2.0.0/24
 
-	INTERFACE_MASTER_VM_IP=10.0.3.7
-	ROBOTCOMMANDER_VM_IP=10.0.3.6
-	MOTIONPLANNING_VM_IP=10.0.3.5
-	STATE_VM_IP=10.0.3.4
-	CONTROLLER_VM_IP=10.0.3.3
-	DRIVER_VM_IP=10.0.4.3
-	VM_USERNAME=ros
-	VM_PSW=ros
+INTERFACE_MASTER_VM_IP=10.0.3.3; ROBOTCOMMANDER_VM_IP=10.0.3.4; MOTIONPLANNING_VM_IP=10.0.3.5; STATE_VM_IP=10.0.3.6; CONTROLLER_VM_IP=10.0.3.7; DRIVER_VM_IP=10.0.4.3; 
+VM_USERNAME=ros; VM_PSW=ros
 
-	VM_EDGE_SUBNET=10.0.3.0/24
-	VM_EDGE_GW=10.0.3.1
-	VM_LOCAL_SUBNET=10.0.4.0/24
-	VM_LOCAL_GW=10.0.4.1
-fi
+VM_EDGE_SUBNET=10.0.3.0/24; VM_EDGE_GW=10.0.3.1; VM_LOCAL_SUBNET=10.0.4.0/24; VM_LOCAL_GW=10.0.4.1; 
+
 
 n=0;
 # read -p $'\nPress the number of robots to start\n' key
@@ -146,6 +157,8 @@ commandname=$2
 
 IDLEmeas_flag=$4
 
+meas_tool=$5
+
 if [[ $IDLEmeas_flag ==  "IDLEYES" && $commandname ==  "pose" ]]
 then
 
@@ -165,28 +178,30 @@ then
 	# sh ./Script_measurements/CPU_measurements.sh ./Output/00_HostMetrics/CPUconsumption_IDLE_$((n_robots))containers.out $measurement_iteration $(echo $measurement_period | tr '.' ',') LocalHost &>/dev/null &
 	# sh ./Script_measurements/RAM_measurements.sh ./Output/00_HostMetrics/RAMusage_IDLE_$((n_robots))containers.out $measurement_iteration $measurement_period LocalHost &>/dev/null &
 
-	sshpass -p ${VM_PSW} ssh ${VM_USERNAME}@$INTERFACE_MASTER_VM_IP "python3 -u ~/resources_psutil.py $measurement_iteration $measurement_period ROS_VNF_interface 1> resources_psutil_IDLE_$((n_robots))containers.out" 1>/dev/null &
-	sshpass -p ${VM_PSW} ssh ${VM_USERNAME}@$INTERFACE_MASTER_VM_IP "python3 -u ~/resources_CPUtime.py $measurement_iteration $measurement_period ROS_VNF_interface 1> resources_psutil_CPUtime_IDLE_$((n_robots))containers.out" 1>/dev/null &
-	sshpass -p ${VM_PSW} ssh ${VM_USERNAME}@$ROBOTCOMMANDER_VM_IP "python3 -u ~/resources_psutil.py $measurement_iteration $measurement_period ROS_VNF_command 1> resources_psutil_IDLE_$((n_robots))containers.out" 1>/dev/null &
-	sshpass -p ${VM_PSW} ssh ${VM_USERNAME}@$ROBOTCOMMANDER_VM_IP "python3 -u ~/resources_CPUtime.py $measurement_iteration $measurement_period ROS_VNF_command 1> resources_psutil_CPUtime_IDLE_$((n_robots))containers.out" 1>/dev/null &
-	sshpass -p ${VM_PSW} ssh ${VM_USERNAME}@$MOTIONPLANNING_VM_IP "python3 -u ~/resources_psutil.py $measurement_iteration $measurement_period ROS_VNF_motionplanning 1> resources_psutil_IDLE_$((n_robots))containers.out" 1>/dev/null &
-	sshpass -p ${VM_PSW} ssh ${VM_USERNAME}@$MOTIONPLANNING_VM_IP "python3 -u ~/resources_CPUtime.py $measurement_iteration $measurement_period ROS_VNF_motionplanning 1> resources_psutil_CPUtime_IDLE_$((n_robots))containers.out" 1>/dev/null &
-	sshpass -p ${VM_PSW} ssh ${VM_USERNAME}@$STATE_VM_IP "python3 -u ~/resources_psutil.py $measurement_iteration $measurement_period ROS_VNF_state 1> resources_psutil_IDLE_$((n_robots))containers.out" 1>/dev/null &
-	sshpass -p ${VM_PSW} ssh ${VM_USERNAME}@$STATE_VM_IP "python3 -u ~/resources_CPUtime.py $measurement_iteration $measurement_period ROS_VNF_state 1> resources_psutil_CPUtime_IDLE_$((n_robots))containers.out" 1>/dev/null &
-	sshpass -p ${VM_PSW} ssh ${VM_USERNAME}@$CONTROLLER_VM_IP "python3 -u ~/resources_psutil.py $measurement_iteration $measurement_period ROS_VNF_control 1> resources_psutil_IDLE_$((n_robots))containers.out" 1>/dev/null &
-	sshpass -p ${VM_PSW} ssh ${VM_USERNAME}@$CONTROLLER_VM_IP "python3 -u ~/resources_CPUtime.py $measurement_iteration $measurement_period ROS_VNF_control 1> resources_psutil_CPUtime_IDLE_$((n_robots))containers.out" 1>/dev/null &
-	sshpass -p ${VM_PSW} ssh ${VM_USERNAME}@$DRIVER_VM_IP "python3 -u ~/resources_psutil.py $measurement_iteration $measurement_period ROS_VNF_driver 1> resources_psutil_IDLE_$((n_robots))containers.out" 1>/dev/null &
-	sshpass -p ${VM_PSW} ssh ${VM_USERNAME}@$DRIVER_VM_IP "python3 -u ~/resources_CPUtime.py $measurement_iteration $measurement_period ROS_VNF_driver 1> resources_psutil_CPUtime_IDLE_$((n_robots))containers.out" 1>/dev/null &
-	python3 -u ./Script_measurements/resources_psutil.py $measurement_iteration $measurement_period LocalHost 1> ./Output/00_HostMetrics/resources_psutil_IDLE_$((n_robots))containers.out 2> /dev/null &
-	python3 -u ./Script_measurements/resources_CPUtime.py 1500 1> ./Output/00_HostMetrics/resources_psutil_CPUtime_IDLE_$((n_robots))containers.out 2> /dev/null &
-
-	# sshpass -p ${VM_PSW} ssh ${VM_USERNAME}@$INTERFACE_MASTER_VM_IP "sh ~/resources_dockerstats.sh resources_dockerstats_IDLE_$((n_robots))containers.out ROS_VNF_interface" 1>/dev/null &
-	# sshpass -p ${VM_PSW} ssh ${VM_USERNAME}@$ROBOTCOMMANDER_VM_IP "sh ~/resources_dockerstats.sh resources_dockerstats_IDLE_$((n_robots))containers.out ROS_VNF_command" 1>/dev/null &
-	# sshpass -p ${VM_PSW} ssh ${VM_USERNAME}@$MOTIONPLANNING_VM_IP "sh ~/resources_dockerstats.sh resources_dockerstats_IDLE_$((n_robots))containers.out ROS_VNF_motionplanning" 1>/dev/null &
-	# sshpass -p ${VM_PSW} ssh ${VM_USERNAME}@$STATE_VM_IP "sh ~/resources_dockerstats.sh resources_dockerstats_IDLE_$((n_robots))containers.out ROS_VNF_state" 1>/dev/null &
-	# sshpass -p ${VM_PSW} ssh ${VM_USERNAME}@$CONTROLLER_VM_IP "sh ~/resources_dockerstats.sh resources_dockerstats_IDLE_$((n_robots))containers.out ROS_VNF_control" 1>/dev/null &
-	# sshpass -p ${VM_PSW} ssh ${VM_USERNAME}@$DRIVER_VM_IP "sh ~/resources_dockerstats.sh resources_dockerstats_IDLE_$((n_robots))containers.out ROS_VNF_driver" 1>/dev/null &
-	# sh ./Script_measurements/resources_dockerstats.sh ./Output/00_HostMetrics/resources_dockerstats_IDLE_$((n_robots))containers.out LocalHost 2> /dev/null &
+	if [[ $meas_tool ==  "psutil" ]]; then
+		sshpass -p ${VM_PSW} ssh ${VM_USERNAME}@$INTERFACE_MASTER_VM_IP "python3 -u ~/resources_psutil.py $measurement_iteration $measurement_period ROS_VNF_interface 1> resources_psutil_IDLE_$((n_robots))containers.out" 1>/dev/null &
+		sshpass -p ${VM_PSW} ssh ${VM_USERNAME}@$INTERFACE_MASTER_VM_IP "python3 -u ~/resources_CPUtime.py $measurement_iteration $measurement_period ROS_VNF_interface 1> resources_psutil_CPUtime_IDLE_$((n_robots))containers.out" 1>/dev/null &
+		sshpass -p ${VM_PSW} ssh ${VM_USERNAME}@$ROBOTCOMMANDER_VM_IP "python3 -u ~/resources_psutil.py $measurement_iteration $measurement_period ROS_VNF_command 1> resources_psutil_IDLE_$((n_robots))containers.out" 1>/dev/null &
+		sshpass -p ${VM_PSW} ssh ${VM_USERNAME}@$ROBOTCOMMANDER_VM_IP "python3 -u ~/resources_CPUtime.py $measurement_iteration $measurement_period ROS_VNF_command 1> resources_psutil_CPUtime_IDLE_$((n_robots))containers.out" 1>/dev/null &
+		sshpass -p ${VM_PSW} ssh ${VM_USERNAME}@$MOTIONPLANNING_VM_IP "python3 -u ~/resources_psutil.py $measurement_iteration $measurement_period ROS_VNF_motionplanning 1> resources_psutil_IDLE_$((n_robots))containers.out" 1>/dev/null &
+		sshpass -p ${VM_PSW} ssh ${VM_USERNAME}@$MOTIONPLANNING_VM_IP "python3 -u ~/resources_CPUtime.py $measurement_iteration $measurement_period ROS_VNF_motionplanning 1> resources_psutil_CPUtime_IDLE_$((n_robots))containers.out" 1>/dev/null &
+		sshpass -p ${VM_PSW} ssh ${VM_USERNAME}@$STATE_VM_IP "python3 -u ~/resources_psutil.py $measurement_iteration $measurement_period ROS_VNF_state 1> resources_psutil_IDLE_$((n_robots))containers.out" 1>/dev/null &
+		sshpass -p ${VM_PSW} ssh ${VM_USERNAME}@$STATE_VM_IP "python3 -u ~/resources_CPUtime.py $measurement_iteration $measurement_period ROS_VNF_state 1> resources_psutil_CPUtime_IDLE_$((n_robots))containers.out" 1>/dev/null &
+		sshpass -p ${VM_PSW} ssh ${VM_USERNAME}@$CONTROLLER_VM_IP "python3 -u ~/resources_psutil.py $measurement_iteration $measurement_period ROS_VNF_control 1> resources_psutil_IDLE_$((n_robots))containers.out" 1>/dev/null &
+		sshpass -p ${VM_PSW} ssh ${VM_USERNAME}@$CONTROLLER_VM_IP "python3 -u ~/resources_CPUtime.py $measurement_iteration $measurement_period ROS_VNF_control 1> resources_psutil_CPUtime_IDLE_$((n_robots))containers.out" 1>/dev/null &
+		sshpass -p ${VM_PSW} ssh ${VM_USERNAME}@$DRIVER_VM_IP "python3 -u ~/resources_psutil.py $measurement_iteration $measurement_period ROS_VNF_driver 1> resources_psutil_IDLE_$((n_robots))containers.out" 1>/dev/null &
+		sshpass -p ${VM_PSW} ssh ${VM_USERNAME}@$DRIVER_VM_IP "python3 -u ~/resources_CPUtime.py $measurement_iteration $measurement_period ROS_VNF_driver 1> resources_psutil_CPUtime_IDLE_$((n_robots))containers.out" 1>/dev/null &
+		python3 -u ./Script_measurements/resources_psutil.py $measurement_iteration $measurement_period LocalHost 1> ./Output/00_HostMetrics/resources_psutil_IDLE_$((n_robots))containers.out 2> /dev/null &
+		python3 -u ./Script_measurements/resources_CPUtime.py 1500 1> ./Output/00_HostMetrics/resources_psutil_CPUtime_IDLE_$((n_robots))containers.out 2> /dev/null &
+	elif [[ $meas_tool ==  "dockerstats" ]]; then
+		sshpass -p ${VM_PSW} ssh ${VM_USERNAME}@$INTERFACE_MASTER_VM_IP "sh ~/resources_dockerstats.sh resources_dockerstats_IDLE_$((n_robots))containers.out ROS_VNF_interface" 1>/dev/null &
+		sshpass -p ${VM_PSW} ssh ${VM_USERNAME}@$ROBOTCOMMANDER_VM_IP "sh ~/resources_dockerstats.sh resources_dockerstats_IDLE_$((n_robots))containers.out ROS_VNF_command" 1>/dev/null &
+		sshpass -p ${VM_PSW} ssh ${VM_USERNAME}@$MOTIONPLANNING_VM_IP "sh ~/resources_dockerstats.sh resources_dockerstats_IDLE_$((n_robots))containers.out ROS_VNF_motionplanning" 1>/dev/null &
+		sshpass -p ${VM_PSW} ssh ${VM_USERNAME}@$STATE_VM_IP "sh ~/resources_dockerstats.sh resources_dockerstats_IDLE_$((n_robots))containers.out ROS_VNF_state" 1>/dev/null &
+		sshpass -p ${VM_PSW} ssh ${VM_USERNAME}@$CONTROLLER_VM_IP "sh ~/resources_dockerstats.sh resources_dockerstats_IDLE_$((n_robots))containers.out ROS_VNF_control" 1>/dev/null &
+		sshpass -p ${VM_PSW} ssh ${VM_USERNAME}@$DRIVER_VM_IP "sh ~/resources_dockerstats.sh resources_dockerstats_IDLE_$((n_robots))containers.out ROS_VNF_driver" 1>/dev/null &
+		sh ./Script_measurements/resources_dockerstats.sh ./Output/00_HostMetrics/resources_dockerstats_IDLE_$((n_robots))containers.out LocalHost 2> /dev/null &
+	fi
 
 	echo "sleep"
 	. ./Script_startRobots/mysleep.sh $(echo "$measurement_iteration*$measurement_period+180" | bc)
@@ -222,6 +237,7 @@ if [[ $commandname ==  "joints" ]]; then
 		# echo "Making script.py executable"
 		sshpass -p root ssh root@$ipinterface 'echo "root" | sudo -S chmod +x /script_joints.py'
 		# echo "Running script.py"
+		# (sshpass -p root ssh root@$ipinterface 'source /root/catkin_ws/devel/setup.bash && export PYTHONPATH=${PYTHONPATH}:/root/catkin_ws/src/niryo_one_python_api/src/niryo_python_api &&'"python /script_joints.py --filename /Output_script/script_joints_output_robots$((NOF_ACTIVE_ROBOTS))_freq$((wait_between_comm))_$((script_running)).txt 2> /Output_script/script_joints_error_robots$((NOF_ACTIVE_ROBOTS))_freq$((wait_between_comm))_$((script_running)).txt" &)
 		(sshpass -p root ssh root@$ipinterface 'source /root/catkin_ws/devel/setup.bash && export PYTHONPATH=${PYTHONPATH}:/root/catkin_ws/src/niryo_one_python_api/src/niryo_python_api &&'"python -u /script_joints.py 1> /Output_script/script_joints_output_robots$((NOF_ACTIVE_ROBOTS))_freq$((wait_between_comm))_$((script_running)).txt 2> /Output_script/script_joints_error_robots$((NOF_ACTIVE_ROBOTS))_freq$((wait_between_comm))_$((script_running)).txt" &)
 		# &> script_output_((NOF_ACTIVE_ROBOTS)).txt
 	done
@@ -246,6 +262,7 @@ elif [[ $commandname ==  "gripper" ]]; then
 		sshpass -p root scp ./Script_python/script_gripper.py root@$ipinterface:/
 		sshpass -p root ssh root@$ipinterface 'echo "root" | sudo -S chmod +x /script_gripper.py'
 	#	(sshpass -p root ssh root@$ipinterface 'source /root/catkin_ws/devel/setup.bash && export PYTHONPATH=${PYTHONPATH}:/root/catkin_ws/src/niryo_one_python_api/src/niryo_python_api && python /script_gripper.py' 1> ./Output_script/script_gripper_output_robots$((NOF_ACTIVE_ROBOTS))_freq$((wait_between_comm))_$((script_running)).txt 2> ./Output_script/script_gripper_error_robots$((NOF_ACTIVE_ROBOTS))_freq$((wait_between_comm))_$((script_running)).txt &)
+		# (sshpass -p root ssh root@$ipinterface 'source /root/catkin_ws/devel/setup.bash && export PYTHONPATH=${PYTHONPATH}:/root/catkin_ws/src/niryo_one_python_api/src/niryo_python_api &&'"python /script_gripper.py --filename /Output_script/script_gripper_output_robots$((NOF_ACTIVE_ROBOTS))_freq$((wait_between_comm))_$((script_running)).txt 2> /Output_script/script_gripper_error_robots$((NOF_ACTIVE_ROBOTS))_freq$((wait_between_comm))_$((script_running)).txt" &)
 		(sshpass -p root ssh root@$ipinterface 'source /root/catkin_ws/devel/setup.bash && export PYTHONPATH=${PYTHONPATH}:/root/catkin_ws/src/niryo_one_python_api/src/niryo_python_api &&'"python -u /script_gripper.py 1> /Output_script/script_gripper_output_robots$((NOF_ACTIVE_ROBOTS))_freq$((wait_between_comm))_$((script_running)).txt 2> /Output_script/script_gripper_error_robots$((NOF_ACTIVE_ROBOTS))_freq$((wait_between_comm))_$((script_running)).txt" &)
 	done
 
@@ -265,7 +282,7 @@ elif [[ $commandname ==  "rosapi" ]]; then
 		echo "Sending script_ROSAPI.py to $ipinterface"
 		sshpass -p root scp ./Script_python/script_ROSAPI.py root@$ipinterface:/
 		sshpass -p root ssh root@$ipinterface 'echo "root" | sudo -S chmod +x /script_ROSAPI.py'
-		(sshpass -p root ssh root@$ipinterface 'source /root/catkin_ws/devel/setup.bash && export PYTHONPATH=${PYTHONPATH}:/root/catkin_ws/src/niryo_one_python_api/src/niryo_python_api &&'"python -u /script_ROSAPI.py --cmd_speed 0.2  --duration 3000 --filename /Output_script/script_rosapi_output_robots$((NOF_ACTIVE_ROBOTS))_freq$((wait_between_comm))_$((script_running)).txt 2> /Output_script/script_rosapi_error_robots$((NOF_ACTIVE_ROBOTS))_freq$((wait_between_comm))_$((script_running)).txt" &)
+		(sshpass -p root ssh root@$ipinterface 'source /root/catkin_ws/devel/setup.bash && export PYTHONPATH=${PYTHONPATH}:/root/catkin_ws/src/niryo_one_python_api/src/niryo_python_api &&'"python /script_ROSAPI.py --cmd_speed 0.2  --duration 3000 --filename /Output_script/script_rosapi_output_robots$((NOF_ACTIVE_ROBOTS))_freq$((wait_between_comm))_$((script_running)).txt 2> /Output_script/script_rosapi_error_robots$((NOF_ACTIVE_ROBOTS))_freq$((wait_between_comm))_$((script_running)).txt" &)
 	done
 
 elif [[ $commandname ==  "rosapi2" ]]; then
@@ -285,7 +302,7 @@ elif [[ $commandname ==  "rosapi2" ]]; then
 		echo "Sending script_ROSAPI_2.py to $ipinterface"
 		sshpass -p root scp ./Script_python/script_ROSAPI_2.py root@$ipinterface:/
 		sshpass -p root ssh root@$ipinterface 'echo "root" | sudo -S chmod +x /script_ROSAPI_2.py'
-		(sshpass -p root ssh root@$ipinterface 'source /root/catkin_ws/devel/setup.bash && export PYTHONPATH=${PYTHONPATH}:/root/catkin_ws/src/niryo_one_python_api/src/niryo_python_api &&'"python -u /script_ROSAPI_2.py --cmd_speed 0.2  --duration 3000 --filename /Output_script/script_rosapi_2_output_robots$((NOF_ACTIVE_ROBOTS))_freq$((wait_between_comm))_$((script_running)).txt 2> /Output_script/script_rosapi_2_error_robots$((NOF_ACTIVE_ROBOTS))_freq$((wait_between_comm))_$((script_running)).txt" &)
+		(sshpass -p root ssh root@$ipinterface 'source /root/catkin_ws/devel/setup.bash && export PYTHONPATH=${PYTHONPATH}:/root/catkin_ws/src/niryo_one_python_api/src/niryo_python_api &&'"python /script_ROSAPI_2.py --cmd_speed 0.2 --duration 3000 --filename /Output_script/script_rosapi_2_output_robots$((NOF_ACTIVE_ROBOTS))_freq$((wait_between_comm))_$((script_running)).txt 2> /Output_script/script_rosapi_2_error_robots$((NOF_ACTIVE_ROBOTS))_freq$((wait_between_comm))_$((script_running)).txt" &)
 	done
 
 else
@@ -309,6 +326,7 @@ else
 		sshpass -p root ssh root@$ipinterface 'echo "root" | sudo -S chmod +x /script_pose.py'
 		# echo "Running script.py"
 		#(sshpass -p root ssh root@$ipinterface 'source /root/catkin_ws/devel/setup.bash && export PYTHONPATH=${PYTHONPATH}:/root/catkin_ws/src/niryo_one_python_api/src/niryo_python_api && python /script_pose.py' 1> ./Output_script/script_pose_output_robots$((NOF_ACTIVE_ROBOTS))_freq$((wait_between_comm))_$((script_running)).txt 2> ./Output_script/script_pose_error_robots$((NOF_ACTIVE_ROBOTS))_freq$((wait_between_comm))_$((script_running)).txt &)
+		# (sshpass -p root ssh root@$ipinterface 'source /root/catkin_ws/devel/setup.bash && export PYTHONPATH=${PYTHONPATH}:/root/catkin_ws/src/niryo_one_python_api/src/niryo_python_api &&'"python /script_pose.py --filename /Output_script/script_pose_output_robots$((NOF_ACTIVE_ROBOTS))_freq$((wait_between_comm))_$((script_running)).txt 2> /Output_script/script_pose_error_robots$((NOF_ACTIVE_ROBOTS))_freq$((wait_between_comm))_$((script_running)).txt" &)
 		(sshpass -p root ssh root@$ipinterface 'source /root/catkin_ws/devel/setup.bash && export PYTHONPATH=${PYTHONPATH}:/root/catkin_ws/src/niryo_one_python_api/src/niryo_python_api &&'"python -u /script_pose.py 1> /Output_script/script_pose_output_robots$((NOF_ACTIVE_ROBOTS))_freq$((wait_between_comm))_$((script_running)).txt 2> /Output_script/script_pose_error_robots$((NOF_ACTIVE_ROBOTS))_freq$((wait_between_comm))_$((script_running)).txt" &)
 
 		# &> script_output_((NOF_ACTIVE_ROBOTS)).txt
@@ -340,114 +358,89 @@ if true; then
 		# sh ./Script_measurements/CPU_measurements.sh ./Output/00_HostMetrics/CPUconsumption_joints_$((NOF_ACTIVE_ROBOTS))ACTIVE_freq$((wait_between_comm)).out $measurement_iteration $(echo $measurement_period | tr '.' ',') LocalHost &>/dev/null &
 		# sh ./Script_measurements/RAM_measurements.sh ./Output/00_HostMetrics/RAMusage_joints_$((NOF_ACTIVE_ROBOTS))ACTIVE_freq$((wait_between_comm)).out $measurement_iteration $measurement_period LocalHost &>/dev/null &
 
-		sshpass -p ${VM_PSW} ssh ${VM_USERNAME}@$INTERFACE_MASTER_VM_IP "python3 -u ~/resources_psutil.py $measurement_iteration $measurement_period ROS_VNF_interface 1> resources_psutil_joints_$((NOF_ACTIVE_ROBOTS))ACTIVE_freq$((wait_between_comm)).out" 1>/dev/null &
-		sshpass -p ${VM_PSW} ssh ${VM_USERNAME}@$INTERFACE_MASTER_VM_IP "python3 -u ~/resources_CPUtime.py $measurement_iteration $measurement_period ROS_VNF_interface 1> resources_psutil_CPUtime_joints_$((NOF_ACTIVE_ROBOTS))ACTIVE_freq$((wait_between_comm)).out" 1>/dev/null &
-		sshpass -p ${VM_PSW} ssh ${VM_USERNAME}@$ROBOTCOMMANDER_VM_IP "python3 -u ~/resources_psutil.py $measurement_iteration $measurement_period ROS_VNF_command 1> resources_psutil_joints_$((NOF_ACTIVE_ROBOTS))ACTIVE_freq$((wait_between_comm)).out" 1>/dev/null &
-		sshpass -p ${VM_PSW} ssh ${VM_USERNAME}@$ROBOTCOMMANDER_VM_IP "python3 -u ~/resources_CPUtime.py $measurement_iteration $measurement_period ROS_VNF_command 1> resources_psutil_CPUtime_joints_$((NOF_ACTIVE_ROBOTS))ACTIVE_freq$((wait_between_comm)).out" 1>/dev/null &
-		sshpass -p ${VM_PSW} ssh ${VM_USERNAME}@$MOTIONPLANNING_VM_IP "python3 -u ~/resources_psutil.py $measurement_iteration $measurement_period ROS_VNF_motionplanning 1> resources_psutil_joints_$((NOF_ACTIVE_ROBOTS))ACTIVE_freq$((wait_between_comm)).out" 1>/dev/null &
-		sshpass -p ${VM_PSW} ssh ${VM_USERNAME}@$MOTIONPLANNING_VM_IP "python3 -u ~/resources_CPUtime.py $measurement_iteration $measurement_period ROS_VNF_motionplanning 1> resources_psutil_CPUtime_joints_$((NOF_ACTIVE_ROBOTS))ACTIVE_freq$((wait_between_comm)).out" 1>/dev/null &
-		sshpass -p ${VM_PSW} ssh ${VM_USERNAME}@$STATE_VM_IP "python3 -u ~/resources_psutil.py $measurement_iteration $measurement_period ROS_VNF_state 1> resources_psutil_joints_$((NOF_ACTIVE_ROBOTS))ACTIVE_freq$((wait_between_comm)).out" 1>/dev/null &
-		sshpass -p ${VM_PSW} ssh ${VM_USERNAME}@$STATE_VM_IP "python3 -u ~/resources_CPUtime.py $measurement_iteration $measurement_period ROS_VNF_state 1> resources_psutil_CPUtime_joints_$((NOF_ACTIVE_ROBOTS))ACTIVE_freq$((wait_between_comm)).out" 1>/dev/null &
-		sshpass -p ${VM_PSW} ssh ${VM_USERNAME}@$CONTROLLER_VM_IP "python3 -u ~/resources_psutil.py $measurement_iteration $measurement_period ROS_VNF_control 1> resources_psutil_joints_$((NOF_ACTIVE_ROBOTS))ACTIVE_freq$((wait_between_comm)).out" 1>/dev/null &
-		sshpass -p ${VM_PSW} ssh ${VM_USERNAME}@$CONTROLLER_VM_IP "python3 -u ~/resources_CPUtime.py $measurement_iteration $measurement_period ROS_VNF_control 1> resources_psutil_CPUtime_joints_$((NOF_ACTIVE_ROBOTS))ACTIVE_freq$((wait_between_comm)).out" 1>/dev/null &
-		sshpass -p ${VM_PSW} ssh ${VM_USERNAME}@$DRIVER_VM_IP "python3 -u ~/resources_psutil.py $measurement_iteration $measurement_period ROS_VNF_driver 1> resources_psutil_joints_$((NOF_ACTIVE_ROBOTS))ACTIVE_freq$((wait_between_comm)).out" 1>/dev/null &
-		sshpass -p ${VM_PSW} ssh ${VM_USERNAME}@$DRIVER_VM_IP "python3 -u ~/resources_CPUtime.py $measurement_iteration $measurement_period ROS_VNF_driver 1> resources_psutil_CPUtime_joints_$((NOF_ACTIVE_ROBOTS))ACTIVE_freq$((wait_between_comm)).out" 1>/dev/null &
-		python3 -u ./Script_measurements/resources_psutil.py $measurement_iteration $measurement_period LocalHost 1> ./Output/00_HostMetrics/resources_psutil_joints_$((NOF_ACTIVE_ROBOTS))ACTIVE_freq$((wait_between_comm)).out &
-		python3 -u ./Script_measurements/resources_CPUtime.py $measurement_iteration $measurement_period LocalHost 1> ./Output/00_HostMetrics/resources_psutil_CPUtime_joints_$((NOF_ACTIVE_ROBOTS))ACTIVE_freq$((wait_between_comm)).out &
-
-		# sshpass -p ${VM_PSW} ssh ${VM_USERNAME}@$INTERFACE_MASTER_VM_IP "sh ~/resources_dockerstats.sh resources_dockerstats_joints_$((n_robots))ACTIVE_freq$((wait_between_comm)).out ROS_VNF_interface" 1>/dev/null &
-		# sshpass -p ${VM_PSW} ssh ${VM_USERNAME}@$ROBOTCOMMANDER_VM_IP "sh ~/resources_dockerstats.sh resources_dockerstats_joints_$((n_robots))ACTIVE_freq$((wait_between_comm)).out ROS_VNF_command" 1>/dev/null &
-		# sshpass -p ${VM_PSW} ssh ${VM_USERNAME}@$MOTIONPLANNING_VM_IP "sh ~/resources_dockerstats.sh resources_dockerstats_joints_$((n_robots))ACTIVE_freq$((wait_between_comm)).out ROS_VNF_motionplanning" 1>/dev/null &
-		# sshpass -p ${VM_PSW} ssh ${VM_USERNAME}@$STATE_VM_IP "sh ~/resources_dockerstats.sh resources_dockerstats_joints_$((n_robots))ACTIVE_freq$((wait_between_comm)).out ROS_VNF_state" 1>/dev/null &
-		# sshpass -p ${VM_PSW} ssh ${VM_USERNAME}@$CONTROLLER_VM_IP "sh ~/resources_dockerstats.sh resources_dockerstats_joints_$((n_robots))ACTIVE_freq$((wait_between_comm)).out ROS_VNF_control" 1>/dev/null &
-		# sshpass -p ${VM_PSW} ssh ${VM_USERNAME}@$DRIVER_VM_IP "sh ~/resources_dockerstats.sh resources_dockerstats_joints_$((n_robots))ACTIVE_freq$((wait_between_comm)).out ROS_VNF_driver" 1>/dev/null &
-		# sh ./Script_measurements/resources_dockerstats.sh ./Output/00_HostMetrics/resources_dockerstats_joints_$((n_robots))ACTIVE_freq$((wait_between_comm)).out LocalHost 2> /dev/null &
-
-
-		. ./Script_startRobots/mysleep.sh $(echo "$measurement_iteration*$measurement_period+180" | bc)
-
-	elif [[ $commandname ==  "gripper" ]]; then
-		# sshpass -p ${VM_PSW} ssh ${VM_USERNAME}@$INTERFACE_MASTER_VM_IP "sh ~/CPU_measurements.sh CPUconsumption_gripper_$((NOF_ACTIVE_ROBOTS))ACTIVE_freq$((wait_between_comm)).out $measurement_iteration $(echo $measurement_period | tr '.' ',') ROS_VNF_interface &>/dev/null &\
-			# sh ~/RAM_measurements.sh RAMusage_gripper_$((NOF_ACTIVE_ROBOTS))ACTIVE_freq$((wait_between_comm)).out $measurement_iteration $measurement_period ROS_VNF_interface &>/dev/null" 1>/dev/null &
-		# sshpass -p ${VM_PSW} ssh ${VM_USERNAME}@$ROBOTCOMMANDER_VM_IP "sh ~/CPU_measurements.sh CPUconsumption_gripper_$((NOF_ACTIVE_ROBOTS))ACTIVE_freq$((wait_between_comm)).out $measurement_iteration $(echo $measurement_period | tr '.' ',') ROS_VNF_command &>/dev/null &\
-			# sh ~/RAM_measurements.sh RAMusage_gripper_$((NOF_ACTIVE_ROBOTS))ACTIVE_freq$((wait_between_comm)).out $measurement_iteration $measurement_period ROS_VNF_command &>/dev/null" 1>/dev/null &
-		# sshpass -p ${VM_PSW} ssh ${VM_USERNAME}@$MOTIONPLANNING_VM_IP "sh ~/CPU_measurements.sh CPUconsumption_gripper_$((NOF_ACTIVE_ROBOTS))ACTIVE_freq$((wait_between_comm)).out $measurement_iteration $(echo $measurement_period | tr '.' ',') ROS_VNF_motionplanning &>/dev/null &\
-			# sh ~/RAM_measurements.sh RAMusage_gripper_$((NOF_ACTIVE_ROBOTS))ACTIVE_freq$((wait_between_comm)).out $measurement_iteration $measurement_period ROS_VNF_motionplanning &>/dev/null" 1>/dev/null &
-		# sshpass -p ${VM_PSW} ssh ${VM_USERNAME}@$STATE_VM_IP "sh ~/CPU_measurements.sh CPUconsumption_gripper_$((NOF_ACTIVE_ROBOTS))ACTIVE_freq$((wait_between_comm)).out $measurement_iteration $(echo $measurement_period | tr '.' ',') ROS_VNF_state &>/dev/null &\
-			# sh ~/RAM_measurements.sh RAMusage_gripper_$((NOF_ACTIVE_ROBOTS))ACTIVE_freq$((wait_between_comm)).out $measurement_iteration $measurement_period ROS_VNF_state &>/dev/null" 1>/dev/null &
-		# sshpass -p ${VM_PSW} ssh ${VM_USERNAME}@$CONTROLLER_VM_IP "sh ~/CPU_measurements.sh CPUconsumption_gripper_$((NOF_ACTIVE_ROBOTS))ACTIVE_freq$((wait_between_comm)).out $measurement_iteration $(echo $measurement_period | tr '.' ',') ROS_VNF_control &>/dev/null &\
-			# sh ~/RAM_measurements.sh RAMusage_gripper_$((NOF_ACTIVE_ROBOTS))ACTIVE_freq$((wait_between_comm)).out $measurement_iteration $measurement_period ROS_VNF_control &>/dev/null" 1>/dev/null &
-		# sshpass -p ${VM_PSW} ssh ${VM_USERNAME}@$DRIVER_VM_IP "sh ~/CPU_measurements.sh CPUconsumption_gripper_$((NOF_ACTIVE_ROBOTS))ACTIVE_freq$((wait_between_comm)).out $measurement_iteration $(echo $measurement_period | tr '.' ',') ROS_VNF_driver &>/dev/null &\
-			# sh ~/RAM_measurements.sh RAMusage_gripper_$((NOF_ACTIVE_ROBOTS))ACTIVE_freq$((wait_between_comm)).out $measurement_iteration $measurement_period ROS_VNF_driver &>/dev/null" 1>/dev/null &
-		# sh ./CPU_measurements.sh ./Output/00_HostMetrics/CPUconsumption_gripper_$((NOF_ACTIVE_ROBOTS))ACTIVE_freq$((wait_between_comm)).out $measurement_iteration $(echo $measurement_period | tr '.' ',') LocalHost &>/dev/null &
-		# sh ./RAM_measurements.sh ./Output/00_HostMetrics/RAMusage_gripper_$((NOF_ACTIVE_ROBOTS))ACTIVE_freq$((wait_between_comm)).out $measurement_iteration $measurement_period LocalHost &>/dev/null &
-
-		sshpass -p ${VM_PSW} ssh ${VM_USERNAME}@$INTERFACE_MASTER_VM_IP "python3 -u ~/resources_psutil.py $measurement_iteration $measurement_period ROS_VNF_interface 1> resources_psutil_gripper_$((NOF_ACTIVE_ROBOTS))ACTIVE_freq$((wait_between_comm)).out" 1>/dev/null &
-		sshpass -p ${VM_PSW} ssh ${VM_USERNAME}@$INTERFACE_MASTER_VM_IP "python3 -u ~/resources_CPUtime.py $measurement_iteration $measurement_period ROS_VNF_interface 1> resources_psutil_CPUtime_gripper_$((NOF_ACTIVE_ROBOTS))ACTIVE_freq$((wait_between_comm)).out" 1>/dev/null &
-		sshpass -p ${VM_PSW} ssh ${VM_USERNAME}@$ROBOTCOMMANDER_VM_IP "python3 -u ~/resources_psutil.py $measurement_iteration $measurement_period ROS_VNF_command 1> resources_psutil_gripper_$((NOF_ACTIVE_ROBOTS))ACTIVE_freq$((wait_between_comm)).out" 1>/dev/null &
-		sshpass -p ${VM_PSW} ssh ${VM_USERNAME}@$ROBOTCOMMANDER_VM_IP "python3 -u ~/resources_CPUtime.py $measurement_iteration $measurement_period ROS_VNF_command 1> resources_psutil_CPUtime_gripper_$((NOF_ACTIVE_ROBOTS))ACTIVE_freq$((wait_between_comm)).out" 1>/dev/null &
-		sshpass -p ${VM_PSW} ssh ${VM_USERNAME}@$MOTIONPLANNING_VM_IP "python3 -u ~/resources_psutil.py $measurement_iteration $measurement_period ROS_VNF_motionplanning 1> resources_psutil_gripper_$((NOF_ACTIVE_ROBOTS))ACTIVE_freq$((wait_between_comm)).out" 1>/dev/null &
-		sshpass -p ${VM_PSW} ssh ${VM_USERNAME}@$MOTIONPLANNING_VM_IP "python3 -u ~/resources_CPUtime.py $measurement_iteration $measurement_period ROS_VNF_motionplanning 1> resources_psutil_CPUtime_gripper_$((NOF_ACTIVE_ROBOTS))ACTIVE_freq$((wait_between_comm)).out" 1>/dev/null &
-		sshpass -p ${VM_PSW} ssh ${VM_USERNAME}@$STATE_VM_IP "python3 -u ~/resources_psutil.py $measurement_iteration $measurement_period ROS_VNF_state 1> resources_psutil_gripper_$((NOF_ACTIVE_ROBOTS))ACTIVE_freq$((wait_between_comm)).out" 1>/dev/null &
-		sshpass -p ${VM_PSW} ssh ${VM_USERNAME}@$STATE_VM_IP "python3 -u ~/resources_CPUtime.py $measurement_iteration $measurement_period ROS_VNF_state 1> resources_psutil_CPUtime_gripper_$((NOF_ACTIVE_ROBOTS))ACTIVE_freq$((wait_between_comm)).out" 1>/dev/null &
-		sshpass -p ${VM_PSW} ssh ${VM_USERNAME}@$CONTROLLER_VM_IP "python3 -u ~/resources_psutil.py $measurement_iteration $measurement_period ROS_VNF_control 1> resources_psutil_gripper_$((NOF_ACTIVE_ROBOTS))ACTIVE_freq$((wait_between_comm)).out" 1>/dev/null &
-		sshpass -p ${VM_PSW} ssh ${VM_USERNAME}@$CONTROLLER_VM_IP "python3 -u ~/resources_CPUtime.py $measurement_iteration $measurement_period ROS_VNF_control 1> resources_psutil_CPUtime_gripper_$((NOF_ACTIVE_ROBOTS))ACTIVE_freq$((wait_between_comm)).out" 1>/dev/null &
-		sshpass -p ${VM_PSW} ssh ${VM_USERNAME}@$DRIVER_VM_IP "python3 -u ~/resources_psutil.py $measurement_iteration $measurement_period ROS_VNF_driver 1> resources_psutil_gripper_$((NOF_ACTIVE_ROBOTS))ACTIVE_freq$((wait_between_comm)).out" 1>/dev/null &
-		sshpass -p ${VM_PSW} ssh ${VM_USERNAME}@$DRIVER_VM_IP "python3 -u ~/resources_CPUtime.py $measurement_iteration $measurement_period ROS_VNF_driver 1> resources_psutil_CPUtime_gripper_$((NOF_ACTIVE_ROBOTS))ACTIVE_freq$((wait_between_comm)).out" 1>/dev/null &
-		python3 -u ./Script_measurements/resources_psutil.py $measurement_iteration $measurement_period LocalHost 1> ./Output/00_HostMetrics/resources_psutil_gripper_$((NOF_ACTIVE_ROBOTS))ACTIVE_freq$((wait_between_comm)).out &
-		python3 -u ./Script_measurements/resources_CPUtime.py $measurement_iteration $measurement_period LocalHost 1> ./Output/00_HostMetrics/resources_psutil_CPUtime_gripper_$((NOF_ACTIVE_ROBOTS))ACTIVE_freq$((wait_between_comm)).out &
+		if [[ $meas_tool ==  "psutil" ]]; then
+			sshpass -p ${VM_PSW} ssh ${VM_USERNAME}@$INTERFACE_MASTER_VM_IP "python3 -u ~/resources_psutil.py $measurement_iteration $measurement_period ROS_VNF_interface 1> resources_psutil_joints_$((NOF_ACTIVE_ROBOTS))ACTIVE_freq$((wait_between_comm)).out" 1>/dev/null &
+			sshpass -p ${VM_PSW} ssh ${VM_USERNAME}@$INTERFACE_MASTER_VM_IP "python3 -u ~/resources_CPUtime.py $measurement_iteration $measurement_period ROS_VNF_interface 1> resources_psutil_CPUtime_joints_$((NOF_ACTIVE_ROBOTS))ACTIVE_freq$((wait_between_comm)).out" 1>/dev/null &
+			sshpass -p ${VM_PSW} ssh ${VM_USERNAME}@$ROBOTCOMMANDER_VM_IP "python3 -u ~/resources_psutil.py $measurement_iteration $measurement_period ROS_VNF_command 1> resources_psutil_joints_$((NOF_ACTIVE_ROBOTS))ACTIVE_freq$((wait_between_comm)).out" 1>/dev/null &
+			sshpass -p ${VM_PSW} ssh ${VM_USERNAME}@$ROBOTCOMMANDER_VM_IP "python3 -u ~/resources_CPUtime.py $measurement_iteration $measurement_period ROS_VNF_command 1> resources_psutil_CPUtime_joints_$((NOF_ACTIVE_ROBOTS))ACTIVE_freq$((wait_between_comm)).out" 1>/dev/null &
+			sshpass -p ${VM_PSW} ssh ${VM_USERNAME}@$MOTIONPLANNING_VM_IP "python3 -u ~/resources_psutil.py $measurement_iteration $measurement_period ROS_VNF_motionplanning 1> resources_psutil_joints_$((NOF_ACTIVE_ROBOTS))ACTIVE_freq$((wait_between_comm)).out" 1>/dev/null &
+			sshpass -p ${VM_PSW} ssh ${VM_USERNAME}@$MOTIONPLANNING_VM_IP "python3 -u ~/resources_CPUtime.py $measurement_iteration $measurement_period ROS_VNF_motionplanning 1> resources_psutil_CPUtime_joints_$((NOF_ACTIVE_ROBOTS))ACTIVE_freq$((wait_between_comm)).out" 1>/dev/null &
+			sshpass -p ${VM_PSW} ssh ${VM_USERNAME}@$STATE_VM_IP "python3 -u ~/resources_psutil.py $measurement_iteration $measurement_period ROS_VNF_state 1> resources_psutil_joints_$((NOF_ACTIVE_ROBOTS))ACTIVE_freq$((wait_between_comm)).out" 1>/dev/null &
+			sshpass -p ${VM_PSW} ssh ${VM_USERNAME}@$STATE_VM_IP "python3 -u ~/resources_CPUtime.py $measurement_iteration $measurement_period ROS_VNF_state 1> resources_psutil_CPUtime_joints_$((NOF_ACTIVE_ROBOTS))ACTIVE_freq$((wait_between_comm)).out" 1>/dev/null &
+			sshpass -p ${VM_PSW} ssh ${VM_USERNAME}@$CONTROLLER_VM_IP "python3 -u ~/resources_psutil.py $measurement_iteration $measurement_period ROS_VNF_control 1> resources_psutil_joints_$((NOF_ACTIVE_ROBOTS))ACTIVE_freq$((wait_between_comm)).out" 1>/dev/null &
+			sshpass -p ${VM_PSW} ssh ${VM_USERNAME}@$CONTROLLER_VM_IP "python3 -u ~/resources_CPUtime.py $measurement_iteration $measurement_period ROS_VNF_control 1> resources_psutil_CPUtime_joints_$((NOF_ACTIVE_ROBOTS))ACTIVE_freq$((wait_between_comm)).out" 1>/dev/null &
+			sshpass -p ${VM_PSW} ssh ${VM_USERNAME}@$DRIVER_VM_IP "python3 -u ~/resources_psutil.py $measurement_iteration $measurement_period ROS_VNF_driver 1> resources_psutil_joints_$((NOF_ACTIVE_ROBOTS))ACTIVE_freq$((wait_between_comm)).out" 1>/dev/null &
+			sshpass -p ${VM_PSW} ssh ${VM_USERNAME}@$DRIVER_VM_IP "python3 -u ~/resources_CPUtime.py $measurement_iteration $measurement_period ROS_VNF_driver 1> resources_psutil_CPUtime_joints_$((NOF_ACTIVE_ROBOTS))ACTIVE_freq$((wait_between_comm)).out" 1>/dev/null &
+			python3 -u ./Script_measurements/resources_psutil.py $measurement_iteration $measurement_period LocalHost 1> ./Output/00_HostMetrics/resources_psutil_joints_$((NOF_ACTIVE_ROBOTS))ACTIVE_freq$((wait_between_comm)).out &
+			python3 -u ./Script_measurements/resources_CPUtime.py $measurement_iteration $measurement_period LocalHost 1> ./Output/00_HostMetrics/resources_psutil_CPUtime_joints_$((NOF_ACTIVE_ROBOTS))ACTIVE_freq$((wait_between_comm)).out &
+		elif [[ $meas_tool ==  "dockerstats" ]]; then
+			sshpass -p ${VM_PSW} ssh ${VM_USERNAME}@$INTERFACE_MASTER_VM_IP "sh ~/resources_dockerstats.sh resources_dockerstats_joints_$((n_robots))ACTIVE_freq$((wait_between_comm)).out ROS_VNF_interface" 1>/dev/null &
+			sshpass -p ${VM_PSW} ssh ${VM_USERNAME}@$ROBOTCOMMANDER_VM_IP "sh ~/resources_dockerstats.sh resources_dockerstats_joints_$((n_robots))ACTIVE_freq$((wait_between_comm)).out ROS_VNF_command" 1>/dev/null &
+			sshpass -p ${VM_PSW} ssh ${VM_USERNAME}@$MOTIONPLANNING_VM_IP "sh ~/resources_dockerstats.sh resources_dockerstats_joints_$((n_robots))ACTIVE_freq$((wait_between_comm)).out ROS_VNF_motionplanning" 1>/dev/null &
+			sshpass -p ${VM_PSW} ssh ${VM_USERNAME}@$STATE_VM_IP "sh ~/resources_dockerstats.sh resources_dockerstats_joints_$((n_robots))ACTIVE_freq$((wait_between_comm)).out ROS_VNF_state" 1>/dev/null &
+			sshpass -p ${VM_PSW} ssh ${VM_USERNAME}@$CONTROLLER_VM_IP "sh ~/resources_dockerstats.sh resources_dockerstats_joints_$((n_robots))ACTIVE_freq$((wait_between_comm)).out ROS_VNF_control" 1>/dev/null &
+			sshpass -p ${VM_PSW} ssh ${VM_USERNAME}@$DRIVER_VM_IP "sh ~/resources_dockerstats.sh resources_dockerstats_joints_$((n_robots))ACTIVE_freq$((wait_between_comm)).out ROS_VNF_driver" 1>/dev/null &
+			sh ./Script_measurements/resources_dockerstats.sh ./Output/00_HostMetrics/resources_dockerstats_joints_$((n_robots))ACTIVE_freq$((wait_between_comm)).out LocalHost 2> /dev/null &
+		fi
 
 		. ./Script_startRobots/mysleep.sh $(echo "$measurement_iteration*$measurement_period+180" | bc)
 
 	elif [[ $commandname ==  "rosapi" ]]; then
-		# sshpass -p ${VM_PSW} ssh ${VM_USERNAME}@$INTERFACE_MASTER_VM_IP "sh ~/CPU_measurements.sh CPUconsumption_gripper_$((NOF_ACTIVE_ROBOTS))ACTIVE_freq$((wait_between_comm)).out $measurement_iteration $(echo $measurement_period | tr '.' ',') ROS_VNF_interface &>/dev/null &\
-			# sh ~/RAM_measurements.sh RAMusage_gripper_$((NOF_ACTIVE_ROBOTS))ACTIVE_freq$((wait_between_comm)).out $measurement_iteration $measurement_period ROS_VNF_interface &>/dev/null" 1>/dev/null &
-		# sshpass -p ${VM_PSW} ssh ${VM_USERNAME}@$ROBOTCOMMANDER_VM_IP "sh ~/CPU_measurements.sh CPUconsumption_gripper_$((NOF_ACTIVE_ROBOTS))ACTIVE_freq$((wait_between_comm)).out $measurement_iteration $(echo $measurement_period | tr '.' ',') ROS_VNF_command &>/dev/null &\
-			# sh ~/RAM_measurements.sh RAMusage_gripper_$((NOF_ACTIVE_ROBOTS))ACTIVE_freq$((wait_between_comm)).out $measurement_iteration $measurement_period ROS_VNF_command &>/dev/null" 1>/dev/null &
-		# sshpass -p ${VM_PSW} ssh ${VM_USERNAME}@$MOTIONPLANNING_VM_IP "sh ~/CPU_measurements.sh CPUconsumption_gripper_$((NOF_ACTIVE_ROBOTS))ACTIVE_freq$((wait_between_comm)).out $measurement_iteration $(echo $measurement_period | tr '.' ',') ROS_VNF_motionplanning &>/dev/null &\
-			# sh ~/RAM_measurements.sh RAMusage_gripper_$((NOF_ACTIVE_ROBOTS))ACTIVE_freq$((wait_between_comm)).out $measurement_iteration $measurement_period ROS_VNF_motionplanning &>/dev/null" 1>/dev/null &
-		# sshpass -p ${VM_PSW} ssh ${VM_USERNAME}@$STATE_VM_IP "sh ~/CPU_measurements.sh CPUconsumption_gripper_$((NOF_ACTIVE_ROBOTS))ACTIVE_freq$((wait_between_comm)).out $measurement_iteration $(echo $measurement_period | tr '.' ',') ROS_VNF_state &>/dev/null &\
-			# sh ~/RAM_measurements.sh RAMusage_gripper_$((NOF_ACTIVE_ROBOTS))ACTIVE_freq$((wait_between_comm)).out $measurement_iteration $measurement_period ROS_VNF_state &>/dev/null" 1>/dev/null &
-		# sshpass -p ${VM_PSW} ssh ${VM_USERNAME}@$CONTROLLER_VM_IP "sh ~/CPU_measurements.sh CPUconsumption_gripper_$((NOF_ACTIVE_ROBOTS))ACTIVE_freq$((wait_between_comm)).out $measurement_iteration $(echo $measurement_period | tr '.' ',') ROS_VNF_control &>/dev/null &\
-			# sh ~/RAM_measurements.sh RAMusage_gripper_$((NOF_ACTIVE_ROBOTS))ACTIVE_freq$((wait_between_comm)).out $measurement_iteration $measurement_period ROS_VNF_control &>/dev/null" 1>/dev/null &
-		# sshpass -p ${VM_PSW} ssh ${VM_USERNAME}@$DRIVER_VM_IP "sh ~/CPU_measurements.sh CPUconsumption_gripper_$((NOF_ACTIVE_ROBOTS))ACTIVE_freq$((wait_between_comm)).out $measurement_iteration $(echo $measurement_period | tr '.' ',') ROS_VNF_driver &>/dev/null &\
-			# sh ~/RAM_measurements.sh RAMusage_gripper_$((NOF_ACTIVE_ROBOTS))ACTIVE_freq$((wait_between_comm)).out $measurement_iteration $measurement_period ROS_VNF_driver &>/dev/null" 1>/dev/null &
-		# sh ./CPU_measurements.sh ./Output/00_HostMetrics/CPUconsumption_gripper_$((NOF_ACTIVE_ROBOTS))ACTIVE_freq$((wait_between_comm)).out $measurement_iteration $(echo $measurement_period | tr '.' ',') LocalHost &>/dev/null &
-		# sh ./RAM_measurements.sh ./Output/00_HostMetrics/RAMusage_gripper_$((NOF_ACTIVE_ROBOTS))ACTIVE_freq$((wait_between_comm)).out $measurement_iteration $measurement_period LocalHost &>/dev/null &
 
-		sshpass -p ${VM_PSW} ssh ${VM_USERNAME}@$INTERFACE_MASTER_VM_IP "python3 -u ~/resources_psutil.py $measurement_iteration $measurement_period ROS_VNF_interface 1> resources_psutil_rosapi_$((NOF_ACTIVE_ROBOTS))ACTIVE_freq$((wait_between_comm)).out" 1>/dev/null &
-		sshpass -p ${VM_PSW} ssh ${VM_USERNAME}@$INTERFACE_MASTER_VM_IP "python3 -u ~/resources_CPUtime.py $measurement_iteration $measurement_period ROS_VNF_interface 1> resources_psutil_CPUtime_rosapi_$((NOF_ACTIVE_ROBOTS))ACTIVE_freq$((wait_between_comm)).out" 1>/dev/null &
-		sshpass -p ${VM_PSW} ssh ${VM_USERNAME}@$ROBOTCOMMANDER_VM_IP "python3 -u ~/resources_psutil.py $measurement_iteration $measurement_period ROS_VNF_command 1> resources_psutil_rosapi_$((NOF_ACTIVE_ROBOTS))ACTIVE_freq$((wait_between_comm)).out" 1>/dev/null &
-		sshpass -p ${VM_PSW} ssh ${VM_USERNAME}@$ROBOTCOMMANDER_VM_IP "python3 -u ~/resources_CPUtime.py $measurement_iteration $measurement_period ROS_VNF_command 1> resources_psutil_CPUtime_rosapi_$((NOF_ACTIVE_ROBOTS))ACTIVE_freq$((wait_between_comm)).out" 1>/dev/null &
-		sshpass -p ${VM_PSW} ssh ${VM_USERNAME}@$MOTIONPLANNING_VM_IP "python3 -u ~/resources_psutil.py $measurement_iteration $measurement_period ROS_VNF_motionplanning 1> resources_psutil_rosapi_$((NOF_ACTIVE_ROBOTS))ACTIVE_freq$((wait_between_comm)).out" 1>/dev/null &
-		sshpass -p ${VM_PSW} ssh ${VM_USERNAME}@$MOTIONPLANNING_VM_IP "python3 -u ~/resources_CPUtime.py $measurement_iteration $measurement_period ROS_VNF_motionplanning 1> resources_psutil_CPUtime_rosapi_$((NOF_ACTIVE_ROBOTS))ACTIVE_freq$((wait_between_comm)).out" 1>/dev/null &
-		sshpass -p ${VM_PSW} ssh ${VM_USERNAME}@$STATE_VM_IP "python3 -u ~/resources_psutil.py $measurement_iteration $measurement_period ROS_VNF_state 1> resources_psutil_rosapi_$((NOF_ACTIVE_ROBOTS))ACTIVE_freq$((wait_between_comm)).out" 1>/dev/null &
-		sshpass -p ${VM_PSW} ssh ${VM_USERNAME}@$STATE_VM_IP "python3 -u ~/resources_CPUtime.py $measurement_iteration $measurement_period ROS_VNF_state 1> resources_psutil_CPUtime_rosapi_$((NOF_ACTIVE_ROBOTS))ACTIVE_freq$((wait_between_comm)).out" 1>/dev/null &
-		sshpass -p ${VM_PSW} ssh ${VM_USERNAME}@$CONTROLLER_VM_IP "python3 -u ~/resources_psutil.py $measurement_iteration $measurement_period ROS_VNF_control 1> resources_psutil_rosapi_$((NOF_ACTIVE_ROBOTS))ACTIVE_freq$((wait_between_comm)).out" 1>/dev/null &
-		sshpass -p ${VM_PSW} ssh ${VM_USERNAME}@$CONTROLLER_VM_IP "python3 -u ~/resources_CPUtime.py $measurement_iteration $measurement_period ROS_VNF_control 1> resources_psutil_CPUtime_rosapi_$((NOF_ACTIVE_ROBOTS))ACTIVE_freq$((wait_between_comm)).out" 1>/dev/null &
-		sshpass -p ${VM_PSW} ssh ${VM_USERNAME}@$DRIVER_VM_IP "python3 -u ~/resources_psutil.py $measurement_iteration $measurement_period ROS_VNF_driver 1> resources_psutil_rosapi_$((NOF_ACTIVE_ROBOTS))ACTIVE_freq$((wait_between_comm)).out" 1>/dev/null &
-		sshpass -p ${VM_PSW} ssh ${VM_USERNAME}@$DRIVER_VM_IP "python3 -u ~/resources_CPUtime.py $measurement_iteration $measurement_period ROS_VNF_driver 1> resources_psutil_CPUtime_rosapi_$((NOF_ACTIVE_ROBOTS))ACTIVE_freq$((wait_between_comm)).out" 1>/dev/null &
-		python3 -u ./Script_measurements/resources_psutil.py $measurement_iteration $measurement_period LocalHost 1> ./Output/00_HostMetrics/resources_psutil_rosapi_$((NOF_ACTIVE_ROBOTS))ACTIVE_freq$((wait_between_comm)).out &
-		python3 -u ./Script_measurements/resources_CPUtime.py $measurement_iteration $measurement_period LocalHost 1> ./Output/00_HostMetrics/resources_psutil_CPUtime_rosapi_$((NOF_ACTIVE_ROBOTS))ACTIVE_freq$((wait_between_comm)).out &
+		if [[ $meas_tool ==  "psutil" ]]; then
+			sshpass -p ${VM_PSW} ssh ${VM_USERNAME}@$INTERFACE_MASTER_VM_IP "python3 -u ~/resources_psutil.py $measurement_iteration $measurement_period ROS_VNF_interface 1> resources_psutil_rosapi_$((NOF_ACTIVE_ROBOTS))ACTIVE_freq$((wait_between_comm)).out" 1>/dev/null &
+			sshpass -p ${VM_PSW} ssh ${VM_USERNAME}@$INTERFACE_MASTER_VM_IP "python3 -u ~/resources_CPUtime.py $measurement_iteration $measurement_period ROS_VNF_interface 1> resources_psutil_CPUtime_rosapi_$((NOF_ACTIVE_ROBOTS))ACTIVE_freq$((wait_between_comm)).out" 1>/dev/null &
+			sshpass -p ${VM_PSW} ssh ${VM_USERNAME}@$ROBOTCOMMANDER_VM_IP "python3 -u ~/resources_psutil.py $measurement_iteration $measurement_period ROS_VNF_command 1> resources_psutil_rosapi_$((NOF_ACTIVE_ROBOTS))ACTIVE_freq$((wait_between_comm)).out" 1>/dev/null &
+			sshpass -p ${VM_PSW} ssh ${VM_USERNAME}@$ROBOTCOMMANDER_VM_IP "python3 -u ~/resources_CPUtime.py $measurement_iteration $measurement_period ROS_VNF_command 1> resources_psutil_CPUtime_rosapi_$((NOF_ACTIVE_ROBOTS))ACTIVE_freq$((wait_between_comm)).out" 1>/dev/null &
+			sshpass -p ${VM_PSW} ssh ${VM_USERNAME}@$MOTIONPLANNING_VM_IP "python3 -u ~/resources_psutil.py $measurement_iteration $measurement_period ROS_VNF_motionplanning 1> resources_psutil_rosapi_$((NOF_ACTIVE_ROBOTS))ACTIVE_freq$((wait_between_comm)).out" 1>/dev/null &
+			sshpass -p ${VM_PSW} ssh ${VM_USERNAME}@$MOTIONPLANNING_VM_IP "python3 -u ~/resources_CPUtime.py $measurement_iteration $measurement_period ROS_VNF_motionplanning 1> resources_psutil_CPUtime_rosapi_$((NOF_ACTIVE_ROBOTS))ACTIVE_freq$((wait_between_comm)).out" 1>/dev/null &
+			sshpass -p ${VM_PSW} ssh ${VM_USERNAME}@$STATE_VM_IP "python3 -u ~/resources_psutil.py $measurement_iteration $measurement_period ROS_VNF_state 1> resources_psutil_rosapi_$((NOF_ACTIVE_ROBOTS))ACTIVE_freq$((wait_between_comm)).out" 1>/dev/null &
+			sshpass -p ${VM_PSW} ssh ${VM_USERNAME}@$STATE_VM_IP "python3 -u ~/resources_CPUtime.py $measurement_iteration $measurement_period ROS_VNF_state 1> resources_psutil_CPUtime_rosapi_$((NOF_ACTIVE_ROBOTS))ACTIVE_freq$((wait_between_comm)).out" 1>/dev/null &
+			sshpass -p ${VM_PSW} ssh ${VM_USERNAME}@$CONTROLLER_VM_IP "python3 -u ~/resources_psutil.py $measurement_iteration $measurement_period ROS_VNF_control 1> resources_psutil_rosapi_$((NOF_ACTIVE_ROBOTS))ACTIVE_freq$((wait_between_comm)).out" 1>/dev/null &
+			sshpass -p ${VM_PSW} ssh ${VM_USERNAME}@$CONTROLLER_VM_IP "python3 -u ~/resources_CPUtime.py $measurement_iteration $measurement_period ROS_VNF_control 1> resources_psutil_CPUtime_rosapi_$((NOF_ACTIVE_ROBOTS))ACTIVE_freq$((wait_between_comm)).out" 1>/dev/null &
+			sshpass -p ${VM_PSW} ssh ${VM_USERNAME}@$DRIVER_VM_IP "python3 -u ~/resources_psutil.py $measurement_iteration $measurement_period ROS_VNF_driver 1> resources_psutil_rosapi_$((NOF_ACTIVE_ROBOTS))ACTIVE_freq$((wait_between_comm)).out" 1>/dev/null &
+			sshpass -p ${VM_PSW} ssh ${VM_USERNAME}@$DRIVER_VM_IP "python3 -u ~/resources_CPUtime.py $measurement_iteration $measurement_period ROS_VNF_driver 1> resources_psutil_CPUtime_rosapi_$((NOF_ACTIVE_ROBOTS))ACTIVE_freq$((wait_between_comm)).out" 1>/dev/null &
+			python3 -u ./Script_measurements/resources_psutil.py $measurement_iteration $measurement_period LocalHost 1> ./Output/00_HostMetrics/resources_psutil_rosapi_$((NOF_ACTIVE_ROBOTS))ACTIVE_freq$((wait_between_comm)).out &
+			python3 -u ./Script_measurements/resources_CPUtime.py $measurement_iteration $measurement_period LocalHost 1> ./Output/00_HostMetrics/resources_psutil_CPUtime_rosapi_$((NOF_ACTIVE_ROBOTS))ACTIVE_freq$((wait_between_comm)).out &
+		elif [[ $meas_tool ==  "dockerstats" ]]
+		then
+			sshpass -p ${VM_PSW} ssh ${VM_USERNAME}@$INTERFACE_MASTER_VM_IP "sh ~/resources_dockerstats.sh resources_dockerstats_rosapi_$((n_robots))ACTIVE_freq$((wait_between_comm)).out ROS_VNF_interface" 1>/dev/null &
+			sshpass -p ${VM_PSW} ssh ${VM_USERNAME}@$ROBOTCOMMANDER_VM_IP "sh ~/resources_dockerstats.sh resources_dockerstats_rosapi_$((n_robots))ACTIVE_freq$((wait_between_comm)).out ROS_VNF_command" 1>/dev/null &
+			sshpass -p ${VM_PSW} ssh ${VM_USERNAME}@$MOTIONPLANNING_VM_IP "sh ~/resources_dockerstats.sh resources_dockerstats_rosapi_$((n_robots))ACTIVE_freq$((wait_between_comm)).out ROS_VNF_motionplanning" 1>/dev/null &
+			sshpass -p ${VM_PSW} ssh ${VM_USERNAME}@$STATE_VM_IP "sh ~/resources_dockerstats.sh resources_dockerstats_rosapi_$((n_robots))ACTIVE_freq$((wait_between_comm)).out ROS_VNF_state" 1>/dev/null &
+			sshpass -p ${VM_PSW} ssh ${VM_USERNAME}@$CONTROLLER_VM_IP "sh ~/resources_dockerstats.sh resources_dockerstats_rosapi_$((n_robots))ACTIVE_freq$((wait_between_comm)).out ROS_VNF_control" 1>/dev/null &
+			sshpass -p ${VM_PSW} ssh ${VM_USERNAME}@$DRIVER_VM_IP "sh ~/resources_dockerstats.sh resources_dockerstats_rosapi_$((n_robots))ACTIVE_freq$((wait_between_comm)).out ROS_VNF_driver" 1>/dev/null &
+			sh ./Script_measurements/resources_dockerstats.sh ./Output/00_HostMetrics/resources_dockerstats_rosapi_$((n_robots))ACTIVE_freq$((wait_between_comm)).out LocalHost 2> /dev/null &
+		fi
 
 		. ./Script_startRobots/mysleep.sh $(echo "$measurement_iteration*$measurement_period+180" | bc)
 
 	elif [[ $commandname ==  "rosapi2" ]]; then
 
-		sshpass -p ${VM_PSW} ssh ${VM_USERNAME}@$INTERFACE_MASTER_VM_IP "python3 -u ~/resources_psutil.py $measurement_iteration $measurement_period ROS_VNF_interface 1> resources_psutil_rosapi_2_$((NOF_ACTIVE_ROBOTS))ACTIVE_freq$((wait_between_comm)).out" 1>/dev/null &
-		sshpass -p ${VM_PSW} ssh ${VM_USERNAME}@$INTERFACE_MASTER_VM_IP "python3 -u ~/resources_CPUtime.py $measurement_iteration $measurement_period ROS_VNF_interface 1> resources_psutil_CPUtime_rosapi_2_$((NOF_ACTIVE_ROBOTS))ACTIVE_freq$((wait_between_comm)).out" 1>/dev/null &
-		sshpass -p ${VM_PSW} ssh ${VM_USERNAME}@$ROBOTCOMMANDER_VM_IP "python3 -u ~/resources_psutil.py $measurement_iteration $measurement_period ROS_VNF_command 1> resources_psutil_rosapi_2_$((NOF_ACTIVE_ROBOTS))ACTIVE_freq$((wait_between_comm)).out" 1>/dev/null &
-		sshpass -p ${VM_PSW} ssh ${VM_USERNAME}@$ROBOTCOMMANDER_VM_IP "python3 -u ~/resources_CPUtime.py $measurement_iteration $measurement_period ROS_VNF_command 1> resources_psutil_CPUtime_rosapi_2_$((NOF_ACTIVE_ROBOTS))ACTIVE_freq$((wait_between_comm)).out" 1>/dev/null &
-		sshpass -p ${VM_PSW} ssh ${VM_USERNAME}@$MOTIONPLANNING_VM_IP "python3 -u ~/resources_psutil.py $measurement_iteration $measurement_period ROS_VNF_motionplanning 1> resources_psutil_rosapi_2_$((NOF_ACTIVE_ROBOTS))ACTIVE_freq$((wait_between_comm)).out" 1>/dev/null &
-		sshpass -p ${VM_PSW} ssh ${VM_USERNAME}@$MOTIONPLANNING_VM_IP "python3 -u ~/resources_CPUtime.py $measurement_iteration $measurement_period ROS_VNF_motionplanning 1> resources_psutil_CPUtime_rosapi_2_$((NOF_ACTIVE_ROBOTS))ACTIVE_freq$((wait_between_comm)).out" 1>/dev/null &
-		sshpass -p ${VM_PSW} ssh ${VM_USERNAME}@$STATE_VM_IP "python3 -u ~/resources_psutil.py $measurement_iteration $measurement_period ROS_VNF_state 1> resources_psutil_rosapi_2_$((NOF_ACTIVE_ROBOTS))ACTIVE_freq$((wait_between_comm)).out" 1>/dev/null &
-		sshpass -p ${VM_PSW} ssh ${VM_USERNAME}@$STATE_VM_IP "python3 -u ~/resources_CPUtime.py $measurement_iteration $measurement_period ROS_VNF_state 1> resources_psutil_CPUtime_rosapi_2_$((NOF_ACTIVE_ROBOTS))ACTIVE_freq$((wait_between_comm)).out" 1>/dev/null &
-		sshpass -p ${VM_PSW} ssh ${VM_USERNAME}@$CONTROLLER_VM_IP "python3 -u ~/resources_psutil.py $measurement_iteration $measurement_period ROS_VNF_control 1> resources_psutil_rosapi_2_$((NOF_ACTIVE_ROBOTS))ACTIVE_freq$((wait_between_comm)).out" 1>/dev/null &
-		sshpass -p ${VM_PSW} ssh ${VM_USERNAME}@$CONTROLLER_VM_IP "python3 -u ~/resources_CPUtime.py $measurement_iteration $measurement_period ROS_VNF_control 1> resources_psutil_CPUtime_rosapi_2_$((NOF_ACTIVE_ROBOTS))ACTIVE_freq$((wait_between_comm)).out" 1>/dev/null &
-		sshpass -p ${VM_PSW} ssh ${VM_USERNAME}@$DRIVER_VM_IP "python3 -u ~/resources_psutil.py $measurement_iteration $measurement_period ROS_VNF_driver 1> resources_psutil_rosapi_2_$((NOF_ACTIVE_ROBOTS))ACTIVE_freq$((wait_between_comm)).out" 1>/dev/null &
-		sshpass -p ${VM_PSW} ssh ${VM_USERNAME}@$DRIVER_VM_IP "python3 -u ~/resources_CPUtime.py $measurement_iteration $measurement_period ROS_VNF_driver 1> resources_psutil_CPUtime_rosapi_2_$((NOF_ACTIVE_ROBOTS))ACTIVE_freq$((wait_between_comm)).out" 1>/dev/null &
-		python3 -u ./Script_measurements/resources_psutil.py $measurement_iteration $measurement_period LocalHost 1> ./Output/00_HostMetrics/resources_psutil_rosapi_2_$((NOF_ACTIVE_ROBOTS))ACTIVE_freq$((wait_between_comm)).out &
-		python3 -u ./Script_measurements/resources_CPUtime.py $measurement_iteration $measurement_period LocalHost 1> ./Output/00_HostMetrics/resources_psutil_CPUtime_rosapi_2_$((NOF_ACTIVE_ROBOTS))ACTIVE_freq$((wait_between_comm)).out &
+		if [[ $meas_tool ==  "psutil" ]]; then
+			sshpass -p ${VM_PSW} ssh ${VM_USERNAME}@$INTERFACE_MASTER_VM_IP "python3 -u ~/resources_psutil.py $measurement_iteration $measurement_period ROS_VNF_interface 1> resources_psutil_rosapi_2_$((NOF_ACTIVE_ROBOTS))ACTIVE_freq$((wait_between_comm)).out" 1>/dev/null &
+			sshpass -p ${VM_PSW} ssh ${VM_USERNAME}@$INTERFACE_MASTER_VM_IP "python3 -u ~/resources_CPUtime.py $measurement_iteration $measurement_period ROS_VNF_interface 1> resources_psutil_CPUtime_rosapi_2_$((NOF_ACTIVE_ROBOTS))ACTIVE_freq$((wait_between_comm)).out" 1>/dev/null &
+			sshpass -p ${VM_PSW} ssh ${VM_USERNAME}@$ROBOTCOMMANDER_VM_IP "python3 -u ~/resources_psutil.py $measurement_iteration $measurement_period ROS_VNF_command 1> resources_psutil_rosapi_2_$((NOF_ACTIVE_ROBOTS))ACTIVE_freq$((wait_between_comm)).out" 1>/dev/null &
+			sshpass -p ${VM_PSW} ssh ${VM_USERNAME}@$ROBOTCOMMANDER_VM_IP "python3 -u ~/resources_CPUtime.py $measurement_iteration $measurement_period ROS_VNF_command 1> resources_psutil_CPUtime_rosapi_2_$((NOF_ACTIVE_ROBOTS))ACTIVE_freq$((wait_between_comm)).out" 1>/dev/null &
+			sshpass -p ${VM_PSW} ssh ${VM_USERNAME}@$MOTIONPLANNING_VM_IP "python3 -u ~/resources_psutil.py $measurement_iteration $measurement_period ROS_VNF_motionplanning 1> resources_psutil_rosapi_2_$((NOF_ACTIVE_ROBOTS))ACTIVE_freq$((wait_between_comm)).out" 1>/dev/null &
+			sshpass -p ${VM_PSW} ssh ${VM_USERNAME}@$MOTIONPLANNING_VM_IP "python3 -u ~/resources_CPUtime.py $measurement_iteration $measurement_period ROS_VNF_motionplanning 1> resources_psutil_CPUtime_rosapi_2_$((NOF_ACTIVE_ROBOTS))ACTIVE_freq$((wait_between_comm)).out" 1>/dev/null &
+			sshpass -p ${VM_PSW} ssh ${VM_USERNAME}@$STATE_VM_IP "python3 -u ~/resources_psutil.py $measurement_iteration $measurement_period ROS_VNF_state 1> resources_psutil_rosapi_2_$((NOF_ACTIVE_ROBOTS))ACTIVE_freq$((wait_between_comm)).out" 1>/dev/null &
+			sshpass -p ${VM_PSW} ssh ${VM_USERNAME}@$STATE_VM_IP "python3 -u ~/resources_CPUtime.py $measurement_iteration $measurement_period ROS_VNF_state 1> resources_psutil_CPUtime_rosapi_2_$((NOF_ACTIVE_ROBOTS))ACTIVE_freq$((wait_between_comm)).out" 1>/dev/null &
+			sshpass -p ${VM_PSW} ssh ${VM_USERNAME}@$CONTROLLER_VM_IP "python3 -u ~/resources_psutil.py $measurement_iteration $measurement_period ROS_VNF_control 1> resources_psutil_rosapi_2_$((NOF_ACTIVE_ROBOTS))ACTIVE_freq$((wait_between_comm)).out" 1>/dev/null &
+			sshpass -p ${VM_PSW} ssh ${VM_USERNAME}@$CONTROLLER_VM_IP "python3 -u ~/resources_CPUtime.py $measurement_iteration $measurement_period ROS_VNF_control 1> resources_psutil_CPUtime_rosapi_2_$((NOF_ACTIVE_ROBOTS))ACTIVE_freq$((wait_between_comm)).out" 1>/dev/null &
+			sshpass -p ${VM_PSW} ssh ${VM_USERNAME}@$DRIVER_VM_IP "python3 -u ~/resources_psutil.py $measurement_iteration $measurement_period ROS_VNF_driver 1> resources_psutil_rosapi_2_$((NOF_ACTIVE_ROBOTS))ACTIVE_freq$((wait_between_comm)).out" 1>/dev/null &
+			sshpass -p ${VM_PSW} ssh ${VM_USERNAME}@$DRIVER_VM_IP "python3 -u ~/resources_CPUtime.py $measurement_iteration $measurement_period ROS_VNF_driver 1> resources_psutil_CPUtime_rosapi_2_$((NOF_ACTIVE_ROBOTS))ACTIVE_freq$((wait_between_comm)).out" 1>/dev/null &
+			python3 -u ./Script_measurements/resources_psutil.py $measurement_iteration $measurement_period LocalHost 1> ./Output/00_HostMetrics/resources_psutil_rosapi_2_$((NOF_ACTIVE_ROBOTS))ACTIVE_freq$((wait_between_comm)).out &
+			python3 -u ./Script_measurements/resources_CPUtime.py $measurement_iteration $measurement_period LocalHost 1> ./Output/00_HostMetrics/resources_psutil_CPUtime_rosapi_2_$((NOF_ACTIVE_ROBOTS))ACTIVE_freq$((wait_between_comm)).out &
+		elif [[ $meas_tool ==  "dockerstats" ]]; then
+			sshpass -p ${VM_PSW} ssh ${VM_USERNAME}@$INTERFACE_MASTER_VM_IP "sh ~/resources_dockerstats.sh resources_dockerstats_rosapi_2_$((n_robots))ACTIVE_freq$((wait_between_comm)).out ROS_VNF_interface" 1>/dev/null &
+			sshpass -p ${VM_PSW} ssh ${VM_USERNAME}@$ROBOTCOMMANDER_VM_IP "sh ~/resources_dockerstats.sh resources_dockerstats_rosapi_2_$((n_robots))ACTIVE_freq$((wait_between_comm)).out ROS_VNF_command" 1>/dev/null &
+			sshpass -p ${VM_PSW} ssh ${VM_USERNAME}@$MOTIONPLANNING_VM_IP "sh ~/resources_dockerstats.sh resources_dockerstats_rosapi_2_$((n_robots))ACTIVE_freq$((wait_between_comm)).out ROS_VNF_motionplanning" 1>/dev/null &
+			sshpass -p ${VM_PSW} ssh ${VM_USERNAME}@$STATE_VM_IP "sh ~/resources_dockerstats.sh resources_dockerstats_rosapi_2_$((n_robots))ACTIVE_freq$((wait_between_comm)).out ROS_VNF_state" 1>/dev/null &
+			sshpass -p ${VM_PSW} ssh ${VM_USERNAME}@$CONTROLLER_VM_IP "sh ~/resources_dockerstats.sh resources_dockerstats_rosapi_2_$((n_robots))ACTIVE_freq$((wait_between_comm)).out ROS_VNF_control" 1>/dev/null &
+			sshpass -p ${VM_PSW} ssh ${VM_USERNAME}@$DRIVER_VM_IP "sh ~/resources_dockerstats.sh resources_dockerstats_rosapi_2_$((n_robots))ACTIVE_freq$((wait_between_comm)).out ROS_VNF_driver" 1>/dev/null &
+			sh ./Script_measurements/resources_dockerstats.sh ./Output/00_HostMetrics/resources_dockerstats_rosapi_2_$((n_robots))ACTIVE_freq$((wait_between_comm)).out LocalHost 2> /dev/null &
+		fi
 
 		. ./Script_startRobots/mysleep.sh $(echo "$measurement_iteration*$measurement_period+180" | bc)
 
@@ -467,30 +460,32 @@ if true; then
 		# sh ./Script_measurements/CPU_measurements.sh ./Output/00_HostMetrics/CPUconsumption_pose_$((NOF_ACTIVE_ROBOTS))ACTIVE_freq$((wait_between_comm)).out $measurement_iteration $(echo $measurement_period | tr '.' ',') LocalHost  &>/dev/null &
 		# sh ./Script_measurements/RAM_measurements.sh ./Output/00_HostMetrics/RAMusage_pose_$((NOF_ACTIVE_ROBOTS))ACTIVE_freq$((wait_between_comm)).out $measurement_iteration $measurement_period LocalHost &>/dev/null &
 
-		sshpass -p ${VM_PSW} ssh ${VM_USERNAME}@$INTERFACE_MASTER_VM_IP "python3 -u ~/resources_psutil.py $measurement_iteration $measurement_period ROS_VNF_interface 1> resources_psutil_pose_$((NOF_ACTIVE_ROBOTS))ACTIVE_freq$((wait_between_comm)).out" 1>/dev/null &
-		sshpass -p ${VM_PSW} ssh ${VM_USERNAME}@$INTERFACE_MASTER_VM_IP "python3 -u ~/resources_CPUtime.py $measurement_iteration $measurement_period ROS_VNF_interface 1> resources_psutil_CPUtime_pose_$((NOF_ACTIVE_ROBOTS))ACTIVE_freq$((wait_between_comm)).out" 1>/dev/null &
-		sshpass -p ${VM_PSW} ssh ${VM_USERNAME}@$ROBOTCOMMANDER_VM_IP "python3 -u ~/resources_psutil.py $measurement_iteration $measurement_period ROS_VNF_command 1> resources_psutil_pose_$((NOF_ACTIVE_ROBOTS))ACTIVE_freq$((wait_between_comm)).out" 1>/dev/null &
-		sshpass -p ${VM_PSW} ssh ${VM_USERNAME}@$ROBOTCOMMANDER_VM_IP "python3 -u ~/resources_CPUtime.py $measurement_iteration $measurement_period ROS_VNF_command 1> resources_psutil_CPUtime_pose_$((NOF_ACTIVE_ROBOTS))ACTIVE_freq$((wait_between_comm)).out" 1>/dev/null &
-		sshpass -p ${VM_PSW} ssh ${VM_USERNAME}@$MOTIONPLANNING_VM_IP "python3 -u ~/resources_psutil.py $measurement_iteration $measurement_period ROS_VNF_motionplanning 1> resources_psutil_pose_$((NOF_ACTIVE_ROBOTS))ACTIVE_freq$((wait_between_comm)).out" 1>/dev/null &
-		sshpass -p ${VM_PSW} ssh ${VM_USERNAME}@$MOTIONPLANNING_VM_IP "python3 -u ~/resources_CPUtime.py $measurement_iteration $measurement_period ROS_VNF_motionplanning 1> resources_psutil_CPUtime_pose_$((NOF_ACTIVE_ROBOTS))ACTIVE_freq$((wait_between_comm)).out" 1>/dev/null &
-		sshpass -p ${VM_PSW} ssh ${VM_USERNAME}@$STATE_VM_IP "python3 -u ~/resources_psutil.py $measurement_iteration $measurement_period ROS_VNF_state 1> resources_psutil_pose_$((NOF_ACTIVE_ROBOTS))ACTIVE_freq$((wait_between_comm)).out" 1>/dev/null &
-		sshpass -p ${VM_PSW} ssh ${VM_USERNAME}@$STATE_VM_IP "python3 -u ~/resources_CPUtime.py $measurement_iteration $measurement_period ROS_VNF_state 1> resources_psutil_CPUtime_pose_$((NOF_ACTIVE_ROBOTS))ACTIVE_freq$((wait_between_comm)).out" 1>/dev/null &
-		sshpass -p ${VM_PSW} ssh ${VM_USERNAME}@$CONTROLLER_VM_IP "python3 -u ~/resources_psutil.py $measurement_iteration $measurement_period ROS_VNF_control 1> resources_psutil_pose_$((NOF_ACTIVE_ROBOTS))ACTIVE_freq$((wait_between_comm)).out" 1>/dev/null &
-		sshpass -p ${VM_PSW} ssh ${VM_USERNAME}@$CONTROLLER_VM_IP "python3 -u ~/resources_CPUtime.py $measurement_iteration $measurement_period ROS_VNF_control 1> resources_psutil_CPUtime_pose_$((NOF_ACTIVE_ROBOTS))ACTIVE_freq$((wait_between_comm)).out" 1>/dev/null &
-		sshpass -p ${VM_PSW} ssh ${VM_USERNAME}@$DRIVER_VM_IP "python3 -u ~/resources_psutil.py $measurement_iteration $measurement_period ROS_VNF_driver 1> resources_psutil_pose_$((NOF_ACTIVE_ROBOTS))ACTIVE_freq$((wait_between_comm)).out" 1>/dev/null &
-		sshpass -p ${VM_PSW} ssh ${VM_USERNAME}@$DRIVER_VM_IP "python3 -u ~/resources_CPUtime.py $measurement_iteration $measurement_period ROS_VNF_driver 1> resources_psutil_CPUtime_pose_$((NOF_ACTIVE_ROBOTS))ACTIVE_freq$((wait_between_comm)).out" 1>/dev/null &
-		python3 -u ./Script_measurements/resources_psutil.py $measurement_iteration $measurement_period LocalHost 1> ./Output/00_HostMetrics/resources_psutil_pose_$((NOF_ACTIVE_ROBOTS))ACTIVE_freq$((wait_between_comm)).out &
-		python3 -u ./Script_measurements/resources_CPUtime.py $measurement_iteration $measurement_period LocalHost 1> ./Output/00_HostMetrics/resources_psutil_CPUtime_pose_$((NOF_ACTIVE_ROBOTS))ACTIVE_freq$((wait_between_comm)).out &
+		if [[ $meas_tool ==  "psutil" ]]; then
+			sshpass -p ${VM_PSW} ssh ${VM_USERNAME}@$INTERFACE_MASTER_VM_IP "python3 -u ~/resources_psutil.py $measurement_iteration $measurement_period ROS_VNF_interface 1> resources_psutil_pose_$((NOF_ACTIVE_ROBOTS))ACTIVE_freq$((wait_between_comm)).out" 1>/dev/null &
+			sshpass -p ${VM_PSW} ssh ${VM_USERNAME}@$INTERFACE_MASTER_VM_IP "python3 -u ~/resources_CPUtime.py $measurement_iteration $measurement_period ROS_VNF_interface 1> resources_psutil_CPUtime_pose_$((NOF_ACTIVE_ROBOTS))ACTIVE_freq$((wait_between_comm)).out" 1>/dev/null &
+			sshpass -p ${VM_PSW} ssh ${VM_USERNAME}@$ROBOTCOMMANDER_VM_IP "python3 -u ~/resources_psutil.py $measurement_iteration $measurement_period ROS_VNF_command 1> resources_psutil_pose_$((NOF_ACTIVE_ROBOTS))ACTIVE_freq$((wait_between_comm)).out" 1>/dev/null &
+			sshpass -p ${VM_PSW} ssh ${VM_USERNAME}@$ROBOTCOMMANDER_VM_IP "python3 -u ~/resources_CPUtime.py $measurement_iteration $measurement_period ROS_VNF_command 1> resources_psutil_CPUtime_pose_$((NOF_ACTIVE_ROBOTS))ACTIVE_freq$((wait_between_comm)).out" 1>/dev/null &
+			sshpass -p ${VM_PSW} ssh ${VM_USERNAME}@$MOTIONPLANNING_VM_IP "python3 -u ~/resources_psutil.py $measurement_iteration $measurement_period ROS_VNF_motionplanning 1> resources_psutil_pose_$((NOF_ACTIVE_ROBOTS))ACTIVE_freq$((wait_between_comm)).out" 1>/dev/null &
+			sshpass -p ${VM_PSW} ssh ${VM_USERNAME}@$MOTIONPLANNING_VM_IP "python3 -u ~/resources_CPUtime.py $measurement_iteration $measurement_period ROS_VNF_motionplanning 1> resources_psutil_CPUtime_pose_$((NOF_ACTIVE_ROBOTS))ACTIVE_freq$((wait_between_comm)).out" 1>/dev/null &
+			sshpass -p ${VM_PSW} ssh ${VM_USERNAME}@$STATE_VM_IP "python3 -u ~/resources_psutil.py $measurement_iteration $measurement_period ROS_VNF_state 1> resources_psutil_pose_$((NOF_ACTIVE_ROBOTS))ACTIVE_freq$((wait_between_comm)).out" 1>/dev/null &
+			sshpass -p ${VM_PSW} ssh ${VM_USERNAME}@$STATE_VM_IP "python3 -u ~/resources_CPUtime.py $measurement_iteration $measurement_period ROS_VNF_state 1> resources_psutil_CPUtime_pose_$((NOF_ACTIVE_ROBOTS))ACTIVE_freq$((wait_between_comm)).out" 1>/dev/null &
+			sshpass -p ${VM_PSW} ssh ${VM_USERNAME}@$CONTROLLER_VM_IP "python3 -u ~/resources_psutil.py $measurement_iteration $measurement_period ROS_VNF_control 1> resources_psutil_pose_$((NOF_ACTIVE_ROBOTS))ACTIVE_freq$((wait_between_comm)).out" 1>/dev/null &
+			sshpass -p ${VM_PSW} ssh ${VM_USERNAME}@$CONTROLLER_VM_IP "python3 -u ~/resources_CPUtime.py $measurement_iteration $measurement_period ROS_VNF_control 1> resources_psutil_CPUtime_pose_$((NOF_ACTIVE_ROBOTS))ACTIVE_freq$((wait_between_comm)).out" 1>/dev/null &
+			sshpass -p ${VM_PSW} ssh ${VM_USERNAME}@$DRIVER_VM_IP "python3 -u ~/resources_psutil.py $measurement_iteration $measurement_period ROS_VNF_driver 1> resources_psutil_pose_$((NOF_ACTIVE_ROBOTS))ACTIVE_freq$((wait_between_comm)).out" 1>/dev/null &
+			sshpass -p ${VM_PSW} ssh ${VM_USERNAME}@$DRIVER_VM_IP "python3 -u ~/resources_CPUtime.py $measurement_iteration $measurement_period ROS_VNF_driver 1> resources_psutil_CPUtime_pose_$((NOF_ACTIVE_ROBOTS))ACTIVE_freq$((wait_between_comm)).out" 1>/dev/null &
+			python3 -u ./Script_measurements/resources_psutil.py $measurement_iteration $measurement_period LocalHost 1> ./Output/00_HostMetrics/resources_psutil_pose_$((NOF_ACTIVE_ROBOTS))ACTIVE_freq$((wait_between_comm)).out &
+			python3 -u ./Script_measurements/resources_CPUtime.py $measurement_iteration $measurement_period LocalHost 1> ./Output/00_HostMetrics/resources_psutil_CPUtime_pose_$((NOF_ACTIVE_ROBOTS))ACTIVE_freq$((wait_between_comm)).out &
+		elif [[ $meas_tool ==  "dockerstats" ]]; then
+			sshpass -p ${VM_PSW} ssh ${VM_USERNAME}@$INTERFACE_MASTER_VM_IP "sh ~/resources_dockerstats.sh resources_dockerstats_pose_$((n_robots))ACTIVE_freq$((wait_between_comm)).out ROS_VNF_interface" 1>/dev/null &
+			sshpass -p ${VM_PSW} ssh ${VM_USERNAME}@$ROBOTCOMMANDER_VM_IP "sh ~/resources_dockerstats.sh resources_dockerstats_pose_$((n_robots))ACTIVE_freq$((wait_between_comm)).out ROS_VNF_command" 1>/dev/null &
+			sshpass -p ${VM_PSW} ssh ${VM_USERNAME}@$MOTIONPLANNING_VM_IP "sh ~/resources_dockerstats.sh resources_dockerstats_pose_$((n_robots))ACTIVE_freq$((wait_between_comm)).out ROS_VNF_motionplanning" 1>/dev/null &
+			sshpass -p ${VM_PSW} ssh ${VM_USERNAME}@$STATE_VM_IP "sh ~/resources_dockerstats.sh resources_dockerstats_pose_$((n_robots))ACTIVE_freq$((wait_between_comm)).out ROS_VNF_state" 1>/dev/null &
+			sshpass -p ${VM_PSW} ssh ${VM_USERNAME}@$CONTROLLER_VM_IP "sh ~/resources_dockerstats.sh resources_dockerstats_pose_$((n_robots))ACTIVE_freq$((wait_between_comm)).out ROS_VNF_control" 1>/dev/null &
+			sshpass -p ${VM_PSW} ssh ${VM_USERNAME}@$DRIVER_VM_IP "sh ~/resources_dockerstats.sh resources_dockerstats_pose_$((n_robots))ACTIVE_freq$((wait_between_comm)).out ROS_VNF_driver" 1>/dev/null &
+			sh ./Script_measurements/resources_dockerstats.sh ./Output/00_HostMetrics/resources_dockerstats_pose_$((n_robots))ACTIVE_freq$((wait_between_comm)).out LocalHost 2> /dev/null &
+		fi
 
 		. ./Script_startRobots/mysleep.sh $(echo "$measurement_iteration*$measurement_period+180" | bc)
-
-		# sshpass -p ${VM_PSW} ssh ${VM_USERNAME}@$INTERFACE_MASTER_VM_IP "sh ~/resources_dockerstats.sh resources_dockerstats_pose_$((n_robots))ACTIVE_freq$((wait_between_comm)).out ROS_VNF_interface" 1>/dev/null &
-		# sshpass -p ${VM_PSW} ssh ${VM_USERNAME}@$ROBOTCOMMANDER_VM_IP "sh ~/resources_dockerstats.sh resources_dockerstats_pose_$((n_robots))ACTIVE_freq$((wait_between_comm)).out ROS_VNF_command" 1>/dev/null &
-		# sshpass -p ${VM_PSW} ssh ${VM_USERNAME}@$MOTIONPLANNING_VM_IP "sh ~/resources_dockerstats.sh resources_dockerstats_pose_$((n_robots))ACTIVE_freq$((wait_between_comm)).out ROS_VNF_motionplanning" 1>/dev/null &
-		# sshpass -p ${VM_PSW} ssh ${VM_USERNAME}@$STATE_VM_IP "sh ~/resources_dockerstats.sh resources_dockerstats_pose_$((n_robots))ACTIVE_freq$((wait_between_comm)).out ROS_VNF_state" 1>/dev/null &
-		# sshpass -p ${VM_PSW} ssh ${VM_USERNAME}@$CONTROLLER_VM_IP "sh ~/resources_dockerstats.sh resources_dockerstats_pose_$((n_robots))ACTIVE_freq$((wait_between_comm)).out ROS_VNF_control" 1>/dev/null &
-		# sshpass -p ${VM_PSW} ssh ${VM_USERNAME}@$DRIVER_VM_IP "sh ~/resources_dockerstats.sh resources_dockerstats_pose_$((n_robots))ACTIVE_freq$((wait_between_comm)).out ROS_VNF_driver" 1>/dev/null &
-		# sh ./Script_measurements/resources_dockerstats.sh ./Output/00_HostMetrics/resources_dockerstats_pose_$((n_robots))ACTIVE_freq$((wait_between_comm)).out LocalHost 2> /dev/null &
 
 	fi
 

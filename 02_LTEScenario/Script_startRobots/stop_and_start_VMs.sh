@@ -40,7 +40,7 @@ sleep 1
 echo -e "\n..Starting the robot interface"
 VBoxManage startvm ROS_VNF_interface --type headless &>/dev/null
 
-. ./Script_startRobots/mysleep.sh 360
+. ./Script_startRobots/mysleep.sh 60
 
 echo -e "\n * * * All the VMs are now running * * *\n"
 echo -e "Remove background processes and services"

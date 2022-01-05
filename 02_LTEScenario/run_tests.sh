@@ -3,13 +3,17 @@
 VBoxManage controlvm ROS_VNF_state poweroff 1>/dev/null 2>/dev/null
 
 
-# NUM_ROBOTS_LIST="1 2 4 6 8"
-NUM_ROBOTS_LIST="10"
+# NUM_ROBOTS_LIST="1 2 4 6 8 10"
+NUM_ROBOTS_LIST="1"
 
 # COMMAND_LIST="rosapi2 joints pose"
-COMMAND_LIST="rosapi2 joints pose"
+COMMAND_LIST="rosapi2"
 
 WAITINGTIME_LIST="0"
+
+MEASUREMENT_TOOL=dockerstats
+MEASUREMENT_TOOL=top
+MEASUREMENT_TOOL=psutil
 
 
 for num_robots_value in $NUM_ROBOTS_LIST; do
@@ -31,10 +35,10 @@ for num_robots_value in $NUM_ROBOTS_LIST; do
 			do
 				loopvar=1
 				if [[ $firstime -eq 1 ]]; then
-					. ./Script_startRobots/ROS_VNFsplit_srsLTE.sh $num_robots_value $command_value $waitingtime_value "IDLEYES"
+					. ./Script_startRobots/ROS_VNFsplit_srsLTE.sh $num_robots_value $command_value $waitingtime_value "IDLEYES" $MEASUREMENT_TOOL
 					firstime=0
 				else
-					. ./Script_startRobots/ROS_VNFsplit_srsLTE.sh $num_robots_value $command_value $waitingtime_value "IDLENO"
+					. ./Script_startRobots/ROS_VNFsplit_srsLTE.sh $num_robots_value $command_value $waitingtime_value "IDLENO" $MEASUREMENT_TOOL
 				fi
 				for i in $(seq $num_robots_value)
 				do
