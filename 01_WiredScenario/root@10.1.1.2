@@ -5,19 +5,32 @@ from niryo_one_python_api.niryo_one_api import *
 import rospy
 import time
 from math import radians
-# from random import uniform
 from random import randint,seed
 import sys
 from datetime import datetime
+import csv
 import argparse
 
 parser = argparse.ArgumentParser()
-parser.add_argument('--duration', help="duration in seconds of the command in loop",type=int,default=60)
+parser.add_argument('--filename', help="name of the file in which data will be stored", type=str, default="/Output_script/prova.csv")
 args = parser.parse_args()
 
-duration=args.duration
-
 rospy.init_node('niryo_one_example_python_api')
+
+filename=args.filename
+
+f = open(filename, 'w')
+log = csv.writer(f)
+log.writerow(["iteration,date,init_position,final_position,time"])
+
+def logging(eventnumb,curr_pos,old_pos,exectime):
+	datestring=datetime.now().strftime("%Y-%m-%d-%H:%M:%S")
+	log.writerow([eventnumb,\
+					datestring,\
+					old_pos,\
+					curr_pos,\
+					"{:.5f}".format(exectime)])
+  	sys.stdout.flush()
 
 if True:
 
@@ -26,7 +39,7 @@ if True:
 		# print "--- Start"
 		n = NiryoOne()
 
-		seed(110)
+		seed(88)
 
 		# Calibrate robot first
 		n.calibrate_auto()
@@ -209,11 +222,9 @@ if True:
 		old_pos = -1
 		curr_pos = -1
 
-		print("date,init_position,final_position,time")
-
-		t_start = time.time()
+		# print("iteration,date,init_position,final_position,time")
 		
-		while(time.time() - t_start < duration):
+		for i in range(10000):
 		
 			while(1):
 				_ = randint(a, b)
@@ -224,12 +235,13 @@ if True:
 			n.move_joints(p_tot[curr_pos])
 			# n.move_pose(p_tot[curr_pos][0],p_tot[curr_pos][1],p_tot[curr_pos][2],p_tot[curr_pos][3],p_tot[curr_pos][4],p_tot[curr_pos][5])
 			datestring=datetime.now().strftime("%Y-%m-%d-%H:%M:%S")
-			print("%s,%d,%d,%f" %(datestring,old_pos,curr_pos,time.time()-t1))
+			# print("%d,%s,%d,%d,%f" %(i,datestring,old_pos,curr_pos,time.time()-t1))
 			# print("%d,%f" %(i,time.time()-t1), file=f1)
+			logging(i,curr_pos,old_pos,time.time()-t1)
 			n.wait(0)
 			old_pos = curr_pos
 	
-		# print "--- End"
+		print "--- End"
 	
 	except NiryoOneException as e:
 		datestring=datetime.now().strftime("%Y-%m-%d,%H:%M:%S")

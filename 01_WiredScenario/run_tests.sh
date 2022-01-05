@@ -4,7 +4,7 @@ VBoxManage controlvm ROS_VNF_state poweroff 1>/dev/null 2>/dev/null
 
 
 # NUM_ROBOTS_LIST="1 2 4 6 8 10"
-NUM_ROBOTS_LIST="8"
+NUM_ROBOTS_LIST="1 2 4 6 8 10"
 
 # COMMAND_LIST="rosapi2 joints pose"
 COMMAND_LIST="joints pose"
