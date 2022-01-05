@@ -242,3 +242,452 @@ Unpacked Attached Complete Message. IMSI 208930100001111
 Unpacked Activate Default EPS Bearer message. EPS Bearer id 5
 Received GTP-C PDU. Message type: GTPC_MSG_TYPE_MODIFY_BEARER_REQUEST
 Sending EMM Information
+Initial UE message: NAS Message Type Unknown
+Received Initial UE message -- Service Request
+Service request -- S-TMSI 0x5be0980b
+Service request -- eNB UE S1AP Id 2
+Service Request -- Short MAC invalid
+There are active E-RABs, send release access bearers request
+Received GTP-C PDU. Message type: GTPC_MSG_TYPE_RELEASE_ACCESS_BEARERS_REQUEST
+Service Request -- Short MAC invalid. Sending service reject.
+Received UE Context Release Complete. MME-UE S1AP Id 1
+No UE context to release found. MME-UE S1AP Id: 1
+UL NAS: Attach Resquest
+Attach request -- IMSI: 208930100001111
+Downlink NAS: Sending Authentication Request
+UL NAS: Received Authentication Response
+Authentication Response -- IMSI 208930100001111
+UE Authentication Accepted.
+Generating KeNB with UL NAS COUNT: 0
+Downlink NAS: Sending NAS Security Mode Command.
+UL NAS: Received Security Mode Complete
+Security Mode Command Complete -- IMSI: 208930100001111
+Getting subscription information -- QCI 9
+Sending Create Session Request.
+Creating Session Response -- IMSI: 208930100001111
+Creating Session Response -- MME control TEID: 2
+Received GTP-C PDU. Message type: GTPC_MSG_TYPE_CREATE_SESSION_REQUEST
+SPGW: GTP-C context for IMSI 208930100001111 already exists.
+SPGW: Deleted previous context.
+SPGW: Allocated Ctrl TEID 2
+SPGW: Allocated User TEID 2
+SPGW: Allocate UE IP 172.16.0.2
+Received Create Session Response
+Create Session Response -- SPGW control TEID 2
+Create Session Response -- SPGW S1-U Address: 127.0.1.100
+SPGW Allocated IP 172.16.0.2 to IMSI 208930100001111
+Adding attach accept to Initial Context Setup Request
+Sent Initial Context Setup Request. E-RAB id 5 
+Received Initial Context Setup Response
+E-RAB Context Setup. E-RAB id 5
+E-RAB Context -- eNB TEID 0x2; eNB GTP-U Address 127.0.1.1
+UL NAS: Received Attach Complete
+Unpacked Attached Complete Message. IMSI 208930100001111
+Unpacked Activate Default EPS Bearer message. EPS Bearer id 5
+Received GTP-C PDU. Message type: GTPC_MSG_TYPE_MODIFY_BEARER_REQUEST
+Sending EMM Information
+Received UE Context Release Request. MME-UE S1AP Id 2
+There are active E-RABs, send release access bearers request
+Received GTP-C PDU. Message type: GTPC_MSG_TYPE_RELEASE_ACCESS_BEARERS_REQUEST
+Received UE Context Release Complete. MME-UE S1AP Id 2
+UE Context Release Completed.
+Found UE for Downlink Notification 
+MME Ctr TEID 0x2, IMSI: 208930100001111
+Initial UE message: NAS Message Type Unknown
+Received Initial UE message -- Service Request
+Service request -- S-TMSI 0x5be0980c
+Service request -- eNB UE S1AP Id 3
+Service Request -- Short MAC valid
+Service Request -- User is ECM DISCONNECTED
+UE previously assigned IP: 172.16.0.2
+Generating KeNB with UL NAS COUNT: 2
+UE Ctr TEID 0
+Sent Initial Context Setup Request. E-RAB id 5 
+Received Initial Context Setup Response
+E-RAB Context Setup. E-RAB id 5
+E-RAB Context -- eNB TEID 0x3; eNB GTP-U Address 127.0.1.1
+Initial Context Setup Response triggered from Service Request.
+Sending Modify Bearer Request.
+Received GTP-C PDU. Message type: GTPC_MSG_TYPE_MODIFY_BEARER_REQUEST
+Modify Bearer Request received after Downling Data Notification was sent
+SCTP Association Shutdown. Association: 34
+Deleting eNB context. eNB Id: 0x19b
+Releasing UEs context
+No UEs to be released
+
+Built in Release mode using commit f74ac6aa8 on branch HEAD.
+
+
+---  Software Radio Systems EPC  ---
+
+Reading configuration file /home/k8s-enb-node/.config/srslte/epc.conf...
+HSS Initialized.
+MME S11 Initialized
+MME GTP-C Initialized
+MME Initialized. MCC: 0xf901, MNC: 0xff70
+SPGW GTP-U Initialized.
+SPGW S11 Initialized.
+SP-GW Initialized.
+Received S1 Setup Request.
+S1 Setup Request - eNB Name: srsenb01, eNB id: 0x19b
+S1 Setup Request - MCC:901, MNC:70
+S1 Setup Request - TAC 7, B-PLMN 0x9f107
+S1 Setup Request - Paging DRX v128
+Sending S1 Setup Response
+Initial UE message: LIBLTE_MME_MSG_TYPE_ATTACH_REQUEST
+Received Initial UE message -- Attach Request
+Attach request -- M-TMSI: 0x1f1bcc1e
+Attach request -- eNB-UE S1AP Id: 1
+Attach request -- Attach type: 1
+Attach Request -- UE Network Capabilities EEA: 11110000
+Attach Request -- UE Network Capabilities EIA: 01110000
+Attach Request -- MS Network Capabilities Present: false
+PDN Connectivity Request -- EPS Bearer Identity requested: 0
+PDN Connectivity Request -- Procedure Transaction Id: 1
+PDN Connectivity Request -- ESM Information Transfer requested: false
+UL NAS: Received Identity Response
+ID Response -- IMSI: 208930100001111
+Downlink NAS: Sent Authentication Request
+UL NAS: Received Authentication Response
+Authentication Response -- IMSI 208930100001111
+UE Authentication Accepted.
+Generating KeNB with UL NAS COUNT: 0
+Downlink NAS: Sending NAS Security Mode Command.
+UL NAS: Received Security Mode Complete
+Security Mode Command Complete -- IMSI: 208930100001111
+Getting subscription information -- QCI 9
+Sending Create Session Request.
+Creating Session Response -- IMSI: 208930100001111
+Creating Session Response -- MME control TEID: 1
+Received GTP-C PDU. Message type: GTPC_MSG_TYPE_CREATE_SESSION_REQUEST
+SPGW: Allocated Ctrl TEID 1
+SPGW: Allocated User TEID 1
+SPGW: Allocate UE IP 172.16.0.2
+Received Create Session Response
+Create Session Response -- SPGW control TEID 1
+Create Session Response -- SPGW S1-U Address: 127.0.1.100
+SPGW Allocated IP 172.16.0.2 to IMSI 208930100001111
+Adding attach accept to Initial Context Setup Request
+Sent Initial Context Setup Request. E-RAB id 5 
+Received Initial Context Setup Response
+E-RAB Context Setup. E-RAB id 5
+E-RAB Context -- eNB TEID 0x1; eNB GTP-U Address 127.0.1.1
+UL NAS: Received Attach Complete
+Unpacked Attached Complete Message. IMSI 208930100001111
+Unpacked Activate Default EPS Bearer message. EPS Bearer id 5
+Received GTP-C PDU. Message type: GTPC_MSG_TYPE_MODIFY_BEARER_REQUEST
+Sending EMM Information
+Initial UE message: NAS Message Type Unknown
+Received Initial UE message -- Service Request
+Service request -- S-TMSI 0x2318c78d
+Service request -- eNB UE S1AP Id 2
+Service Request -- Short MAC invalid
+There are active E-RABs, send release access bearers request
+Received GTP-C PDU. Message type: GTPC_MSG_TYPE_RELEASE_ACCESS_BEARERS_REQUEST
+Service Request -- Short MAC invalid. Sending service reject.
+Received UE Context Release Complete. MME-UE S1AP Id 1
+No UE context to release found. MME-UE S1AP Id: 1
+UL NAS: Attach Resquest
+Attach request -- IMSI: 208930100001111
+Downlink NAS: Sending Authentication Request
+UL NAS: Received Authentication Response
+Authentication Response -- IMSI 208930100001111
+UE Authentication Accepted.
+Generating KeNB with UL NAS COUNT: 0
+Downlink NAS: Sending NAS Security Mode Command.
+UL NAS: Received Security Mode Complete
+Security Mode Command Complete -- IMSI: 208930100001111
+Getting subscription information -- QCI 9
+Sending Create Session Request.
+Creating Session Response -- IMSI: 208930100001111
+Creating Session Response -- MME control TEID: 2
+Received GTP-C PDU. Message type: GTPC_MSG_TYPE_CREATE_SESSION_REQUEST
+SPGW: GTP-C context for IMSI 208930100001111 already exists.
+SPGW: Deleted previous context.
+SPGW: Allocated Ctrl TEID 2
+SPGW: Allocated User TEID 2
+SPGW: Allocate UE IP 172.16.0.2
+Received Create Session Response
+Create Session Response -- SPGW control TEID 2
+Create Session Response -- SPGW S1-U Address: 127.0.1.100
+SPGW Allocated IP 172.16.0.2 to IMSI 208930100001111
+Adding attach accept to Initial Context Setup Request
+Sent Initial Context Setup Request. E-RAB id 5 
+Received Initial Context Setup Response
+E-RAB Context Setup. E-RAB id 5
+E-RAB Context -- eNB TEID 0x2; eNB GTP-U Address 127.0.1.1
+UL NAS: Received Attach Complete
+Unpacked Attached Complete Message. IMSI 208930100001111
+Unpacked Activate Default EPS Bearer message. EPS Bearer id 5
+Received GTP-C PDU. Message type: GTPC_MSG_TYPE_MODIFY_BEARER_REQUEST
+Sending EMM Information
+Received UE Context Release Request. MME-UE S1AP Id 2
+There are active E-RABs, send release access bearers request
+Received GTP-C PDU. Message type: GTPC_MSG_TYPE_RELEASE_ACCESS_BEARERS_REQUEST
+Received UE Context Release Complete. MME-UE S1AP Id 2
+UE Context Release Completed.
+Found UE for Downlink Notification 
+MME Ctr TEID 0x2, IMSI: 208930100001111
+T3413 expired -- Could not page the ue.
+Received GTP-C PDU. Message type: GTPC_MSG_TYPE_DOWNLINK_DATA_NOTIFICATION_FAILURE_INDICATION
+Found UE for Downlink Notification 
+MME Ctr TEID 0x2, IMSI: 208930100001111
+T3413 expired -- Could not page the ue.
+Received GTP-C PDU. Message type: GTPC_MSG_TYPE_DOWNLINK_DATA_NOTIFICATION_FAILURE_INDICATION
+Found UE for Downlink Notification 
+MME Ctr TEID 0x2, IMSI: 208930100001111
+T3413 expired -- Could not page the ue.
+Received GTP-C PDU. Message type: GTPC_MSG_TYPE_DOWNLINK_DATA_NOTIFICATION_FAILURE_INDICATION
+Found UE for Downlink Notification 
+MME Ctr TEID 0x2, IMSI: 208930100001111
+T3413 expired -- Could not page the ue.
+Received GTP-C PDU. Message type: GTPC_MSG_TYPE_DOWNLINK_DATA_NOTIFICATION_FAILURE_INDICATION
+Found UE for Downlink Notification 
+MME Ctr TEID 0x2, IMSI: 208930100001111
+T3413 expired -- Could not page the ue.
+Received GTP-C PDU. Message type: GTPC_MSG_TYPE_DOWNLINK_DATA_NOTIFICATION_FAILURE_INDICATION
+Found UE for Downlink Notification 
+MME Ctr TEID 0x2, IMSI: 208930100001111
+T3413 expired -- Could not page the ue.
+Received GTP-C PDU. Message type: GTPC_MSG_TYPE_DOWNLINK_DATA_NOTIFICATION_FAILURE_INDICATION
+Found UE for Downlink Notification 
+MME Ctr TEID 0x2, IMSI: 208930100001111
+T3413 expired -- Could not page the ue.
+Received GTP-C PDU. Message type: GTPC_MSG_TYPE_DOWNLINK_DATA_NOTIFICATION_FAILURE_INDICATION
+Found UE for Downlink Notification 
+MME Ctr TEID 0x2, IMSI: 208930100001111
+T3413 expired -- Could not page the ue.
+Received GTP-C PDU. Message type: GTPC_MSG_TYPE_DOWNLINK_DATA_NOTIFICATION_FAILURE_INDICATION
+Found UE for Downlink Notification 
+MME Ctr TEID 0x2, IMSI: 208930100001111
+T3413 expired -- Could not page the ue.
+Received GTP-C PDU. Message type: GTPC_MSG_TYPE_DOWNLINK_DATA_NOTIFICATION_FAILURE_INDICATION
+Found UE for Downlink Notification 
+MME Ctr TEID 0x2, IMSI: 208930100001111
+T3413 expired -- Could not page the ue.
+Received GTP-C PDU. Message type: GTPC_MSG_TYPE_DOWNLINK_DATA_NOTIFICATION_FAILURE_INDICATION
+Found UE for Downlink Notification 
+MME Ctr TEID 0x2, IMSI: 208930100001111
+T3413 expired -- Could not page the ue.
+Received GTP-C PDU. Message type: GTPC_MSG_TYPE_DOWNLINK_DATA_NOTIFICATION_FAILURE_INDICATION
+Found UE for Downlink Notification 
+MME Ctr TEID 0x2, IMSI: 208930100001111
+T3413 expired -- Could not page the ue.
+Received GTP-C PDU. Message type: GTPC_MSG_TYPE_DOWNLINK_DATA_NOTIFICATION_FAILURE_INDICATION
+Found UE for Downlink Notification 
+MME Ctr TEID 0x2, IMSI: 208930100001111
+T3413 expired -- Could not page the ue.
+Received GTP-C PDU. Message type: GTPC_MSG_TYPE_DOWNLINK_DATA_NOTIFICATION_FAILURE_INDICATION
+Found UE for Downlink Notification 
+MME Ctr TEID 0x2, IMSI: 208930100001111
+T3413 expired -- Could not page the ue.
+Received GTP-C PDU. Message type: GTPC_MSG_TYPE_DOWNLINK_DATA_NOTIFICATION_FAILURE_INDICATION
+Found UE for Downlink Notification 
+MME Ctr TEID 0x2, IMSI: 208930100001111
+T3413 expired -- Could not page the ue.
+Received GTP-C PDU. Message type: GTPC_MSG_TYPE_DOWNLINK_DATA_NOTIFICATION_FAILURE_INDICATION
+Found UE for Downlink Notification 
+MME Ctr TEID 0x2, IMSI: 208930100001111
+T3413 expired -- Could not page the ue.
+Received GTP-C PDU. Message type: GTPC_MSG_TYPE_DOWNLINK_DATA_NOTIFICATION_FAILURE_INDICATION
+Found UE for Downlink Notification 
+MME Ctr TEID 0x2, IMSI: 208930100001111
+T3413 expired -- Could not page the ue.
+Received GTP-C PDU. Message type: GTPC_MSG_TYPE_DOWNLINK_DATA_NOTIFICATION_FAILURE_INDICATION
+Found UE for Downlink Notification 
+MME Ctr TEID 0x2, IMSI: 208930100001111
+T3413 expired -- Could not page the ue.
+Received GTP-C PDU. Message type: GTPC_MSG_TYPE_DOWNLINK_DATA_NOTIFICATION_FAILURE_INDICATION
+Found UE for Downlink Notification 
+MME Ctr TEID 0x2, IMSI: 208930100001111
+T3413 expired -- Could not page the ue.
+Received GTP-C PDU. Message type: GTPC_MSG_TYPE_DOWNLINK_DATA_NOTIFICATION_FAILURE_INDICATION
+Found UE for Downlink Notification 
+MME Ctr TEID 0x2, IMSI: 208930100001111
+T3413 expired -- Could not page the ue.
+Received GTP-C PDU. Message type: GTPC_MSG_TYPE_DOWNLINK_DATA_NOTIFICATION_FAILURE_INDICATION
+Found UE for Downlink Notification 
+MME Ctr TEID 0x2, IMSI: 208930100001111
+Initial UE message: NAS Message Type Unknown
+Received Initial UE message -- Service Request
+Service request -- S-TMSI 0x2318c78e
+Service request -- eNB UE S1AP Id 3
+Service Request -- Short MAC invalid
+Service Request -- Short MAC invalid. Sending service reject.
+UL NAS: Attach Resquest
+Attach request -- IMSI: 208930100001111
+Downlink NAS: Sending Authentication Request
+UL NAS: Received Authentication Response
+Authentication Response -- IMSI 208930100001111
+UE Authentication Accepted.
+Generating KeNB with UL NAS COUNT: 0
+Downlink NAS: Sending NAS Security Mode Command.
+UL NAS: Received Security Mode Complete
+Security Mode Command Complete -- IMSI: 208930100001111
+Getting subscription information -- QCI 9
+Sending Create Session Request.
+Creating Session Response -- IMSI: 208930100001111
+Creating Session Response -- MME control TEID: 3
+Received GTP-C PDU. Message type: GTPC_MSG_TYPE_CREATE_SESSION_REQUEST
+SPGW: GTP-C context for IMSI 208930100001111 already exists.
+SPGW: Deleted previous context.
+SPGW: Allocated Ctrl TEID 3
+SPGW: Allocated User TEID 3
+SPGW: Allocate UE IP 172.16.0.2
+Received Create Session Response
+Create Session Response -- SPGW control TEID 3
+Create Session Response -- SPGW S1-U Address: 127.0.1.100
+SPGW Allocated IP 172.16.0.2 to IMSI 208930100001111
+Adding attach accept to Initial Context Setup Request
+Sent Initial Context Setup Request. E-RAB id 5 
+Received Initial Context Setup Response
+E-RAB Context Setup. E-RAB id 5
+E-RAB Context -- eNB TEID 0x3; eNB GTP-U Address 127.0.1.1
+UL NAS: Received Attach Complete
+Unpacked Attached Complete Message. IMSI 208930100001111
+Unpacked Activate Default EPS Bearer message. EPS Bearer id 5
+Received GTP-C PDU. Message type: GTPC_MSG_TYPE_MODIFY_BEARER_REQUEST
+Sending EMM Information
+T3413 expired -- Could not page the ue.
+Received GTP-C PDU. Message type: GTPC_MSG_TYPE_DOWNLINK_DATA_NOTIFICATION_FAILURE_INDICATION
+SCTP Association Shutdown. Association: 36
+Deleting eNB context. eNB Id: 0x19b
+Releasing UEs context
+Releasing UE ECM context. UE-MME S1AP Id: 3
+Received GTP-C PDU. Message type: GTPC_MSG_TYPE_DELETE_SESSION_REQUEST
+
+Built in Release mode using commit f74ac6aa8 on branch HEAD.
+
+
+---  Software Radio Systems EPC  ---
+
+Reading configuration file /home/k8s-enb-node/.config/srslte/epc.conf...
+HSS Initialized.
+MME S11 Initialized
+MME GTP-C Initialized
+MME Initialized. MCC: 0xf901, MNC: 0xff70
+SPGW GTP-U Initialized.
+SPGW S11 Initialized.
+SP-GW Initialized.
+Received S1 Setup Request.
+S1 Setup Request - eNB Name: srsenb01, eNB id: 0x19b
+S1 Setup Request - MCC:901, MNC:70
+S1 Setup Request - TAC 7, B-PLMN 0x9f107
+S1 Setup Request - Paging DRX v128
+Sending S1 Setup Response
+Initial UE message: LIBLTE_MME_MSG_TYPE_ATTACH_REQUEST
+Received Initial UE message -- Attach Request
+Attach request -- M-TMSI: 0x1f1bcc1e
+Attach request -- eNB-UE S1AP Id: 1
+Attach request -- Attach type: 1
+Attach Request -- UE Network Capabilities EEA: 11110000
+Attach Request -- UE Network Capabilities EIA: 01110000
+Attach Request -- MS Network Capabilities Present: false
+PDN Connectivity Request -- EPS Bearer Identity requested: 0
+PDN Connectivity Request -- Procedure Transaction Id: 1
+PDN Connectivity Request -- ESM Information Transfer requested: false
+UL NAS: Received Identity Response
+ID Response -- IMSI: 208930100001111
+Downlink NAS: Sent Authentication Request
+UL NAS: Received Authentication Response
+Authentication Response -- IMSI 208930100001111
+UE Authentication Accepted.
+Generating KeNB with UL NAS COUNT: 0
+Downlink NAS: Sending NAS Security Mode Command.
+UL NAS: Received Security Mode Complete
+Security Mode Command Complete -- IMSI: 208930100001111
+Getting subscription information -- QCI 9
+Sending Create Session Request.
+Creating Session Response -- IMSI: 208930100001111
+Creating Session Response -- MME control TEID: 1
+Received GTP-C PDU. Message type: GTPC_MSG_TYPE_CREATE_SESSION_REQUEST
+SPGW: Allocated Ctrl TEID 1
+SPGW: Allocated User TEID 1
+SPGW: Allocate UE IP 172.16.0.2
+Received Create Session Response
+Create Session Response -- SPGW control TEID 1
+Create Session Response -- SPGW S1-U Address: 127.0.1.100
+SPGW Allocated IP 172.16.0.2 to IMSI 208930100001111
+Adding attach accept to Initial Context Setup Request
+Sent Initial Context Setup Request. E-RAB id 5 
+Received Initial Context Setup Response
+E-RAB Context Setup. E-RAB id 5
+E-RAB Context -- eNB TEID 0x1; eNB GTP-U Address 127.0.1.1
+UL NAS: Received Attach Complete
+Unpacked Attached Complete Message. IMSI 208930100001111
+Unpacked Activate Default EPS Bearer message. EPS Bearer id 5
+Received GTP-C PDU. Message type: GTPC_MSG_TYPE_MODIFY_BEARER_REQUEST
+Sending EMM Information
+SCTP Association Shutdown. Association: 38
+Deleting eNB context. eNB Id: 0x19b
+Releasing UEs context
+Releasing UE ECM context. UE-MME S1AP Id: 1
+Received GTP-C PDU. Message type: GTPC_MSG_TYPE_DELETE_SESSION_REQUEST
+
+Built in Release mode using commit f74ac6aa8 on branch HEAD.
+
+
+---  Software Radio Systems EPC  ---
+
+Reading configuration file /home/k8s-enb-node/.config/srslte/epc.conf...
+HSS Initialized.
+MME S11 Initialized
+MME GTP-C Initialized
+MME Initialized. MCC: 0xf901, MNC: 0xff70
+SPGW GTP-U Initialized.
+SPGW S11 Initialized.
+SP-GW Initialized.
+Received S1 Setup Request.
+S1 Setup Request - eNB Name: srsenb01, eNB id: 0x19b
+S1 Setup Request - MCC:901, MNC:70
+S1 Setup Request - TAC 7, B-PLMN 0x9f107
+S1 Setup Request - Paging DRX v128
+Sending S1 Setup Response
+Initial UE message: LIBLTE_MME_MSG_TYPE_ATTACH_REQUEST
+Received Initial UE message -- Attach Request
+Attach request -- M-TMSI: 0x1f1bcc1e
+Attach request -- eNB-UE S1AP Id: 1
+Attach request -- Attach type: 1
+Attach Request -- UE Network Capabilities EEA: 11110000
+Attach Request -- UE Network Capabilities EIA: 01110000
+Attach Request -- MS Network Capabilities Present: false
+PDN Connectivity Request -- EPS Bearer Identity requested: 0
+PDN Connectivity Request -- Procedure Transaction Id: 1
+PDN Connectivity Request -- ESM Information Transfer requested: false
+UL NAS: Received Identity Response
+ID Response -- IMSI: 208930100001111
+Downlink NAS: Sent Authentication Request
+UL NAS: Received Authentication Response
+Authentication Response -- IMSI 208930100001111
+UE Authentication Accepted.
+Generating KeNB with UL NAS COUNT: 0
+Downlink NAS: Sending NAS Security Mode Command.
+UL NAS: Received Security Mode Complete
+Security Mode Command Complete -- IMSI: 208930100001111
+Getting subscription information -- QCI 9
+Sending Create Session Request.
+Creating Session Response -- IMSI: 208930100001111
+Creating Session Response -- MME control TEID: 1
+Received GTP-C PDU. Message type: GTPC_MSG_TYPE_CREATE_SESSION_REQUEST
+SPGW: Allocated Ctrl TEID 1
+SPGW: Allocated User TEID 1
+SPGW: Allocate UE IP 172.16.0.2
+Received Create Session Response
+Create Session Response -- SPGW control TEID 1
+Create Session Response -- SPGW S1-U Address: 127.0.1.100
+SPGW Allocated IP 172.16.0.2 to IMSI 208930100001111
+Adding attach accept to Initial Context Setup Request
+Sent Initial Context Setup Request. E-RAB id 5 
+Received Initial Context Setup Response
+E-RAB Context Setup. E-RAB id 5
+E-RAB Context -- eNB TEID 0x1; eNB GTP-U Address 127.0.1.1
+UL NAS: Received Attach Complete
+Unpacked Attached Complete Message. IMSI 208930100001111
+Unpacked Activate Default EPS Bearer message. EPS Bearer id 5
+Received GTP-C PDU. Message type: GTPC_MSG_TYPE_MODIFY_BEARER_REQUEST
+Sending EMM Information
+SCTP Association Shutdown. Association: 40
+Deleting eNB context. eNB Id: 0x19b
+Releasing UEs context
+Releasing UE ECM context. UE-MME S1AP Id: 1
+Received GTP-C PDU. Message type: GTPC_MSG_TYPE_DELETE_SESSION_REQUEST

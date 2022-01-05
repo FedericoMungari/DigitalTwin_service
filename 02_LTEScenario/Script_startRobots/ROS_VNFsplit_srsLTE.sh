@@ -86,7 +86,7 @@ if [[ $# -eq 5 ]]; then
 	VM_LOCAL_SUBNET=10.0.4.0/24
 	VM_LOCAL_GW=10.0.4.1
 
-	GAIN=80
+	GAIN=85
 
 	# measurement_iteration="6000"
 	# measurement_period="0.1"
@@ -261,10 +261,13 @@ if [[ $# -eq 5 ]]; then
 	# ####################################################################################################################################
 	# eu
 	echo -e "\n* * * * * * * * * * * * * * * * * * * * * *\nSTEP 12: Bidirectional ping between eNB and UE"
-	echo "First brief ping from eNB to UE"
-	ping -c 5 $ROBOT_HOST_IP_LTE
-	echo "First brief ping from UE to eNB"
-	ping -c 5 $EDGE_HOST_IP_LTE
+	if false
+	then
+		echo "First brief ping from eNB to UE"
+		ping -c 5 $ROBOT_HOST_IP_LTE
+		echo "First brief ping from UE to eNB"
+		ping -c 5 $EDGE_HOST_IP_LTE
+	fi
 	pingperiod=600
 	echo "The UE will ping the eNB for $pingperiod seconds in background"
 	sshpass -p${ROBOT_HOST_PASS} ssh $ROBOT_HOST_USER@$ROBOT_HOST_IP_LOCAL "nohup ping -c $pingperiod $EDGE_HOST_IP_LTE &" &>/dev/null &
@@ -275,31 +278,37 @@ if [[ $# -eq 5 ]]; then
 	# ####################################################################################################################################
 	echo -e "\n* * * * * * * * * * * * * * * * * * * * * *\nSTEP 13: pinging"
 
-	echo -e "\n-->Starting pinging from edge to ros_interface bridge"
-	ping -c 2 $(echo $INTERFACE_MASTER_DOCKER_SUBNET | cut -d"." -f1-3)".1"
-	echo -e "\n-->Starting pinging from edge to ros_command bridge"
-	ping -c 2 $(echo $ROBOTCOMMANDER_DOCKER_SUBNET | cut -d"." -f1-3)".1"
-	echo -e "\n-->Starting pinging from edge to ros_motionplanning bridge"
-	ping -c 2 $(echo $MOTIONPLANNING_DOCKER_SUBNET | cut -d"." -f1-3)".1"
-	echo -e "\n-->Starting pinging from edge to ros_state bridge"
-	ping -c 2 $(echo $STATE_DOCKER_SUBNET | cut -d"." -f1-3)".1"
-	echo -e "\n-->Starting pinging from edge to ros_controller bridge"
-	ping -c 2 $(echo $CONTROLLER_DOCKER_SUBNET | cut -d"." -f1-3)".1"
-	echo -e "\n-->Starting pinging from edge to ros_driver bridge"
-	ping -c 2 $(echo $DRIVER_DOCKER_SUBNET | cut -d"." -f1-3)".1"
+	if false
+	then
+		echo -e "\n-->Starting pinging from edge to ros_interface bridge"
+		ping -c 2 $(echo $INTERFACE_MASTER_DOCKER_SUBNET | cut -d"." -f1-3)".1"
+		echo -e "\n-->Starting pinging from edge to ros_command bridge"
+		ping -c 2 $(echo $ROBOTCOMMANDER_DOCKER_SUBNET | cut -d"." -f1-3)".1"
+		echo -e "\n-->Starting pinging from edge to ros_motionplanning bridge"
+		ping -c 2 $(echo $MOTIONPLANNING_DOCKER_SUBNET | cut -d"." -f1-3)".1"
+		echo -e "\n-->Starting pinging from edge to ros_state bridge"
+		ping -c 2 $(echo $STATE_DOCKER_SUBNET | cut -d"." -f1-3)".1"
+		echo -e "\n-->Starting pinging from edge to ros_controller bridge"
+		ping -c 2 $(echo $CONTROLLER_DOCKER_SUBNET | cut -d"." -f1-3)".1"
+		echo -e "\n-->Starting pinging from edge to ros_driver bridge"
+		ping -c 2 $(echo $DRIVER_DOCKER_SUBNET | cut -d"." -f1-3)".1"
 
-	echo -e "\n-->Starting pinging from robot to ros_driver bridge"
-	sshpass -p${ROBOT_HOST_PASS} ssh $ROBOT_HOST_USER@$ROBOT_HOST_IP_LOCAL "ping -c 2 10.2.0.1"
-	echo -e "\n-->Starting pinging from robot to ros_controller bridge"
-	sshpass -p${ROBOT_HOST_PASS} ssh $ROBOT_HOST_USER@$ROBOT_HOST_IP_LOCAL "ping -c 2 10.1.5.1"
-	echo -e "\n-->Starting pinging from robot to ros_state bridge"
-	sshpass -p${ROBOT_HOST_PASS} ssh $ROBOT_HOST_USER@$ROBOT_HOST_IP_LOCAL "ping -c 2 10.1.4.1"
-	echo -e "\n-->Starting pinging from robot to ros_motionplanning bridge"
-	sshpass -p${ROBOT_HOST_PASS} ssh $ROBOT_HOST_USER@$ROBOT_HOST_IP_LOCAL "ping -c 2 10.1.3.1"
-	echo -e "\n-->Starting pinging from robot to ros_command bridge"
-	sshpass -p${ROBOT_HOST_PASS} ssh $ROBOT_HOST_USER@$ROBOT_HOST_IP_LOCAL "ping -c 2 10.1.2.1"
-	echo -e "\n-->Starting pinging from robot to ros_interface bridge"
-	sshpass -p${ROBOT_HOST_PASS} ssh $ROBOT_HOST_USER@$ROBOT_HOST_IP_LOCAL "ping -c 2 10.1.1.1"
+		echo -e "\n-->Starting pinging from robot to ros_driver bridge"
+		sshpass -p${ROBOT_HOST_PASS} ssh $ROBOT_HOST_USER@$ROBOT_HOST_IP_LOCAL "ping -c 2 10.2.0.1"
+		echo -e "\n-->Starting pinging from robot to ros_controller bridge"
+		sshpass -p${ROBOT_HOST_PASS} ssh $ROBOT_HOST_USER@$ROBOT_HOST_IP_LOCAL "ping -c 2 10.1.5.1"
+		echo -e "\n-->Starting pinging from robot to ros_state bridge"
+		sshpass -p${ROBOT_HOST_PASS} ssh $ROBOT_HOST_USER@$ROBOT_HOST_IP_LOCAL "ping -c 2 10.1.4.1"
+		echo -e "\n-->Starting pinging from robot to ros_motionplanning bridge"
+		sshpass -p${ROBOT_HOST_PASS} ssh $ROBOT_HOST_USER@$ROBOT_HOST_IP_LOCAL "ping -c 2 10.1.3.1"
+		echo -e "\n-->Starting pinging from robot to ros_command bridge"
+		sshpass -p${ROBOT_HOST_PASS} ssh $ROBOT_HOST_USER@$ROBOT_HOST_IP_LOCAL "ping -c 2 10.1.2.1"
+		echo -e "\n-->Starting pinging from robot to ros_interface bridge"
+		sshpass -p${ROBOT_HOST_PASS} ssh $ROBOT_HOST_USER@$ROBOT_HOST_IP_LOCAL "ping -c 2 10.1.1.1"
+	else
+		echo -e "\t . . . S k i p p i n g . . ."
+	fi
+
 
 
 	# ####################################################################################################################################
