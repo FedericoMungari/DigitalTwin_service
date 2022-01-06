@@ -218,3 +218,519 @@ Random Access Complete.     c-rnti=0x46, ta=5
 RRC Connected
 Network attach successful. IP: 172.16.0.2
 Software Radio Systems LTE (srsLTE) 5/1/2022 17:22:20 TZ:0
+Scheduling request failed: releasing RRC connection...
+Random Access Transmission: seq=36, ra-rnti=0x2
+Random Access Transmission: seq=50, ra-rnti=0x2
+Random Access Transmission: seq=12, ra-rnti=0x2
+Random Access Transmission: seq=44, ra-rnti=0x2
+Random Access Transmission: seq=20, ra-rnti=0x2
+Random Access Transmission: seq=43, ra-rnti=0x2
+Random Access Transmission: seq=3, ra-rnti=0x2
+Random Access Transmission: seq=3, ra-rnti=0x2
+Random Access Transmission: seq=38, ra-rnti=0x2
+Random Access Transmission: seq=16, ra-rnti=0x2
+Warning: Detected Radio-Link Failure
+RRC Connection Reestablishment
+Random Access Transmission: seq=4, ra-rnti=0x2
+Random Access Transmission: seq=23, ra-rnti=0x2
+Random Access Transmission: seq=4, ra-rnti=0x2
+Random Access Transmission: seq=43, ra-rnti=0x2
+Random Access Transmission: seq=47, ra-rnti=0x2
+RRC IDLE
+Random Access Transmission: seq=11, ra-rnti=0x2
+Random Access Transmission: seq=23, ra-rnti=0x2
+Random Access Transmission: seq=47, ra-rnti=0x2
+Random Access Transmission: seq=32, ra-rnti=0x2
+Random Access Transmission: seq=14, ra-rnti=0x2
+Random Access Transmission: seq=30, ra-rnti=0x2
+Random Access Transmission: seq=21, ra-rnti=0x2
+Random Access Transmission: seq=45, ra-rnti=0x2
+Random Access Transmission: seq=17, ra-rnti=0x2
+Random Access Transmission: seq=43, ra-rnti=0x2
+Warning: Detected Radio-Link Failure
+Random Access Transmission: seq=4, ra-rnti=0x2
+Random Access Transmission: seq=29, ra-rnti=0x2
+Random Access Transmission: seq=37, ra-rnti=0x2
+Random Access Transmission: seq=50, ra-rnti=0x2
+Random Access Transmission: seq=24, ra-rnti=0x2
+Random Access Transmission: seq=21, ra-rnti=0x2
+Random Access Transmission: seq=24, ra-rnti=0x2
+Random Access Transmission: seq=12, ra-rnti=0x2
+Random Access Transmission: seq=13, ra-rnti=0x2
+Random Access Transmission: seq=45, ra-rnti=0x2
+Warning: Detected Radio-Link Failure
+Random Access Transmission: seq=3, ra-rnti=0x2
+Random Access Complete.     c-rnti=0x8f, ta=5
+RRC Connected
+Received service reject with EMM cause=0x9.
+Network attach successful. IP: 172.16.0.2
+Software Radio Systems LTE (srsLTE) 5/1/2022 17:25:36 TZ:0
+Scheduling request failed: releasing RRC connection...
+Random Access Transmission: seq=44, ra-rnti=0x2
+Random Access Transmission: seq=48, ra-rnti=0x2
+Received ConnectionReject. Wait time: 10
+Random Access Transmission: seq=41, ra-rnti=0x2
+Received ConnectionReject. Wait time: 10
+Random Access Transmission: seq=36, ra-rnti=0x2
+Random Access Complete.     c-rnti=0x8f, ta=5
+Scheduling request failed: releasing RRC connection...
+Random Access Transmission: seq=28, ra-rnti=0x2
+Random Access Transmission: seq=12, ra-rnti=0x2
+Random Access Complete.     c-rnti=0x8f, ta=5
+Scheduling request failed: releasing RRC connection...
+Random Access Transmission: seq=40, ra-rnti=0x2
+Random Access Transmission: seq=47, ra-rnti=0x2
+Received ConnectionReject. Wait time: 10
+Random Access Transmission: seq=7, ra-rnti=0x2
+Received ConnectionReject. Wait time: 10
+Random Access Transmission: seq=22, ra-rnti=0x2
+Received ConnectionReject. Wait time: 10
+Random Access Transmission: seq=35, ra-rnti=0x2
+Received ConnectionReject. Wait time: 10
+Random Access Transmission: seq=6, ra-rnti=0x2
+Received ConnectionReject. Wait time: 10
+Random Access Transmission: seq=17, ra-rnti=0x2
+Received ConnectionReject. Wait time: 10
+Random Access Complete.     c-rnti=0x8f, ta=5
+Scheduling request failed: releasing RRC connection...
+Random Access Transmission: seq=21, ra-rnti=0x2
+Random Access Transmission: seq=23, ra-rnti=0x2
+Received ConnectionReject. Wait time: 10
+Random Access Transmission: seq=40, ra-rnti=0x2
+Received ConnectionReject. Wait time: 10
+Random Access Transmission: seq=14, ra-rnti=0x2
+Received ConnectionReject. Wait time: 10
+Random Access Transmission: seq=41, ra-rnti=0x2
+Received ConnectionReject. Wait time: 10
+Random Access Transmission: seq=31, ra-rnti=0x2
+Received ConnectionReject. Wait time: 10
+Random Access Complete.     c-rnti=0x8f, ta=5
+Scheduling request failed: releasing RRC connection...
+Random Access Transmission: seq=46, ra-rnti=0x2
+Random Access Transmission: seq=16, ra-rnti=0x2
+Received ConnectionReject. Wait time: 10
+Random Access Transmission: seq=21, ra-rnti=0x2
+Received ConnectionReject. Wait time: 10
+Random Access Transmission: seq=18, ra-rnti=0x2
+Random Access Complete.     c-rnti=0x8f, ta=5
+Received ConnectionReject. Wait time: 10
+Scheduling request failed: releasing RRC connection...
+Random Access Transmission: seq=13, ra-rnti=0x2
+Random Access Transmission: seq=45, ra-rnti=0x2
+Received ConnectionReject. Wait time: 10
+Random Access Transmission: seq=6, ra-rnti=0x2
+Received ConnectionReject. Wait time: 10
+Random Access Transmission: seq=26, ra-rnti=0x2
+Received ConnectionReject. Wait time: 10
+Random Access Transmission: seq=38, ra-rnti=0x2
+Received ConnectionReject. Wait time: 10
+Random Access Transmission: seq=37, ra-rnti=0x2
+Received ConnectionReject. Wait time: 10
+Random Access Transmission: seq=46, ra-rnti=0x2
+Received ConnectionReject. Wait time: 10
+Random Access Complete.     c-rnti=0x8f, ta=5
+Scheduling request failed: releasing RRC connection...
+Random Access Transmission: seq=10, ra-rnti=0x2
+Random Access Transmission: seq=26, ra-rnti=0x2
+Received ConnectionReject. Wait time: 10
+Random Access Transmission: seq=31, ra-rnti=0x2
+Received ConnectionReject. Wait time: 10
+Random Access Transmission: seq=15, ra-rnti=0x2
+Received ConnectionReject. Wait time: 10
+Random Access Transmission: seq=14, ra-rnti=0x2
+Received ConnectionReject. Wait time: 10
+Random Access Transmission: seq=19, ra-rnti=0x2
+Received ConnectionReject. Wait time: 10
+Random Access Transmission: seq=38, ra-rnti=0x2
+Received ConnectionReject. Wait time: 10
+Random Access Transmission: seq=50, ra-rnti=0x2
+Received ConnectionReject. Wait time: 10
+Random Access Transmission: seq=18, ra-rnti=0x2
+Received ConnectionReject. Wait time: 10
+Random Access Transmission: seq=21, ra-rnti=0x2
+Received ConnectionReject. Wait time: 10
+Warning: Detected Radio-Link Failure
+RRC Connection Reestablishment
+Random Access Transmission: seq=4, ra-rnti=0x2
+Random Access Complete.     c-rnti=0xb8, ta=0
+Reestablishment OK
+RRC Connected
+Received RRC Connection Release
+RRC IDLE
+S-TMSI match in paging message
+Random Access Transmission: seq=45, ra-rnti=0x2
+Random Access Complete.     c-rnti=0xb9, ta=5
+RRC Connected
+Warning: Detected Radio-Link Failure
+RRC IDLE
+...........................................................................................................................................
+.............................................................................................................................................................................................................................................................................................................................................................................................................................................................................................................
+...........................................................................................................................................
+.........................................................................................................................................................................................................................................................................................................................................................................................................................
+.................................................................................Reading configuration file /etc/srslte/ue.conf...
+
+Built in Release mode using commit c34fee992 on branch dev.
+
+Opening 1 RF devices with 1 RF channels...
+Opening USRP with args: type=b200,num_recv_frames=256,num_send_frames=256,master_clock_rate=23.04e6
+Waiting PHY to initialize ... done!
+Attaching UE...
+Closing stdin thread.
+Searching cell in DL EARFCN=2850, f_dl=2630.0 MHz, f_ul=2510.0 MHz
+.
+Found Cell:  Mode=FDD, PCI=1, PRB=50, Ports=1, CFO=-2.3 KHz
+Found PLMN:  Id=90170, TAC=7
+Could not find Home PLMN Id=20893, trying to connect to PLMN Id=90170
+Random Access Transmission: seq=27, ra-rnti=0x2
+Random Access Complete.     c-rnti=0x46, ta=5
+RRC Connected
+Network attach successful. IP: 172.16.0.2
+Software Radio Systems LTE (srsLTE) 5/1/2022 17:33:41 TZ:0
+Scheduling request failed: releasing RRC connection...
+Random Access Transmission: seq=16, ra-rnti=0x2
+Random Access Transmission: seq=27, ra-rnti=0x2
+Random Access Transmission: seq=23, ra-rnti=0x2
+Random Access Transmission: seq=51, ra-rnti=0x2
+Random Access Transmission: seq=24, ra-rnti=0x2
+Random Access Transmission: seq=49, ra-rnti=0x2
+Random Access Transmission: seq=43, ra-rnti=0x2
+Random Access Transmission: seq=15, ra-rnti=0x2
+Random Access Transmission: seq=42, ra-rnti=0x2
+Random Access Transmission: seq=19, ra-rnti=0x2
+Warning: Detected Radio-Link Failure
+RRC Connection Reestablishment
+Random Access Transmission: seq=34, ra-rnti=0x2
+Random Access Transmission: seq=21, ra-rnti=0x2
+Random Access Transmission: seq=40, ra-rnti=0x2
+Random Access Transmission: seq=23, ra-rnti=0x2
+Random Access Transmission: seq=10, ra-rnti=0x2
+RRC IDLE
+Random Access Transmission: seq=11, ra-rnti=0x2
+Random Access Transmission: seq=30, ra-rnti=0x2
+Random Access Transmission: seq=49, ra-rnti=0x2
+Random Access Transmission: seq=22, ra-rnti=0x2
+Random Access Transmission: seq=24, ra-rnti=0x2
+Random Access Transmission: seq=12, ra-rnti=0x2
+Random Access Transmission: seq=15, ra-rnti=0x2
+Random Access Transmission: seq=29, ra-rnti=0x2
+Random Access Transmission: seq=37, ra-rnti=0x2
+Random Access Transmission: seq=28, ra-rnti=0x2
+Warning: Detected Radio-Link Failure
+.
+Found Cell:  Mode=FDD, PCI=1, PRB=50, Ports=1, CFO=-1.8 KHz
+Random Access Transmission: seq=7, ra-rnti=0x2
+Random Access Complete.     c-rnti=0x77, ta=5
+RRC Connected
+Received service reject with EMM cause=0x9.
+Network attach successful. IP: 172.16.0.2
+Software Radio Systems LTE (srsLTE) 5/1/2022 17:34:49 TZ:0
+Scheduling request failed: releasing RRC connection...
+Random Access Transmission: seq=22, ra-rnti=0x2
+Random Access Transmission: seq=31, ra-rnti=0x2
+Random Access Transmission: seq=25, ra-rnti=0x2
+Random Access Transmission: seq=49, ra-rnti=0x2
+Random Access Transmission: seq=47, ra-rnti=0x2
+Random Access Transmission: seq=1, ra-rnti=0x2
+Random Access Transmission: seq=48, ra-rnti=0x2
+Random Access Transmission: seq=22, ra-rnti=0x2
+Random Access Transmission: seq=25, ra-rnti=0x2
+Random Access Transmission: seq=45, ra-rnti=0x2
+Warning: Detected Radio-Link Failure
+RRC Connection Reestablishment
+Random Access Transmission: seq=13, ra-rnti=0x2
+Random Access Transmission: seq=16, ra-rnti=0x2
+Random Access Transmission: seq=35, ra-rnti=0x2
+Random Access Transmission: seq=33, ra-rnti=0x2
+Random Access Transmission: seq=50, ra-rnti=0x2
+RRC IDLE
+Random Access Transmission: seq=49, ra-rnti=0x2
+Random Access Transmission: seq=21, ra-rnti=0x2
+Random Access Transmission: seq=15, ra-rnti=0x2
+Random Access Transmission: seq=43, ra-rnti=0x2
+Random Access Transmission: seq=33, ra-rnti=0x2
+Random Access Transmission: seq=46, ra-rnti=0x2
+Random Access Transmission: seq=41, ra-rnti=0x2
+Random Access Transmission: seq=31, ra-rnti=0x2
+Random Access Transmission: seq=18, ra-rnti=0x2
+Random Access Transmission: seq=29, ra-rnti=0x2
+Warning: Detected Radio-Link Failure
+Random Access Transmission: seq=23, ra-rnti=0x2
+Random Access Transmission: seq=23, ra-rnti=0x2
+Random Access Transmission: seq=42, ra-rnti=0x2
+Random Access Transmission: seq=51, ra-rnti=0x2
+Random Access Transmission: seq=30, ra-rnti=0x2
+Random Access Transmission: seq=40, ra-rnti=0x2
+Random Access Transmission: seq=6, ra-rnti=0x2
+Random Access Transmission: seq=31, ra-rnti=0x2
+Random Access Transmission: seq=38, ra-rnti=0x2
+Random Access Transmission: seq=29, ra-rnti=0x2
+Warning: Detected Radio-Link Failure
+Random Access Transmission: seq=32, ra-rnti=0x2
+Random Access Transmission: seq=10, ra-rnti=0x2
+Random Access Transmission: seq=51, ra-rnti=0x2
+Random Access Transmission: seq=33, ra-rnti=0x2
+Random Access Transmission: seq=4, ra-rnti=0x2
+Random Access Transmission: seq=12, ra-rnti=0x2
+Random Access Transmission: seq=49, ra-rnti=0x2
+Random Access Transmission: seq=39, ra-rnti=0x2
+Random Access Transmission: seq=21, ra-rnti=0x2
+Random Access Transmission: seq=24, ra-rnti=0x2
+Warning: Detected Radio-Link Failure
+Random Access Transmission: seq=44, ra-rnti=0x2
+Random Access Transmission: seq=18, ra-rnti=0x2
+Random Access Transmission: seq=45, ra-rnti=0x2
+Random Access Transmission: seq=36, ra-rnti=0x2
+Random Access Transmission: seq=38, ra-rnti=0x2
+Random Access Transmission: seq=2, ra-rnti=0x2
+Random Access Transmission: seq=30, ra-rnti=0x2
+Random Access Transmission: seq=3, ra-rnti=0x2
+Random Access Transmission: seq=10, ra-rnti=0x2
+Random Access Transmission: seq=24, ra-rnti=0x2
+Warning: Detected Radio-Link Failure
+Random Access Transmission: seq=8, ra-rnti=0x2
+Random Access Transmission: seq=33, ra-rnti=0x2
+Random Access Transmission: seq=47, ra-rnti=0x2
+Random Access Transmission: seq=51, ra-rnti=0x2
+Random Access Transmission: seq=8, ra-rnti=0x2
+Random Access Transmission: seq=1, ra-rnti=0x2
+Random Access Transmission: seq=39, ra-rnti=0x2
+Random Access Transmission: seq=14, ra-rnti=0x2
+Random Access Transmission: seq=32, ra-rnti=0x2
+Random Access Transmission: seq=1, ra-rnti=0x2
+Warning: Detected Radio-Link Failure
+Random Access Transmission: seq=43, ra-rnti=0x2
+Random Access Transmission: seq=41, ra-rnti=0x2
+Random Access Transmission: seq=12, ra-rnti=0x2
+Random Access Transmission: seq=42, ra-rnti=0x2
+Random Access Transmission: seq=50, ra-rnti=0x2
+Random Access Transmission: seq=16, ra-rnti=0x2
+Random Access Transmission: seq=30, ra-rnti=0x2
+Random Access Transmission: seq=24, ra-rnti=0x2
+Random Access Transmission: seq=31, ra-rnti=0x2
+Random Access Transmission: seq=0, ra-rnti=0x2
+Warning: Detected Radio-Link Failure
+Random Access Transmission: seq=48, ra-rnti=0x2
+Random Access Transmission: seq=0, ra-rnti=0x2
+Random Access Transmission: seq=46, ra-rnti=0x2
+Random Access Transmission: seq=17, ra-rnti=0x2
+Random Access Transmission: seq=36, ra-rnti=0x2
+Random Access Transmission: seq=32, ra-rnti=0x2
+Random Access Transmission: seq=48, ra-rnti=0x2
+Random Access Transmission: seq=42, ra-rnti=0x2
+Random Access Transmission: seq=35, ra-rnti=0x2
+Random Access Transmission: seq=34, ra-rnti=0x2
+Warning: Detected Radio-Link Failure
+Random Access Transmission: seq=42, ra-rnti=0x2
+Random Access Transmission: seq=44, ra-rnti=0x2
+Random Access Transmission: seq=43, ra-rnti=0x2
+Random Access Transmission: seq=13, ra-rnti=0x2
+Random Access Transmission: seq=43, ra-rnti=0x2
+Random Access Transmission: seq=51, ra-rnti=0x2
+Random Access Transmission: seq=14, ra-rnti=0x2
+Random Access Transmission: seq=6, ra-rnti=0x2
+Random Access Transmission: seq=13, ra-rnti=0x2
+Random Access Transmission: seq=22, ra-rnti=0x2
+Warning: Detected Radio-Link Failure
+Random Access Transmission: seq=36, ra-rnti=0x2
+Random Access Transmission: seq=32, ra-rnti=0x2
+Random Access Transmission: seq=39, ra-rnti=0x2
+Random Access Transmission: seq=48, ra-rnti=0x2
+Random Access Transmission: seq=22, ra-rnti=0x2
+Random Access Transmission: seq=14, ra-rnti=0x2
+Random Access Transmission: seq=40, ra-rnti=0x2
+Random Access Transmission: seq=0, ra-rnti=0x2
+Random Access Transmission: seq=38, ra-rnti=0x2
+Random Access Transmission: seq=47, ra-rnti=0x2
+Warning: Detected Radio-Link Failure
+Random Access Transmission: seq=28, ra-rnti=0x2
+Random Access Transmission: seq=10, ra-rnti=0x2
+Random Access Transmission: seq=47, ra-rnti=0x2
+Random Access Transmission: seq=23, ra-rnti=0x2
+Random Access Transmission: seq=3, ra-rnti=0x2
+Random Access Transmission: seq=31, ra-rnti=0x2
+Random Access Transmission: seq=3, ra-rnti=0x2
+Random Access Transmission: seq=51, ra-rnti=0x2
+Random Access Transmission: seq=49, ra-rnti=0x2
+Random Access Transmission: seq=15, ra-rnti=0x2
+Warning: Detected Radio-Link Failure
+Random Access Transmission: seq=33, ra-rnti=0x2
+Random Access Transmission: seq=39, ra-rnti=0x2
+Random Access Transmission: seq=7, ra-rnti=0x2
+Random Access Transmission: seq=24, ra-rnti=0x2
+Random Access Transmission: seq=0, ra-rnti=0x2
+Random Access Transmission: seq=26, ra-rnti=0x2
+Random Access Transmission: seq=23, ra-rnti=0x2
+Random Access Transmission: seq=14, ra-rnti=0x2
+Random Access Transmission: seq=8, ra-rnti=0x2
+Random Access Transmission: seq=12, ra-rnti=0x2
+Warning: Detected Radio-Link Failure
+Random Access Transmission: seq=13, ra-rnti=0x2
+Random Access Transmission: seq=44, ra-rnti=0x2
+Random Access Transmission: seq=44, ra-rnti=0x2
+Random Access Transmission: seq=28, ra-rnti=0x2
+Random Access Transmission: seq=16, ra-rnti=0x2
+Random Access Transmission: seq=42, ra-rnti=0x2
+Random Access Transmission: seq=42, ra-rnti=0x2
+Random Access Transmission: seq=4, ra-rnti=0x2
+Random Access Transmission: seq=19, ra-rnti=0x2
+Random Access Transmission: seq=28, ra-rnti=0x2
+Warning: Detected Radio-Link Failure
+Random Access Transmission: seq=0, ra-rnti=0x2
+Random Access Transmission: seq=47, ra-rnti=0x2
+Random Access Transmission: seq=14, ra-rnti=0x2
+Random Access Transmission: seq=47, ra-rnti=0x2
+Random Access Transmission: seq=46, ra-rnti=0x2
+Random Access Transmission: seq=18, ra-rnti=0x2
+Random Access Transmission: seq=3, ra-rnti=0x2
+Random Access Transmission: seq=26, ra-rnti=0x2
+Random Access Transmission: seq=17, ra-rnti=0x2
+Random Access Transmission: seq=0, ra-rnti=0x2
+Warning: Detected Radio-Link Failure
+Random Access Transmission: seq=41, ra-rnti=0x2
+Random Access Transmission: seq=27, ra-rnti=0x2
+Random Access Transmission: seq=16, ra-rnti=0x2
+Random Access Transmission: seq=48, ra-rnti=0x2
+Random Access Transmission: seq=51, ra-rnti=0x2
+Random Access Transmission: seq=16, ra-rnti=0x2
+Random Access Transmission: seq=22, ra-rnti=0x2
+Random Access Transmission: seq=51, ra-rnti=0x2
+Random Access Transmission: seq=7, ra-rnti=0x2
+Random Access Transmission: seq=30, ra-rnti=0x2
+Warning: Detected Radio-Link Failure
+Random Access Transmission: seq=39, ra-rnti=0x2
+Random Access Complete.     c-rnti=0x167, ta=5
+RRC Connected
+Received service reject with EMM cause=0x9.
+Network attach successful. IP: 172.16.0.2
+Software Radio Systems LTE (srsLTE) 5/1/2022 17:36:13 TZ:0
+Warning: Detected Radio-Link Failure
+RRC IDLE
+.........................................................
+................................................................................................................................................................................................
+.........................
+.....................
+.................................................
+.....................................................................................................................................................................................................................................................................................................................................................
+.............................................................................................................................................................................................................................................................................................................................................................................................................................................................................................................................................................................................................................................
+..............................................................................................................................................................................................................................................................................................................................................................................................................................................................................................................................................................................................................................................................................................................................................................................................................................................................................................................................................................................................................................................................................
+.............................................................................................................................................................................................................................
+.........................................................................................................................................Reading configuration file /etc/srslte/ue.conf...
+
+Built in Release mode using commit c34fee992 on branch dev.
+
+Opening 1 RF devices with 1 RF channels...
+Opening USRP with args: type=b200,num_recv_frames=256,num_send_frames=256,master_clock_rate=23.04e6
+Waiting PHY to initialize ... done!
+Attaching UE...
+Closing stdin thread.
+Searching cell in DL EARFCN=2850, f_dl=2630.0 MHz, f_ul=2510.0 MHz
+.
+Found Cell:  Mode=FDD, PCI=1, PRB=50, Ports=1, CFO=-1.8 KHz
+Found PLMN:  Id=90170, TAC=7
+Could not find Home PLMN Id=20893, trying to connect to PLMN Id=90170
+Random Access Transmission: seq=22, ra-rnti=0x2
+Random Access Complete.     c-rnti=0x46, ta=5
+RRC Connected
+Network attach successful. IP: 172.16.0.2
+Software Radio Systems LTE (srsLTE) 5/1/2022 17:43:23 TZ:0
+Scheduling request failed: releasing RRC connection...
+Random Access Transmission: seq=46, ra-rnti=0x2
+Random Access Transmission: seq=23, ra-rnti=0x2
+Random Access Transmission: seq=11, ra-rnti=0x2
+Random Access Transmission: seq=14, ra-rnti=0x2
+Random Access Transmission: seq=0, ra-rnti=0x2
+Random Access Transmission: seq=6, ra-rnti=0x2
+Random Access Transmission: seq=28, ra-rnti=0x2
+Random Access Transmission: seq=25, ra-rnti=0x2
+Random Access Transmission: seq=3, ra-rnti=0x2
+Random Access Transmission: seq=46, ra-rnti=0x2
+Warning: Detected Radio-Link Failure
+RRC Connection Reestablishment
+Random Access Transmission: seq=47, ra-rnti=0x2
+Random Access Transmission: seq=13, ra-rnti=0x2
+Random Access Transmission: seq=32, ra-rnti=0x2
+Random Access Transmission: seq=38, ra-rnti=0x2
+Random Access Transmission: seq=27, ra-rnti=0x2
+RRC IDLE
+Random Access Transmission: seq=13, ra-rnti=0x2
+Random Access Transmission: seq=7, ra-rnti=0x2
+Random Access Transmission: seq=41, ra-rnti=0x2
+Long small integers not supported
+This method only supports unpacking up to 32 bits
+Long small integers not supported
+Not handling octet strings longer than 16383 octets
+This method only supports unpacking up to 32 bits
+The condition lb <= n <= ub (0 <= 14 <= 9) was not met
+[/home/dell46/srslte/lib/include/srslte/asn1/asn1_utils.h][744] Decoding failure.
+[/home/dell46/srslte/lib/src/asn1/rrc_asn1.cc][78997] Decoding failure.
+[/home/dell46/srslte/lib/src/asn1/rrc_asn1.cc][79062] Decoding failure.
+[/home/dell46/srslte/lib/include/srslte/asn1/asn1_utils.h][756] Decoding failure.
+[/home/dell46/srslte/lib/src/asn1/rrc_asn1.cc][79143] Decoding failure.
+[/home/dell46/srslte/lib/src/asn1/rrc_asn1.cc][79298] Decoding failure.
+[/home/dell46/srslte/lib/src/asn1/rrc_asn1.cc][79273] Decoding failure.
+[/home/dell46/srslte/lib/src/asn1/rrc_asn1.cc][79313] Decoding failure.
+Random Access Transmission: seq=47, ra-rnti=0x2
+Random Access Transmission: seq=33, ra-rnti=0x2
+Random Access Transmission: seq=32, ra-rnti=0x2
+Random Access Transmission: seq=13, ra-rnti=0x2
+Random Access Transmission: seq=4, ra-rnti=0x2
+Random Access Transmission: seq=40, ra-rnti=0x2
+Random Access Transmission: seq=41, ra-rnti=0x2
+Warning: Detected Radio-Link Failure
+........................................................................................................................
+............................................................................................................................................................................................................................................................................................................................................................................................................................................................................................................................................................................................................................................................................................................................................................................................................................................................................................................................................
+.......................................
+..................................................................................................................
+............................................................................................................................................
+.............................................................................
+.............................................................................................................................................................
+.
+.......................................................................................................................................................................................................................................................................................................................................
+...................................................................................................................................................
+...........................................................
+.......................................................................
+..............................................................................................................................................................................................................................................................................................
+.......................................................................................................................................
+.............................................................................................................................................................................................................................................................................................
+..............................................................................................
+...............................................................
+..................................................................
+.................
+.............................................................................................................................................................................................................
+....................................................................................................................................................................................................................................................................
+..................................................................................................................................................................................................................................................................................................................................................Reading configuration file /etc/srslte/ue.conf...
+
+Built in Release mode using commit c34fee992 on branch dev.
+
+Opening 1 RF devices with 1 RF channels...
+Opening USRP with args: type=b200,num_recv_frames=256,num_send_frames=256,master_clock_rate=23.04e6
+Waiting PHY to initialize ... done!
+Attaching UE...
+Closing stdin thread.
+Searching cell in DL EARFCN=2850, f_dl=2630.0 MHz, f_ul=2510.0 MHz
+.
+Found Cell:  Mode=FDD, PCI=1, PRB=50, Ports=1, CFO=-2.2 KHz
+Found PLMN:  Id=90170, TAC=7
+Could not find Home PLMN Id=20893, trying to connect to PLMN Id=90170
+Random Access Transmission: seq=47, ra-rnti=0x2
+Random Access Complete.     c-rnti=0x46, ta=5
+RRC Connected
+Network attach successful. IP: 172.16.0.2
+Software Radio Systems LTE (srsLTE) 5/1/2022 18:9:6 TZ:0
+Warning: Detected Radio-Link Failure
+RRC IDLE
+.........................................................
+....................................................................................................................................................................................................................................................................................
+........................
+..............................................................................................
+...........................................................................
+................................................................................................................................................................................................................................................................................
+...........................................................................................................................................................................................................
+...................................................................................................................
+......................................................................................................
+..........................................................................................................................................
+..................................................................................................................................
+....................................................................................................
+..................................
+.......................................................
+..........................................................................................................................................................................................................................................................................................................................................

@@ -57,7 +57,7 @@ function start_robot () {
 			interface_trial=$((interface_trial+1))
 			echo "Interface: istantiation trial #$interface_trial"
 			sshpass -p$1 ssh $2@$8 "docker run -dit --rm --name interfacemaster_robot_$((NOF_ACTIVE_ROBOTS)) --hostname master --add-host driver:10.2.0.$((NOF_ACTIVE_ROBOTS+1))  --add-host control:10.1.5.$((NOF_ACTIVE_ROBOTS+1)) --add-host state:10.1.4.$((NOF_ACTIVE_ROBOTS+1)) --add-host motion_planning:10.1.3.$((NOF_ACTIVE_ROBOTS+1)) --add-host robot_commander:10.1.2.$((NOF_ACTIVE_ROBOTS+1)) --network ros_interface --ip 10.1.1.$((NOF_ACTIVE_ROBOTS+1)) -v /home/ros/Output_script/:/Output_script robot interface_master"
-			. ./Script_startRobots/mysleep.sh 60
+			. ./Script_startRobots/mysleep.sh 20
 		done
 		INTERFACE_IP=10.1.1.$((NOF_ACTIVE_ROBOTS+1))
 		echo -e "Interface commander IP:  $INTERFACE_IP"
@@ -67,7 +67,7 @@ function start_robot () {
 		echo -e "Interface commander IP:  $INTERFACE_IP"
 	fi
 
-	. ./Script_startRobots/mysleep.sh 20
+	# . ./Script_startRobots/mysleep.sh 20
 
 	echo -e "\n\nSTEP $((8+2*(NOF_ACTIVE_ROBOTS-1))): CPU measurements and RAM usage with VMs hosting idle containers"
 	echo "REMEMBER : already istantiated containers : $NOF_ACTIVE_ROBOTS"
@@ -151,7 +151,7 @@ while true; do
     fi
 done
 
-. ./Script_startRobots/mysleep.sh 20
+# . ./Script_startRobots/mysleep.sh 20
 
 commandname=$2
 
