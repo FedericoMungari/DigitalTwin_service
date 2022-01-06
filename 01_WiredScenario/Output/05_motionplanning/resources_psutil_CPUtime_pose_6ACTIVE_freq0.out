@@ -1,4 +1,4 @@
-E R R O R:
-Problem with input quantities
-Please insert:
-VAR 1 : measurement time window
+MACHINE,meas_samples,meas_periodicity,date,time,user,nice,system,idle,iowait,irq,softirq,steal,guest,guest_nice
+ROS_VNF_motionplanning,3600.0,0.5,2022-01-06,05:33:42,203.12,0.0,179.01,4099.77,479.37,0.0,445.83,0.0,0.0,0.0
+ROS_VNF_motionplanning,3600.0,0.5,2022-01-06,06:03:42,542.16,0.0,269.6,6448.42,581.33,0.0,785.42,0.0,0.0,0.0
+ROS_VNF_motionplanning,3600.0,0.5,2022-01-06,06:03:42,339.03999999999996,0.0,90.59000000000003,2348.6499999999996,101.96000000000004,101.96000000000004,339.59,0.0,0.0,0.0
