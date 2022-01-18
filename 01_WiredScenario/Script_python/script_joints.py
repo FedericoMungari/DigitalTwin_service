@@ -26,7 +26,7 @@ if True:
 		# print "--- Start"
 		n = NiryoOne()
 
-		seed(88)
+		seed(110)
 
 		# Calibrate robot first
 		n.calibrate_auto()

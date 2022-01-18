@@ -1,1 +1,3 @@
 date,init_position,final_position,time
+0,2022-01-07,21:34:58,-1,7,11.874476
+Goal has been aborted : Please restart the robot and try again.
