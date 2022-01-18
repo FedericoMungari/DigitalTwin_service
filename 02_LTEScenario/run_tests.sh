@@ -1,5 +1,13 @@
 #!/bin/bash
 
+# REMEMBER to mount ssd
+# 1) lsblk
+# 	-> show mounted and unmounted partitions
+# 2) udisksctl mount -b /dev/<to_be_mounted>
+# 	-> mount the selected partition
+# In .44:
+# udisksctl mount -b /dev/nvme0n1
+
 VBoxManage controlvm ROS_VNF_state poweroff 1>/dev/null 2>/dev/null
 
 
