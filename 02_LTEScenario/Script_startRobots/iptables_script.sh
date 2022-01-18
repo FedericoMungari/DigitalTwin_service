@@ -3,9 +3,22 @@
 # ######################################################################################################################################################################################
 # IPTABLE
 
-# echo $REMOTE_HOST_PASS
-# echo $REMOTE_HOST_USER
-# echo $REMOTE_HOST_IP
+echo "ROBOT_HOST_PASS: ", $ROBOT_HOST_PASS
+echo "ROBOT_HOST_USER: ", $ROBOT_HOST_USER
+echo "ROBOT_HOST_IP_LOCAL: ", $ROBOT_HOST_IP_LOCAL
+
+echo "EDGE_HOST_PASS: ", $EDGE_HOST_PASS
+
+echo "VM_PSW: ", $VM_PSW
+echo "VM_USERNAME: ", $VM_USERNAME
+
+echo "DRIVER_VM_IP: ", $DRIVER_VM_IP
+echo "CONTROLLER_VM_IP: ", $CONTROLLER_VM_IP
+echo "STATE_VM_IP: ", $STATE_VM_IP
+echo "MOTIONPLANNING_VM_IP: ", $MOTIONPLANNING_VM_IP
+echo "ROBOTCOMMANDER_VM_IP: ", $ROBOTCOMMANDER_VM_IP
+echo "INTERFACE_MASTER_VM_IP: ", $INTERFACE_MASTER_VM_IP
+
 
 echo -e "\niptables command on the every VM and host"
 
