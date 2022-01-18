@@ -77,6 +77,13 @@ if [[ $# -eq 5 ]]; then
 	MOTIONPLANNING_VM_IP=10.0.3.5
 	STATE_VM_IP=10.0.3.6
 	CONTROLLER_VM_IP=10.0.3.7
+
+	INTERFACE_MASTER_VM_IP=10.0.3.7
+	ROBOTCOMMANDER_VM_IP=10.0.3.6
+	MOTIONPLANNING_VM_IP=10.0.3.5
+	STATE_VM_IP=10.0.3.3
+	CONTROLLER_VM_IP=10.0.3.4
+
 	DRIVER_VM_IP=10.0.4.3
 	VM_USERNAME=ros
 	VM_PSW=ros
@@ -86,7 +93,7 @@ if [[ $# -eq 5 ]]; then
 	VM_LOCAL_SUBNET=10.0.4.0/24
 	VM_LOCAL_GW=10.0.4.1
 
-	GAIN=85
+	GAIN=80
 
 	# measurement_iteration="6000"
 	# measurement_period="0.1"
