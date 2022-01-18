@@ -1,0 +1,31 @@
+Exception in thread /niryo_one/commander/robot_action/result (most likely raised during interpreter shutdown):Exception in thread /niryo_one/commander/robot_action/status (most likely raised during interpreter shutdown):Exception in thread /niryo_one/robot_state (most likely raised during interpreter shutdown):
+Traceback (most recent call last):
+  File "/usr/lib/python2.7/threading.py", line 801, in __bootstrap_inner
+ Exception in thread Thread-4 (most likely raised during interpreter shutdown):
+Traceback (most recent call last):
+
+Traceback (most recent call last):
+  File "/usr/lib/python2.7/threading.py", line 801, in __bootstrap_inner
+  File "/usr/lib/python2.7/threading.py", line 754, in run
+  File "/opt/ros/kinetic/lib/python2.7/dist-packages/rospy/impl/tcpros_pubsub.py", line 185, in robust_connect_subscriber
+  File "/opt/ros/kinetic/lib/python2.7/dist-packages/rospy/impl/tcpros_base.py", line 824, in receive_loop
+<type 'exceptions.TypeError'>: 'NoneType' object is not callable
+  File "/usr/lib/python2.7/threading.py", line 801, in __bootstrap_innerException in thread /niryo_one/commander/robot_action/feedback (most likely raised during interpreter shutdown):
+Traceback (most recent call last):
+  File "/usr/lib/python2.7/threading.py", line 801, in __bootstrap_inner
+
+  File "/usr/lib/python2.7/threading.py", line 754, in run
+  File "/opt/ros/kinetic/lib/python2.7/dist-packages/rospy/impl/tcpros_pubsub.py", line 185, in robust_connect_subscriber
+  File "/opt/ros/kinetic/lib/python2.7/dist-packages/rospy/impl/tcpros_base.py", line 824, in receive_loop
+  File "/usr/lib/python2.7/threading.py", line 754, in runTraceback (most recent call last):
+  File "/usr/lib/python2.7/threading.py", line 801, in __bootstrap_inner
+  File "/usr/lib/python2.7/threading.py", line 754, in run
+  File "/opt/ros/kinetic/lib/python2.7/dist-packages/rospy/impl/tcpros_pubsub.py", line 185, in robust_connect_subscriber
+  File "/opt/ros/kinetic/lib/python2.7/dist-packages/rospy/impl/tcpros_base.py", line 824, in receive_loop
+<type 'exceptions.TypeError'>: 'NoneType' object is not callable<type 'exceptions.TypeError'>: 'NoneType' object is not callable
+
+
+  File "/usr/lib/python2.7/threading.py", line 754, in run  File "/opt/ros/kinetic/lib/python2.7/dist-packages/rospy/impl/tcpros_pubsub.py", line 185, in robust_connect_subscriber
+  File "/opt/ros/kinetic/lib/python2.7/dist-packages/rospy/impl/tcpros_base.py", line 824, in receive_loop
+
+<type 'exceptions.TypeError'>: 'NoneType' object is not callable

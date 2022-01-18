@@ -1,0 +1,1 @@
+Exception in thread /niryo_one/commander/robot_action/feedback (most likely raised during interpreter shutdown):

@@ -1,0 +1,102 @@
+<launch>
+
+    <!-- Will not work on Raspberry Pi, to use on a non-ARM computer only 
+        Hardware communication is disabled with simulation_mode flag
+        The hardware interface will just follow the command given by the chosen controller (ros_controllers)
+    -->
+
+    <machine name="driver" address="driver" user="root" password="root" default="true" env-loader="~/catkin_ws/devel/env.sh" />
+ 
+    <arg name="execute_on_niryo_one_raspberry_pi_image" value="false"/>
+    <arg name="urdf_without_meshes" default="false" />
+    <include file="$(find niryo_one_bringup)/launch/niryo_one_base.launch" pass_all_args="true"/>
+
+    <arg name="simulation_mode" default="true" />
+    <!-- set to true to disable hardware communication for CAN bus (Niryo Steppers)
+     or DXl bus (DEBUG PURPOSES) -->
+    <arg name="disable_can_for_debug" default="false" />
+    <arg name="disable_dxl_for_debug" default="false" />
+
+    <node name="niryo_one_driver" pkg="niryo_one_driver" type="niryo_one_driver" output="screen">
+
+        <rosparam file="$(find niryo_one_bringup)/config/niryo_one_driver.yaml" /> 
+    
+        <param name="fake_communication" type="bool" value="$(arg simulation_mode)" />
+    
+        <param name="can_enabled" type="bool" value="true"  unless="$(arg disable_can_for_debug)" />
+        <param name="can_enabled" type="bool" value="false" if="$(arg disable_can_for_debug)" />
+        <param name="dxl_enabled" type="bool" value="true"  unless="$(arg disable_dxl_for_debug)" />
+        <param name="dxl_enabled" type="bool" value="false" if="$(arg disable_dxl_for_debug)" />
+    </node>
+
+    <machine name="control" address="control" user="root" password="root" default="true" env-loader="~/catkin_ws/devel/env.sh" />
+
+    <node name="niryo_one_tools" pkg="niryo_one_tools" type="tool_controller.py" output="screen" respawn="false"> 
+        <rosparam file="$(find niryo_one_tools)/config/end_effectors.yaml" />
+    </node>
+
+    <!-- Load controller settings -->
+    <rosparam file="$(find niryo_one_driver)/config/niryo_one_controllers.yaml" command="load"/>
+  
+    <!-- spawn controllers -->
+    <node name="controller_spawner" pkg="controller_manager" type="spawner" respawn="false" output="screen" 
+        args="joint_state_controller niryo_one_follow_joint_trajectory_controller
+        --shutdown-timeout 1"/>
+
+    <machine name="state" address="state" user="root" password="root" default="true" env-loader="~/catkin_ws/devel/env.sh" />
+
+    <!-- robot state publisher -->
+    <node name="robot_state_publisher" pkg="robot_state_publisher" type="robot_state_publisher" output="screen" />
+
+    <machine name="motion_planning" address="motion_planning" user="root" password="root" default="true" env-loader="~/catkin_ws/devel/env.sh" />
+
+   <!-- <include file="$(find niryo_one_bringup)/launch/robot_commander.launch">
+        <arg name="simulation_mode" value="true" />
+    </include>
+
+    <arg name="simulation_mode" default="false" />
+    -->
+
+    <!-- Moveit move_group -->
+    <include file="$(find niryo_one_moveit_config)/launch/move_group.launch" />
+
+    <!-- Disable Moveit! controller timeout -->
+    <param name="move_group/trajectory_execution/execution_duration_monitoring" value="false" />
+
+    <!-- Change start tolerance from 0.01 to 0.0 to avoid this error : "Invalid Trajectory: start point deviates from current robot state more than"-->
+    <!-- more info http://moveit.ros.org/moveit!/ros/2017/01/03/firstIndigoRelease.html -->
+    <param name="/move_group/trajectory_execution/allowed_start_tolerance" value="0.0" />
+
+    <!-- Change from 0.1 to 0.3 rad -->
+    <!-- Allows joints to be outside of min and max values when starting -->
+    <param name="/move_group/start_state_max_bounds_error" value="0.3" />
+
+   <machine name="robot_commander" address="robot_commander" user="root" password="root" default="true" env-loader="~/catkin_ws/devel/env.sh" />
+
+    <!-- Robot commander -->
+    <node name="niryo_one_commander" pkg="niryo_one_commander" type="niryo_one_commander_node.py" output="screen" respawn="false">
+	<param name="reference_frame"            type="string" value="world" />
+	<param name="move_group_commander_name"  type="string" value="arm" />
+	<param name="allow_replanning"           type="bool"   value="true" />
+	<param name="goal_joint_tolerance"       type="double" value="0.0001" />
+	<param name="goal_position_tolerance"    type="double" value="0.0001" />
+	<param name="goal_orientation_tolerance" type="double" value="0.001" />
+	<param name="positions_dir" type="string"  value="/home/niryo/niryo_one_positions" unless="$(arg simulation_mode)"/>
+	<param name="positions_dir" type="string"  value="~/niryo_one_positions"           if="$(arg simulation_mode)"/>
+	<param name="trajectories_dir" type="string"  value="/home/niryo/niryo_one_trajectories" unless="$(arg simulation_mode)"/>
+	<param name="trajectories_dir" type="string"  value="~/niryo_one_trajectories"           if="$(arg simulation_mode)"/>
+    </node>
+  
+    <machine name="master" address="master" user="root" password="root" default="true" env-loader="~/catkin_ws/devel/env.sh" />
+<include file="$(find niryo_one_bringup)/launch/user_interface.launch">
+        <!-- <arg name="simulation_mode" value="true" /> -->
+    </include>
+
+    
+    <node name="tf2_web_republisher" pkg="tf2_web_republisher" type="tf2_web_republisher"/>
+    <include file="$(find rosbridge_server)/launch/rosbridge_websocket.launch">
+        <arg name="port" value="9090"/>
+    </include>
+
+
+</launch>

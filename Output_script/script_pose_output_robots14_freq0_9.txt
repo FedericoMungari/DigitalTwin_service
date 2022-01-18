@@ -1,0 +1,18 @@
+--- Start
+Calibration finished !
+
+Learning mode activated? 
+False
+0,81.449886
+1,6.040662
+2,6.404621
+3,4.946000
+4,5.519911
+5,4.230819
+6,4.930542
+7,4.303553
+8,2.648379
+9,6.294362
+10,5.867849
+Goal has been aborted : Moveit failed to compute the plan.
+--- End
