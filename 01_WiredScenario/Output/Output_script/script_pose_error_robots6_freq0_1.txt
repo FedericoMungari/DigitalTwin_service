@@ -1,4 +1,0 @@
-Traceback (most recent call last):
-  File "/script_pose.py", line 105, in <module>
-    print("%d,%s,%d,%d,%f" %(i,datestring,old_pos,curr_pos,time.time()-t1))
-NameError: name 'i' is not defined

@@ -9,30 +9,36 @@ from math import radians
 from random import randint,seed
 import sys
 from datetime import datetime
+import argparse
+
+parser = argparse.ArgumentParser()
+parser.add_argument('--duration', help="duration in seconds of the command in loop",type=int,default=60)
+args = parser.parse_args()
+
+duration=args.duration
 
 rospy.init_node('niryo_one_example_python_api')
-
 
 if True:
 	
 	try:
 
-		print "--- Start"
+		# print "--- Start"
 		n = NiryoOne()
 
-		seed(80)
+		seed(60)
 
 		# Calibrate robot first
 		n.calibrate_auto()
 		#n.calibrate_manual()
-		print "Calibration finished !\n"
+		# print "Calibration finished !\n"
 
 		time.sleep(1)
 
 		# Test learning mode
 		n.activate_learning_mode(False)
-		print "Learning mode activated? "
-		print n.get_learning_mode()
+		# print "Learning mode activated? "
+		# print n.get_learning_mode()
 
 		# Move
 		n.set_arm_max_velocity(100)
@@ -73,10 +79,13 @@ if True:
 		old_pos = -1
 		curr_pos = -1
 
-		print("iteration,date,init_position,final_position,time")
+		i=0
 
+		print("date,init_position,final_position,time")
 
-		for i in range(10000):
+		t_start = time.time()
+		
+		while(time.time() - t_start < duration):
 
 			while(1):
 				_ = randint(a, b)
@@ -86,12 +95,13 @@ if True:
 			t1 = time.time()
 			# n.move_joints(p_tot[curr_pos])
 			n.move_pose(p_tot[curr_pos][0],p_tot[curr_pos][1],p_tot[curr_pos][2],p_tot[curr_pos][3],p_tot[curr_pos][4],p_tot[curr_pos][5])
+			i=i+1
 			datestring=datetime.now().strftime("%Y-%m-%d-%H:%M:%S")
 			print("%d,%s,%d,%d,%f" %(i,datestring,old_pos,curr_pos,time.time()-t1))
 			n.wait(0)
 			old_pos = curr_pos
 
-		print "--- End"
+		# print "--- End"
 
 	except NiryoOneException as e:
 		datestring=datetime.now().strftime("%Y-%m-%d,%H:%M:%S")

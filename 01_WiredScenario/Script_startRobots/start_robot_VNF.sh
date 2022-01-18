@@ -190,7 +190,7 @@ then
 	fi
 
 	echo "sleep"
-	. ./Script_startRobots/mysleep.sh $(echo "$measurement_iteration*$measurement_period+180" | bc)
+	. ./Script_startRobots/mysleep.sh $(echo "$measurement_iteration*$measurement_period+240" | bc)
 
 fi
 
@@ -224,7 +224,7 @@ if [[ $commandname ==  "joints" ]]; then
 		sshpass -p root ssh root@$ipinterface 'echo "root" | sudo -S chmod +x /script_joints.py'
 		# echo "Running script.py"
 		# (sshpass -p root ssh root@$ipinterface 'source /root/catkin_ws/devel/setup.bash && export PYTHONPATH=${PYTHONPATH}:/root/catkin_ws/src/niryo_one_python_api/src/niryo_python_api &&'"python /script_joints.py --filename /Output_script/script_joints_output_robots$((NOF_ACTIVE_ROBOTS))_freq$((wait_between_comm))_$((script_running)).txt 2> /Output_script/script_joints_error_robots$((NOF_ACTIVE_ROBOTS))_freq$((wait_between_comm))_$((script_running)).txt" &)
-		(sshpass -p root ssh root@$ipinterface 'source /root/catkin_ws/devel/setup.bash && export PYTHONPATH=${PYTHONPATH}:/root/catkin_ws/src/niryo_one_python_api/src/niryo_python_api &&'"python -u /script_joints.py 1> /Output_script/script_joints_output_robots$((NOF_ACTIVE_ROBOTS))_freq$((wait_between_comm))_$((script_running)).txt 2> /Output_script/script_joints_error_robots$((NOF_ACTIVE_ROBOTS))_freq$((wait_between_comm))_$((script_running)).txt" &)
+		(sshpass -p root ssh root@$ipinterface 'source /root/catkin_ws/devel/setup.bash && export PYTHONPATH=${PYTHONPATH}:/root/catkin_ws/src/niryo_one_python_api/src/niryo_python_api &&'"python -u /script_joints.py --duration 3000 1> /Output_script/script_joints_output_robots$((NOF_ACTIVE_ROBOTS))_freq$((wait_between_comm))_$((script_running)).txt 2> /Output_script/script_joints_error_robots$((NOF_ACTIVE_ROBOTS))_freq$((wait_between_comm))_$((script_running)).txt" &)
 		# &> script_output_((NOF_ACTIVE_ROBOTS)).txt
 	done
 
@@ -313,13 +313,13 @@ else
 		# echo "Running script.py"
 		#(sshpass -p root ssh root@$ipinterface 'source /root/catkin_ws/devel/setup.bash && export PYTHONPATH=${PYTHONPATH}:/root/catkin_ws/src/niryo_one_python_api/src/niryo_python_api && python /script_pose.py' 1> ./Output_script/script_pose_output_robots$((NOF_ACTIVE_ROBOTS))_freq$((wait_between_comm))_$((script_running)).txt 2> ./Output_script/script_pose_error_robots$((NOF_ACTIVE_ROBOTS))_freq$((wait_between_comm))_$((script_running)).txt &)
 		# (sshpass -p root ssh root@$ipinterface 'source /root/catkin_ws/devel/setup.bash && export PYTHONPATH=${PYTHONPATH}:/root/catkin_ws/src/niryo_one_python_api/src/niryo_python_api &&'"python /script_pose.py --filename /Output_script/script_pose_output_robots$((NOF_ACTIVE_ROBOTS))_freq$((wait_between_comm))_$((script_running)).txt 2> /Output_script/script_pose_error_robots$((NOF_ACTIVE_ROBOTS))_freq$((wait_between_comm))_$((script_running)).txt" &)
-		(sshpass -p root ssh root@$ipinterface 'source /root/catkin_ws/devel/setup.bash && export PYTHONPATH=${PYTHONPATH}:/root/catkin_ws/src/niryo_one_python_api/src/niryo_python_api &&'"python -u /script_pose.py 1> /Output_script/script_pose_output_robots$((NOF_ACTIVE_ROBOTS))_freq$((wait_between_comm))_$((script_running)).txt 2> /Output_script/script_pose_error_robots$((NOF_ACTIVE_ROBOTS))_freq$((wait_between_comm))_$((script_running)).txt" &)
+		(sshpass -p root ssh root@$ipinterface 'source /root/catkin_ws/devel/setup.bash && export PYTHONPATH=${PYTHONPATH}:/root/catkin_ws/src/niryo_one_python_api/src/niryo_python_api &&'"python -u /script_pose.py --duration 3000 1> /Output_script/script_pose_output_robots$((NOF_ACTIVE_ROBOTS))_freq$((wait_between_comm))_$((script_running)).txt 2> /Output_script/script_pose_error_robots$((NOF_ACTIVE_ROBOTS))_freq$((wait_between_comm))_$((script_running)).txt" &)
 
 		# &> script_output_((NOF_ACTIVE_ROBOTS)).txt
 	done
 fi
 
-. ./Script_startRobots/mysleep.sh 30
+. ./Script_startRobots/mysleep.sh 60
 
 echo -e "\n\nSTEP $((9+2*(NOF_ACTIVE_ROBOTS-1)+2)): CPU measurements and RAM usage with VM hosting active containers (python script is running)"
 # read -p "Do you want to measure the CPU consumption and RAM usage of VMs hosting active containers??`echo $'\n> '`If yes, press Y or y`echo $'\n> '`" -n 1 -r
@@ -369,7 +369,7 @@ if true; then
 			sh ./Script_measurements/resources_dockerstats.sh ./Output/00_HostMetrics/resources_dockerstats_joints_$((n_robots))ACTIVE_freq$((wait_between_comm)).out LocalHost 2> /dev/null &
 		fi
 
-		. ./Script_startRobots/mysleep.sh $(echo "$measurement_iteration*$measurement_period+180" | bc)
+		. ./Script_startRobots/mysleep.sh $(echo "$measurement_iteration*$measurement_period+240" | bc)
 
 	elif [[ $commandname ==  "rosapi" ]]; then
 
@@ -399,7 +399,7 @@ if true; then
 			sh ./Script_measurements/resources_dockerstats.sh ./Output/00_HostMetrics/resources_dockerstats_rosapi_$((n_robots))ACTIVE_freq$((wait_between_comm)).out LocalHost 2> /dev/null &
 		fi
 
-		. ./Script_startRobots/mysleep.sh $(echo "$measurement_iteration*$measurement_period+180" | bc)
+		. ./Script_startRobots/mysleep.sh $(echo "$measurement_iteration*$measurement_period+240" | bc)
 
 	elif [[ $commandname ==  "rosapi2" ]]; then
 
@@ -428,7 +428,7 @@ if true; then
 			sh ./Script_measurements/resources_dockerstats.sh ./Output/00_HostMetrics/resources_dockerstats_rosapi_2_$((n_robots))ACTIVE_freq$((wait_between_comm)).out LocalHost 2> /dev/null &
 		fi
 
-		. ./Script_startRobots/mysleep.sh $(echo "$measurement_iteration*$measurement_period+180" | bc)
+		. ./Script_startRobots/mysleep.sh $(echo "$measurement_iteration*$measurement_period+240" | bc)
 
 	elif [[ $commandname ==  "pose" ]]; then
 		# sshpass -p ${VM_PSW} ssh ${VM_USERNAME}@$INTERFACE_MASTER_VM_IP "sh ~/CPU_measurements.sh CPUconsumption_pose_$((NOF_ACTIVE_ROBOTS))ACTIVE_freq$((wait_between_comm)).out $measurement_iteration $(echo $measurement_period | tr '.' ',') ROS_VNF_interface &>/dev/null &\
@@ -471,7 +471,7 @@ if true; then
 			sh ./Script_measurements/resources_dockerstats.sh ./Output/00_HostMetrics/resources_dockerstats_pose_$((n_robots))ACTIVE_freq$((wait_between_comm)).out LocalHost 2> /dev/null &
 		fi
 
-		. ./Script_startRobots/mysleep.sh $(echo "$measurement_iteration*$measurement_period+180" | bc)
+		. ./Script_startRobots/mysleep.sh $(echo "$measurement_iteration*$measurement_period+240" | bc)
 
 	fi
 

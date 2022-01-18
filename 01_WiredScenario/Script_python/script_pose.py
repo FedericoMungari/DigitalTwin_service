@@ -79,6 +79,8 @@ if True:
 		old_pos = -1
 		curr_pos = -1
 
+		i=0
+
 		print("date,init_position,final_position,time")
 
 		t_start = time.time()
@@ -93,8 +95,9 @@ if True:
 			t1 = time.time()
 			# n.move_joints(p_tot[curr_pos])
 			n.move_pose(p_tot[curr_pos][0],p_tot[curr_pos][1],p_tot[curr_pos][2],p_tot[curr_pos][3],p_tot[curr_pos][4],p_tot[curr_pos][5])
+			i=i+1
 			datestring=datetime.now().strftime("%Y-%m-%d-%H:%M:%S")
-			print("%s,%d,%d,%f" %(datestring,old_pos,curr_pos,time.time()-t1))
+			print("%d,%s,%d,%d,%f" %(i,datestring,old_pos,curr_pos,time.time()-t1))
 			n.wait(0)
 			old_pos = curr_pos
 
