@@ -2,9 +2,6 @@
 
 # VMs STOPPING
 echo -e "\n..Stopping the robot driver"
-echo $ROBOT_HOST_IP_PRIVATE
-echo $ROBOT_HOST_USER
-echo $ROBOT_HOST_PASS
 sshpass -p${ROBOT_HOST_PASS} ssh $ROBOT_HOST_USER@$ROBOT_HOST_IP_LOCAL "VBoxManage controlvm ROS_VNF_driver poweroff" &>/dev/null
 sleep  2
 echo -e "\n..Stopping the robot control"
