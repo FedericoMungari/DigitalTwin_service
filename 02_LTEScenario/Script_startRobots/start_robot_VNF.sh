@@ -21,43 +21,45 @@ function start_robot () {
 	echo -e "\n\nSTEP $((7+2*(NOF_ACTIVE_ROBOTS-1))): robot activating"
 	echo -e "\t -* Activating robot #$NOF_ACTIVE_ROBOTS ..."
 
-	echo "DRIVER: ip - ",$3
-	sshpass -p$1 ssh $2@$3 "docker network ls"
+	echo "DRIVER VM: ip - ",$3
+	sshpass -p$1 ssh $2@$3 "docker network ls | grep ros_"
 	sshpass -p$1 ssh $2@$3 "docker run -dit --rm --name driver_robot_$((NOF_ACTIVE_ROBOTS)) --hostname driver --add-host control:10.1.5.$((NOF_ACTIVE_ROBOTS+1)) --add-host state:10.1.4.$((NOF_ACTIVE_ROBOTS+1)) --add-host motion_planning:10.1.3.$((NOF_ACTIVE_ROBOTS+1)) --add-host robot_commander:10.1.2.$((NOF_ACTIVE_ROBOTS+1)) --add-host master:10.1.1.$((NOF_ACTIVE_ROBOTS+1)) --network ros_driver --ip 10.2.0.$((NOF_ACTIVE_ROBOTS+1)) -v /home/ros/Output_script/:/Output_script robot driver"
 	DRIVER_IP=10.2.0.$((NOF_ACTIVE_ROBOTS+1))
 	echo -e "Diver IP: $DRIVER_IP"
 	# echo " "
 
-	echo "CONTROL: ip - ",$4
-	sshpass -p$1 ssh $2@$4 "docker network ls"
+	echo "CONTROL VM: ip - ",$4
+	sshpass -p$1 ssh $2@$4 "docker network ls | grep ros_"
 	sshpass -p$1 ssh $2@$4 "docker run -dit --rm --name controller_robot_$((NOF_ACTIVE_ROBOTS)) --hostname control --add-host driver:10.2.0.$((NOF_ACTIVE_ROBOTS+1))  --add-host state:10.1.4.$((NOF_ACTIVE_ROBOTS+1)) --add-host motion_planning:10.1.3.$((NOF_ACTIVE_ROBOTS+1)) --add-host robot_commander:10.1.2.$((NOF_ACTIVE_ROBOTS+1)) --add-host master:10.1.1.$((NOF_ACTIVE_ROBOTS+1)) --network ros_controller --ip 10.1.5.$((NOF_ACTIVE_ROBOTS+1)) -v /home/ros/Output_script/:/Output_script robot control"
 	CONTROL_IP=10.1.5.$((NOF_ACTIVE_ROBOTS+1))
 	echo -e "Control IP: $CONTROL_IP"
 	# echo " "
 
-	echo "STATE: ip - ",$5
-	sshpass -p$1 ssh $2@$5 "docker network ls"
+	echo "STATE VM: ip - ",$5
+	sshpass -p$1 ssh $2@$5 "docker network ls | grep ros_"
 	sshpass -p$1 ssh $2@$5 "docker run -dit --rm --name state_robot_$((NOF_ACTIVE_ROBOTS)) --hostname state --add-host driver:10.2.0.$((NOF_ACTIVE_ROBOTS+1))  --add-host control:10.1.5.$((NOF_ACTIVE_ROBOTS+1)) --add-host motion_planning:10.1.3.$((NOF_ACTIVE_ROBOTS+1)) --add-host robot_commander:10.1.2.$((NOF_ACTIVE_ROBOTS+1)) --add-host master:10.1.1.$((NOF_ACTIVE_ROBOTS+1)) --network ros_state --ip 10.1.4.$((NOF_ACTIVE_ROBOTS+1)) -v /home/ros/Output_script/:/Output_script robot state"
 	STATE_IP=10.1.4.$((NOF_ACTIVE_ROBOTS+1))
 	echo -e "State IP: $STATE_IP"
 	# echo " "
 
-	echo "MOTION PLANNING: ip - ",$6
-	sshpass -p$1 ssh $2@$6 "docker network ls"
+	echo "MOTION PLANNING VM: ip - ",$6
+	sshpass -p$1 ssh $2@$6 "docker network ls | grep ros_"
 	sshpass -p$1 ssh $2@$6 "docker run -dit --rm --name motionplanning_robot_$((NOF_ACTIVE_ROBOTS)) --hostname motion_planning --add-host driver:10.2.0.$((NOF_ACTIVE_ROBOTS+1))  --add-host control:10.1.5.$((NOF_ACTIVE_ROBOTS+1)) --add-host state:10.1.4.$((NOF_ACTIVE_ROBOTS+1)) --add-host robot_commander:10.1.2.$((NOF_ACTIVE_ROBOTS+1)) --add-host master:10.1.1.$((NOF_ACTIVE_ROBOTS+1)) --network ros_motionplanning --ip 10.1.3.$((NOF_ACTIVE_ROBOTS+1)) -v /home/ros/Output_script/:/Output_script robot motion_planning"
 	MOTIONPLANNING_IP=10.1.3.$((NOF_ACTIVE_ROBOTS+1))
 	echo -e "Motion planning IP: $MOTIONPLANNING_IP"
 	# echo " "
 
-	echo "CONTROL: ip - ",$7
-	sshpass -p$1 ssh $2@$7 "docker network ls"
+	echo "COMMANDER VM: ip - ",$7
+	sshpass -p$1 ssh $2@$7 "docker network ls | grep ros_"
 	sshpass -p$1 ssh $2@$7 "docker run -dit --rm --name commander_robot_$((NOF_ACTIVE_ROBOTS))  --hostname robot_commander --add-host driver:10.2.0.$((NOF_ACTIVE_ROBOTS+1))  --add-host control:10.1.5.$((NOF_ACTIVE_ROBOTS+1)) --add-host state:10.1.4.$((NOF_ACTIVE_ROBOTS+1)) --add-host motion_planning:10.1.3.$((NOF_ACTIVE_ROBOTS+1)) --add-host master:10.1.1.$((NOF_ACTIVE_ROBOTS+1)) --network ros_command --ip 10.1.2.$((NOF_ACTIVE_ROBOTS+1)) -v /home/ros/Output_script/:/Output_script robot robot_commander"
 	ROBOTCOMMANDER_IP=10.1.2.$((NOF_ACTIVE_ROBOTS+1))
 	echo -e "Robot commander IP: $ROBOTCOMMANDER_IP"
 	# echo " "
 
-	sleep 10
+	sleep 5
 
+	echo "INTERFACE VM: ip - ",$8
+	sshpass -p$1 ssh $2@$8 "docker network ls | grep ros_"
 	interface_trial=0
 
 	if [[ $NOF_ACTIVE_ROBOTS -eq 1 ]]; then

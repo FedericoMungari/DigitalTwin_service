@@ -143,45 +143,46 @@ if [[ $# -eq 5 ]]; then
 
 	# ####################################################################################################################################
 	echo -e "\n* * * * * * * * * * * * * * * * * * * * * *\nSTEP 5: Sending CPU and RAM measurement scripts to ..."
+	PATH_TO_MEAS_SCRIPTS="~/Desktop/federico/DigitalTwin_service/02_LTEScenario/Script_measurements/"
 	# NOTE 
 	# still cannot send the measurement scripts to the driver, since even if the iptunnel was istantiated, the radio link is not there.
 	# Solution: send the measurement scripts to the ROBOT HOST, which will forward them to the driver VM
 	echo -e "\t... the interface VM"
-	sshpass -p ${VM_PSW} scp ./Script_measurements/CPU_measurements.sh ${VM_USERNAME}@$INTERFACE_MASTER_VM_IP:~/
-	sshpass -p ${VM_PSW} scp ./Script_measurements/RAM_measurements.sh ${VM_USERNAME}@$INTERFACE_MASTER_VM_IP:~/
-	sshpass -p ${VM_PSW} scp ./Script_measurements/resources_psutil.py ${VM_USERNAME}@$INTERFACE_MASTER_VM_IP:~/
-	sshpass -p ${VM_PSW} scp ./Script_measurements/resources_dockerstats.sh ${VM_USERNAME}@$INTERFACE_MASTER_VM_IP:~/
-	sshpass -p ${VM_PSW} scp ./Script_measurements/resources_CPUtime.py ${VM_USERNAME}@$INTERFACE_MASTER_VM_IP:~/
+	sshpass -p ${VM_PSW} scp ${PATH_TO_MEAS_SCRIPTS}/CPU_measurements.sh ${VM_USERNAME}@$INTERFACE_MASTER_VM_IP:~/
+	sshpass -p ${VM_PSW} scp ${PATH_TO_MEAS_SCRIPTS}/RAM_measurements.sh ${VM_USERNAME}@$INTERFACE_MASTER_VM_IP:~/
+	sshpass -p ${VM_PSW} scp ${PATH_TO_MEAS_SCRIPTS}/resources_psutil.py ${VM_USERNAME}@$INTERFACE_MASTER_VM_IP:~/
+	sshpass -p ${VM_PSW} scp ${PATH_TO_MEAS_SCRIPTS}/resources_dockerstats.sh ${VM_USERNAME}@$INTERFACE_MASTER_VM_IP:~/
+	sshpass -p ${VM_PSW} scp ${PATH_TO_MEAS_SCRIPTS}/resources_CPUtime.py ${VM_USERNAME}@$INTERFACE_MASTER_VM_IP:~/
 	echo -e "\t... the commander VM"
-	sshpass -p ${VM_PSW} scp ./Script_measurements/CPU_measurements.sh ${VM_USERNAME}@$ROBOTCOMMANDER_VM_IP:~/
-	sshpass -p ${VM_PSW} scp ./Script_measurements/RAM_measurements.sh ${VM_USERNAME}@$ROBOTCOMMANDER_VM_IP:~/
-	sshpass -p ${VM_PSW} scp ./Script_measurements/resources_psutil.py ${VM_USERNAME}@$ROBOTCOMMANDER_VM_IP:~/
-	sshpass -p ${VM_PSW} scp ./Script_measurements/resources_dockerstats.sh ${VM_USERNAME}@$ROBOTCOMMANDER_VM_IP:~/
-	sshpass -p ${VM_PSW} scp ./Script_measurements/resources_CPUtime.py ${VM_USERNAME}@$ROBOTCOMMANDER_VM_IP:~/
+	sshpass -p ${VM_PSW} scp ${PATH_TO_MEAS_SCRIPTS}/CPU_measurements.sh ${VM_USERNAME}@$ROBOTCOMMANDER_VM_IP:~/
+	sshpass -p ${VM_PSW} scp ${PATH_TO_MEAS_SCRIPTS}/RAM_measurements.sh ${VM_USERNAME}@$ROBOTCOMMANDER_VM_IP:~/
+	sshpass -p ${VM_PSW} scp ${PATH_TO_MEAS_SCRIPTS}/resources_psutil.py ${VM_USERNAME}@$ROBOTCOMMANDER_VM_IP:~/
+	sshpass -p ${VM_PSW} scp ${PATH_TO_MEAS_SCRIPTS}/resources_dockerstats.sh ${VM_USERNAME}@$ROBOTCOMMANDER_VM_IP:~/
+	sshpass -p ${VM_PSW} scp ${PATH_TO_MEAS_SCRIPTS}/resources_CPUtime.py ${VM_USERNAME}@$ROBOTCOMMANDER_VM_IP:~/
 	echo -e "\t... the motion planning VM"
-	sshpass -p ${VM_PSW} scp ./Script_measurements/CPU_measurements.sh ${VM_USERNAME}@$MOTIONPLANNING_VM_IP:~/
-	sshpass -p ${VM_PSW} scp ./Script_measurements/RAM_measurements.sh ${VM_USERNAME}@$MOTIONPLANNING_VM_IP:~/
-	sshpass -p ${VM_PSW} scp ./Script_measurements/resources_psutil.py ${VM_USERNAME}@$MOTIONPLANNING_VM_IP:~/
-	sshpass -p ${VM_PSW} scp ./Script_measurements/resources_dockerstats.sh ${VM_USERNAME}@$MOTIONPLANNING_VM_IP:~/
-	sshpass -p ${VM_PSW} scp ./Script_measurements/resources_CPUtime.py ${VM_USERNAME}@$MOTIONPLANNING_VM_IP:~/
+	sshpass -p ${VM_PSW} scp ${PATH_TO_MEAS_SCRIPTS}/CPU_measurements.sh ${VM_USERNAME}@$MOTIONPLANNING_VM_IP:~/
+	sshpass -p ${VM_PSW} scp ${PATH_TO_MEAS_SCRIPTS}/RAM_measurements.sh ${VM_USERNAME}@$MOTIONPLANNING_VM_IP:~/
+	sshpass -p ${VM_PSW} scp ${PATH_TO_MEAS_SCRIPTS}/resources_psutil.py ${VM_USERNAME}@$MOTIONPLANNING_VM_IP:~/
+	sshpass -p ${VM_PSW} scp ${PATH_TO_MEAS_SCRIPTS}/resources_dockerstats.sh ${VM_USERNAME}@$MOTIONPLANNING_VM_IP:~/
+	sshpass -p ${VM_PSW} scp ${PATH_TO_MEAS_SCRIPTS}/resources_CPUtime.py ${VM_USERNAME}@$MOTIONPLANNING_VM_IP:~/
 	echo -e "\t... the state VM"
-	sshpass -p ${VM_PSW} scp ./Script_measurements/CPU_measurements.sh ${VM_USERNAME}@$STATE_VM_IP:~/
-	sshpass -p ${VM_PSW} scp ./Script_measurements/RAM_measurements.sh ${VM_USERNAME}@$STATE_VM_IP:~/
-	sshpass -p ${VM_PSW} scp ./Script_measurements/resources_psutil.py ${VM_USERNAME}@$STATE_VM_IP:~/
-	sshpass -p ${VM_PSW} scp ./Script_measurements/resources_dockerstats.sh ${VM_USERNAME}@$STATE_VM_IP:~/
-	sshpass -p ${VM_PSW} scp ./Script_measurements/resources_CPUtime.py ${VM_USERNAME}@$STATE_VM_IP:~/
+	sshpass -p ${VM_PSW} scp ${PATH_TO_MEAS_SCRIPTS}/CPU_measurements.sh ${VM_USERNAME}@$STATE_VM_IP:~/
+	sshpass -p ${VM_PSW} scp ${PATH_TO_MEAS_SCRIPTS}/RAM_measurements.sh ${VM_USERNAME}@$STATE_VM_IP:~/
+	sshpass -p ${VM_PSW} scp ${PATH_TO_MEAS_SCRIPTS}/resources_psutil.py ${VM_USERNAME}@$STATE_VM_IP:~/
+	sshpass -p ${VM_PSW} scp ${PATH_TO_MEAS_SCRIPTS}/resources_dockerstats.sh ${VM_USERNAME}@$STATE_VM_IP:~/
+	sshpass -p ${VM_PSW} scp ${PATH_TO_MEAS_SCRIPTS}/resources_CPUtime.py ${VM_USERNAME}@$STATE_VM_IP:~/
 	echo -e "\t... the control VM"
-	sshpass -p ${VM_PSW} scp ./Script_measurements/CPU_measurements.sh ${VM_USERNAME}@$CONTROLLER_VM_IP:~/
-	sshpass -p ${VM_PSW} scp ./Script_measurements/RAM_measurements.sh ${VM_USERNAME}@$CONTROLLER_VM_IP:~/
-	sshpass -p ${VM_PSW} scp ./Script_measurements/resources_psutil.py ${VM_USERNAME}@$CONTROLLER_VM_IP:~/
-	sshpass -p ${VM_PSW} scp ./Script_measurements/resources_dockerstats.sh ${VM_USERNAME}@$CONTROLLER_VM_IP:~/
-	sshpass -p ${VM_PSW} scp ./Script_measurements/resources_CPUtime.py ${VM_USERNAME}@$CONTROLLER_VM_IP:~/
+	sshpass -p ${VM_PSW} scp ${PATH_TO_MEAS_SCRIPTS}/CPU_measurements.sh ${VM_USERNAME}@$CONTROLLER_VM_IP:~/
+	sshpass -p ${VM_PSW} scp ${PATH_TO_MEAS_SCRIPTS}/RAM_measurements.sh ${VM_USERNAME}@$CONTROLLER_VM_IP:~/
+	sshpass -p ${VM_PSW} scp ${PATH_TO_MEAS_SCRIPTS}/resources_psutil.py ${VM_USERNAME}@$CONTROLLER_VM_IP:~/
+	sshpass -p ${VM_PSW} scp ${PATH_TO_MEAS_SCRIPTS}/resources_dockerstats.sh ${VM_USERNAME}@$CONTROLLER_VM_IP:~/
+	sshpass -p ${VM_PSW} scp ${PATH_TO_MEAS_SCRIPTS}/resources_CPUtime.py ${VM_USERNAME}@$CONTROLLER_VM_IP:~/
 	echo -e "\t... the driver VM"
-	sshpass -p ${ROBOT_HOST_PASS} scp ./Script_measurements/CPU_measurements.sh ${ROBOT_HOST_USER}@$ROBOT_HOST_IP_LOCAL:~/Desktop/ROSNiryo/
-	sshpass -p ${ROBOT_HOST_PASS} scp ./Script_measurements/RAM_measurements.sh ${ROBOT_HOST_USER}@$ROBOT_HOST_IP_LOCAL:~/Desktop/ROSNiryo/
-	sshpass -p ${ROBOT_HOST_PASS} scp ./Script_measurements/resources_psutil.py ${ROBOT_HOST_USER}@$ROBOT_HOST_IP_LOCAL:~/Desktop/ROSNiryo/
-	sshpass -p ${ROBOT_HOST_PASS} scp ./Script_measurements/resources_dockerstats.sh ${ROBOT_HOST_USER}@$ROBOT_HOST_IP_LOCAL:~/Desktop/ROSNiryo/
-	sshpass -p ${ROBOT_HOST_PASS} scp ./Script_measurements/resources_CPUtime.py ${ROBOT_HOST_USER}@$ROBOT_HOST_IP_LOCAL:~/Desktop/ROSNiryo/
+	sshpass -p ${ROBOT_HOST_PASS} scp ${PATH_TO_MEAS_SCRIPTS}/CPU_measurements.sh ${ROBOT_HOST_USER}@$ROBOT_HOST_IP_LOCAL:~/Desktop/ROSNiryo/
+	sshpass -p ${ROBOT_HOST_PASS} scp ${PATH_TO_MEAS_SCRIPTS}/RAM_measurements.sh ${ROBOT_HOST_USER}@$ROBOT_HOST_IP_LOCAL:~/Desktop/ROSNiryo/
+	sshpass -p ${ROBOT_HOST_PASS} scp ${PATH_TO_MEAS_SCRIPTS}/resources_psutil.py ${ROBOT_HOST_USER}@$ROBOT_HOST_IP_LOCAL:~/Desktop/ROSNiryo/
+	sshpass -p ${ROBOT_HOST_PASS} scp ${PATH_TO_MEAS_SCRIPTS}/resources_dockerstats.sh ${ROBOT_HOST_USER}@$ROBOT_HOST_IP_LOCAL:~/Desktop/ROSNiryo/
+	sshpass -p ${ROBOT_HOST_PASS} scp ${PATH_TO_MEAS_SCRIPTS}/resources_CPUtime.py ${ROBOT_HOST_USER}@$ROBOT_HOST_IP_LOCAL:~/Desktop/ROSNiryo/
 	sshpass -p ${ROBOT_HOST_PASS} ssh ${ROBOT_HOST_USER}@$ROBOT_HOST_IP_LOCAL ". /home/dell46/Desktop/ROSNiryo/send_measscripts_DRIVER.sh ${VM_PSW} ${VM_USERNAME} ${DRIVER_VM_IP}"
 
 	# ####################################################################################################################################
