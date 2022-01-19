@@ -15,6 +15,17 @@ NOF_ACTIVE_ROBOTS=0
 
 declare -a Interface_IP_Set
 
+function provafunct () {
+	echo "VM_PSW: ",$1
+	echo "VM_USERNAME: ",$2
+	echo "DRIVER_VM_IP: ",$3
+	echo "CONTROLLER_VM_IP: ",$4
+	echo "STATE_VM_IP: ",$5
+	echo "MOTIONPLANNING_VM_IP: ",$6
+	echo "ROBOTCOMMANDER_VM_IP: ",$7
+	echo "INTERFACE_MASTER_VM_IP: ",$8
+}
+
 function start_robot () {
 
 	NOF_ACTIVE_ROBOTS=$((NOF_ACTIVE_ROBOTS+1))
@@ -157,6 +168,16 @@ n_robots=$1
 echo -e "$n_robots robots will be istantiated\n"
 
 while true; do
+	echo " "
+	echo "VM_PSW: ",$VM_PSW
+	echo "VM_USERNAME: ",$VM_USERNAME
+	echo "DRIVER_VM_IP: ",$DRIVER_VM_IP
+	echo "CONTROLLER_VM_IP: ",$CONTROLLER_VM_IP
+	echo "STATE_VM_IP: ",$STATE_VM_IP
+	echo "MOTIONPLANNING_VM_IP: ",$MOTIONPLANNING_VM_IP
+	echo "ROBOTCOMMANDER_VM_IP: ",$ROBOTCOMMANDER_VM_IP
+	echo "INTERFACE_MASTER_VM_IP: ",$INTERFACE_MASTER_VM_IP
+	provafunct $VM_PSW $VM_USERNAME $DRIVER_VM_IP $CONTROLLER_VM_IP $STATE_VM_IP $MOTIONPLANNING_VM_IP $ROBOTCOMMANDER_VM_IP $INTERFACE_MASTER_VM_IP
     start_robot $VM_PSW $VM_USERNAME $DRIVER_VM_IP $CONTROLLER_VM_IP $STATE_VM_IP $MOTIONPLANNING_VM_IP $ROBOTCOMMANDER_VM_IP $INTERFACE_MASTER_VM_IP
     n=$((n+1))
     if [[ $n -eq $n_robots ]]; then
