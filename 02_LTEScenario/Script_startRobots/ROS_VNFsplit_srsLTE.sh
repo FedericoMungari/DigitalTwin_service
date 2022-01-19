@@ -142,6 +142,11 @@ if [[ $# -eq 5 ]]; then
 	# still cannot send the measurement scripts to the driver, since even if the iptunnel was istantiated, the radio link is not there.
 	# Solution: send the measurement scripts to the ROBOT HOST, which will forward them to the driver VM
 	echo -e "\t... the interface VM"
+	echo "VM_PSW: " $VM_PSW
+	echo "PATH_TO_MEAS_SCRIPTS: " $PATH_TO_MEAS_SCRIPTS
+	echo "VM_USERNAME: " $VM_USERNAME
+	echo "INTERFACE_MASTER_VM_IP: " $INTERFACE_MASTER_VM_IP
+	echo "sshpass -p ${VM_PSW} scp ${PATH_TO_MEAS_SCRIPTS}/CPU_measurements.sh ${VM_USERNAME}@$INTERFACE_MASTER_VM_IP:~/"
 	sshpass -p ${VM_PSW} scp ${PATH_TO_MEAS_SCRIPTS}/CPU_measurements.sh ${VM_USERNAME}@$INTERFACE_MASTER_VM_IP:~/
 	sshpass -p ${VM_PSW} scp ${PATH_TO_MEAS_SCRIPTS}/RAM_measurements.sh ${VM_USERNAME}@$INTERFACE_MASTER_VM_IP:~/
 	sshpass -p ${VM_PSW} scp ${PATH_TO_MEAS_SCRIPTS}/resources_psutil.py ${VM_USERNAME}@$INTERFACE_MASTER_VM_IP:~/
