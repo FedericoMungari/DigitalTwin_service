@@ -87,7 +87,7 @@ if [[ $# -eq 5 ]]; then
 	VM_LOCAL_SUBNET=10.0.4.0/24
 	VM_LOCAL_GW=10.0.4.1
 
-	GAIN=80
+	GAIN=85
 
 	# measurement_iteration="6000"
 	# measurement_period="0.1"
