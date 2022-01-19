@@ -275,7 +275,7 @@ if [[ $# -eq 5 ]]; then
 		echo "First brief ping from UE to eNB"
 		ping -c 5 $EDGE_HOST_IP_LTE
 	fi
-	pingperiod=600
+	pingperiod=6000
 	echo "The UE will ping the eNB for $pingperiod seconds in background"
 	sshpass -p${ROBOT_HOST_PASS} ssh $ROBOT_HOST_USER@$ROBOT_HOST_IP_LOCAL "nohup ping -c $pingperiod $EDGE_HOST_IP_LTE &" &>/dev/null &
 	echo "The eNB will ping the UE for $pingperiod seconds in background"
@@ -285,7 +285,8 @@ if [[ $# -eq 5 ]]; then
 	# ####################################################################################################################################
 	echo -e "\n* * * * * * * * * * * * * * * * * * * * * *\nSTEP 13: pinging"
 
-	if false
+	# if false
+	if true
 	then
 		echo -e "\n-->Starting pinging from edge to ros_interface bridge"
 		ping -c 2 $(echo $INTERFACE_MASTER_DOCKER_SUBNET | cut -d"." -f1-3)".1"
