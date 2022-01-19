@@ -143,7 +143,7 @@ if [[ $# -eq 5 ]]; then
 
 	# ####################################################################################################################################
 	echo -e "\n* * * * * * * * * * * * * * * * * * * * * *\nSTEP 5: Sending CPU and RAM measurement scripts to ..."
-	PATH_TO_MEAS_SCRIPTS="~/Desktop/federico/DigitalTwin_service/02_LTEScenario/Script_measurements/"
+	PATH_TO_MEAS_SCRIPTS="~/Desktop/federico/DigitalTwin_service/02_LTEScenario/Script_measurements"
 	# NOTE 
 	# still cannot send the measurement scripts to the driver, since even if the iptunnel was istantiated, the radio link is not there.
 	# Solution: send the measurement scripts to the ROBOT HOST, which will forward them to the driver VM
