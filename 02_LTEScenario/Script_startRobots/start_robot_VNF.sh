@@ -8,7 +8,7 @@
 # 	 docker network create -o "com.docker.network.bridge.name"="ros_bridge" --subnet="10.1.2.0/24" ros_command
 # 	 docker network create -o "com.docker.network.bridge.name"="ros_bridge" --subnet="10.1.1.0/24" ros_interface
 
-measurement_iteration="3600"
+measurement_iteration="200"
 measurement_period="0.5"
 
 NOF_ACTIVE_ROBOTS=0
@@ -22,39 +22,39 @@ function provafunct () {
 function start_robot () {
 
 	NOF_ACTIVE_ROBOTS=$((NOF_ACTIVE_ROBOTS+1))
-	echo -e "\n\nSTEP $((7+2*(NOF_ACTIVE_ROBOTS-1))): robot activating"
+	echo -e "\n\nSTEP $((16+2*(NOF_ACTIVE_ROBOTS-1))): robot activating"
 	echo -e "\t -* Activating robot #$NOF_ACTIVE_ROBOTS ..."
 
-	echo "DRIVER VM: ip - ",$3
-	sshpass -p$1 ssh $2@$3 "docker network ls | grep ros_"
+	# echo "DRIVER VM: ip - ",$3
+	# sshpass -p$1 ssh $2@$3 "docker network ls | grep ros_"
 	sshpass -p$1 ssh $2@$3 "docker run -dit --rm --name driver_robot_$((NOF_ACTIVE_ROBOTS)) --hostname driver --add-host control:10.1.5.$((NOF_ACTIVE_ROBOTS+1)) --add-host state:10.1.4.$((NOF_ACTIVE_ROBOTS+1)) --add-host motion_planning:10.1.3.$((NOF_ACTIVE_ROBOTS+1)) --add-host robot_commander:10.1.2.$((NOF_ACTIVE_ROBOTS+1)) --add-host master:10.1.1.$((NOF_ACTIVE_ROBOTS+1)) --network ros_driver --ip 10.2.0.$((NOF_ACTIVE_ROBOTS+1)) -v /home/ros/Output_script/:/Output_script robot driver"
 	DRIVER_IP=10.2.0.$((NOF_ACTIVE_ROBOTS+1))
 	echo -e "Diver IP: $DRIVER_IP"
 	# echo " "
 
-	echo "CONTROL VM: ip - ",$4
-	sshpass -p$1 ssh $2@$4 "docker network ls | grep ros_"
+	# echo "CONTROL VM: ip - ",$4
+	# sshpass -p$1 ssh $2@$4 "docker network ls | grep ros_"
 	sshpass -p$1 ssh $2@$4 "docker run -dit --rm --name controller_robot_$((NOF_ACTIVE_ROBOTS)) --hostname control --add-host driver:10.2.0.$((NOF_ACTIVE_ROBOTS+1))  --add-host state:10.1.4.$((NOF_ACTIVE_ROBOTS+1)) --add-host motion_planning:10.1.3.$((NOF_ACTIVE_ROBOTS+1)) --add-host robot_commander:10.1.2.$((NOF_ACTIVE_ROBOTS+1)) --add-host master:10.1.1.$((NOF_ACTIVE_ROBOTS+1)) --network ros_controller --ip 10.1.5.$((NOF_ACTIVE_ROBOTS+1)) -v /home/ros/Output_script/:/Output_script robot control"
 	CONTROL_IP=10.1.5.$((NOF_ACTIVE_ROBOTS+1))
 	echo -e "Control IP: $CONTROL_IP"
 	# echo " "
 
-	echo "STATE VM: ip - ",$5
-	sshpass -p$1 ssh $2@$5 "docker network ls | grep ros_"
+	# echo "STATE VM: ip - ",$5
+	# sshpass -p$1 ssh $2@$5 "docker network ls | grep ros_"
 	sshpass -p$1 ssh $2@$5 "docker run -dit --rm --name state_robot_$((NOF_ACTIVE_ROBOTS)) --hostname state --add-host driver:10.2.0.$((NOF_ACTIVE_ROBOTS+1))  --add-host control:10.1.5.$((NOF_ACTIVE_ROBOTS+1)) --add-host motion_planning:10.1.3.$((NOF_ACTIVE_ROBOTS+1)) --add-host robot_commander:10.1.2.$((NOF_ACTIVE_ROBOTS+1)) --add-host master:10.1.1.$((NOF_ACTIVE_ROBOTS+1)) --network ros_state --ip 10.1.4.$((NOF_ACTIVE_ROBOTS+1)) -v /home/ros/Output_script/:/Output_script robot state"
 	STATE_IP=10.1.4.$((NOF_ACTIVE_ROBOTS+1))
 	echo -e "State IP: $STATE_IP"
 	# echo " "
 
-	echo "MOTION PLANNING VM: ip - ",$6
-	sshpass -p$1 ssh $2@$6 "docker network ls | grep ros_"
+	# echo "MOTION PLANNING VM: ip - ",$6
+	# sshpass -p$1 ssh $2@$6 "docker network ls | grep ros_"
 	sshpass -p$1 ssh $2@$6 "docker run -dit --rm --name motionplanning_robot_$((NOF_ACTIVE_ROBOTS)) --hostname motion_planning --add-host driver:10.2.0.$((NOF_ACTIVE_ROBOTS+1))  --add-host control:10.1.5.$((NOF_ACTIVE_ROBOTS+1)) --add-host state:10.1.4.$((NOF_ACTIVE_ROBOTS+1)) --add-host robot_commander:10.1.2.$((NOF_ACTIVE_ROBOTS+1)) --add-host master:10.1.1.$((NOF_ACTIVE_ROBOTS+1)) --network ros_motionplanning --ip 10.1.3.$((NOF_ACTIVE_ROBOTS+1)) -v /home/ros/Output_script/:/Output_script robot motion_planning"
 	MOTIONPLANNING_IP=10.1.3.$((NOF_ACTIVE_ROBOTS+1))
 	echo -e "Motion planning IP: $MOTIONPLANNING_IP"
 	# echo " "
 
-	echo "COMMANDER VM: ip - ",$7
-	sshpass -p$1 ssh $2@$7 "docker network ls | grep ros_"
+	# echo "COMMANDER VM: ip - ",$7
+	# sshpass -p$1 ssh $2@$7 "docker network ls | grep ros_"
 	sshpass -p$1 ssh $2@$7 "docker run -dit --rm --name commander_robot_$((NOF_ACTIVE_ROBOTS))  --hostname robot_commander --add-host driver:10.2.0.$((NOF_ACTIVE_ROBOTS+1))  --add-host control:10.1.5.$((NOF_ACTIVE_ROBOTS+1)) --add-host state:10.1.4.$((NOF_ACTIVE_ROBOTS+1)) --add-host motion_planning:10.1.3.$((NOF_ACTIVE_ROBOTS+1)) --add-host master:10.1.1.$((NOF_ACTIVE_ROBOTS+1)) --network ros_command --ip 10.1.2.$((NOF_ACTIVE_ROBOTS+1)) -v /home/ros/Output_script/:/Output_script robot robot_commander"
 	ROBOTCOMMANDER_IP=10.1.2.$((NOF_ACTIVE_ROBOTS+1))
 	echo -e "Robot commander IP: $ROBOTCOMMANDER_IP"
@@ -62,8 +62,8 @@ function start_robot () {
 
 	sleep 5
 
-	echo "INTERFACE VM: ip - ",$8
-	sshpass -p$1 ssh $2@$8 "docker network ls | grep ros_"
+	# echo "INTERFACE VM: ip - ",$8
+	# sshpass -p$1 ssh $2@$8 "docker network ls | grep ros_"
 	interface_trial=0
 
 	if [[ $NOF_ACTIVE_ROBOTS -eq 1 ]]; then
@@ -85,7 +85,7 @@ function start_robot () {
 
 	# . ./Script_startRobots/mysleep.sh 20
 
-	echo -e "\n\nSTEP $((8+2*(NOF_ACTIVE_ROBOTS-1))): CPU measurements and RAM usage with VMs hosting idle containers"
+	echo -e "\n\nSTEP $((17+2*(NOF_ACTIVE_ROBOTS-1))): CPU measurements and RAM usage with VMs hosting idle containers"
 	echo "REMEMBER : already istantiated containers : $NOF_ACTIVE_ROBOTS"
 	echo -e "\t\t. . . S k i p p i n g . . ."
 	# read -p "Do you want to measure the CPU consumption of VMs hosting $NOF_ACTIVE_ROBOTS idle containers??`echo $'\n> '`If yes, press Y or y`echo $'\n> '`" -n 1 -r
@@ -148,7 +148,7 @@ INTERFACE_MASTER_DOCKER_SUBNET=10.1.1.0/24; ROBOTCOMMANDER_DOCKER_SUBNET=10.1.2.
 
 DRIVER_DOCKER_SUBNET=10.2.0.0/24
 
-INTERFACE_MASTER_VM_IP=10.0.3.7; ROBOTCOMMANDER_VM_IP=10.0.3.6; MOTIONPLANNING_VM_IP=10.0.3.5; STATE_VM_IP=10.0.3.4; CONTROLLER_VM_IP=10.0.3.3
+INTERFACE_MASTER_VM_IP=10.0.3.6; ROBOTCOMMANDER_VM_IP=10.0.3.5; MOTIONPLANNING_VM_IP=10.0.3.4; STATE_VM_IP=10.0.3.7; CONTROLLER_VM_IP=10.0.3.3;
 DRIVER_VM_IP=10.0.4.3
 
 VM_USERNAME=ros; VM_PSW=ros
@@ -160,6 +160,9 @@ n=0;
 # read -p $'\nPress the number of robots to start\n' key
 n_robots=$1
 echo -e "$n_robots robots will be istantiated\n"
+
+# ##########################################################################################################################################################################
+# Start capturing with tshark
 
 while true; do
 	# echo " "
@@ -178,7 +181,11 @@ while true; do
     fi
 done
 
-# . ./Script_startRobots/mysleep.sh 20
+echo " "
+echo "* - * - * - * - * - * - * - * - * - * - * - * - * - *"
+echo "          All ROBOTS have been istantiated"
+echo "* - * - * - * - * - * - * - * - * - * - * - * - * - *"
+. ./Script_startRobots/mysleep.sh 20
 
 commandname=$2
 
@@ -236,7 +243,7 @@ then
 fi
 
 
-echo -e "\n\nSTEP $((9+2*(NOF_ACTIVE_ROBOTS-1)+1)): Run python script to send move pose or joints commands to the robot"
+echo -e "\n\nSTEP $((19+2*(NOF_ACTIVE_ROBOTS-1)+1)): Run python script to send move pose or joints commands to the robot"
 
 # read -p $'\nPress j/J if u want to send move joint commands.\nPress g/G if u want to send open/close gripper commands.\nPress p/P if u want to send move pose commands.\nAny other char/string will trigger move pose commands\n' commandtype
 # if [[ $commandtype =~ ^[Jj]$ ]] 
@@ -252,20 +259,25 @@ if [[ $commandname ==  "joints" ]]; then
 	# read -p $'\nPress the waiting time between move joint commands to the robot\n' wait_between_comm
 	echo "A move joint command will be sent to the robots after $wait_between_comm seconds since the last movement"
 
-	sed -i "s/n.wait(\([0-9]\+\))/n.wait($wait_between_comm)/g" ./Script_python/script_joints.py
+	sed -i "s/n.wait(\([0-9]\+\))/n.wait($wait_between_comm)/g" /home/k8s-enb-node/Desktop/federico/DigitalTwin_service/02_LTEScenario/Script_python/script_joints.py
+
+	# . ./Script_startRobots/mysleep.sh 300
 
 	script_running=0
 	for ipinterface in "${Interface_IP_Set[@]}"
 	do
 		script_running=$((script_running+1))
-		sed -i "s/seed(\([0-9]\+\))/seed($(echo "$script_running*11" | bc))/g" ./Script_python/script_joints.py
+		sed -i "s/seed(\([0-9]\+\))/seed($(echo "$script_running*11" | bc))/g" /home/k8s-enb-node/Desktop/federico/DigitalTwin_service/02_LTEScenario/Script_python/script_joints.py
 		echo "Sending script_joints.py to $ipinterface"
-		sshpass -p root scp ./Script_python/script_joints.py root@$ipinterface:/
+		sshpass -p root scp /home/k8s-enb-node/Desktop/federico/DigitalTwin_service/02_LTEScenario/Script_python/script_joints.py root@$ipinterface:/
 		# echo "Making script.py executable"
 		sshpass -p root ssh root@$ipinterface 'echo "root" | sudo -S chmod +x /script_joints.py'
 		# echo "Running script.py"
 		# (sshpass -p root ssh root@$ipinterface 'source /root/catkin_ws/devel/setup.bash && export PYTHONPATH=${PYTHONPATH}:/root/catkin_ws/src/niryo_one_python_api/src/niryo_python_api &&'"python /script_joints.py --filename /Output_script/script_joints_output_robots$((NOF_ACTIVE_ROBOTS))_freq$((wait_between_comm))_$((script_running)).txt 2> /Output_script/script_joints_error_robots$((NOF_ACTIVE_ROBOTS))_freq$((wait_between_comm))_$((script_running)).txt" &)
-		(sshpass -p root ssh root@$ipinterface 'source /root/catkin_ws/devel/setup.bash && export PYTHONPATH=${PYTHONPATH}:/root/catkin_ws/src/niryo_one_python_api/src/niryo_python_api &&'"python -u /script_joints.py 1> /Output_script/script_joints_output_robots$((NOF_ACTIVE_ROBOTS))_freq$((wait_between_comm))_$((script_running)).txt 2> /Output_script/script_joints_error_robots$((NOF_ACTIVE_ROBOTS))_freq$((wait_between_comm))_$((script_running)).txt" &)
+		sshpass -p root ssh root@$ipinterface 'touch /prova.txt'
+		(sshpass -p root ssh root@$ipinterface 'touch /prova2.txt' &)
+		# sshpass -p root ssh root@$ipinterface 'source /root/catkin_ws/devel/setup.bash && export PYTHONPATH=${PYTHONPATH}:/root/catkin_ws/src/niryo_one_python_api/src/niryo_python_api &&'"python -u /script_joints.py 1> /Output_script/02_LTE/joints/script_joints_output_robots$((NOF_ACTIVE_ROBOTS))_freq$((wait_between_comm))_$((script_running)).txt 2> /Output_script/02_LTE/joints/script_joints_error_robots$((NOF_ACTIVE_ROBOTS))_freq$((wait_between_comm))_$((script_running)).txt"
+		(sshpass -p root ssh root@$ipinterface 'source /root/catkin_ws/devel/setup.bash && export PYTHONPATH=${PYTHONPATH}:/root/catkin_ws/src/niryo_one_python_api/src/niryo_python_api &&'"python -u /script_joints.py --duration 600 1> /Output_script/02_LTE/joints/script_joints_output_robots$((NOF_ACTIVE_ROBOTS))_freq$((wait_between_comm))_$((script_running)).txt 2> /Output_script/02_LTE/joints/script_joints_error_robots$((NOF_ACTIVE_ROBOTS))_freq$((wait_between_comm))_$((script_running)).txt" &)
 		# &> script_output_((NOF_ACTIVE_ROBOTS)).txt
 	done
 
@@ -278,15 +290,15 @@ elif [[ $commandname ==  "gripper" ]]; then
 	# read -p $'\nPress the waiting time between open/close gripper commands to the robot\n' wait_between_comm
 	echo "An open/close gripper command will be sent to the robots after $wait_between_comm seconds since the last movement"
 
-	sed -i "s/n.wait(\([0-9]\+\))/n.wait($wait_between_comm)/g" ./Script_python/script_gripper.py
+	sed -i "s/n.wait(\([0-9]\+\))/n.wait($wait_between_comm)/g" /home/k8s-enb-node/Desktop/federico/DigitalTwin_service/02_LTEScenario/Script_python/script_gripper.py
 
 	script_running=0
 	for ipinterface in "${Interface_IP_Set[@]}"
 	do
 		script_running=$((script_running+1))
-		sed -i "s/seed(\([0-9]\+\))/seed($(echo "$script_running*10" | bc))/g" ./Script_python/script_gripper.py
+		sed -i "s/seed(\([0-9]\+\))/seed($(echo "$script_running*10" | bc))/g" /home/k8s-enb-node/Desktop/federico/DigitalTwin_service/02_LTEScenario/Script_python/script_gripper.py
 		echo "Sending script_gripper.py to $ipinterface"
-		sshpass -p root scp ./Script_python/script_gripper.py root@$ipinterface:/
+		sshpass -p root scp /home/k8s-enb-node/Desktop/federico/DigitalTwin_service/02_LTEScenario/Script_python/script_gripper.py root@$ipinterface:/
 		sshpass -p root ssh root@$ipinterface 'echo "root" | sudo -S chmod +x /script_gripper.py'
 	#	(sshpass -p root ssh root@$ipinterface 'source /root/catkin_ws/devel/setup.bash && export PYTHONPATH=${PYTHONPATH}:/root/catkin_ws/src/niryo_one_python_api/src/niryo_python_api && python /script_gripper.py' 1> ./Output_script/script_gripper_output_robots$((NOF_ACTIVE_ROBOTS))_freq$((wait_between_comm))_$((script_running)).txt 2> ./Output_script/script_gripper_error_robots$((NOF_ACTIVE_ROBOTS))_freq$((wait_between_comm))_$((script_running)).txt &)
 		# (sshpass -p root ssh root@$ipinterface 'source /root/catkin_ws/devel/setup.bash && export PYTHONPATH=${PYTHONPATH}:/root/catkin_ws/src/niryo_one_python_api/src/niryo_python_api &&'"python /script_gripper.py --filename /Output_script/script_gripper_output_robots$((NOF_ACTIVE_ROBOTS))_freq$((wait_between_comm))_$((script_running)).txt 2> /Output_script/script_gripper_error_robots$((NOF_ACTIVE_ROBOTS))_freq$((wait_between_comm))_$((script_running)).txt" &)
@@ -307,9 +319,9 @@ elif [[ $commandname ==  "rosapi" ]]; then
 	do
 		script_running=$((script_running+1))
 		echo "Sending script_ROSAPI.py to $ipinterface"
-		sshpass -p root scp ./Script_python/script_ROSAPI.py root@$ipinterface:/
+		sshpass -p root scp /home/k8s-enb-node/Desktop/federico/DigitalTwin_service/02_LTEScenario/Script_python/script_ROSAPI.py root@$ipinterface:/
 		sshpass -p root ssh root@$ipinterface 'echo "root" | sudo -S chmod +x /script_ROSAPI.py'
-		(sshpass -p root ssh root@$ipinterface 'source /root/catkin_ws/devel/setup.bash && export PYTHONPATH=${PYTHONPATH}:/root/catkin_ws/src/niryo_one_python_api/src/niryo_python_api &&'"python /script_ROSAPI.py --cmd_speed 0.2  --duration 3000 --filename /Output_script/script_rosapi_output_robots$((NOF_ACTIVE_ROBOTS))_freq$((wait_between_comm))_$((script_running)).txt 2> /Output_script/script_rosapi_error_robots$((NOF_ACTIVE_ROBOTS))_freq$((wait_between_comm))_$((script_running)).txt" &)
+		(sshpass -p root ssh root@$ipinterface 'source /root/catkin_ws/devel/setup.bash && export PYTHONPATH=${PYTHONPATH}:/root/catkin_ws/src/niryo_one_python_api/src/niryo_python_api &&'"python /script_ROSAPI.py --cmd_speed 0.2  --duration 3000 --filename /Output_script/02_LTE/rosapi/script_rosapi_output_robots$((NOF_ACTIVE_ROBOTS))_freq$((wait_between_comm))_$((script_running)).txt 2> /Output_script/02_LTE/rosapi/script_rosapi_error_robots$((NOF_ACTIVE_ROBOTS))_freq$((wait_between_comm))_$((script_running)).txt" &)
 	done
 
 elif [[ $commandname ==  "rosapi2" ]]; then
@@ -327,9 +339,9 @@ elif [[ $commandname ==  "rosapi2" ]]; then
 	do
 		script_running=$((script_running+1))
 		echo "Sending script_ROSAPI_2.py to $ipinterface"
-		sshpass -p root scp ./Script_python/script_ROSAPI_2.py root@$ipinterface:/
+		sshpass -p root scp /home/k8s-enb-node/Desktop/federico/DigitalTwin_service/02_LTEScenario/Script_python/script_ROSAPI_2.py root@$ipinterface:/
 		sshpass -p root ssh root@$ipinterface 'echo "root" | sudo -S chmod +x /script_ROSAPI_2.py'
-		(sshpass -p root ssh root@$ipinterface 'source /root/catkin_ws/devel/setup.bash && export PYTHONPATH=${PYTHONPATH}:/root/catkin_ws/src/niryo_one_python_api/src/niryo_python_api &&'"python /script_ROSAPI_2.py --cmd_speed 0.2 --duration 3000 --filename /Output_script/script_rosapi_2_output_robots$((NOF_ACTIVE_ROBOTS))_freq$((wait_between_comm))_$((script_running)).txt 2> /Output_script/script_rosapi_2_error_robots$((NOF_ACTIVE_ROBOTS))_freq$((wait_between_comm))_$((script_running)).txt" &)
+		(sshpass -p root ssh root@$ipinterface 'source /root/catkin_ws/devel/setup.bash && export PYTHONPATH=${PYTHONPATH}:/root/catkin_ws/src/niryo_one_python_api/src/niryo_python_api &&'"python /script_ROSAPI_2.py --cmd_speed 0.2 --duration 3000 --filename /Output_script/02_LTE/rosapi2/script_rosapi_2_output_robots$((NOF_ACTIVE_ROBOTS))_freq$((wait_between_comm))_$((script_running)).txt 2> /Output_script/02_LTE/rosapi2/script_rosapi_2_error_robots$((NOF_ACTIVE_ROBOTS))_freq$((wait_between_comm))_$((script_running)).txt" &)
 	done
 
 else
@@ -340,21 +352,21 @@ else
 	# read -p $'\nPress the waiting time between move pose commands to the robot\n' wait_between_comm
 	echo "A move pose command will be sent to the robots after $wait_between_comm seconds since the last movement"
 
-	sed -i "s/n.wait(\([0-9]\+\))/n.wait($wait_between_comm)/g" ./Script_python/script_pose.py
+	sed -i "s/n.wait(\([0-9]\+\))/n.wait($wait_between_comm)/g" /home/k8s-enb-node/Desktop/federico/DigitalTwin_service/02_LTEScenario/Script_python/script_pose.py
 
 	script_running=0
 	for ipinterface in "${Interface_IP_Set[@]}"
 	do
 		script_running=$((script_running+1))
-		sed -i "s/seed(\([0-9]\+\))/seed($(echo "$script_running*10" | bc))/g" ./Script_python/script_pose.py
+		sed -i "s/seed(\([0-9]\+\))/seed($(echo "$script_running*10" | bc))/g" /home/k8s-enb-node/Desktop/federico/DigitalTwin_service/02_LTEScenario/Script_python/script_pose.py
 		echo "Sending script_pose.py to $ipinterface"
-		sshpass -p root scp ./Script_python/script_pose.py root@$ipinterface:/
+		sshpass -p root scp /home/k8s-enb-node/Desktop/federico/DigitalTwin_service/02_LTEScenario/Script_python/script_pose.py root@$ipinterface:/
 		# echo "Making script.py executable"
 		sshpass -p root ssh root@$ipinterface 'echo "root" | sudo -S chmod +x /script_pose.py'
 		# echo "Running script.py"
 		#(sshpass -p root ssh root@$ipinterface 'source /root/catkin_ws/devel/setup.bash && export PYTHONPATH=${PYTHONPATH}:/root/catkin_ws/src/niryo_one_python_api/src/niryo_python_api && python /script_pose.py' 1> ./Output_script/script_pose_output_robots$((NOF_ACTIVE_ROBOTS))_freq$((wait_between_comm))_$((script_running)).txt 2> ./Output_script/script_pose_error_robots$((NOF_ACTIVE_ROBOTS))_freq$((wait_between_comm))_$((script_running)).txt &)
 		# (sshpass -p root ssh root@$ipinterface 'source /root/catkin_ws/devel/setup.bash && export PYTHONPATH=${PYTHONPATH}:/root/catkin_ws/src/niryo_one_python_api/src/niryo_python_api &&'"python /script_pose.py --filename /Output_script/script_pose_output_robots$((NOF_ACTIVE_ROBOTS))_freq$((wait_between_comm))_$((script_running)).txt 2> /Output_script/script_pose_error_robots$((NOF_ACTIVE_ROBOTS))_freq$((wait_between_comm))_$((script_running)).txt" &)
-		(sshpass -p root ssh root@$ipinterface 'source /root/catkin_ws/devel/setup.bash && export PYTHONPATH=${PYTHONPATH}:/root/catkin_ws/src/niryo_one_python_api/src/niryo_python_api &&'"python -u /script_pose.py 1> /Output_script/script_pose_output_robots$((NOF_ACTIVE_ROBOTS))_freq$((wait_between_comm))_$((script_running)).txt 2> /Output_script/script_pose_error_robots$((NOF_ACTIVE_ROBOTS))_freq$((wait_between_comm))_$((script_running)).txt" &)
+		(sshpass -p root ssh root@$ipinterface 'source /root/catkin_ws/devel/setup.bash && export PYTHONPATH=${PYTHONPATH}:/root/catkin_ws/src/niryo_one_python_api/src/niryo_python_api &&'"python -u /script_pose.py --duration 3000 1> /Output_script/02_LTE/pose/script_pose_output_robots$((NOF_ACTIVE_ROBOTS))_freq$((wait_between_comm))_$((script_running)).txt 2> /Output_script/02_LTE/pose/script_pose_error_robots$((NOF_ACTIVE_ROBOTS))_freq$((wait_between_comm))_$((script_running)).txt" &)
 
 		# &> script_output_((NOF_ACTIVE_ROBOTS)).txt
 	done
@@ -362,7 +374,7 @@ fi
 
 . ./Script_startRobots/mysleep.sh 30
 
-echo -e "\n\nSTEP $((9+2*(NOF_ACTIVE_ROBOTS-1)+2)): CPU measurements and RAM usage with VM hosting active containers (python script is running)"
+echo -e "\n\nSTEP $((19+2*(NOF_ACTIVE_ROBOTS-1)+2)): CPU measurements and RAM usage with VM hosting active containers (python script is running)"
 # read -p "Do you want to measure the CPU consumption and RAM usage of VMs hosting active containers??`echo $'\n> '`If yes, press Y or y`echo $'\n> '`" -n 1 -r
 # echo " "
 # if [[ $REPLY =~ ^[Yy]$ ]]

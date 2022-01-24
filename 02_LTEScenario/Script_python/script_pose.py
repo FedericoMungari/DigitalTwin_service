@@ -17,32 +17,13 @@ args = parser.parse_args()
 
 duration=args.duration
 
-rospy.init_node('niryo_one_example_python_api')
-
-if True:
+while True:
 	
 	try:
 
-		# print "--- Start"
-		n = NiryoOne()
+		seed(7)
 
-		seed(60)
-
-		# Calibrate robot first
-		n.calibrate_auto()
-		#n.calibrate_manual()
-		# print "Calibration finished !\n"
-
-		time.sleep(1)
-
-		# Test learning mode
-		n.activate_learning_mode(False)
-		# print "Learning mode activated? "
-		# print n.get_learning_mode()
-
-		# Move
-		n.set_arm_max_velocity(100)
-		
+		# POSE
 		p1 = [-0.150, -0.238, -0.022, 1.205, 0.852, -0.012]
 		p2 = [0.037, -0.176, 0.137, -1.142, 0.905, -0.515]
 		p3 = [-0.007, 0.232, 0.070, 0.603, 1.514, 0.968]
@@ -79,33 +60,85 @@ if True:
 		old_pos = -1
 		curr_pos = -1
 
-		i=0
+		# i=0
 
 		print("date,init_position,final_position,time")
 
 		t_start = time.time()
-		
-		while(time.time() - t_start < duration):
+		t1 = time.time()
 
-			while(1):
-				_ = randint(a, b)
-				if _ != old_pos:
-					curr_pos = _
-					break
-			t1 = time.time()
-			# n.move_joints(p_tot[curr_pos])
-			n.move_pose(p_tot[curr_pos][0],p_tot[curr_pos][1],p_tot[curr_pos][2],p_tot[curr_pos][3],p_tot[curr_pos][4],p_tot[curr_pos][5])
-			i=i+1
-			datestring=datetime.now().strftime("%Y-%m-%d-%H:%M:%S")
-			print("%d,%s,%d,%d,%f" %(i,datestring,old_pos,curr_pos,time.time()-t1))
-			n.wait(0)
-			old_pos = curr_pos
+		while (time.time() - t_start < duration):
 
-		# print "--- End"
+			# print(time.time()-t_start, duration, time.time()-t_start<duration)
+			# print(". . . R E S T A R T . . . ")
+
+			try:
+
+				rospy.init_node('niryo_one_example_python_api')
+
+				# print "--- Start"
+				n = NiryoOne()
+
+				# Calibrate robot first
+				n.calibrate_auto()
+				#n.calibrate_manual()
+				# print "Calibration finished !\n"
+
+				time.sleep(1)
+
+				# Test learning mode
+				n.activate_learning_mode(False)
+				# print "Learning mode activated? "
+				# print n.get_learning_mode()
+
+				# rospy.init_node('niryo_one_example_python_api')
+				n.set_arm_max_velocity(100)
+
+				while(time.time() - t_start < duration):
+
+					# print("%f,%f" %(time.time() - t_start, duration))
+
+					while(1):
+						_ = randint(a, b)
+						if _ != old_pos:
+							curr_pos = _
+							break
+					t1 = time.time()
+
+					n.move_pose(p_tot[curr_pos][0],p_tot[curr_pos][1],p_tot[curr_pos][2],p_tot[curr_pos][3],p_tot[curr_pos][4],p_tot[curr_pos][5])
+			
+					datestring=datetime.now().strftime("%Y-%m-%d-%H:%M:%S")
+			
+					print("%s,%d,%d,%f" %(datestring,old_pos,curr_pos,time.time()-t1))
+			
+					n.wait(0)
+			
+					old_pos = curr_pos
+
+				# print "--- End"
+			
+			except NiryoOneException as e:
+
+				datestring=datetime.now().strftime("%Y-%m-%d,%H:%M:%S")
+				
+				print("%s,%d,%d,%f" %(datestring,old_pos,curr_pos,time.time()-t1))
+				print("ERROR - exception 1")
+				print e
+
+				time.sleep(5)
+
+		if (time.time() - t_start > duration):
+			break
 
 	except NiryoOneException as e:
+
 		datestring=datetime.now().strftime("%Y-%m-%d,%H:%M:%S")
-		print("%d,%s,%d,%d,%f" %(i,datestring,old_pos,curr_pos,time.time()-t1))
+
+		print("%s,%d,%d,%f" %(datestring,old_pos,curr_pos,time.time()-t1))
+		print("ERROR - exception 2")
 		print e
 		# handle exception here
 		# you can also make a try/except for each command separately
+
+		if (time.time() - t_start > duration):
+			break

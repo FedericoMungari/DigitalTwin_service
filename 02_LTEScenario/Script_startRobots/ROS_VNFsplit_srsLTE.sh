@@ -87,7 +87,7 @@ if [[ $# -eq 5 ]]; then
 	VM_LOCAL_SUBNET=10.0.4.0/24
 	VM_LOCAL_GW=10.0.4.1
 
-	GAIN=85
+	GAIN=80
 
 	# measurement_iteration="6000"
 	# measurement_period="0.1"
@@ -110,6 +110,20 @@ if [[ $# -eq 5 ]]; then
 		echo -e "\t . . . S k i p p i n g . . ."
 		echo -e "\t\tAll the VMs are already running"
 	fi
+
+	echo -e "\nCheck IP addresses"
+	
+	echo -e $INTERFACE_MASTER_VM_IP
+	sshpass -p ${VM_PSW} ssh $VM_USERNAME@$INTERFACE_MASTER_VM_IP "cat /etc/hostname"
+	echo -e "\n"$ROBOTCOMMANDER_VM_IP
+	sshpass -p ${VM_PSW} ssh $VM_USERNAME@$ROBOTCOMMANDER_VM_IP "cat /etc/hostname"
+	echo -e "\n"$MOTIONPLANNING_VM_IP
+	sshpass -p ${VM_PSW} ssh $VM_USERNAME@$MOTIONPLANNING_VM_IP "cat /etc/hostname"
+	echo -e "\n"$STATE_VM_IP
+	sshpass -p ${VM_PSW} ssh $VM_USERNAME@$STATE_VM_IP "cat /etc/hostname"
+	echo -e "\n"$CONTROLLER_VM_IP
+	sshpass -p ${VM_PSW} ssh $VM_USERNAME@$CONTROLLER_VM_IP "cat /etc/hostname"
+
 
 	# ####################################################################################################################################
 	echo -e "\n* * * * * * * * * * * * * * * * * * * * * *\nSTEP 3: Stop prev executing containers on VMs"
@@ -137,16 +151,16 @@ if [[ $# -eq 5 ]]; then
 
 	# ####################################################################################################################################
 	echo -e "\n* * * * * * * * * * * * * * * * * * * * * *\nSTEP 5: Sending CPU and RAM measurement scripts to ..."
-	PATH_TO_MEAS_SCRIPTS="~/Desktop/federico/DigitalTwin_service/02_LTEScenario/Script_measurements"
+	PATH_TO_MEAS_SCRIPTS="/home/k8s-enb-node/Desktop/federico/DigitalTwin_service/02_LTEScenario/Script_measurements"
 	# NOTE 
 	# still cannot send the measurement scripts to the driver, since even if the iptunnel was istantiated, the radio link is not there.
 	# Solution: send the measurement scripts to the ROBOT HOST, which will forward them to the driver VM
 	echo -e "\t... the interface VM"
-	echo "VM_PSW: " $VM_PSW
-	echo "PATH_TO_MEAS_SCRIPTS: " $PATH_TO_MEAS_SCRIPTS
-	echo "VM_USERNAME: " $VM_USERNAME
-	echo "INTERFACE_MASTER_VM_IP: " $INTERFACE_MASTER_VM_IP
-	echo "sshpass -p ${VM_PSW} scp ${PATH_TO_MEAS_SCRIPTS}/CPU_measurements.sh ${VM_USERNAME}@$INTERFACE_MASTER_VM_IP:~/"
+	# echo "VM_PSW: " $VM_PSW
+	# echo "PATH_TO_MEAS_SCRIPTS: " $PATH_TO_MEAS_SCRIPTS
+	# echo "VM_USERNAME: " $VM_USERNAME
+	# echo "INTERFACE_MASTER_VM_IP: " $INTERFACE_MASTER_VM_IP
+	# echo "sshpass -p ${VM_PSW} scp ${PATH_TO_MEAS_SCRIPTS}/CPU_measurements.sh ${VM_USERNAME}@$INTERFACE_MASTER_VM_IP:~/"
 	sshpass -p ${VM_PSW} scp ${PATH_TO_MEAS_SCRIPTS}/CPU_measurements.sh ${VM_USERNAME}@$INTERFACE_MASTER_VM_IP:~/
 	sshpass -p ${VM_PSW} scp ${PATH_TO_MEAS_SCRIPTS}/RAM_measurements.sh ${VM_USERNAME}@$INTERFACE_MASTER_VM_IP:~/
 	sshpass -p ${VM_PSW} scp ${PATH_TO_MEAS_SCRIPTS}/resources_psutil.py ${VM_USERNAME}@$INTERFACE_MASTER_VM_IP:~/
@@ -229,6 +243,7 @@ if [[ $# -eq 5 ]]; then
 	# ####################################################################################################################################
 	echo -e "\n* * * * * * * * * * * * * * * * * * * * * *\nSTEP 8: USRPs firmware loading... (expect 30s for each if first time)"
 	echo $EPC_PASS | sudo -S pkill -9 srsepc
+	echo $EPC_PASS | sudo -S pkill -9 srsenb
 	docker stop srsenb &>/dev/null
 	echo $ENB_PASS | sudo -S uhd_usrp_probe &>/dev/null
 	echo "Local USRP ready (EPC+eNB)"
@@ -239,7 +254,7 @@ if [[ $# -eq 5 ]]; then
 
 	# ####################################################################################################################################
 	echo -e "\n* * * * * * * * * * * * * * * * * * * * * *\nSTEP 9: Run the EPC"
-	echo $EPC_PASS | sudo -bS srsepc >> 99LOG_epc_output.txt &
+	echo $EPC_PASS | sudo -bS srsepc > 99LOG_epc_output.txt &
 	sleep 5
 	echo "EPC is now running"
 
@@ -249,7 +264,7 @@ if [[ $# -eq 5 ]]; then
 	#enb
 	echo -e "\n* * * * * * * * * * * * * * * * * * * * * *\nSTEP 10: Run the eNB"
 	# sh -c "nohup docker run -t --network=host --cap-add SYS_NICE --cap-add NET_ADMIN --cap-add SYS_ADMIN --device /dev/net/tun:/dev/net/tun --device /dev/bus/usb:/dev/bus/usb -v /tmp:/tmp --rm --name srsenb srslte:20.10 srsenb --rf.tx_gain $GAIN >/dev/null 2>&1 &"
-	sh -c "docker run -t --network=host --cap-add SYS_NICE --cap-add NET_ADMIN --cap-add SYS_ADMIN --device /dev/net/tun:/dev/net/tun --device /dev/bus/usb:/dev/bus/usb -v /tmp:/tmp --rm --name srsenb srslte:20.10 srsenb --rf.tx_gain $GAIN >> 99LOG_enb_output.txt 2>&1 &"
+	sh -c "docker run -t --network=host --cap-add SYS_NICE --cap-add NET_ADMIN --cap-add SYS_ADMIN --device /dev/net/tun:/dev/net/tun --device /dev/bus/usb:/dev/bus/usb -v /tmp:/tmp --rm --name srsenb srslte:20.10.2 srsenb --scheduler.pdsch_max_prb 100 --rf.tx_gain $GAIN > 99LOG_enb_output.txt 2>&1 &"
 	sleep 10
 	echo "eNB is now running (radio link started)"
 
@@ -259,7 +274,7 @@ if [[ $# -eq 5 ]]; then
 	echo -e "\n* * * * * * * * * * * * * * * * * * * * * *\nSTEP 11: Run the UE"
 	#docker run -t --network='host' --cap-add NET_ADMIN --cap-add SYS_ADMIN --device /dev/net/tun:/dev/net/tun --device /dev/bus/usb:/dev/bus/usb -v /tmp:/tmp --rm --name srsue srslte:19.09 srsue --rf.tx_gain $GAIN >/dev/null &
 	{
-	sshpass -p$UE_PASS ssh -t $UE_USER@$UE_IP_LOCAL "echo $UE_PASS | sudo -S srsue --general.metrics_csv_enable 1 --rf.tx_gain $GAIN" >> 99LOG_ue_output.txt &
+	sshpass -p$UE_PASS ssh -t $UE_USER@$UE_IP_LOCAL "echo $UE_PASS | sudo -S srsue --general.metrics_csv_enable 1 --rf.tx_gain $GAIN" > 99LOG_ue_output.txt &
 	} &> /dev/null
 	sleep 15
 	echo "UE is now running"
@@ -274,19 +289,45 @@ if [[ $# -eq 5 ]]; then
 		ping -c 5 $ROBOT_HOST_IP_LTE
 		echo "First brief ping from UE to eNB"
 		ping -c 5 $EDGE_HOST_IP_LTE
+	
+		pingperiod=6000
+		echo "The UE will ping the eNB for $pingperiod seconds in background"
+		sshpass -p${ROBOT_HOST_PASS} ssh $ROBOT_HOST_USER@$ROBOT_HOST_IP_LOCAL "nohup ping -c $pingperiod $EDGE_HOST_IP_LTE &" &>/dev/null &
+		echo "The eNB will ping the UE for $pingperiod seconds in background"
+		(nohup ping -c $pingperiod $ROBOT_HOST_IP_LTE &) &>/dev/null
 	fi
-	pingperiod=6000
-	echo "The UE will ping the eNB for $pingperiod seconds in background"
-	sshpass -p${ROBOT_HOST_PASS} ssh $ROBOT_HOST_USER@$ROBOT_HOST_IP_LOCAL "nohup ping -c $pingperiod $EDGE_HOST_IP_LTE &" &>/dev/null &
-	echo "The eNB will ping the UE for $pingperiod seconds in background"
-	(nohup ping -c $pingperiod $ROBOT_HOST_IP_LTE &) &>/dev/null
 
 
 	# ####################################################################################################################################
-	echo -e "\n* * * * * * * * * * * * * * * * * * * * * *\nSTEP 13: pinging"
-
-	# if false
+	# eu
+	echo -e "\n* * * * * * * * * * * * * * * * * * * * * *\nSTEP 13: Bidirectional IPERF between eNB and UE"
 	if true
+	then
+		sshpass -p${ROBOT_HOST_PASS} ssh $ROBOT_HOST_USER@$ROBOT_HOST_IP_LOCAL "pkill -9 iperf3"
+		sshpass -p${ROBOT_HOST_PASS} ssh $ROBOT_HOST_USER@$ROBOT_HOST_IP_LOCAL "rm /home/dell46/Desktop/ROSNiryo/iperf_client.out"
+		pkill -9 iperf3
+		rm /home/k8s-enb-node/Desktop/federico/DigitalTwin_service/02_LTEScenario/iperf_server.out
+		iperfperiod=6000
+		echo "The eNB will iperf the IPERF server"
+		nohup iperf3 -s -i 5 >> /home/k8s-enb-node/Desktop/federico/DigitalTwin_service/02_LTEScenario/iperf_server.out 2>&1 &
+		echo "The UE will be the IPERF client"
+		# sshpass -p${ROBOT_HOST_PASS} ssh $ROBOT_HOST_USER@$ROBOT_HOST_IP_LOCAL "nohup iperf3 -c $ENB_IP_LTE -b 512K -i 5 -t $iperfperiod >> /home/dell46/Desktop/ROSNiryo/iperf_client.out 2>&1 & " &>/dev/null &
+		sshpass -p${ROBOT_HOST_PASS} scp /home/k8s-enb-node/Desktop/federico/DigitalTwin_service/02_LTEScenario/iperf_run_tests.sh  $ROBOT_HOST_USER@$ROBOT_HOST_IP_LOCAL:/home/dell46/Desktop/ROSNiryo/
+		# INPUT VAR 1 : server IP
+		# INPUT VAR 2 : target bandwith
+		# INPUT VAR 3 : number of one after the other connections
+		# INPUT VAR 4 : duration of each connection
+		# INPUT VAR 5 : output interval (iperf3 i option)
+		# INPUT VAR 6 : tcp flag (if true, tcp, if not udp)
+		# INPUT VAR 7 : dualtest flag (if true, -d option is given)
+		sshpass -p${ROBOT_HOST_PASS} ssh $ROBOT_HOST_USER@$ROBOT_HOST_IP_LOCAL "sh /home/dell46/Desktop/ROSNiryo/iperf_run_tests.sh $ENB_IP_LTE 256K 10 60 5 true true > /home/dell46/Desktop/ROSNiryo/iperf_client.out 2>&1 &" &>/dev/null &
+	fi
+
+	# ####################################################################################################################################
+	echo -e "\n* * * * * * * * * * * * * * * * * * * * * *\nSTEP 14: pinging"
+
+	if false
+	# if true
 	then
 		echo -e "\n-->Starting pinging from edge to ros_interface bridge"
 		ping -c 2 $(echo $INTERFACE_MASTER_DOCKER_SUBNET | cut -d"." -f1-3)".1"
@@ -321,20 +362,27 @@ if [[ $# -eq 5 ]]; then
 
 	# ####################################################################################################################################
 	# MAIN CODE
-	echo -e "\n\n* * * * * * * * * * * * * * * * * * * * * *\nSTEP 14: STARTING EXECUTING THE MAIN CODE"
-	sleep 1
+	echo -e "\n\n* * * * * * * * * * * * * * * * * * * * * *\nSTEP 15: STARTING EXECUTING THE MAIN CODE"
+	# sleep 1
 	echo -ne '..1 \r'
-	sleep 1
+	# sleep 1
 	echo -ne '..1 ..2\r'
-	sleep 1
+	# sleep 1
 	echo -ne '..1 ..2 ..3\r'
-	sleep 1
+	# sleep 1
 
-	/bin/bash ./Script_startRobots/start_robot_VNF.sh $1 $2 $3 $4 $5
-	# sleep 20
+	# /bin/bash ./Script_startRobots/start_robot_VNF.sh $1 $2 $3 $4 $5
+	/bin/bash ./Script_startRobots/start_robot_VNF_tshark.sh $1 $2 $3 $4 $5
 
 	echo -e "\nMAIN CODE ENDED"
 
 	. ./Script_startRobots/mysleep.sh 20
+
+	sshpass -p${ROBOT_HOST_PASS} ssh $ROBOT_HOST_USER@$ROBOT_HOST_IP_LOCAL "pkill -9 iperf3"
+	pkill -9 iperf3
+
+	sshpass -p$UE_PASS ssh -t $UE_USER@$UE_IP_LOCAL "echo $UE_PASS | sudo -S pkill -9 srsue  &>/dev/null" &>/dev/null
+	docker stop srsenb &>/dev/null
+	echo $EPC_PASS | sudo -S pkill -9 srsepc
 
 fi

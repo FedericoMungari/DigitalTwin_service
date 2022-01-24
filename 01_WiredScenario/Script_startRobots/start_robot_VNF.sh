@@ -217,7 +217,7 @@ if [[ $commandname ==  "joints" ]]; then
 	for ipinterface in "${Interface_IP_Set[@]}"
 	do
 		script_running=$((script_running+1))
-		sed -i "s/seed(\([0-9]\+\))/seed($(echo "$script_running*11" | bc))/g" ./Script_python/script_joints.py
+		sed -i "s/seed(\([0-9]\+\))/seed($(echo "$script_running*8" | bc))/g" ./Script_python/script_joints.py
 		echo "Sending script_joints.py to $ipinterface"
 		sshpass -p root scp ./Script_python/script_joints.py root@$ipinterface:/
 		# echo "Making script.py executable"
@@ -243,7 +243,7 @@ elif [[ $commandname ==  "gripper" ]]; then
 	for ipinterface in "${Interface_IP_Set[@]}"
 	do
 		script_running=$((script_running+1))
-		sed -i "s/seed(\([0-9]\+\))/seed($(echo "$script_running*10" | bc))/g" ./Script_python/script_gripper.py
+		sed -i "s/seed(\([0-9]\+\))/seed($(echo "$script_running*8" | bc))/g" ./Script_python/script_gripper.py
 		echo "Sending script_gripper.py to $ipinterface"
 		sshpass -p root scp ./Script_python/script_gripper.py root@$ipinterface:/
 		sshpass -p root ssh root@$ipinterface 'echo "root" | sudo -S chmod +x /script_gripper.py'
@@ -305,7 +305,7 @@ else
 	for ipinterface in "${Interface_IP_Set[@]}"
 	do
 		script_running=$((script_running+1))
-		sed -i "s/seed(\([0-9]\+\))/seed($(echo "$script_running*10" | bc))/g" ./Script_python/script_pose.py
+		sed -i "s/seed(\([0-9]\+\))/seed($(echo "$script_running*8" | bc))/g" ./Script_python/script_pose.py
 		echo "Sending script_pose.py to $ipinterface"
 		sshpass -p root scp ./Script_python/script_pose.py root@$ipinterface:/
 		# echo "Making script.py executable"

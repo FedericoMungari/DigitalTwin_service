@@ -149,4 +149,5 @@ if __name__=="__main__":
 				if (time.time() - t_start > duration):
 					break
 		except Exception as e:
-			print(e) 
+			print("ERROR - exception")
+			print e
