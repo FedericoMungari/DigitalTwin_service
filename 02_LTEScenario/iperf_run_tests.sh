@@ -9,57 +9,62 @@
 # INPUT VAR 7 : dualtest flag (if true, -d option is given)
 
 
-# echo "Variable number 1 : "$1
-# echo "Variable number 2 : "$2
-# echo "Variable number 3 : "$3
-# echo "Variable number 4 : "$4
-# echo "Variable number 5 : "$5
-# echo "Variable number 6 : "$6
-# echo "Variable number 7 : "$7
+echo "Variable number 1 : "$1
+echo "Variable number 2 : "$2
+echo "Variable number 3 : "$3
+echo "Variable number 4 : "$4
+echo "Variable number 5 : "$5
+echo "Variable number 6 : "$6
+echo "Variable number 7 : "$7
 
 SERVERIP=$1
 BANDWIDTH=$2
-START=1
 END=$3
 DURATION=$4
 OUTPUTFREQ=$5
+i=1
 
-if [[ $6 ==  "true" ]]
+if [ "$6" ==  "true" ]
 then
 
-	if [[ $7 ==  "true" ]]
+	if [ "$7" ==  "true" ]
 	then
-
-		for (( i=$START; i<=$END; i++ ))
+		while [ $i -le $END ]
 		do
 			iperf3 -c $SERVERIP -b $BANDWIDTH -t $DURATION -i $OUTPUTFREQ -d
+			i=$(( i + 1 ))
 		done
 
-	elif [[ $7 ==  "false" ]]; then
+	elif [[ $7 ==  "false" ]]
+	then
 
-		for (( i=$START; i<=$END; i++ ))
+		while [ $i -le $END ]
 		do
 			iperf3 -c $SERVERIP -b $BANDWIDTH -t $DURATION -i $OUTPUTFREQ
+			i=$(( i + 1 ))
 		done
 
 	fi
 
-elif [[ $7 ==  "false" ]]
+elif [ "$7" ==  "false" ]
 then
 
-	if [[ $7 ==  "true" ]]
+	if [ "$7" ==  "true" ]
 	then
 
-		for (( i=$START; i<=$END; i++ ))
+		while [ $i -le $END ]
 		do
 			iperf3 -c $SERVERIP -b $BANDWIDTH -t $DURATION -i $OUTPUTFREQ -d -u
+			i=$(( i + 1 ))
 		done
 
-	elif [[ $7 ==  "false" ]]; then
+	elif [[ $7 ==  "false" ]]
+	then
 
-		for (( i=$START; i<=$END; i++ ))
+		while [ $i -le $END ]
 		do
 			iperf3 -c $SERVERIP -b $BANDWIDTH -t $DURATION -i $OUTPUTFREQ -u
+			i=$(( i + 1 ))
 		done
 
 	fi

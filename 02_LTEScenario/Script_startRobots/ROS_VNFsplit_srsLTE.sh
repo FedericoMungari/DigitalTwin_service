@@ -72,8 +72,8 @@ if [[ $# -eq 5 ]]; then
 
 	DRIVER_DOCKER_SUBNET=10.2.0.0/24
 
-	INTERFACE_MASTER_VM_IP=10.0.3.7
-	ROBOTCOMMANDER_VM_IP=10.0.3.6
+	INTERFACE_MASTER_VM_IP=10.0.3.6
+	ROBOTCOMMANDER_VM_IP=10.0.3.7
 	MOTIONPLANNING_VM_IP=10.0.3.5
 	STATE_VM_IP=10.0.3.4
 	CONTROLLER_VM_IP=10.0.3.3
@@ -320,7 +320,9 @@ if [[ $# -eq 5 ]]; then
 		# INPUT VAR 5 : output interval (iperf3 i option)
 		# INPUT VAR 6 : tcp flag (if true, tcp, if not udp)
 		# INPUT VAR 7 : dualtest flag (if true, -d option is given)
-		sshpass -p${ROBOT_HOST_PASS} ssh $ROBOT_HOST_USER@$ROBOT_HOST_IP_LOCAL "sh /home/dell46/Desktop/ROSNiryo/iperf_run_tests.sh $ENB_IP_LTE 256K 10 60 5 true true > /home/dell46/Desktop/ROSNiryo/iperf_client.out 2>&1 &" &>/dev/null &
+		# sshpass -p${ROBOT_HOST_PASS} ssh $ROBOT_HOST_USER@$ROBOT_HOST_IP_LOCAL "sh /home/dell46/Desktop/ROSNiryo/iperf_run_tests.sh $ENB_IP_LTE 128K 10 60 5 true true > /home/dell46/Desktop/ROSNiryo/iperf_client.out 2>&1 &" &>/dev/null &
+		sshpass -p${ROBOT_HOST_PASS} ssh $ROBOT_HOST_USER@$ROBOT_HOST_IP_LOCAL "bash /home/dell46/Desktop/ROSNiryo/iperf_run_tests.sh $ENB_IP_LTE 56K 15 60 5 true true > /home/dell46/Desktop/ROSNiryo/iperf_client.out &" &
+
 	fi
 
 	# ####################################################################################################################################

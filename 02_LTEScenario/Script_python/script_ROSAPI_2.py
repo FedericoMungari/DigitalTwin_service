@@ -95,7 +95,7 @@ def callback_joint_states(joint_states):
   
 	# print(last_position, " : ", joint_states.position)
 	diff = [abs(x1 - x2) for (x1, x2) in zip(last_position, joint_states.position)]
-	if all(x < 0.0001 for x in diff) == True:
+	if all(x < 0.01 for x in diff) == True:
 		# print("\n\nEqual")
 		if moving == True:
 	  		moving = False

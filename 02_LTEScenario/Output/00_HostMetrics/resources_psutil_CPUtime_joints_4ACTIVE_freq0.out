@@ -1,4 +1,4 @@
-E R R O R:
-Problem with input quantities
-Please insert:
-VAR 1 : measurement time window
+MACHINE,meas_samples,meas_periodicity,date,time,user,nice,system,idle,iowait,irq,softirq,steal,guest,guest_nice
+LocalHost,600.0,0.5,2022-01-25,17:24:32,41881.18,30.16,66821.2,631584.94,3443.27,0.0,8644.3,0.0,0.0,0.0
+LocalHost,600.0,0.5,2022-01-25,17:29:32,42112.02,30.3,67070.22,633392.22,3496.67,0.0,8661.1,0.0,0.0,0.0
+LocalHost,600.0,0.5,2022-01-25,17:29:32,230.8399999999965,0.14000000000000057,249.02000000000407,1807.280000000028,53.40000000000009,53.40000000000009,16.80000000000109,0.0,0.0,0.0

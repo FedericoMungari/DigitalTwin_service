@@ -8,7 +8,7 @@
 # 	 docker network create -o "com.docker.network.bridge.name"="ros_bridge" --subnet="10.1.2.0/24" ros_command
 # 	 docker network create -o "com.docker.network.bridge.name"="ros_bridge" --subnet="10.1.1.0/24" ros_interface
 
-measurement_iteration="400"
+measurement_iteration="600"
 measurement_period="0.5"
 
 NOF_ACTIVE_ROBOTS=0
@@ -69,7 +69,7 @@ function start_robot () {
 			interface_trial=$((interface_trial+1))
 			echo "Interface: istantiation trial #$interface_trial"
 			sshpass -p$1 ssh $2@$8 "docker run -dit --rm --name interfacemaster_robot_$((NOF_ACTIVE_ROBOTS)) --hostname master --add-host driver:10.2.0.$((NOF_ACTIVE_ROBOTS+1))  --add-host control:10.1.5.$((NOF_ACTIVE_ROBOTS+1)) --add-host state:10.1.4.$((NOF_ACTIVE_ROBOTS+1)) --add-host motion_planning:10.1.3.$((NOF_ACTIVE_ROBOTS+1)) --add-host robot_commander:10.1.2.$((NOF_ACTIVE_ROBOTS+1)) --network ros_interface --ip 10.1.1.$((NOF_ACTIVE_ROBOTS+1)) -v /home/ros/Output_script/:/Output_script robot interface_master"
-			. ./Script_startRobots/mysleep.sh 20
+			. ./Script_startRobots/mysleep.sh 30
 		done
 		INTERFACE_IP=10.1.1.$((NOF_ACTIVE_ROBOTS+1))
 		echo -e "Interface commander IP:  $INTERFACE_IP"
@@ -79,7 +79,7 @@ function start_robot () {
 		echo -e "Interface commander IP:  $INTERFACE_IP"
 	fi
 
-	# . ./Script_startRobots/mysleep.sh 20
+	#  . ./Script_startRobots/mysleep.sh 20
 
 	Interface_IP_Set+=( $INTERFACE_IP )
 
@@ -105,7 +105,7 @@ INTERFACE_MASTER_DOCKER_SUBNET=10.1.1.0/24; ROBOTCOMMANDER_DOCKER_SUBNET=10.1.2.
 
 DRIVER_DOCKER_SUBNET=10.2.0.0/24
 
-INTERFACE_MASTER_VM_IP=10.0.3.7; ROBOTCOMMANDER_VM_IP=10.0.3.6; MOTIONPLANNING_VM_IP=10.0.3.5; STATE_VM_IP=10.0.3.4; CONTROLLER_VM_IP=10.0.3.3;
+INTERFACE_MASTER_VM_IP=10.0.3.6; ROBOTCOMMANDER_VM_IP=10.0.3.7; MOTIONPLANNING_VM_IP=10.0.3.5; STATE_VM_IP=10.0.3.4; CONTROLLER_VM_IP=10.0.3.3;
 DRIVER_VM_IP=10.0.4.3
 
 VM_USERNAME=ros; VM_PSW=ros
@@ -132,15 +132,9 @@ meas_tool=$5
 capturing_time=$(echo $n_robots*60+120 |  bc -l)
 sshpass -p ${UE_PASS} scp /home/k8s-enb-node/Desktop/federico/DigitalTwin_service/02_LTEScenario/Script_tshark/script_tshark.sh ${UE_USER}@$UE_IP_LOCAL:/home/dell46/Desktop/ROSNiryo/
 sh /home/k8s-enb-node/Desktop/federico/DigitalTwin_service/02_LTEScenario/Script_tshark/script_tshark.sh /home/k8s-enb-node/Desktop/federico/DigitalTwin_service/02_LTEScenario/Output/tshark_traces/robot_istantiation_$((n_robots))_$commandname.pcapng srs_spgw_sgi $capturing_time &
-sshpass -p ${UE_PASS} ssh ${UE_USER}@$UE_IP_LOCAL "touch /home/dell46/Desktop/ROSNiryo/tshark_traces/robot_istantiation1_$((n_robots))_$commandname.txt"
-sshpass -p ${UE_PASS} ssh ${UE_USER}@$UE_IP_LOCAL "touch /home/dell46/Desktop/ROSNiryo/tshark_traces/robot_istantiation2_$n_robots_$commandname.txt"
-sshpass -p ${UE_PASS} ssh ${UE_USER}@$UE_IP_LOCAL "touch /home/dell46/Desktop/ROSNiryo/tshark_traces/robot_istantiation3_$n_robots_$((commandname)).txt"
 sshpass -p ${UE_PASS} ssh ${UE_USER}@$UE_IP_LOCAL "sh /home/dell46/Desktop/ROSNiryo/script_tshark.sh /home/dell46/Desktop/ROSNiryo/tshark_traces/robot_istantiation_$((n_robots))_$commandname.pcapng tun_srsue $capturing_time &" &
 
 # ##########################################################################################################################################################################
-
-now=$(date +"%T")
-echo "Current time : $now"
 
 # Robot istantiation
 while true; do
@@ -160,15 +154,15 @@ while true; do
     fi
 done
 
-now=$(date +"%T")
-echo "Current time : $now"
+pkill tshark
+sshpass -p ${UE_PASS} ssh ${UE_USER}@$UE_IP_LOCAL "pkill tshark"
 
 echo " "
 echo "* - * - * - * - * - * - * - * - * - * - * - * - * - *"
 echo "          All ROBOTS have been istantiated"
 echo "* - * - * - * - * - * - * - * - * - * - * - * - * - *"
 
-# . ./Script_startRobots/mysleep.sh 20
+. ./Script_startRobots/mysleep.sh 20
 
 
 if [[ $IDLEmeas_flag ==  "IDLEYES" && $commandname ==  "NOpose" ]]
@@ -204,6 +198,9 @@ then
 	. ./Script_startRobots/mysleep.sh $(echo "$measurement_iteration*$measurement_period+180" | bc)
 
 fi
+
+pkill iperf3
+sshpass -p ${UE_PASS} ssh ${UE_USER}@$UE_IP_LOCAL "pkill iperf3"
 
 
 echo -e "\n\nSTEP $((18+1*(NOF_ACTIVE_ROBOTS-1)+1)): Run python script to send move pose or joints commands to the robot"
@@ -493,6 +490,8 @@ if true; then
 
 	. ./Script_startRobots/mysleep.sh $(echo "$measurement_iteration*$measurement_period+180" | bc)
 
+	pkill tshark
+	sshpass -p ${UE_PASS} ssh ${UE_USER}@$UE_IP_LOCAL "pkill tshark"
 
 else
 	echo -e "\t\t. . . CPU consumption and RAM usage of VMs hosting active containers will not be measured . . ."
