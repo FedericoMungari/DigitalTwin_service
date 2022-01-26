@@ -9,990 +9,161 @@ Attaching UE...
 Closing stdin thread.
 Searching cell in DL EARFCN=2850, f_dl=2630.0 MHz, f_ul=2510.0 MHz
 .
-Found Cell:  Mode=FDD, PCI=1, PRB=50, Ports=1, CFO=-1.1 KHz
+Found Cell:  Mode=FDD, PCI=1, PRB=50, Ports=1, CFO=-0.9 KHz
 Found PLMN:  Id=90170, TAC=7
 Could not find Home PLMN Id=20893, trying to connect to PLMN Id=90170
+Random Access Transmission: seq=5, ra-rnti=0x2
+Random Access Transmission: seq=16, ra-rnti=0x2
+Random Access Complete.     c-rnti=0x47, ta=5
+RRC Connected
+Network attach successful. IP: 172.16.0.2
+Software Radio Systems LTE (srsLTE) 26/1/2022 12:22:10 TZ:0
+Scheduling request failed: releasing RRC connection...
+Random Access Transmission: seq=26, ra-rnti=0x2
 Random Access Transmission: seq=38, ra-rnti=0x2
-Random Access Complete.     c-rnti=0x46, ta=5
-RRC Connected
-Network attach successful. IP: 172.16.0.2
-Software Radio Systems LTE (srsLTE) 25/1/2022 17:6:6 TZ:0
-Scheduling request failed: releasing RRC connection...
-Random Access Transmission: seq=29, ra-rnti=0x2
-Random Access Transmission: seq=42, ra-rnti=0x2
-Random Access Transmission: seq=11, ra-rnti=0x2
-Random Access Transmission: seq=2, ra-rnti=0x2
-Random Access Transmission: seq=26, ra-rnti=0x2
-Random Access Transmission: seq=0, ra-rnti=0x2
-Random Access Complete.     c-rnti=0x46, ta=5
-Scheduling request failed: releasing RRC connection...
-Random Access Transmission: seq=42, ra-rnti=0x2
-Random Access Transmission: seq=0, ra-rnti=0x2
-Random Access Transmission: seq=40, ra-rnti=0x2
-Random Access Transmission: seq=0, ra-rnti=0x2
-Random Access Transmission: seq=4, ra-rnti=0x2
-Random Access Transmission: seq=40, ra-rnti=0x2
-Random Access Transmission: seq=21, ra-rnti=0x2
-Random Access Transmission: seq=29, ra-rnti=0x2
-Random Access Transmission: seq=30, ra-rnti=0x2
-Random Access Transmission: seq=18, ra-rnti=0x2
-Warning: Detected Radio-Link Failure
-RRC Connection Reestablishment
-Random Access Transmission: seq=2, ra-rnti=0x2
-Random Access Transmission: seq=28, ra-rnti=0x2
-Random Access Transmission: seq=31, ra-rnti=0x2
-Random Access Transmission: seq=13, ra-rnti=0x2
-Random Access Transmission: seq=27, ra-rnti=0x2
-RRC IDLE
-Random Access Transmission: seq=42, ra-rnti=0x2
-Random Access Transmission: seq=10, ra-rnti=0x2
-Random Access Transmission: seq=26, ra-rnti=0x2
-Random Access Transmission: seq=28, ra-rnti=0x2
-Random Access Transmission: seq=5, ra-rnti=0x2
-Random Access Transmission: seq=25, ra-rnti=0x2
-Random Access Transmission: seq=16, ra-rnti=0x2
-Random Access Transmission: seq=19, ra-rnti=0x2
-Random Access Transmission: seq=31, ra-rnti=0x2
-Random Access Transmission: seq=6, ra-rnti=0x2
-Warning: Detected Radio-Link Failure
-Random Access Transmission: seq=30, ra-rnti=0x2
-Random Access Complete.     c-rnti=0x8d, ta=5
-RRC Connected
-Received service reject with EMM cause=0x9.
-Network attach successful. IP: 172.16.0.2
-Software Radio Systems LTE (srsLTE) 25/1/2022 17:7:28 TZ:0
-Warning: Detected Radio-Link Failure
-RRC IDLE
-.
-Found Cell:  Mode=FDD, PCI=1, PRB=50, Ports=1, CFO=-1.0 KHz
-Random Access Transmission: seq=9, ra-rnti=0x2
-Random Access Complete.     c-rnti=0x8f, ta=5
-RRC Connected
-Scheduling request failed: releasing RRC connection...
-Random Access Transmission: seq=6, ra-rnti=0x2
-Random Access Transmission: seq=5, ra-rnti=0x2
-Random Access Transmission: seq=27, ra-rnti=0x2
-Random Access Transmission: seq=35, ra-rnti=0x2
-Random Access Transmission: seq=45, ra-rnti=0x2
-Random Access Transmission: seq=27, ra-rnti=0x2
-Random Access Transmission: seq=39, ra-rnti=0x2
-Random Access Transmission: seq=33, ra-rnti=0x2
-Random Access Transmission: seq=48, ra-rnti=0x2
-Random Access Transmission: seq=16, ra-rnti=0x2
-Warning: Detected Radio-Link Failure
-RRC Connection Reestablishment
-Random Access Transmission: seq=40, ra-rnti=0x2
-Random Access Transmission: seq=15, ra-rnti=0x2
-Random Access Transmission: seq=46, ra-rnti=0x2
-Random Access Transmission: seq=44, ra-rnti=0x2
-Random Access Transmission: seq=22, ra-rnti=0x2
-RRC IDLE
-Random Access Transmission: seq=20, ra-rnti=0x2
-Random Access Transmission: seq=7, ra-rnti=0x2
-Random Access Transmission: seq=26, ra-rnti=0x2
-Random Access Transmission: seq=6, ra-rnti=0x2
-Random Access Transmission: seq=34, ra-rnti=0x2
-Random Access Transmission: seq=31, ra-rnti=0x2
-Random Access Transmission: seq=11, ra-rnti=0x2
-Random Access Transmission: seq=35, ra-rnti=0x2
-Random Access Transmission: seq=23, ra-rnti=0x2
-Random Access Transmission: seq=6, ra-rnti=0x2
-Warning: Detected Radio-Link Failure
-Random Access Transmission: seq=42, ra-rnti=0x2
-Random Access Transmission: seq=5, ra-rnti=0x2
-Random Access Transmission: seq=36, ra-rnti=0x2
-Random Access Transmission: seq=0, ra-rnti=0x2
-Random Access Transmission: seq=14, ra-rnti=0x2
-Random Access Transmission: seq=19, ra-rnti=0x2
-Random Access Transmission: seq=33, ra-rnti=0x2
 Random Access Transmission: seq=41, ra-rnti=0x2
-Random Access Transmission: seq=30, ra-rnti=0x2
 Random Access Transmission: seq=3, ra-rnti=0x2
+Random Access Transmission: seq=38, ra-rnti=0x2
+Random Access Transmission: seq=9, ra-rnti=0x2
+Random Access Transmission: seq=13, ra-rnti=0x2
+Random Access Transmission: seq=44, ra-rnti=0x2
+Random Access Transmission: seq=10, ra-rnti=0x2
+Random Access Transmission: seq=4, ra-rnti=0x2
 Warning: Detected Radio-Link Failure
-.
-Found Cell:  Mode=FDD, PCI=1, PRB=50, Ports=1, CFO=-0.8 KHz
-Random Access Transmission: seq=17, ra-rnti=0x2
-Random Access Complete.     c-rnti=0xd5, ta=5
+RRC Connection Reestablishment
+Random Access Transmission: seq=8, ra-rnti=0x2
+Random Access Transmission: seq=38, ra-rnti=0x2
+Random Access Transmission: seq=45, ra-rnti=0x2
+Random Access Transmission: seq=2, ra-rnti=0x2
+Random Access Transmission: seq=15, ra-rnti=0x2
+RRC IDLE
+Random Access Transmission: seq=3, ra-rnti=0x2
+Random Access Transmission: seq=12, ra-rnti=0x2
+Random Access Transmission: seq=31, ra-rnti=0x2
+Random Access Transmission: seq=25, ra-rnti=0x2
+Random Access Transmission: seq=2, ra-rnti=0x2
+Random Access Transmission: seq=27, ra-rnti=0x2
+Random Access Transmission: seq=44, ra-rnti=0x2
+Random Access Transmission: seq=43, ra-rnti=0x2
+Random Access Transmission: seq=31, ra-rnti=0x2
+Random Access Transmission: seq=37, ra-rnti=0x2
+Warning: Detected Radio-Link Failure
+Random Access Transmission: seq=44, ra-rnti=0x2
+Random Access Transmission: seq=38, ra-rnti=0x2
+Random Access Transmission: seq=30, ra-rnti=0x2
+Random Access Transmission: seq=26, ra-rnti=0x2
+Random Access Transmission: seq=30, ra-rnti=0x2
+Random Access Transmission: seq=33, ra-rnti=0x2
+Random Access Transmission: seq=12, ra-rnti=0x2
+Random Access Transmission: seq=48, ra-rnti=0x2
+Random Access Transmission: seq=12, ra-rnti=0x2
+Random Access Transmission: seq=27, ra-rnti=0x2
+Warning: Detected Radio-Link Failure
+Random Access Transmission: seq=33, ra-rnti=0x2
+Random Access Complete.     c-rnti=0x86, ta=5
 RRC Connected
 Received service reject with EMM cause=0x9.
 Network attach successful. IP: 172.16.0.2
-Software Radio Systems LTE (srsLTE) 25/1/2022 17:8:47 TZ:0
+Software Radio Systems LTE (srsLTE) 26/1/2022 12:25:22 TZ:0
 Scheduling request failed: releasing RRC connection...
-Random Access Transmission: seq=45, ra-rnti=0x2
-Random Access Transmission: seq=12, ra-rnti=0x2
-Random Access Transmission: seq=41, ra-rnti=0x2
-Random Access Transmission: seq=37, ra-rnti=0x2
+Random Access Transmission: seq=43, ra-rnti=0x2
+Random Access Transmission: seq=5, ra-rnti=0x2
+Random Access Transmission: seq=3, ra-rnti=0x2
+Random Access Transmission: seq=29, ra-rnti=0x2
+Random Access Transmission: seq=27, ra-rnti=0x2
+Random Access Transmission: seq=5, ra-rnti=0x2
+Random Access Transmission: seq=21, ra-rnti=0x2
+Random Access Transmission: seq=17, ra-rnti=0x2
+Random Access Transmission: seq=8, ra-rnti=0x2
+Random Access Transmission: seq=33, ra-rnti=0x2
+Warning: Detected Radio-Link Failure
+RRC Connection Reestablishment
+Random Access Transmission: seq=25, ra-rnti=0x2
+Random Access Transmission: seq=10, ra-rnti=0x2
+Random Access Transmission: seq=35, ra-rnti=0x2
 Random Access Transmission: seq=0, ra-rnti=0x2
+Random Access Transmission: seq=2, ra-rnti=0x2
+RRC IDLE
+Random Access Transmission: seq=31, ra-rnti=0x2
+Random Access Transmission: seq=15, ra-rnti=0x2
+Random Access Transmission: seq=47, ra-rnti=0x2
+Random Access Transmission: seq=46, ra-rnti=0x2
+Random Access Transmission: seq=21, ra-rnti=0x2
+Random Access Transmission: seq=21, ra-rnti=0x2
+Random Access Transmission: seq=0, ra-rnti=0x2
+Random Access Transmission: seq=2, ra-rnti=0x2
+Random Access Transmission: seq=9, ra-rnti=0x2
+Random Access Transmission: seq=48, ra-rnti=0x2
+Warning: Detected Radio-Link Failure
+Random Access Transmission: seq=14, ra-rnti=0x2
+Random Access Transmission: seq=12, ra-rnti=0x2
+Random Access Transmission: seq=29, ra-rnti=0x2
+Random Access Transmission: seq=16, ra-rnti=0x2
+Random Access Transmission: seq=8, ra-rnti=0x2
+Random Access Transmission: seq=48, ra-rnti=0x2
+Random Access Transmission: seq=21, ra-rnti=0x2
+Random Access Transmission: seq=11, ra-rnti=0x2
+Random Access Transmission: seq=2, ra-rnti=0x2
+Random Access Transmission: seq=48, ra-rnti=0x2
+Warning: Detected Radio-Link Failure
+Random Access Transmission: seq=45, ra-rnti=0x2
+Random Access Transmission: seq=23, ra-rnti=0x2
+Random Access Transmission: seq=42, ra-rnti=0x2
+Random Access Transmission: seq=1, ra-rnti=0x2
+Random Access Transmission: seq=4, ra-rnti=0x2
+Random Access Transmission: seq=15, ra-rnti=0x2
+Random Access Transmission: seq=39, ra-rnti=0x2
+Random Access Transmission: seq=15, ra-rnti=0x2
+Random Access Transmission: seq=15, ra-rnti=0x2
+Random Access Transmission: seq=41, ra-rnti=0x2
+Warning: Detected Radio-Link Failure
+Random Access Transmission: seq=17, ra-rnti=0x2
+Random Access Transmission: seq=22, ra-rnti=0x2
 Random Access Transmission: seq=32, ra-rnti=0x2
-Random Access Transmission: seq=31, ra-rnti=0x2
-Random Access Transmission: seq=45, ra-rnti=0x2
-Random Access Transmission: seq=31, ra-rnti=0x2
-Random Access Transmission: seq=43, ra-rnti=0x2
-Warning: Detected Radio-Link Failure
-RRC Connection Reestablishment
-Random Access Transmission: seq=41, ra-rnti=0x2
-Random Access Transmission: seq=38, ra-rnti=0x2
-Random Access Transmission: seq=18, ra-rnti=0x2
-Random Access Transmission: seq=23, ra-rnti=0x2
-Random Access Transmission: seq=48, ra-rnti=0x2
-RRC IDLE
-Random Access Transmission: seq=10, ra-rnti=0x2
-Random Access Transmission: seq=8, ra-rnti=0x2
-Random Access Transmission: seq=48, ra-rnti=0x2
-Random Access Transmission: seq=16, ra-rnti=0x2
-Random Access Transmission: seq=50, ra-rnti=0x2
-Random Access Transmission: seq=1, ra-rnti=0x2
-Random Access Transmission: seq=28, ra-rnti=0x2
-Random Access Transmission: seq=26, ra-rnti=0x2
-Random Access Transmission: seq=44, ra-rnti=0x2
-Random Access Transmission: seq=47, ra-rnti=0x2
-Warning: Detected Radio-Link Failure
-Random Access Transmission: seq=36, ra-rnti=0x2
-Random Access Transmission: seq=9, ra-rnti=0x2
-Random Access Transmission: seq=1, ra-rnti=0x2
-Random Access Transmission: seq=39, ra-rnti=0x2
-Random Access Transmission: seq=2, ra-rnti=0x2
-Random Access Transmission: seq=46, ra-rnti=0x2
-Random Access Transmission: seq=51, ra-rnti=0x2
-Random Access Transmission: seq=20, ra-rnti=0x2
-Random Access Transmission: seq=31, ra-rnti=0x2
-Random Access Transmission: seq=28, ra-rnti=0x2
-Warning: Detected Radio-Link Failure
-Random Access Transmission: seq=0, ra-rnti=0x2
-Random Access Transmission: seq=39, ra-rnti=0x2
-Random Access Transmission: seq=49, ra-rnti=0x2
-Random Access Transmission: seq=31, ra-rnti=0x2
-Random Access Transmission: seq=30, ra-rnti=0x2
-Random Access Transmission: seq=38, ra-rnti=0x2
-Random Access Transmission: seq=46, ra-rnti=0x2
-Random Access Transmission: seq=48, ra-rnti=0x2
-Random Access Transmission: seq=9, ra-rnti=0x2
-Random Access Transmission: seq=42, ra-rnti=0x2
-Warning: Detected Radio-Link Failure
-Random Access Transmission: seq=49, ra-rnti=0x2
-Random Access Transmission: seq=19, ra-rnti=0x2
-Random Access Transmission: seq=26, ra-rnti=0x2
-Random Access Transmission: seq=45, ra-rnti=0x2
-Random Access Transmission: seq=35, ra-rnti=0x2
-Random Access Transmission: seq=25, ra-rnti=0x2
-Random Access Transmission: seq=23, ra-rnti=0x2
-Random Access Transmission: seq=11, ra-rnti=0x2
-Random Access Transmission: seq=27, ra-rnti=0x2
-Random Access Transmission: seq=43, ra-rnti=0x2
-Warning: Detected Radio-Link Failure
-Random Access Transmission: seq=35, ra-rnti=0x2
-Random Access Complete.     c-rnti=0x15b, ta=5
-RRC Connected
-Received service reject with EMM cause=0x9.
-.
-.
-..
-..
-.
-.
-Found Cell:  Mode=FDD, PCI=1, PRB=50, Ports=1, CFO=-0.8 KHz
-Found PLMN:  Id=90170, TAC=7
-Could not find Home PLMN Id=20893, trying to connect to PLMN Id=90170
-Network attach successful. IP: 172.16.0.2
-Software Radio Systems LTE (srsLTE) 25/1/2022 17:11:50 TZ:0
-Scheduling request failed: releasing RRC connection...
-Random Access Transmission: seq=11, ra-rnti=0x2
-Random Access Transmission: seq=0, ra-rnti=0x2
-Random Access Transmission: seq=36, ra-rnti=0x2
-Random Access Transmission: seq=50, ra-rnti=0x2
-Random Access Transmission: seq=31, ra-rnti=0x2
-Random Access Transmission: seq=7, ra-rnti=0x2
-Random Access Transmission: seq=26, ra-rnti=0x2
-Random Access Transmission: seq=51, ra-rnti=0x2
-Random Access Transmission: seq=38, ra-rnti=0x2
-Random Access Transmission: seq=2, ra-rnti=0x2
-Warning: Detected Radio-Link Failure
-RRC Connection Reestablishment
-Random Access Transmission: seq=27, ra-rnti=0x2
-Random Access Transmission: seq=25, ra-rnti=0x2
-Random Access Transmission: seq=51, ra-rnti=0x2
-Random Access Transmission: seq=35, ra-rnti=0x2
-Random Access Transmission: seq=4, ra-rnti=0x2
-RRC IDLE
-Random Access Transmission: seq=29, ra-rnti=0x2
-Random Access Complete.     c-rnti=0x17a, ta=5
-RRC Connected
-Received RRC Connection Release
-RRC IDLE
-Random Access Transmission: seq=22, ra-rnti=0x2
-Random Access Complete.     c-rnti=0x17b, ta=5
-RRC Connected
-Received RRC Connection Release
-RRC IDLE
-.
-Found Cell:  Mode=FDD, PCI=1, PRB=50, Ports=1, CFO=-0.9 KHz
-Random Access Transmission: seq=47, ra-rnti=0x2
-Random Access Complete.     c-rnti=0x17c, ta=5
-RRC Connected
-Received RRC Connection Release
-RRC IDLE
-Random Access Transmission: seq=2, ra-rnti=0x2
-Random Access Complete.     c-rnti=0x17d, ta=5
-RRC Connected
-Received RRC Connection Release
-RRC IDLE
-Random Access Transmission: seq=17, ra-rnti=0x2
-Random Access Complete.     c-rnti=0x17e, ta=5
-RRC Connected
-Scheduling request failed: releasing RRC connection...
-Random Access Transmission: seq=22, ra-rnti=0x2
-Random Access Transmission: seq=23, ra-rnti=0x2
-Random Access Transmission: seq=28, ra-rnti=0x2
-Random Access Transmission: seq=23, ra-rnti=0x2
-Random Access Transmission: seq=46, ra-rnti=0x2
-Random Access Transmission: seq=39, ra-rnti=0x2
-Random Access Transmission: seq=26, ra-rnti=0x2
-Random Access Transmission: seq=13, ra-rnti=0x2
-Random Access Transmission: seq=50, ra-rnti=0x2
-Random Access Transmission: seq=38, ra-rnti=0x2
-Warning: Detected Radio-Link Failure
-RRC IDLE
-Random Access Transmission: seq=42, ra-rnti=0x2
-Random Access Complete.     c-rnti=0x198, ta=5
-RRC Connected
-Received service reject with EMM cause=0x9.
-Network attach successful. IP: 172.16.0.2
-Software Radio Systems LTE (srsLTE) 25/1/2022 17:29:56 TZ:0
-Received RRC Connection Release
-RRC IDLE
-Random Access Transmission: seq=11, ra-rnti=0x2
-Random Access Transmission: seq=12, ra-rnti=0x2
-Random Access Transmission: seq=21, ra-rnti=0x2
-Random Access Transmission: seq=18, ra-rnti=0x2
-Random Access Transmission: seq=14, ra-rnti=0x2
-Random Access Transmission: seq=20, ra-rnti=0x2
-Random Access Transmission: seq=4, ra-rnti=0x2
-Random Access Transmission: seq=16, ra-rnti=0x2
-Random Access Transmission: seq=23, ra-rnti=0x2
-Random Access Transmission: seq=6, ra-rnti=0x2
-Warning: Detected Radio-Link Failure
-Random Access Transmission: seq=43, ra-rnti=0x2
-Random Access Transmission: seq=6, ra-rnti=0x2
-Random Access Transmission: seq=38, ra-rnti=0x2
-Random Access Transmission: seq=4, ra-rnti=0x2
-Random Access Transmission: seq=35, ra-rnti=0x2
-Random Access Transmission: seq=42, ra-rnti=0x2
-Random Access Transmission: seq=26, ra-rnti=0x2
-Random Access Transmission: seq=7, ra-rnti=0x2
-Random Access Transmission: seq=44, ra-rnti=0x2
-Random Access Transmission: seq=19, ra-rnti=0x2
-Warning: Detected Radio-Link Failure
-Random Access Transmission: seq=5, ra-rnti=0x2
-Random Access Transmission: seq=16, ra-rnti=0x2
-Random Access Transmission: seq=47, ra-rnti=0x2
-Random Access Transmission: seq=28, ra-rnti=0x2
-Random Access Transmission: seq=38, ra-rnti=0x2
-Random Access Transmission: seq=11, ra-rnti=0x2
-Random Access Transmission: seq=30, ra-rnti=0x2
-Random Access Transmission: seq=28, ra-rnti=0x2
-Random Access Transmission: seq=9, ra-rnti=0x2
-Random Access Transmission: seq=16, ra-rnti=0x2
-Warning: Detected Radio-Link Failure
-Random Access Transmission: seq=18, ra-rnti=0x2
-Random Access Transmission: seq=48, ra-rnti=0x2
-Random Access Transmission: seq=5, ra-rnti=0x2
-Random Access Transmission: seq=39, ra-rnti=0x2
-Random Access Transmission: seq=14, ra-rnti=0x2
-Random Access Transmission: seq=19, ra-rnti=0x2
-Random Access Transmission: seq=35, ra-rnti=0x2
-Random Access Transmission: seq=47, ra-rnti=0x2
-Random Access Transmission: seq=12, ra-rnti=0x2
-Random Access Transmission: seq=6, ra-rnti=0x2
-Warning: Detected Radio-Link Failure
-Random Access Transmission: seq=29, ra-rnti=0x2
-Random Access Transmission: seq=3, ra-rnti=0x2
-Random Access Transmission: seq=13, ra-rnti=0x2
-Random Access Transmission: seq=15, ra-rnti=0x2
-Random Access Transmission: seq=8, ra-rnti=0x2
-Random Access Transmission: seq=24, ra-rnti=0x2
-Random Access Transmission: seq=33, ra-rnti=0x2
-Random Access Transmission: seq=10, ra-rnti=0x2
-Random Access Transmission: seq=31, ra-rnti=0x2
-Random Access Transmission: seq=26, ra-rnti=0x2
-Warning: Detected Radio-Link Failure
-Random Access Transmission: seq=6, ra-rnti=0x2
-Random Access Transmission: seq=12, ra-rnti=0x2
-Random Access Transmission: seq=18, ra-rnti=0x2
-Random Access Transmission: seq=1, ra-rnti=0x2
 Random Access Transmission: seq=40, ra-rnti=0x2
+Random Access Transmission: seq=44, ra-rnti=0x2
+Random Access Transmission: seq=2, ra-rnti=0x2
+Random Access Transmission: seq=37, ra-rnti=0x2
+Random Access Transmission: seq=45, ra-rnti=0x2
 Random Access Transmission: seq=32, ra-rnti=0x2
-Random Access Transmission: seq=12, ra-rnti=0x2
 Random Access Transmission: seq=47, ra-rnti=0x2
-Random Access Transmission: seq=8, ra-rnti=0x2
-Random Access Transmission: seq=50, ra-rnti=0x2
 Warning: Detected Radio-Link Failure
-Random Access Transmission: seq=11, ra-rnti=0x2
-Random Access Complete.     c-rnti=0x237, ta=5
-RRC Connected
-Received service reject with EMM cause=0x9.
-Network attach successful. IP: 172.16.0.2
-Software Radio Systems LTE (srsLTE) 25/1/2022 17:38:42 TZ:0
-Received RRC Connection Release
-RRC IDLE
-Long small integers not supported
-This method only supports unpacking up to 32 bits
-The condition lb <= n <= ub (0 <= 15 <= 9) was not met
-[/home/dell46/srslte/lib/include/srslte/asn1/asn1_utils.h][744] Decoding failure.
-[/home/dell46/srslte/lib/src/asn1/rrc_asn1.cc][78997] Decoding failure.
-[/home/dell46/srslte/lib/src/asn1/rrc_asn1.cc][79062] Decoding failure.
-[/home/dell46/srslte/lib/include/srslte/asn1/asn1_utils.h][756] Decoding failure.
-[/home/dell46/srslte/lib/src/asn1/rrc_asn1.cc][79143] Decoding failure.
-[/home/dell46/srslte/lib/src/asn1/rrc_asn1.cc][79298] Decoding failure.
-[/home/dell46/srslte/lib/src/asn1/rrc_asn1.cc][79273] Decoding failure.
-[/home/dell46/srslte/lib/src/asn1/rrc_asn1.cc][79313] Decoding failure.
-The provided enum is not within the range of possible values (54>=4)
-[/home/dell46/srslte/lib/src/asn1/rrc_asn1.cc][79062] Decoding failure.
-[/home/dell46/srslte/lib/include/srslte/asn1/asn1_utils.h][756] Decoding failure.
-[/home/dell46/srslte/lib/src/asn1/rrc_asn1.cc][79143] Decoding failure.
-[/home/dell46/srslte/lib/src/asn1/rrc_asn1.cc][79298] Decoding failure.
-[/home/dell46/srslte/lib/src/asn1/rrc_asn1.cc][79273] Decoding failure.
-[/home/dell46/srslte/lib/src/asn1/rrc_asn1.cc][79313] Decoding failure.
-The provided enum is not within the range of possible values (9>=4)
-[/home/dell46/srslte/lib/src/asn1/rrc_asn1.cc][79062] Decoding failure.
-[/home/dell46/srslte/lib/include/srslte/asn1/asn1_utils.h][756] Decoding failure.
-[/home/dell46/srslte/lib/src/asn1/rrc_asn1.cc][79143] Decoding failure.
-[/home/dell46/srslte/lib/src/asn1/rrc_asn1.cc][79298] Decoding failure.
-[/home/dell46/srslte/lib/src/asn1/rrc_asn1.cc][79273] Decoding failure.
-[/home/dell46/srslte/lib/src/asn1/rrc_asn1.cc][79313] Decoding failure.
-The condition lb <= n <= ub (0 <= 13 <= 9) was not met
-[/home/dell46/srslte/lib/include/srslte/asn1/asn1_utils.h][744] Decoding failure.
-[/home/dell46/srslte/lib/src/asn1/rrc_asn1.cc][78997] Decoding failure.
-[/home/dell46/srslte/lib/src/asn1/rrc_asn1.cc][79062] Decoding failure.
-[/home/dell46/srslte/lib/include/srslte/asn1/asn1_utils.h][756] Decoding failure.
-[/home/dell46/srslte/lib/src/asn1/rrc_asn1.cc][79143] Decoding failure.
-[/home/dell46/srslte/lib/src/asn1/rrc_asn1.cc][79298] Decoding failure.
-[/home/dell46/srslte/lib/src/asn1/rrc_asn1.cc][79273] Decoding failure.
-[/home/dell46/srslte/lib/src/asn1/rrc_asn1.cc][79313] Decoding failure.
-Random Access Transmission: seq=26, ra-rnti=0x2
-Random Access Complete.     c-rnti=0x238, ta=5
-RRC Connected
-Received service reject with EMM cause=0x9.
-Network attach successful. IP: 172.16.0.2
-Software Radio Systems LTE (srsLTE) 25/1/2022 17:47:33 TZ:0
-Received RRC Connection Release
-RRC IDLE
-Random Access Transmission: seq=46, ra-rnti=0x2
-S-TMSI match in paging message
-Random Access Complete.     c-rnti=0x239, ta=5
-RRC Connected
-Received RRC Connection Release
-RRC IDLE
-Random Access Transmission: seq=44, ra-rnti=0x2
-Random Access Complete.     c-rnti=0x23a, ta=5
-RRC Connected
-Received RRC Connection Release
-RRC IDLE
 Random Access Transmission: seq=41, ra-rnti=0x2
-Random Access Complete.     c-rnti=0x23b, ta=5
-RRC Connected
-Received RRC Connection Release
-RRC IDLE
-Random Access Transmission: seq=9, ra-rnti=0x2
-Random Access Complete.     c-rnti=0x23c, ta=5
-RRC Connected
-Received RRC Connection Release
-RRC IDLE
-Random Access Transmission: seq=40, ra-rnti=0x2
-Random Access Complete.     c-rnti=0x23d, ta=5
-RRC Connected
-Received RRC Connection Release
-RRC IDLE
-Random Access Transmission: seq=24, ra-rnti=0x2
-Random Access Complete.     c-rnti=0x23e, ta=5
-RRC Connected
-Warning: Detected Radio-Link Failure
-RRC IDLE
-.
-Found Cell:  Mode=FDD, PCI=1, PRB=50, Ports=1, CFO=-1.1 KHz
-Random Access Transmission: seq=32, ra-rnti=0x2
-Random Access Complete.     c-rnti=0x23f, ta=5
-RRC Connected
-Received RRC Connection Release
-RRC IDLE
-Random Access Transmission: seq=0, ra-rnti=0x2
-Random Access Complete.     c-rnti=0x240, ta=5
-RRC Connected
-Received RRC Connection Release
-RRC IDLE
-.
-Found Cell:  Mode=FDD, PCI=1, PRB=50, Ports=1, CFO=-1.1 KHz
-Random Access Transmission: seq=7, ra-rnti=0x2
-Random Access Complete.     c-rnti=0x241, ta=5
-RRC Connected
-Received RRC Connection Release
-RRC IDLE
-Random Access Transmission: seq=9, ra-rnti=0x2
-Random Access Complete.     c-rnti=0x242, ta=5
-RRC Connected
-Received RRC Connection Release
-RRC IDLE
-The provided enum is not within the range of possible values (4>=4)
-[/home/dell46/srslte/lib/src/asn1/rrc_asn1.cc][79062] Decoding failure.
-[/home/dell46/srslte/lib/include/srslte/asn1/asn1_utils.h][756] Decoding failure.
-[/home/dell46/srslte/lib/src/asn1/rrc_asn1.cc][79143] Decoding failure.
-[/home/dell46/srslte/lib/src/asn1/rrc_asn1.cc][79298] Decoding failure.
-[/home/dell46/srslte/lib/src/asn1/rrc_asn1.cc][79273] Decoding failure.
-[/home/dell46/srslte/lib/src/asn1/rrc_asn1.cc][79313] Decoding failure.
-Random Access Transmission: seq=31, ra-rnti=0x2
-Random Access Transmission: seq=48, ra-rnti=0x2
-Random Access Transmission: seq=0, ra-rnti=0x2
-Random Access Transmission: seq=15, ra-rnti=0x2
-Random Access Transmission: seq=20, ra-rnti=0x2
-Random Access Transmission: seq=33, ra-rnti=0x2
-Random Access Transmission: seq=2, ra-rnti=0x2
-Random Access Transmission: seq=28, ra-rnti=0x2
-Random Access Transmission: seq=35, ra-rnti=0x2
-Random Access Transmission: seq=8, ra-rnti=0x2
-Warning: Detected Radio-Link Failure
-Random Access Transmission: seq=40, ra-rnti=0x2
-Random Access Transmission: seq=1, ra-rnti=0x2
-Random Access Transmission: seq=9, ra-rnti=0x2
-Random Access Transmission: seq=5, ra-rnti=0x2
-Random Access Transmission: seq=10, ra-rnti=0x2
-Random Access Transmission: seq=50, ra-rnti=0x2
-Random Access Transmission: seq=0, ra-rnti=0x2
-Random Access Transmission: seq=46, ra-rnti=0x2
-Random Access Transmission: seq=24, ra-rnti=0x2
-Random Access Transmission: seq=39, ra-rnti=0x2
-Warning: Detected Radio-Link Failure
-Random Access Transmission: seq=49, ra-rnti=0x2
-Random Access Transmission: seq=18, ra-rnti=0x2
-Random Access Transmission: seq=8, ra-rnti=0x2
-Random Access Transmission: seq=38, ra-rnti=0x2
-Random Access Transmission: seq=3, ra-rnti=0x2
-Random Access Transmission: seq=48, ra-rnti=0x2
-Random Access Transmission: seq=39, ra-rnti=0x2
-Random Access Transmission: seq=35, ra-rnti=0x2
-Random Access Transmission: seq=24, ra-rnti=0x2
-Random Access Transmission: seq=22, ra-rnti=0x2
-Warning: Detected Radio-Link Failure
-Random Access Transmission: seq=20, ra-rnti=0x2
-Random Access Transmission: seq=3, ra-rnti=0x2
-Random Access Transmission: seq=18, ra-rnti=0x2
-Random Access Transmission: seq=20, ra-rnti=0x2
 Random Access Transmission: seq=47, ra-rnti=0x2
-Random Access Transmission: seq=14, ra-rnti=0x2
-Random Access Transmission: seq=2, ra-rnti=0x2
-Random Access Transmission: seq=49, ra-rnti=0x2
-Random Access Transmission: seq=42, ra-rnti=0x2
-Random Access Transmission: seq=37, ra-rnti=0x2
-Warning: Detected Radio-Link Failure
-Random Access Transmission: seq=5, ra-rnti=0x2
-Random Access Transmission: seq=7, ra-rnti=0x2
-Random Access Transmission: seq=15, ra-rnti=0x2
-Random Access Transmission: seq=42, ra-rnti=0x2
-Random Access Transmission: seq=40, ra-rnti=0x2
-Random Access Transmission: seq=25, ra-rnti=0x2
-Random Access Transmission: seq=16, ra-rnti=0x2
-Random Access Transmission: seq=16, ra-rnti=0x2
+Random Access Transmission: seq=35, ra-rnti=0x2
 Random Access Transmission: seq=47, ra-rnti=0x2
-Random Access Transmission: seq=40, ra-rnti=0x2
-Warning: Detected Radio-Link Failure
-Random Access Transmission: seq=31, ra-rnti=0x2
-Random Access Transmission: seq=44, ra-rnti=0x2
-Random Access Transmission: seq=7, ra-rnti=0x2
-Random Access Transmission: seq=39, ra-rnti=0x2
-Random Access Transmission: seq=31, ra-rnti=0x2
-Random Access Transmission: seq=38, ra-rnti=0x2
 Random Access Transmission: seq=11, ra-rnti=0x2
-Random Access Transmission: seq=46, ra-rnti=0x2
-Random Access Transmission: seq=22, ra-rnti=0x2
-Random Access Transmission: seq=35, ra-rnti=0x2
-Warning: Detected Radio-Link Failure
-Random Access Transmission: seq=16, ra-rnti=0x2
-Random Access Transmission: seq=42, ra-rnti=0x2
-Random Access Transmission: seq=15, ra-rnti=0x2
-Random Access Transmission: seq=34, ra-rnti=0x2
-Random Access Transmission: seq=11, ra-rnti=0x2
-Random Access Transmission: seq=10, ra-rnti=0x2
-Random Access Transmission: seq=24, ra-rnti=0x2
-Random Access Transmission: seq=41, ra-rnti=0x2
-Random Access Transmission: seq=7, ra-rnti=0x2
-Random Access Transmission: seq=15, ra-rnti=0x2
-Warning: Detected Radio-Link Failure
-Random Access Transmission: seq=26, ra-rnti=0x2
-Random Access Transmission: seq=40, ra-rnti=0x2
-Random Access Transmission: seq=50, ra-rnti=0x2
-Random Access Transmission: seq=41, ra-rnti=0x2
-Random Access Transmission: seq=6, ra-rnti=0x2
-Random Access Transmission: seq=14, ra-rnti=0x2
-Random Access Transmission: seq=42, ra-rnti=0x2
-Random Access Transmission: seq=23, ra-rnti=0x2
-Random Access Transmission: seq=30, ra-rnti=0x2
-Random Access Transmission: seq=38, ra-rnti=0x2
-Warning: Detected Radio-Link Failure
-Random Access Transmission: seq=39, ra-rnti=0x2
-Random Access Transmission: seq=9, ra-rnti=0x2
-Random Access Transmission: seq=30, ra-rnti=0x2
-Random Access Transmission: seq=22, ra-rnti=0x2
-Random Access Transmission: seq=25, ra-rnti=0x2
-Random Access Transmission: seq=37, ra-rnti=0x2
-Random Access Transmission: seq=9, ra-rnti=0x2
-Random Access Transmission: seq=36, ra-rnti=0x2
-Random Access Transmission: seq=7, ra-rnti=0x2
-Random Access Transmission: seq=7, ra-rnti=0x2
-Warning: Detected Radio-Link Failure
-Random Access Transmission: seq=20, ra-rnti=0x2
-Random Access Transmission: seq=23, ra-rnti=0x2
-Random Access Transmission: seq=49, ra-rnti=0x2
-Random Access Transmission: seq=11, ra-rnti=0x2
-Random Access Transmission: seq=33, ra-rnti=0x2
-Random Access Transmission: seq=36, ra-rnti=0x2
-Random Access Transmission: seq=21, ra-rnti=0x2
-Random Access Transmission: seq=6, ra-rnti=0x2
-Random Access Transmission: seq=1, ra-rnti=0x2
-Random Access Transmission: seq=4, ra-rnti=0x2
-Warning: Detected Radio-Link Failure
-Random Access Transmission: seq=49, ra-rnti=0x2
-Random Access Transmission: seq=28, ra-rnti=0x2
-Random Access Transmission: seq=20, ra-rnti=0x2
-Random Access Transmission: seq=23, ra-rnti=0x2
-Random Access Transmission: seq=45, ra-rnti=0x2
-Random Access Transmission: seq=26, ra-rnti=0x2
-Random Access Transmission: seq=37, ra-rnti=0x2
-Random Access Transmission: seq=12, ra-rnti=0x2
-Random Access Transmission: seq=25, ra-rnti=0x2
-Random Access Transmission: seq=15, ra-rnti=0x2
-Warning: Detected Radio-Link Failure
-Random Access Transmission: seq=26, ra-rnti=0x2
-Random Access Transmission: seq=13, ra-rnti=0x2
-Random Access Transmission: seq=0, ra-rnti=0x2
-Random Access Transmission: seq=32, ra-rnti=0x2
-Random Access Transmission: seq=35, ra-rnti=0x2
-Random Access Transmission: seq=25, ra-rnti=0x2
-Random Access Transmission: seq=18, ra-rnti=0x2
-Random Access Transmission: seq=44, ra-rnti=0x2
-Random Access Transmission: seq=10, ra-rnti=0x2
-Random Access Transmission: seq=1, ra-rnti=0x2
-Warning: Detected Radio-Link Failure
-Random Access Transmission: seq=51, ra-rnti=0x2
-Random Access Complete.     c-rnti=0x336, ta=5
-RRC Connected
-Received service reject with EMM cause=0x9.
-Network attach successful. IP: 172.16.0.2
-Software Radio Systems LTE (srsLTE) 25/1/2022 18:49:26 TZ:0
-Received RRC Connection Release
-RRC IDLE
-Random Access Transmission: seq=6, ra-rnti=0x2
-Random Access Complete.     c-rnti=0x337, ta=5
-RRC Connected
-Received RRC Connection Release
-RRC IDLE
-Random Access Transmission: seq=25, ra-rnti=0x2
-Random Access Complete.     c-rnti=0x338, ta=5
-RRC Connected
-Warning: Detected Radio-Link Failure
-RRC IDLE
-.
-Found Cell:  Mode=FDD, PCI=1, PRB=50, Ports=1, CFO=-1.2 KHz
-Not handling octet strings longer than 16383 octets
-[/home/dell46/srslte/lib/src/asn1/asn1_utils.cc][738] Decoding failure.
-[/home/dell46/srslte/lib/src/asn1/rrc_asn1.cc][79097] Decoding failure.
-[/home/dell46/srslte/lib/src/asn1/rrc_asn1.cc][79146] Decoding failure.
-[/home/dell46/srslte/lib/src/asn1/rrc_asn1.cc][79298] Decoding failure.
-[/home/dell46/srslte/lib/src/asn1/rrc_asn1.cc][79273] Decoding failure.
-[/home/dell46/srslte/lib/src/asn1/rrc_asn1.cc][79313] Decoding failure.
-The provided enum is not within the range of possible values (29>=4)
-[/home/dell46/srslte/lib/src/asn1/rrc_asn1.cc][79062] Decoding failure.
-[/home/dell46/srslte/lib/include/srslte/asn1/asn1_utils.h][756] Decoding failure.
-[/home/dell46/srslte/lib/src/asn1/rrc_asn1.cc][79143] Decoding failure.
-[/home/dell46/srslte/lib/src/asn1/rrc_asn1.cc][79298] Decoding failure.
-[/home/dell46/srslte/lib/src/asn1/rrc_asn1.cc][79273] Decoding failure.
-[/home/dell46/srslte/lib/src/asn1/rrc_asn1.cc][79313] Decoding failure.
-The condition lb <= n <= ub (0 <= 10 <= 9) was not met
-[/home/dell46/srslte/lib/include/srslte/asn1/asn1_utils.h][744] Decoding failure.
-[/home/dell46/srslte/lib/src/asn1/rrc_asn1.cc][78997] Decoding failure.
-[/home/dell46/srslte/lib/src/asn1/rrc_asn1.cc][79062] Decoding failure.
-[/home/dell46/srslte/lib/include/srslte/asn1/asn1_utils.h][756] Decoding failure.
-[/home/dell46/srslte/lib/src/asn1/rrc_asn1.cc][79143] Decoding failure.
-[/home/dell46/srslte/lib/src/asn1/rrc_asn1.cc][79298] Decoding failure.
-[/home/dell46/srslte/lib/src/asn1/rrc_asn1.cc][79273] Decoding failure.
-[/home/dell46/srslte/lib/src/asn1/rrc_asn1.cc][79313] Decoding failure.
-Long small integers not supported
-Not handling octet strings longer than 16383 octets
-This method only supports unpacking up to 32 bits
-The condition lb <= n <= ub (0 <= 10 <= 9) was not met
-[/home/dell46/srslte/lib/include/srslte/asn1/asn1_utils.h][744] Decoding failure.
-[/home/dell46/srslte/lib/src/asn1/rrc_asn1.cc][78997] Decoding failure.
-[/home/dell46/srslte/lib/src/asn1/rrc_asn1.cc][79062] Decoding failure.
-[/home/dell46/srslte/lib/include/srslte/asn1/asn1_utils.h][756] Decoding failure.
-[/home/dell46/srslte/lib/src/asn1/rrc_asn1.cc][79143] Decoding failure.
-[/home/dell46/srslte/lib/src/asn1/rrc_asn1.cc][79298] Decoding failure.
-[/home/dell46/srslte/lib/src/asn1/rrc_asn1.cc][79273] Decoding failure.
-[/home/dell46/srslte/lib/src/asn1/rrc_asn1.cc][79313] Decoding failure.
-The provided enum is not within the range of possible values (43>=4)
-[/home/dell46/srslte/lib/src/asn1/rrc_asn1.cc][79062] Decoding failure.
-[/home/dell46/srslte/lib/include/srslte/asn1/asn1_utils.h][756] Decoding failure.
-[/home/dell46/srslte/lib/src/asn1/rrc_asn1.cc][79143] Decoding failure.
-[/home/dell46/srslte/lib/src/asn1/rrc_asn1.cc][79298] Decoding failure.
-[/home/dell46/srslte/lib/src/asn1/rrc_asn1.cc][79273] Decoding failure.
-[/home/dell46/srslte/lib/src/asn1/rrc_asn1.cc][79313] Decoding failure.
-Random Access Transmission: seq=25, ra-rnti=0x2
-Random Access Complete.     c-rnti=0x339, ta=5
-RRC Connected
-Received service reject with EMM cause=0x9.
-Network attach successful. IP: 172.16.0.2
-Software Radio Systems LTE (srsLTE) 25/1/2022 19:7:12 TZ:0
-Scheduling request failed: releasing RRC connection...
-Random Access Transmission: seq=45, ra-rnti=0x2
-Random Access Transmission: seq=34, ra-rnti=0x2
-Random Access Transmission: seq=37, ra-rnti=0x2
-Random Access Transmission: seq=14, ra-rnti=0x2
-Random Access Transmission: seq=16, ra-rnti=0x2
-Random Access Transmission: seq=39, ra-rnti=0x2
-Random Access Transmission: seq=46, ra-rnti=0x2
-Random Access Transmission: seq=13, ra-rnti=0x2
 Random Access Transmission: seq=43, ra-rnti=0x2
-Random Access Transmission: seq=14, ra-rnti=0x2
-Warning: Detected Radio-Link Failure
-RRC Connection Reestablishment
-Random Access Transmission: seq=12, ra-rnti=0x2
-Random Access Complete.     c-rnti=0x344, ta=5
-Reestablishment Reject
-RRC IDLE
-Random Access Transmission: seq=12, ra-rnti=0x2
-Random Access Complete.     c-rnti=0x345, ta=5
-RRC Connected
-Received RRC Connection Release
-RRC IDLE
-Random Access Transmission: seq=40, ra-rnti=0x2
-Random Access Complete.     c-rnti=0x346, ta=5
-RRC Connected
-Received RRC Connection Release
-RRC IDLE
-The provided enum is not within the range of possible values (17>=4)
-[/home/dell46/srslte/lib/src/asn1/rrc_asn1.cc][79062] Decoding failure.
-[/home/dell46/srslte/lib/include/srslte/asn1/asn1_utils.h][756] Decoding failure.
-[/home/dell46/srslte/lib/src/asn1/rrc_asn1.cc][79143] Decoding failure.
-[/home/dell46/srslte/lib/src/asn1/rrc_asn1.cc][79298] Decoding failure.
-[/home/dell46/srslte/lib/src/asn1/rrc_asn1.cc][79273] Decoding failure.
-[/home/dell46/srslte/lib/src/asn1/rrc_asn1.cc][79313] Decoding failure.
-Long small integers not supported
-This method only supports unpacking up to 32 bits
-The condition lb <= n <= ub (0 <= 12 <= 9) was not met
-[/home/dell46/srslte/lib/include/srslte/asn1/asn1_utils.h][744] Decoding failure.
-[/home/dell46/srslte/lib/src/asn1/rrc_asn1.cc][78997] Decoding failure.
-[/home/dell46/srslte/lib/src/asn1/rrc_asn1.cc][79062] Decoding failure.
-[/home/dell46/srslte/lib/include/srslte/asn1/asn1_utils.h][756] Decoding failure.
-[/home/dell46/srslte/lib/src/asn1/rrc_asn1.cc][79143] Decoding failure.
-[/home/dell46/srslte/lib/src/asn1/rrc_asn1.cc][79298] Decoding failure.
-[/home/dell46/srslte/lib/src/asn1/rrc_asn1.cc][79273] Decoding failure.
-[/home/dell46/srslte/lib/src/asn1/rrc_asn1.cc][79313] Decoding failure.
-Random Access Transmission: seq=49, ra-rnti=0x2
-Random Access Complete.     c-rnti=0x347, ta=5
-RRC Connected
-Received RRC Connection Release
-RRC IDLE
-Random Access Transmission: seq=24, ra-rnti=0x2
-Random Access Complete.     c-rnti=0x348, ta=5
-RRC Connected
-Received RRC Connection Release
-RRC IDLE
-Random Access Transmission: seq=42, ra-rnti=0x2
-Random Access Complete.     c-rnti=0x349, ta=5
-RRC Connected
-Warning: Detected Radio-Link Failure
-RRC IDLE
-.
-Found Cell:  Mode=FDD, PCI=1, PRB=50, Ports=1, CFO=-0.8 KHz
-.
-Found Cell:  Mode=FDD, PCI=1, PRB=50, Ports=1, CFO=-1.2 KHz
-Random Access Transmission: seq=40, ra-rnti=0x2
-Random Access Complete.     c-rnti=0x34a, ta=5
-RRC Connected
-Received RRC Connection Release
-RRC IDLE
-Long small integers not supported
-This method only supports unpacking up to 32 bits
-The condition lb <= n <= ub (0 <= 10 <= 9) was not met
-[/home/dell46/srslte/lib/include/srslte/asn1/asn1_utils.h][744] Decoding failure.
-[/home/dell46/srslte/lib/src/asn1/rrc_asn1.cc][78997] Decoding failure.
-[/home/dell46/srslte/lib/src/asn1/rrc_asn1.cc][79062] Decoding failure.
-[/home/dell46/srslte/lib/include/srslte/asn1/asn1_utils.h][756] Decoding failure.
-[/home/dell46/srslte/lib/src/asn1/rrc_asn1.cc][79143] Decoding failure.
-[/home/dell46/srslte/lib/src/asn1/rrc_asn1.cc][79298] Decoding failure.
-[/home/dell46/srslte/lib/src/asn1/rrc_asn1.cc][79273] Decoding failure.
-[/home/dell46/srslte/lib/src/asn1/rrc_asn1.cc][79313] Decoding failure.
-The condition lb <= n <= ub (0 <= 12 <= 9) was not met
-[/home/dell46/srslte/lib/include/srslte/asn1/asn1_utils.h][744] Decoding failure.
-[/home/dell46/srslte/lib/src/asn1/rrc_asn1.cc][78997] Decoding failure.
-[/home/dell46/srslte/lib/src/asn1/rrc_asn1.cc][79062] Decoding failure.
-[/home/dell46/srslte/lib/include/srslte/asn1/asn1_utils.h][756] Decoding failure.
-[/home/dell46/srslte/lib/src/asn1/rrc_asn1.cc][79143] Decoding failure.
-[/home/dell46/srslte/lib/src/asn1/rrc_asn1.cc][79298] Decoding failure.
-[/home/dell46/srslte/lib/src/asn1/rrc_asn1.cc][79273] Decoding failure.
-[/home/dell46/srslte/lib/src/asn1/rrc_asn1.cc][79313] Decoding failure.
-Not handling octet strings longer than 16383 octets
-[/home/dell46/srslte/lib/src/asn1/asn1_utils.cc][738] Decoding failure.
-[/home/dell46/srslte/lib/src/asn1/rrc_asn1.cc][79097] Decoding failure.
-[/home/dell46/srslte/lib/src/asn1/rrc_asn1.cc][79146] Decoding failure.
-[/home/dell46/srslte/lib/src/asn1/rrc_asn1.cc][79298] Decoding failure.
-[/home/dell46/srslte/lib/src/asn1/rrc_asn1.cc][79273] Decoding failure.
-[/home/dell46/srslte/lib/src/asn1/rrc_asn1.cc][79313] Decoding failure.
-Random Access Transmission: seq=26, ra-rnti=0x2
-Random Access Complete.     c-rnti=0x34b, ta=5
-RRC Connected
-Received RRC Connection Release
-RRC IDLE
-Random Access Transmission: seq=3, ra-rnti=0x2
-Random Access Complete.     c-rnti=0x34c, ta=5
-RRC Connected
-Received RRC Connection Release
-RRC IDLE
-Random Access Transmission: seq=41, ra-rnti=0x2
-Random Access Transmission: seq=7, ra-rnti=0x2
-Random Access Transmission: seq=38, ra-rnti=0x2
-Random Access Transmission: seq=42, ra-rnti=0x2
-Random Access Transmission: seq=1, ra-rnti=0x2
-Random Access Transmission: seq=7, ra-rnti=0x2
-Random Access Transmission: seq=28, ra-rnti=0x2
-Random Access Transmission: seq=2, ra-rnti=0x2
-Random Access Transmission: seq=34, ra-rnti=0x2
-Random Access Transmission: seq=10, ra-rnti=0x2
-Warning: Detected Radio-Link Failure
-Random Access Transmission: seq=3, ra-rnti=0x2
-Random Access Transmission: seq=35, ra-rnti=0x2
-Random Access Transmission: seq=3, ra-rnti=0x2
-Random Access Transmission: seq=38, ra-rnti=0x2
-Random Access Transmission: seq=49, ra-rnti=0x2
-Random Access Transmission: seq=17, ra-rnti=0x2
-Random Access Transmission: seq=2, ra-rnti=0x2
-Random Access Transmission: seq=12, ra-rnti=0x2
-Random Access Transmission: seq=39, ra-rnti=0x2
-Random Access Transmission: seq=44, ra-rnti=0x2
-Warning: Detected Radio-Link Failure
-Random Access Transmission: seq=31, ra-rnti=0x2
-Random Access Transmission: seq=1, ra-rnti=0x2
-Random Access Transmission: seq=4, ra-rnti=0x2
-Random Access Transmission: seq=43, ra-rnti=0x2
-Random Access Transmission: seq=18, ra-rnti=0x2
-Random Access Transmission: seq=30, ra-rnti=0x2
-Random Access Transmission: seq=44, ra-rnti=0x2
-Random Access Transmission: seq=8, ra-rnti=0x2
-Random Access Transmission: seq=18, ra-rnti=0x2
-Random Access Transmission: seq=18, ra-rnti=0x2
-Warning: Detected Radio-Link Failure
-.
-Found Cell:  Mode=FDD, PCI=1, PRB=50, Ports=1, CFO=-0.9 KHz
-The provided enum is not within the range of possible values (64>=4)
-[/home/dell46/srslte/lib/src/asn1/rrc_asn1.cc][79062] Decoding failure.
-[/home/dell46/srslte/lib/include/srslte/asn1/asn1_utils.h][756] Decoding failure.
-[/home/dell46/srslte/lib/src/asn1/rrc_asn1.cc][79143] Decoding failure.
-[/home/dell46/srslte/lib/src/asn1/rrc_asn1.cc][79298] Decoding failure.
-[/home/dell46/srslte/lib/src/asn1/rrc_asn1.cc][79273] Decoding failure.
-[/home/dell46/srslte/lib/src/asn1/rrc_asn1.cc][79313] Decoding failure.
-Not handling octet strings longer than 16383 octets
-[/home/dell46/srslte/lib/src/asn1/asn1_utils.cc][738] Decoding failure.
-[/home/dell46/srslte/lib/src/asn1/rrc_asn1.cc][79097] Decoding failure.
-[/home/dell46/srslte/lib/src/asn1/rrc_asn1.cc][79146] Decoding failure.
-[/home/dell46/srslte/lib/src/asn1/rrc_asn1.cc][79298] Decoding failure.
-[/home/dell46/srslte/lib/src/asn1/rrc_asn1.cc][79273] Decoding failure.
-[/home/dell46/srslte/lib/src/asn1/rrc_asn1.cc][79313] Decoding failure.
-The condition lb <= n <= ub (0 <= 10 <= 9) was not met
-[/home/dell46/srslte/lib/include/srslte/asn1/asn1_utils.h][744] Decoding failure.
-[/home/dell46/srslte/lib/src/asn1/rrc_asn1.cc][78997] Decoding failure.
-[/home/dell46/srslte/lib/src/asn1/rrc_asn1.cc][79062] Decoding failure.
-[/home/dell46/srslte/lib/include/srslte/asn1/asn1_utils.h][756] Decoding failure.
-[/home/dell46/srslte/lib/src/asn1/rrc_asn1.cc][79143] Decoding failure.
-[/home/dell46/srslte/lib/src/asn1/rrc_asn1.cc][79298] Decoding failure.
-[/home/dell46/srslte/lib/src/asn1/rrc_asn1.cc][79273] Decoding failure.
-[/home/dell46/srslte/lib/src/asn1/rrc_asn1.cc][79313] Decoding failure.
-The condition lb <= n <= ub (0 <= 10 <= 9) was not met
-[/home/dell46/srslte/lib/include/srslte/asn1/asn1_utils.h][744] Decoding failure.
-[/home/dell46/srslte/lib/src/asn1/rrc_asn1.cc][78997] Decoding failure.
-[/home/dell46/srslte/lib/src/asn1/rrc_asn1.cc][79062] Decoding failure.
-[/home/dell46/srslte/lib/include/srslte/asn1/asn1_utils.h][756] Decoding failure.
-[/home/dell46/srslte/lib/src/asn1/rrc_asn1.cc][79143] Decoding failure.
-[/home/dell46/srslte/lib/src/asn1/rrc_asn1.cc][79298] Decoding failure.
-[/home/dell46/srslte/lib/src/asn1/rrc_asn1.cc][79273] Decoding failure.
-[/home/dell46/srslte/lib/src/asn1/rrc_asn1.cc][79313] Decoding failure.
-.
-Found Cell:  Mode=FDD, PCI=1, PRB=50, Ports=1, CFO=-0.9 KHz
-Random Access Transmission: seq=11, ra-rnti=0x2
-Random Access Complete.     c-rnti=0x381, ta=5
-RRC Connected
-Received service reject with EMM cause=0x9.
-Network attach successful. IP: 172.16.0.2
-Software Radio Systems LTE (srsLTE) 25/1/2022 19:51:21 TZ:0
-Received RRC Connection Release
-RRC IDLE
-Random Access Transmission: seq=7, ra-rnti=0x2
-Random Access Complete.     c-rnti=0x382, ta=5
-RRC Connected
-Received RRC Connection Release
-RRC IDLE
-Random Access Transmission: seq=1, ra-rnti=0x2
-Random Access Complete.     c-rnti=0x383, ta=5
-RRC Connected
-Received RRC Connection Release
-RRC IDLE
-Random Access Transmission: seq=25, ra-rnti=0x2
-Random Access Complete.     c-rnti=0x384, ta=5
-RRC Connected
-Received RRC Connection Release
-RRC IDLE
-Random Access Transmission: seq=26, ra-rnti=0x2
-Random Access Complete.     c-rnti=0x385, ta=5
-RRC Connected
-Received RRC Connection Release
-RRC IDLE
-Random Access Transmission: seq=2, ra-rnti=0x2
-Random Access Complete.     c-rnti=0x386, ta=5
-RRC Connected
-Received RRC Connection Release
-RRC IDLE
-Random Access Transmission: seq=8, ra-rnti=0x2
-Random Access Transmission: seq=2, ra-rnti=0x2
-Random Access Transmission: seq=5, ra-rnti=0x2
 Random Access Transmission: seq=19, ra-rnti=0x2
-Random Access Transmission: seq=13, ra-rnti=0x2
 Random Access Transmission: seq=8, ra-rnti=0x2
-Random Access Transmission: seq=2, ra-rnti=0x2
-Random Access Transmission: seq=16, ra-rnti=0x2
-Random Access Transmission: seq=22, ra-rnti=0x2
-Random Access Transmission: seq=27, ra-rnti=0x2
-Warning: Detected Radio-Link Failure
-Random Access Transmission: seq=10, ra-rnti=0x2
-Random Access Transmission: seq=1, ra-rnti=0x2
-Random Access Transmission: seq=39, ra-rnti=0x2
+Random Access Transmission: seq=31, ra-rnti=0x2
 Random Access Transmission: seq=49, ra-rnti=0x2
-Random Access Transmission: seq=21, ra-rnti=0x2
-Random Access Transmission: seq=18, ra-rnti=0x2
-Random Access Transmission: seq=27, ra-rnti=0x2
-Random Access Transmission: seq=25, ra-rnti=0x2
-Random Access Transmission: seq=10, ra-rnti=0x2
-Random Access Transmission: seq=45, ra-rnti=0x2
 Warning: Detected Radio-Link Failure
-Random Access Transmission: seq=3, ra-rnti=0x2
-Random Access Transmission: seq=30, ra-rnti=0x2
-Random Access Transmission: seq=1, ra-rnti=0x2
-Random Access Transmission: seq=50, ra-rnti=0x2
-Random Access Transmission: seq=24, ra-rnti=0x2
-Random Access Transmission: seq=40, ra-rnti=0x2
-Random Access Transmission: seq=33, ra-rnti=0x2
-Random Access Transmission: seq=26, ra-rnti=0x2
-Random Access Transmission: seq=13, ra-rnti=0x2
-Random Access Transmission: seq=7, ra-rnti=0x2
-Warning: Detected Radio-Link Failure
-Random Access Transmission: seq=28, ra-rnti=0x2
-Random Access Transmission: seq=50, ra-rnti=0x2
-Random Access Transmission: seq=10, ra-rnti=0x2
-Random Access Transmission: seq=9, ra-rnti=0x2
-Random Access Transmission: seq=17, ra-rnti=0x2
-Random Access Transmission: seq=51, ra-rnti=0x2
-Random Access Transmission: seq=18, ra-rnti=0x2
-Random Access Transmission: seq=47, ra-rnti=0x2
-Random Access Transmission: seq=43, ra-rnti=0x2
-Random Access Transmission: seq=16, ra-rnti=0x2
-Warning: Detected Radio-Link Failure
-Random Access Transmission: seq=23, ra-rnti=0x2
-Random Access Complete.     c-rnti=0x3ae, ta=5
-RRC Connected
-Received service reject with EMM cause=0x9.
-Network attach successful. IP: 172.16.0.2
-Software Radio Systems LTE (srsLTE) 25/1/2022 20:26:45 TZ:0
-Received RRC Connection Release
-RRC IDLE
-Buffer size limit was achieved
-[/home/dell46/srslte/lib/src/asn1/asn1_utils.cc][741] Decoding failure.
-[/home/dell46/srslte/lib/src/asn1/rrc_asn1.cc][79097] Decoding failure.
-[/home/dell46/srslte/lib/src/asn1/rrc_asn1.cc][79146] Decoding failure.
-[/home/dell46/srslte/lib/src/asn1/rrc_asn1.cc][79298] Decoding failure.
-[/home/dell46/srslte/lib/src/asn1/rrc_asn1.cc][79273] Decoding failure.
-[/home/dell46/srslte/lib/src/asn1/rrc_asn1.cc][79313] Decoding failure.
-The condition lb <= n <= ub (0 <= 11 <= 9) was not met
-[/home/dell46/srslte/lib/include/srslte/asn1/asn1_utils.h][744] Decoding failure.
-[/home/dell46/srslte/lib/src/asn1/rrc_asn1.cc][78997] Decoding failure.
-[/home/dell46/srslte/lib/src/asn1/rrc_asn1.cc][79062] Decoding failure.
-[/home/dell46/srslte/lib/include/srslte/asn1/asn1_utils.h][756] Decoding failure.
-[/home/dell46/srslte/lib/src/asn1/rrc_asn1.cc][79143] Decoding failure.
-[/home/dell46/srslte/lib/src/asn1/rrc_asn1.cc][79298] Decoding failure.
-[/home/dell46/srslte/lib/src/asn1/rrc_asn1.cc][79273] Decoding failure.
-[/home/dell46/srslte/lib/src/asn1/rrc_asn1.cc][79313] Decoding failure.
-Random Access Transmission: seq=29, ra-rnti=0x2
-Random Access Transmission: seq=17, ra-rnti=0x2
-Random Access Transmission: seq=10, ra-rnti=0x2
-Random Access Transmission: seq=3, ra-rnti=0x2
-Random Access Transmission: seq=14, ra-rnti=0x2
 Random Access Transmission: seq=5, ra-rnti=0x2
-Random Access Transmission: seq=30, ra-rnti=0x2
-Random Access Transmission: seq=40, ra-rnti=0x2
-Random Access Transmission: seq=43, ra-rnti=0x2
-Random Access Transmission: seq=23, ra-rnti=0x2
-Warning: Detected Radio-Link Failure
-Random Access Transmission: seq=19, ra-rnti=0x2
-Random Access Transmission: seq=21, ra-rnti=0x2
-Random Access Transmission: seq=0, ra-rnti=0x2
-Random Access Transmission: seq=17, ra-rnti=0x2
-Random Access Transmission: seq=45, ra-rnti=0x2
-Random Access Transmission: seq=40, ra-rnti=0x2
-Random Access Transmission: seq=51, ra-rnti=0x2
-Random Access Transmission: seq=19, ra-rnti=0x2
-Random Access Transmission: seq=29, ra-rnti=0x2
-Random Access Transmission: seq=6, ra-rnti=0x2
-Warning: Detected Radio-Link Failure
-.
-Found Cell:  Mode=FDD, PCI=1, PRB=50, Ports=1, CFO=-0.9 KHz
 Random Access Transmission: seq=24, ra-rnti=0x2
-Random Access Complete.     c-rnti=0x407, ta=5
-RRC Connected
-Received service reject with EMM cause=0x9.
-Network attach successful. IP: 172.16.0.2
-Software Radio Systems LTE (srsLTE) 25/1/2022 20:35:36 TZ:0
-Received RRC Connection Release
-RRC IDLE
-The condition lb <= n <= ub (0 <= 11 <= 9) was not met
-[/home/dell46/srslte/lib/include/srslte/asn1/asn1_utils.h][744] Decoding failure.
-[/home/dell46/srslte/lib/src/asn1/rrc_asn1.cc][78997] Decoding failure.
-[/home/dell46/srslte/lib/src/asn1/rrc_asn1.cc][79062] Decoding failure.
-[/home/dell46/srslte/lib/include/srslte/asn1/asn1_utils.h][756] Decoding failure.
-[/home/dell46/srslte/lib/src/asn1/rrc_asn1.cc][79143] Decoding failure.
-[/home/dell46/srslte/lib/src/asn1/rrc_asn1.cc][79298] Decoding failure.
-[/home/dell46/srslte/lib/src/asn1/rrc_asn1.cc][79273] Decoding failure.
-[/home/dell46/srslte/lib/src/asn1/rrc_asn1.cc][79313] Decoding failure.
-The condition lb <= n <= ub (0 <= 13 <= 9) was not met
-[/home/dell46/srslte/lib/include/srslte/asn1/asn1_utils.h][744] Decoding failure.
-[/home/dell46/srslte/lib/src/asn1/rrc_asn1.cc][78997] Decoding failure.
-[/home/dell46/srslte/lib/src/asn1/rrc_asn1.cc][79062] Decoding failure.
-[/home/dell46/srslte/lib/include/srslte/asn1/asn1_utils.h][756] Decoding failure.
-[/home/dell46/srslte/lib/src/asn1/rrc_asn1.cc][79143] Decoding failure.
-[/home/dell46/srslte/lib/src/asn1/rrc_asn1.cc][79298] Decoding failure.
-[/home/dell46/srslte/lib/src/asn1/rrc_asn1.cc][79273] Decoding failure.
-[/home/dell46/srslte/lib/src/asn1/rrc_asn1.cc][79313] Decoding failure.
-Buffer size limit was achieved
-[/home/dell46/srslte/lib/src/asn1/asn1_utils.cc][787] Decoding failure.
-[/home/dell46/srslte/lib/src/asn1/rrc_asn1.cc][78797] Decoding failure.
-[/home/dell46/srslte/lib/src/asn1/rrc_asn1.cc][78994] Decoding failure.
-[/home/dell46/srslte/lib/src/asn1/rrc_asn1.cc][79062] Decoding failure.
-[/home/dell46/srslte/lib/include/srslte/asn1/asn1_utils.h][756] Decoding failure.
-[/home/dell46/srslte/lib/src/asn1/rrc_asn1.cc][79143] Decoding failure.
-[/home/dell46/srslte/lib/src/asn1/rrc_asn1.cc][79298] Decoding failure.
-[/home/dell46/srslte/lib/src/asn1/rrc_asn1.cc][79273] Decoding failure.
-[/home/dell46/srslte/lib/src/asn1/rrc_asn1.cc][79313] Decoding failure.
-The condition lb <= n <= ub (0 <= 14 <= 9) was not met
-[/home/dell46/srslte/lib/include/srslte/asn1/asn1_utils.h][744] Decoding failure.
-[/home/dell46/srslte/lib/src/asn1/rrc_asn1.cc][78997] Decoding failure.
-[/home/dell46/srslte/lib/src/asn1/rrc_asn1.cc][79062] Decoding failure.
-[/home/dell46/srslte/lib/include/srslte/asn1/asn1_utils.h][756] Decoding failure.
-[/home/dell46/srslte/lib/src/asn1/rrc_asn1.cc][79143] Decoding failure.
-[/home/dell46/srslte/lib/src/asn1/rrc_asn1.cc][79298] Decoding failure.
-[/home/dell46/srslte/lib/src/asn1/rrc_asn1.cc][79273] Decoding failure.
-[/home/dell46/srslte/lib/src/asn1/rrc_asn1.cc][79313] Decoding failure.
-Random Access Transmission: seq=3, ra-rnti=0x2
-Random Access Complete.     c-rnti=0x408, ta=5
-RRC Connected
-Received RRC Connection Release
-RRC IDLE
-.
-Found Cell:  Mode=FDD, PCI=1, PRB=50, Ports=1, CFO=-1.7 KHz
-Selected cell PCI=1, EARFCN=2850
-.......................................................................................................
-.
-..................................................................................................................................................................................................................................................................................................................................................
-............................................Stopping srsUE... Press Ctrl+C 9 more times to force stop
-.......---  exiting  ---
+Random Access Transmission: seq=20, ra-rnti=0x2
+Random Access Transmission: seq=47, ra-rnti=0x2
+Random Access Transmission: seq=25, ra-rnti=0x2
+Random Access Transmission: seq=0, ra-rnti=0x2
+Random Access Transmission: seq=38, ra-rnti=0x2
+Random Access Transmission: seq=13, ra-rnti=0x2
+Random Access Transmission: seq=43, ra-rnti=0x2
+Random Access Transmission: seq=1, ra-rnti=0x2
+Warning: Detected Radio-Link Failure
+...........................
+...................................................................................................................................................................................................................................................................................................
+.........................................................................................................................
+.....................................................................................................................................................
+...................................................................................................................................................................................................................................................................
+........................................................................................................................................................................................................................................................................................................................................
+.......................................................................................................................................................
+................................................................................................................................................................................................................................................................................................................................................................................................
+.......
+................
+...............................................................................................................................................................................................................................
+.................
+...................................................
+...........................................................................................................................................
+.............................................................................................................................................................................................................................................................................................................................................................................................
+...................
+......................................................................
