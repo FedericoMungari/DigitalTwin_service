@@ -98,6 +98,7 @@ def callback_joint_states(joint_states):
 		if moving == True:
 			moving = False
 			elapsed_time = (rtime.secs * 1000000000 + rtime.nsecs) - init_time
+			
 			logging(name, elapsed_time / 1000000, position)
 			# print("Execution time: ", elapsed_time / 1000000, "ms")
 

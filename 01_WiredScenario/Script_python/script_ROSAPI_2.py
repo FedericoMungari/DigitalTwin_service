@@ -92,16 +92,28 @@ def callback_joint_states(joint_states):
 	global moving, last_position, init_time
 
 	rtime = rospy.Time.now()
+	# print(last_position)
+	# print(joint_states.position)
   
 	# print(last_position, " : ", joint_states.position)
 	diff = [abs(x1 - x2) for (x1, x2) in zip(last_position, joint_states.position)]
-	if all(x < 0.0001 for x in diff) == True:
+	# print(diff)
+	# print(" ")
+	if all(x < 0.01 for x in diff) == True:
 		# print("\n\nEqual")
 		if moving == True:
+			# print("Moving")
 	  		moving = False
 	  		elapsed_time = (rtime.secs * 1000000000 + rtime.nsecs) - init_time
+	  		print(name, elapsed_time / 1000000, joint_states.position)
 	  		logging(name, elapsed_time / 1000000, joint_states.position)
 	  		# print("Execution time: ", elapsed_time / 1000000, "ms")
+	  	else:
+	  		# print("NOT Moving")
+	  		pass
+	else:
+		# print("\n\nNOT Equal")
+		pass
 
 if __name__=="__main__":
 	rospy.init_node('niryo_one_example_python_api')
