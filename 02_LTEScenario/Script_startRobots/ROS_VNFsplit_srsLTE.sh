@@ -283,18 +283,22 @@ if [[ $# -eq 5 ]]; then
 	# ####################################################################################################################################
 	# eu
 	echo -e "\n* * * * * * * * * * * * * * * * * * * * * *\nSTEP 12: Bidirectional ping between eNB and UE"
-	if false
+	if true
 	then
-		echo "First brief ping from eNB to UE"
-		ping -c 5 $ROBOT_HOST_IP_LTE
-		echo "First brief ping from UE to eNB"
-		ping -c 5 $EDGE_HOST_IP_LTE
-	
+		# echo "First brief ping from eNB to UE"
+		# ping -c 5 $ROBOT_HOST_IP_LTE
+		# echo "First brief ping from UE to eNB"
+		# ping -c 5 $EDGE_HOST_IP_LTE
+		sshpass -p${ROBOT_HOST_PASS} ssh $ROBOT_HOST_USER@$ROBOT_HOST_IP_LOCAL "pkill -9 ping"
+		sshpass -p${ROBOT_HOST_PASS} ssh $ROBOT_HOST_USER@$ROBOT_HOST_IP_LOCAL "rm /home/dell46/Desktop/ROSNiryo/ping_test.out"
+		pkill -9 ping
+		rm /home/k8s-enb-node/Desktop/federico/DigitalTwin_service/02_LTEScenario/ping_test.out
+
 		pingperiod=6000
 		echo "The UE will ping the eNB for $pingperiod seconds in background"
-		sshpass -p${ROBOT_HOST_PASS} ssh $ROBOT_HOST_USER@$ROBOT_HOST_IP_LOCAL "nohup ping -c $pingperiod $EDGE_HOST_IP_LTE &" &>/dev/null &
+		sshpass -p${ROBOT_HOST_PASS} ssh $ROBOT_HOST_USER@$ROBOT_HOST_IP_LOCAL "ping -c $pingperiod $EDGE_HOST_IP_LTE > /home/dell46/Desktop/ROSNiryo/ping_test.out &" &
 		echo "The eNB will ping the UE for $pingperiod seconds in background"
-		(nohup ping -c $pingperiod $ROBOT_HOST_IP_LTE &) &>/dev/null
+		nohup ping -c $pingperiod $ROBOT_HOST_IP_LTE > /home/k8s-enb-node/Desktop/federico/DigitalTwin_service/02_LTEScenario/ping_test.out 2>&1 &
 	fi
 
 
@@ -303,13 +307,13 @@ if [[ $# -eq 5 ]]; then
 	echo -e "\n* * * * * * * * * * * * * * * * * * * * * *\nSTEP 13: Bidirectional IPERF between eNB and UE"
 	if true
 	then
-		sshpass -p${ROBOT_HOST_PASS} ssh $ROBOT_HOST_USER@$ROBOT_HOST_IP_LOCAL "pkill -9 iperf3"
+		tmp=0; while [ $tmp -le 20 ]; do sshpass -p${ROBOT_HOST_PASS} ssh $ROBOT_HOST_USER@$ROBOT_HOST_IP_LOCAL "pkill -9 iperf3"; tmp=$(( tmp + 1 )); done
 		sshpass -p${ROBOT_HOST_PASS} ssh $ROBOT_HOST_USER@$ROBOT_HOST_IP_LOCAL "rm /home/dell46/Desktop/ROSNiryo/iperf_client.out"
 		pkill -9 iperf3
 		rm /home/k8s-enb-node/Desktop/federico/DigitalTwin_service/02_LTEScenario/iperf_server.out
 		iperfperiod=6000
 		echo "The eNB will iperf the IPERF server"
-		nohup iperf3 -s -i 5 >> /home/k8s-enb-node/Desktop/federico/DigitalTwin_service/02_LTEScenario/iperf_server.out 2>&1 &
+		nohup iperf3 -s -i 5 > /home/k8s-enb-node/Desktop/federico/DigitalTwin_service/02_LTEScenario/iperf_server.out 2>&1 &
 		echo "The UE will be the IPERF client"
 		# sshpass -p${ROBOT_HOST_PASS} ssh $ROBOT_HOST_USER@$ROBOT_HOST_IP_LOCAL "nohup iperf3 -c $ENB_IP_LTE -b 512K -i 5 -t $iperfperiod >> /home/dell46/Desktop/ROSNiryo/iperf_client.out 2>&1 & " &>/dev/null &
 		sshpass -p${ROBOT_HOST_PASS} scp /home/k8s-enb-node/Desktop/federico/DigitalTwin_service/02_LTEScenario/iperf_run_tests.sh  $ROBOT_HOST_USER@$ROBOT_HOST_IP_LOCAL:/home/dell46/Desktop/ROSNiryo/
@@ -321,7 +325,7 @@ if [[ $# -eq 5 ]]; then
 		# INPUT VAR 6 : tcp flag (if true, tcp, if not udp)
 		# INPUT VAR 7 : dualtest flag (if true, -d option is given)
 		# sshpass -p${ROBOT_HOST_PASS} ssh $ROBOT_HOST_USER@$ROBOT_HOST_IP_LOCAL "sh /home/dell46/Desktop/ROSNiryo/iperf_run_tests.sh $ENB_IP_LTE 128K 10 60 5 true true > /home/dell46/Desktop/ROSNiryo/iperf_client.out 2>&1 &" &>/dev/null &
-		sshpass -p${ROBOT_HOST_PASS} ssh $ROBOT_HOST_USER@$ROBOT_HOST_IP_LOCAL "bash /home/dell46/Desktop/ROSNiryo/iperf_run_tests.sh $ENB_IP_LTE 56K 15 60 5 true true > /home/dell46/Desktop/ROSNiryo/iperf_client.out &" &
+		sshpass -p${ROBOT_HOST_PASS} ssh $ROBOT_HOST_USER@$ROBOT_HOST_IP_LOCAL "bash /home/dell46/Desktop/ROSNiryo/iperf_run_tests.sh $ENB_IP_LTE 128K 20 60 5 true true > /home/dell46/Desktop/ROSNiryo/iperf_client.out &" &
 
 	fi
 

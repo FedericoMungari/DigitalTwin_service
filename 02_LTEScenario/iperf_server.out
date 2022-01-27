@@ -1,8 +1,31 @@
 -----------------------------------------------------------
 Server listening on 5201
 -----------------------------------------------------------
-Accepted connection from 172.16.0.2, port 60266
-[  5] local 172.16.0.1 port 5201 connected to 172.16.0.2 port 60268
+Accepted connection from 172.16.0.2, port 32850
+[  5] local 172.16.0.1 port 5201 connected to 172.16.0.2 port 32852
+[ ID] Interval           Transfer     Bandwidth
+[  5]   0.00-5.00   sec  76.4 KBytes   125 Kbits/sec                  
+[  5]   5.00-10.00  sec  0.00 Bytes  0.00 bits/sec                  
+[  5]  10.00-15.00  sec   128 KBytes   210 Kbits/sec                  
+[  5]  15.00-20.00  sec  0.00 Bytes  0.00 bits/sec                  
+[  5]  20.00-25.00  sec  0.00 Bytes  0.00 bits/sec                  
+[  5]  25.00-30.00  sec   128 KBytes   210 Kbits/sec                  
+[  5]  30.00-35.00  sec  0.00 Bytes  0.00 bits/sec                  
+[  5]  35.00-40.00  sec  0.00 Bytes  0.00 bits/sec                  
+[  5]  40.00-45.00  sec  0.00 Bytes  0.00 bits/sec                  
+[  5]  45.00-50.00  sec   128 KBytes   210 Kbits/sec                  
+[  5]  50.00-55.00  sec  0.00 Bytes  0.00 bits/sec                  
+[  5]  55.00-60.00  sec  0.00 Bytes  0.00 bits/sec                  
+[  5]  60.00-60.01  sec  0.00 Bytes  0.00 bits/sec                  
+- - - - - - - - - - - - - - - - - - - - - - - - -
+[ ID] Interval           Transfer     Bandwidth
+[  5]   0.00-60.01  sec  0.00 Bytes  0.00 bits/sec                  sender
+[  5]   0.00-60.01  sec   460 KBytes  62.8 Kbits/sec                  receiver
+-----------------------------------------------------------
+Server listening on 5201
+-----------------------------------------------------------
+Accepted connection from 172.16.0.2, port 32874
+[  5] local 172.16.0.1 port 5201 connected to 172.16.0.2 port 32876
 [ ID] Interval           Transfer     Bandwidth
 [  5]   0.00-5.00   sec  76.4 KBytes   125 Kbits/sec                  
 [  5]   5.00-10.00  sec  0.00 Bytes  0.00 bits/sec                  
@@ -24,8 +47,8 @@ Accepted connection from 172.16.0.2, port 60266
 -----------------------------------------------------------
 Server listening on 5201
 -----------------------------------------------------------
-Accepted connection from 172.16.0.2, port 60292
-[  5] local 172.16.0.1 port 5201 connected to 172.16.0.2 port 60294
+Accepted connection from 172.16.0.2, port 32878
+[  5] local 172.16.0.1 port 5201 connected to 172.16.0.2 port 32880
 [ ID] Interval           Transfer     Bandwidth
 [  5]   0.00-5.00   sec  76.4 KBytes   125 Kbits/sec                  
 [  5]   5.00-10.00  sec  0.00 Bytes  0.00 bits/sec                  
@@ -34,32 +57,9 @@ Accepted connection from 172.16.0.2, port 60292
 [  5]  20.00-25.00  sec  0.00 Bytes  0.00 bits/sec                  
 [  5]  25.00-30.00  sec   128 KBytes   210 Kbits/sec                  
 [  5]  30.00-35.00  sec  0.00 Bytes  0.00 bits/sec                  
-[  5]  35.00-40.00  sec  0.00 Bytes  0.00 bits/sec                  
-[  5]  40.00-45.00  sec  0.00 Bytes  0.00 bits/sec                  
-[  5]  45.00-50.00  sec   128 KBytes   210 Kbits/sec                  
-[  5]  50.00-55.00  sec  0.00 Bytes  0.00 bits/sec                  
-[  5]  55.00-60.00  sec  0.00 Bytes  0.00 bits/sec                  
-[  5]  60.00-60.05  sec  0.00 Bytes  0.00 bits/sec                  
+[  5]  35.00-35.39  sec  0.00 Bytes  0.00 bits/sec                  
 - - - - - - - - - - - - - - - - - - - - - - - - -
 [ ID] Interval           Transfer     Bandwidth
-[  5]   0.00-60.05  sec  0.00 Bytes  0.00 bits/sec                  sender
-[  5]   0.00-60.05  sec   460 KBytes  62.8 Kbits/sec                  receiver
------------------------------------------------------------
-Server listening on 5201
------------------------------------------------------------
-Accepted connection from 172.16.0.2, port 60298
-[  5] local 172.16.0.1 port 5201 connected to 172.16.0.2 port 60300
-[ ID] Interval           Transfer     Bandwidth
-[  5]   0.00-5.00   sec  76.4 KBytes   125 Kbits/sec                  
-[  5]   5.00-10.00  sec  0.00 Bytes  0.00 bits/sec                  
-[  5]  10.00-15.00  sec   128 KBytes   210 Kbits/sec                  
-[  5]  15.00-20.00  sec  0.00 Bytes  0.00 bits/sec                  
-[  5]  20.00-25.00  sec  0.00 Bytes  0.00 bits/sec                  
-[  5]  25.00-30.00  sec   128 KBytes   210 Kbits/sec                  
-[  5]  30.00-35.00  sec  0.00 Bytes  0.00 bits/sec                  
-[  5]  35.00-35.36  sec  0.00 Bytes  0.00 bits/sec                  
-- - - - - - - - - - - - - - - - - - - - - - - - -
-[ ID] Interval           Transfer     Bandwidth
-[  5]   0.00-35.36  sec  0.00 Bytes  0.00 bits/sec                  sender
-[  5]   0.00-35.36  sec   332 KBytes  77.0 Kbits/sec                  receiver
+[  5]   0.00-35.39  sec  0.00 Bytes  0.00 bits/sec                  sender
+[  5]   0.00-35.39  sec   332 KBytes  76.9 Kbits/sec                  receiver
 iperf3: interrupt - the server has terminated

@@ -131,6 +131,7 @@ meas_tool=$5
 # Start capturing with tshark
 capturing_time=$(echo $n_robots*60+120 |  bc -l)
 sshpass -p ${UE_PASS} scp /home/k8s-enb-node/Desktop/federico/DigitalTwin_service/02_LTEScenario/Script_tshark/script_tshark.sh ${UE_USER}@$UE_IP_LOCAL:/home/dell46/Desktop/ROSNiryo/
+sshpass -p ${UE_PASS} scp /home/k8s-enb-node/Desktop/federico/DigitalTwin_service/02_LTEScenario/Script_measurements/CPU_driver.sh ${UE_USER}@$UE_IP_LOCAL:/home/dell46/Desktop/ROSNiryo/
 sh /home/k8s-enb-node/Desktop/federico/DigitalTwin_service/02_LTEScenario/Script_tshark/script_tshark.sh /home/k8s-enb-node/Desktop/federico/DigitalTwin_service/02_LTEScenario/Output/tshark_traces/robot_istantiation_$((n_robots))_$commandname.pcapng srs_spgw_sgi $capturing_time &
 sshpass -p ${UE_PASS} ssh ${UE_USER}@$UE_IP_LOCAL "sh /home/dell46/Desktop/ROSNiryo/script_tshark.sh /home/dell46/Desktop/ROSNiryo/tshark_traces/robot_istantiation_$((n_robots))_$commandname.pcapng tun_srsue $capturing_time &" &
 
@@ -199,8 +200,8 @@ then
 
 fi
 
-pkill iperf3
-sshpass -p ${UE_PASS} ssh ${UE_USER}@$UE_IP_LOCAL "pkill iperf3"
+# pkill iperf3
+# sshpass -p ${UE_PASS} ssh ${UE_USER}@$UE_IP_LOCAL "pkill iperf3"
 
 
 echo -e "\n\nSTEP $((18+1*(NOF_ACTIVE_ROBOTS-1)+1)): Run python script to send move pose or joints commands to the robot"
@@ -474,19 +475,15 @@ if true; then
 
 	echo -e "\t\t. . . tshark capturing with active VMs . . ."
 	capturing_time=$(echo $measurement_iteration*$measurement_period |  bc -l | awk '{print int($1)}')
-	if [[ $commandname ==  "joints" ]]; then
-		sh /home/k8s-enb-node/Desktop/federico/DigitalTwin_service/02_LTEScenario/Script_tshark/script_tshark.sh /home/k8s-enb-node/Desktop/federico/DigitalTwin_service/02_LTEScenario/Output/tshark_traces/robot_active_$((n_robots))_$commandname.pcapng srs_spgw_sgi $capturing_time &
-		sshpass -p ${UE_PASS} ssh ${UE_USER}@$UE_IP_LOCAL "sh /home/dell46/Desktop/ROSNiryo/script_tshark.sh /home/dell46/Desktop/ROSNiryo/tshark_traces/robot_active_$((n_robots))_$commandname.pcapng tun_srsue $capturing_time &" &
-	elif [[ $commandname ==  "rosapi" ]]; then
-		sh /home/k8s-enb-node/Desktop/federico/DigitalTwin_service/02_LTEScenario/Script_tshark/script_tshark.sh /home/k8s-enb-node/Desktop/federico/DigitalTwin_service/02_LTEScenario/Output/tshark_traces/robot_active_$((n_robots))_$commandname.pcapng srs_spgw_sgi $capturing_time &
-		sshpass -p ${UE_PASS} ssh ${UE_USER}@$UE_IP_LOCAL "sh /home/dell46/Desktop/ROSNiryo/script_tshark.sh /home/dell46/Desktop/ROSNiryo/tshark_traces/robot_active_$((n_robots))_$commandname.pcapng tun_srsue $capturing_time &" &
-	elif [[ $commandname ==  "rosapi2" ]]; then
-		sh /home/k8s-enb-node/Desktop/federico/DigitalTwin_service/02_LTEScenario/Script_tshark/script_tshark.sh /home/k8s-enb-node/Desktop/federico/DigitalTwin_service/02_LTEScenario/Output/tshark_traces/robot_active_$((n_robots))_$commandname.pcapng srs_spgw_sgi $capturing_time &
-		sshpass -p ${UE_PASS} ssh ${UE_USER}@$UE_IP_LOCAL "sh /home/dell46/Desktop/ROSNiryo/script_tshark.sh /home/dell46/Desktop/ROSNiryo/tshark_traces/robot_active_$((n_robots))_$commandname.pcapng tun_srsue $capturing_time &" &
-	elif [[ $commandname ==  "pose" ]]; then
-		sh /home/k8s-enb-node/Desktop/federico/DigitalTwin_service/02_LTEScenario/Script_tshark/script_tshark.sh /home/k8s-enb-node/Desktop/federico/DigitalTwin_service/02_LTEScenario/Output/tshark_traces/robot_active_$((n_robots))_$commandname.pcapng srs_spgw_sgi $capturing_time &
-		sshpass -p ${UE_PASS} ssh ${UE_USER}@$UE_IP_LOCAL "sh /home/dell46/Desktop/ROSNiryo/script_tshark.sh /home/dell46/Desktop/ROSNiryo/tshark_traces/robot_active_$((n_robots))_$commandname.pcapng tun_srsue $capturing_time &" &
-	fi
+	sh /home/k8s-enb-node/Desktop/federico/DigitalTwin_service/02_LTEScenario/Script_tshark/script_tshark.sh /home/k8s-enb-node/Desktop/federico/DigitalTwin_service/02_LTEScenario/Output/tshark_traces/robot_active_$((n_robots))_$commandname.pcapng srs_spgw_sgi $capturing_time &
+	sshpass -p ${UE_PASS} ssh ${UE_USER}@$UE_IP_LOCAL "sh /home/dell46/Desktop/ROSNiryo/script_tshark.sh /home/dell46/Desktop/ROSNiryo/tshark_traces/robot_active_$((n_robots))_$commandname.pcapng tun_srsue $capturing_time &" &
+
+
+	echo -e "\t\t. . . LTE profiling with active VMs . . ."
+	capturing_time=$(echo $measurement_iteration*$measurement_period |  bc -l | awk '{print int($1)}')
+	measurement_period_lte=$( echo $measurement_period | tr '.' ',' )
+	sh /home/k8s-enb-node/Desktop/federico/DigitalTwin_service/02_LTEScenario/CPU_edge.sh /home/k8s-enb-node/Desktop/federico/DigitalTwin_service/02_LTEScenario/Output/LTE_profiling/epc_profiling_robots$((n_robots))_$commandname.csv /home/k8s-enb-node/Desktop/federico/DigitalTwin_service/02_LTEScenario/Output/LTE_profiling/enb_profiling_robots$((n_robots))_$commandname.csv $measurement_iteration $measurement_period_lte &
+	sshpass -p ${UE_PASS} ssh ${UE_USER}@$UE_IP_LOCAL "sh /home/dell46/Desktop/ROSNiryo/CPU_driver.sh /home/dell46/Desktop/ROSNiryo/LTE_profiling/ue_profiling_robots$((n_robots))_$commandname.csv $measurement_iteration $measurement_period_lte &" &
 
 	. ./Script_startRobots/mysleep.sh $(echo "$measurement_iteration*$measurement_period+180" | bc)
 
