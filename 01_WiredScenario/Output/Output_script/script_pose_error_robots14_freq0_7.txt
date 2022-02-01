@@ -1,1 +1,0 @@
-Exception in thread /niryo_one/learning_mode (most likely raised during interpreter shutdown):
