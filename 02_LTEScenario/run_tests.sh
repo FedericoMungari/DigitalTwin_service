@@ -8,14 +8,14 @@
 # In .44:
 # udisksctl mount -b /dev/nvme0n1
 
-VBoxManage controlvm ROS_VNF_state poweroff 1>/dev/null 2>/dev/null
+# VBoxManage controlvm ROS_VNF_state poweroff 1>/dev/null 2>/dev/null
 
 
 # NUM_ROBOTS_LIST="1 2 4 6 8 10"
-NUM_ROBOTS_LIST="6"
+NUM_ROBOTS_LIST="1 2 3 4"
 
 # COMMAND_LIST="rosapi2 joints pose"
-COMMAND_LIST="joints pose"
+COMMAND_LIST="pose joints"
 
 WAITINGTIME_LIST="0"
 

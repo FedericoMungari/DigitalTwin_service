@@ -1,65 +1,83 @@
 -----------------------------------------------------------
 Server listening on 5201
 -----------------------------------------------------------
-Accepted connection from 172.16.0.2, port 32850
-[  5] local 172.16.0.1 port 5201 connected to 172.16.0.2 port 32852
+Accepted connection from 172.16.0.2, port 45968
+[  5] local 172.16.0.1 port 5201 connected to 172.16.0.2 port 45970
 [ ID] Interval           Transfer     Bandwidth
-[  5]   0.00-5.00   sec  76.4 KBytes   125 Kbits/sec                  
-[  5]   5.00-10.00  sec  0.00 Bytes  0.00 bits/sec                  
-[  5]  10.00-15.00  sec   128 KBytes   210 Kbits/sec                  
-[  5]  15.00-20.00  sec  0.00 Bytes  0.00 bits/sec                  
-[  5]  20.00-25.00  sec  0.00 Bytes  0.00 bits/sec                  
-[  5]  25.00-30.00  sec   128 KBytes   210 Kbits/sec                  
-[  5]  30.00-35.00  sec  0.00 Bytes  0.00 bits/sec                  
-[  5]  35.00-40.00  sec  0.00 Bytes  0.00 bits/sec                  
-[  5]  40.00-45.00  sec  0.00 Bytes  0.00 bits/sec                  
-[  5]  45.00-50.00  sec   128 KBytes   210 Kbits/sec                  
-[  5]  50.00-55.00  sec  0.00 Bytes  0.00 bits/sec                  
-[  5]  55.00-60.00  sec  0.00 Bytes  0.00 bits/sec                  
-[  5]  60.00-60.01  sec  0.00 Bytes  0.00 bits/sec                  
-- - - - - - - - - - - - - - - - - - - - - - - - -
-[ ID] Interval           Transfer     Bandwidth
-[  5]   0.00-60.01  sec  0.00 Bytes  0.00 bits/sec                  sender
-[  5]   0.00-60.01  sec   460 KBytes  62.8 Kbits/sec                  receiver
+[  5]   0.00-5.00   sec   204 KBytes   335 Kbits/sec                  
+[  5]   5.00-10.00  sec   128 KBytes   210 Kbits/sec                  
+[  5]  10.00-15.00  sec   256 KBytes   420 Kbits/sec                  
+[  5]  15.00-20.00  sec   128 KBytes   210 Kbits/sec                  
+iperf3: the client has unexpectedly closed the connection
 -----------------------------------------------------------
 Server listening on 5201
 -----------------------------------------------------------
-Accepted connection from 172.16.0.2, port 32874
-[  5] local 172.16.0.1 port 5201 connected to 172.16.0.2 port 32876
-[ ID] Interval           Transfer     Bandwidth
-[  5]   0.00-5.00   sec  76.4 KBytes   125 Kbits/sec                  
-[  5]   5.00-10.00  sec  0.00 Bytes  0.00 bits/sec                  
-[  5]  10.00-15.00  sec   128 KBytes   210 Kbits/sec                  
-[  5]  15.00-20.00  sec  0.00 Bytes  0.00 bits/sec                  
-[  5]  20.00-25.00  sec  0.00 Bytes  0.00 bits/sec                  
-[  5]  25.00-30.00  sec   128 KBytes   210 Kbits/sec                  
-[  5]  30.00-35.00  sec  0.00 Bytes  0.00 bits/sec                  
-[  5]  35.00-40.00  sec  0.00 Bytes  0.00 bits/sec                  
-[  5]  40.00-45.00  sec  0.00 Bytes  0.00 bits/sec                  
-[  5]  45.00-50.00  sec   128 KBytes   210 Kbits/sec                  
-[  5]  50.00-55.00  sec  0.00 Bytes  0.00 bits/sec                  
-[  5]  55.00-60.00  sec  0.00 Bytes  0.00 bits/sec                  
-[  5]  60.00-60.02  sec  0.00 Bytes  0.00 bits/sec                  
-- - - - - - - - - - - - - - - - - - - - - - - - -
-[ ID] Interval           Transfer     Bandwidth
-[  5]   0.00-60.02  sec  0.00 Bytes  0.00 bits/sec                  sender
-[  5]   0.00-60.02  sec   460 KBytes  62.8 Kbits/sec                  receiver
+Accepted connection from 172.16.0.2, port 45976
+[  6] local 172.16.0.1 port 5201 connected to 172.16.0.2 port 45978
+iperf3: the client has unexpectedly closed the connection
 -----------------------------------------------------------
 Server listening on 5201
 -----------------------------------------------------------
-Accepted connection from 172.16.0.2, port 32878
-[  5] local 172.16.0.1 port 5201 connected to 172.16.0.2 port 32880
-[ ID] Interval           Transfer     Bandwidth
-[  5]   0.00-5.00   sec  76.4 KBytes   125 Kbits/sec                  
-[  5]   5.00-10.00  sec  0.00 Bytes  0.00 bits/sec                  
-[  5]  10.00-15.00  sec   128 KBytes   210 Kbits/sec                  
-[  5]  15.00-20.00  sec  0.00 Bytes  0.00 bits/sec                  
-[  5]  20.00-25.00  sec  0.00 Bytes  0.00 bits/sec                  
-[  5]  25.00-30.00  sec   128 KBytes   210 Kbits/sec                  
-[  5]  30.00-35.00  sec  0.00 Bytes  0.00 bits/sec                  
-[  5]  35.00-35.39  sec  0.00 Bytes  0.00 bits/sec                  
-- - - - - - - - - - - - - - - - - - - - - - - - -
-[ ID] Interval           Transfer     Bandwidth
-[  5]   0.00-35.39  sec  0.00 Bytes  0.00 bits/sec                  sender
-[  5]   0.00-35.39  sec   332 KBytes  76.9 Kbits/sec                  receiver
-iperf3: interrupt - the server has terminated
+Accepted connection from 172.16.0.2, port 45982
+[  7] local 172.16.0.1 port 5201 connected to 172.16.0.2 port 45984
+iperf3: the client has unexpectedly closed the connection
+-----------------------------------------------------------
+Server listening on 5201
+-----------------------------------------------------------
+Accepted connection from 172.16.0.2, port 45986
+[  8] local 172.16.0.1 port 5201 connected to 172.16.0.2 port 45988
+iperf3: the client has unexpectedly closed the connection
+-----------------------------------------------------------
+Server listening on 5201
+-----------------------------------------------------------
+Accepted connection from 172.16.0.2, port 45990
+[  9] local 172.16.0.1 port 5201 connected to 172.16.0.2 port 45992
+iperf3: the client has unexpectedly closed the connection
+-----------------------------------------------------------
+Server listening on 5201
+-----------------------------------------------------------
+Accepted connection from 172.16.0.2, port 45996
+[ 10] local 172.16.0.1 port 5201 connected to 172.16.0.2 port 45998
+iperf3: the client has unexpectedly closed the connection
+-----------------------------------------------------------
+Server listening on 5201
+-----------------------------------------------------------
+Accepted connection from 172.16.0.2, port 46002
+[ 11] local 172.16.0.1 port 5201 connected to 172.16.0.2 port 46004
+iperf3: the client has unexpectedly closed the connection
+-----------------------------------------------------------
+Server listening on 5201
+-----------------------------------------------------------
+Accepted connection from 172.16.0.2, port 46006
+[ 12] local 172.16.0.1 port 5201 connected to 172.16.0.2 port 46008
+iperf3: the client has unexpectedly closed the connection
+-----------------------------------------------------------
+Server listening on 5201
+-----------------------------------------------------------
+Accepted connection from 172.16.0.2, port 46012
+[ 13] local 172.16.0.1 port 5201 connected to 172.16.0.2 port 46014
+iperf3: the client has unexpectedly closed the connection
+-----------------------------------------------------------
+Server listening on 5201
+-----------------------------------------------------------
+Accepted connection from 172.16.0.2, port 46018
+[ 14] local 172.16.0.1 port 5201 connected to 172.16.0.2 port 46020
+iperf3: the client has unexpectedly closed the connection
+-----------------------------------------------------------
+Server listening on 5201
+-----------------------------------------------------------
+Accepted connection from 172.16.0.2, port 46022
+[ 15] local 172.16.0.1 port 5201 connected to 172.16.0.2 port 46024
+iperf3: the client has unexpectedly closed the connection
+-----------------------------------------------------------
+Server listening on 5201
+-----------------------------------------------------------
+Accepted connection from 172.16.0.2, port 46028
+[ 16] local 172.16.0.1 port 5201 connected to 172.16.0.2 port 46030
+iperf3: the client has unexpectedly closed the connection
+-----------------------------------------------------------
+Server listening on 5201
+-----------------------------------------------------------
+Accepted connection from 172.16.0.2, port 46032
+[ 17] local 172.16.0.1 port 5201 connected to 172.16.0.2 port 46034
+iperf3: the client has unexpectedly closed the connection

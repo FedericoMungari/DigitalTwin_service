@@ -33,6 +33,7 @@ if [[ $# -eq 5 ]]; then
 	ENB_IP_PRIVATE=10.0.2.1 # ptpd
 	ENB_IP_LOCAL=10.0.1.44
 	ENB_IP_LTE=172.16.0.1
+	# ENB_IP_LTE=10.0.1.44
 	ENB_USER=k8s-enb-node
 	ENB_PASS=k8snode
 
@@ -47,6 +48,7 @@ if [[ $# -eq 5 ]]; then
 	UE_IP_PRIVATE=10.0.2.2
 	UE_IP_LOCAL=10.0.1.46
 	UE_IP_LTE=172.16.0.2
+	# UE_IP_LTE=10.0.1.46
 	UE_PASS=4646
 	UE_USER=dell46
 
@@ -72,10 +74,10 @@ if [[ $# -eq 5 ]]; then
 
 	DRIVER_DOCKER_SUBNET=10.2.0.0/24
 
-	INTERFACE_MASTER_VM_IP=10.0.3.6
+	INTERFACE_MASTER_VM_IP=10.0.3.5
 	ROBOTCOMMANDER_VM_IP=10.0.3.7
-	MOTIONPLANNING_VM_IP=10.0.3.4
-	STATE_VM_IP=10.0.3.5
+	MOTIONPLANNING_VM_IP=10.0.3.6
+	STATE_VM_IP=10.0.3.4
 	CONTROLLER_VM_IP=10.0.3.3
 
 	DRIVER_VM_IP=10.0.4.3
@@ -105,7 +107,8 @@ if [[ $# -eq 5 ]]; then
 	# ####################################################################################################################################
 	echo -e "\n* * * * * * * * * * * * * * * * * * * * * *\nSTEP 2: Stop prev executing VMs, and start new ones"
 	if [[ n_vm_running -eq 2 ]]; then
-		. ./Script_startRobots/stop_and_start_VMs.sh
+		# . ./Script_startRobots/stop_and_start_VMs.sh
+		echo "eliminate"
 	else
 		echo -e "\t . . . S k i p p i n g . . ."
 		echo -e "\t\tAll the VMs are already running"
@@ -113,16 +116,37 @@ if [[ $# -eq 5 ]]; then
 
 	echo -e "\nCheck IP addresses"
 	
-	echo -e $INTERFACE_MASTER_VM_IP
-	sshpass -p ${VM_PSW} ssh $VM_USERNAME@$INTERFACE_MASTER_VM_IP "cat /etc/hostname"
-	echo -e "\n"$ROBOTCOMMANDER_VM_IP
-	sshpass -p ${VM_PSW} ssh $VM_USERNAME@$ROBOTCOMMANDER_VM_IP "cat /etc/hostname"
-	echo -e "\n"$MOTIONPLANNING_VM_IP
-	sshpass -p ${VM_PSW} ssh $VM_USERNAME@$MOTIONPLANNING_VM_IP "cat /etc/hostname"
-	echo -e "\n"$STATE_VM_IP
-	sshpass -p ${VM_PSW} ssh $VM_USERNAME@$STATE_VM_IP "cat /etc/hostname"
-	echo -e "\n"$CONTROLLER_VM_IP
-	sshpass -p ${VM_PSW} ssh $VM_USERNAME@$CONTROLLER_VM_IP "cat /etc/hostname"
+	echo -e "Expected INTERFACE_MASTER in : "$INTERFACE_MASTER_VM_IP
+	name1=$(sshpass -p ${VM_PSW} ssh $VM_USERNAME@$INTERFACE_MASTER_VM_IP "cat /etc/hostname"); echo $name1
+	#	if [[ $name1 ==  "vnfcontrol" ]]
+	#	then 
+	#		CONTROLLER_VM_IP=$INTERFACE_MASTER_VM_IP_tmp
+	#	elif [[ $name1 ==  "vnfstate" ]]
+	#	then 
+	#		STATE_VM_IP=$INTERFACE_MASTER_VM_IP_tmp
+	#	elif [[ $name1 ==  "vnfmotionplanning" ]]
+	#	then 
+	#		MOTIONPLANNING_VM_IP=$INTERFACE_MASTER_VM_IP_tmp
+	#	elif [[ $name1 ==  "vnfcommand" ]]
+	#	then 
+	#		ROBOTCOMMANDER_VM_IP=$INTERFACE_MASTER_VM_IP_tmp
+	#	elif [[ $name1 ==  "master" ]]
+	#	then 
+	#		INTERFACE_MASTER_VM_IP=$INTERFACE_MASTER_VM_IP_tmp
+	#	fi
+
+	echo -e "\nExpected ROBOTCOMMANDER in : "$ROBOTCOMMANDER_VM_IP
+	name2=$(sshpass -p ${VM_PSW} ssh $VM_USERNAME@$ROBOTCOMMANDER_VM_IP "cat /etc/hostname"); echo $name2
+
+	echo -e "\nExpected MOTIONPLANNING in : "$MOTIONPLANNING_VM_IP
+	name3=$(sshpass -p ${VM_PSW} ssh $VM_USERNAME@$MOTIONPLANNING_VM_IP "cat /etc/hostname"); echo $name3
+
+	echo -e "\nExpected STATE in : "$STATE_VM_IP
+	name4=$(sshpass -p ${VM_PSW} ssh $VM_USERNAME@$STATE_VM_IP "cat /etc/hostname"); echo $name4
+
+	echo -e "\nExpected CONTROLLER in : "$CONTROLLER_VM_IP
+	name5=$(sshpass -p ${VM_PSW} ssh $VM_USERNAME@$CONTROLLER_VM_IP "cat /etc/hostname"); echo $name5
+
 
 
 	# ####################################################################################################################################
@@ -150,8 +174,9 @@ if [[ $# -eq 5 ]]; then
 
 
 	# ####################################################################################################################################
-	echo -e "\n* * * * * * * * * * * * * * * * * * * * * *\nSTEP 5: Sending CPU and RAM measurement scripts to ..."
+	echo -e "\n* * * * * * * * * * * * * * * * * * * * * *\nSTEP 5: Sending CPU, RAM and L7RTT measurement scripts to ..."
 	PATH_TO_MEAS_SCRIPTS="/home/k8s-enb-node/Desktop/federico/DigitalTwin_service/02_LTEScenario/Script_measurements"
+	PATH_TO_L7RTT_SCRIPTS="/home/k8s-enb-node/Desktop/federico/DigitalTwin_service/02_LTEScenario/Script_ApplicationRTT"
 	# NOTE 
 	# still cannot send the measurement scripts to the driver, since even if the iptunnel was istantiated, the radio link is not there.
 	# Solution: send the measurement scripts to the ROBOT HOST, which will forward them to the driver VM
@@ -166,36 +191,42 @@ if [[ $# -eq 5 ]]; then
 	sshpass -p ${VM_PSW} scp ${PATH_TO_MEAS_SCRIPTS}/resources_psutil.py ${VM_USERNAME}@$INTERFACE_MASTER_VM_IP:~/
 	sshpass -p ${VM_PSW} scp ${PATH_TO_MEAS_SCRIPTS}/resources_dockerstats.sh ${VM_USERNAME}@$INTERFACE_MASTER_VM_IP:~/
 	sshpass -p ${VM_PSW} scp ${PATH_TO_MEAS_SCRIPTS}/resources_CPUtime.py ${VM_USERNAME}@$INTERFACE_MASTER_VM_IP:~/
+	sshpass -p ${VM_PSW} scp ${PATH_TO_L7RTT_SCRIPTS}/*.py ${VM_USERNAME}@$INTERFACE_MASTER_VM_IP:~/docker/niryo_one/Script_ApplicationRTT
 	echo -e "\t... the commander VM"
 	sshpass -p ${VM_PSW} scp ${PATH_TO_MEAS_SCRIPTS}/CPU_measurements.sh ${VM_USERNAME}@$ROBOTCOMMANDER_VM_IP:~/
 	sshpass -p ${VM_PSW} scp ${PATH_TO_MEAS_SCRIPTS}/RAM_measurements.sh ${VM_USERNAME}@$ROBOTCOMMANDER_VM_IP:~/
 	sshpass -p ${VM_PSW} scp ${PATH_TO_MEAS_SCRIPTS}/resources_psutil.py ${VM_USERNAME}@$ROBOTCOMMANDER_VM_IP:~/
 	sshpass -p ${VM_PSW} scp ${PATH_TO_MEAS_SCRIPTS}/resources_dockerstats.sh ${VM_USERNAME}@$ROBOTCOMMANDER_VM_IP:~/
 	sshpass -p ${VM_PSW} scp ${PATH_TO_MEAS_SCRIPTS}/resources_CPUtime.py ${VM_USERNAME}@$ROBOTCOMMANDER_VM_IP:~/
+	sshpass -p ${VM_PSW} scp ${PATH_TO_L7RTT_SCRIPTS}/*.py ${VM_USERNAME}@$ROBOTCOMMANDER_VM_IP:~/docker/niryo_one/Script_ApplicationRTT
 	echo -e "\t... the motion planning VM"
 	sshpass -p ${VM_PSW} scp ${PATH_TO_MEAS_SCRIPTS}/CPU_measurements.sh ${VM_USERNAME}@$MOTIONPLANNING_VM_IP:~/
 	sshpass -p ${VM_PSW} scp ${PATH_TO_MEAS_SCRIPTS}/RAM_measurements.sh ${VM_USERNAME}@$MOTIONPLANNING_VM_IP:~/
 	sshpass -p ${VM_PSW} scp ${PATH_TO_MEAS_SCRIPTS}/resources_psutil.py ${VM_USERNAME}@$MOTIONPLANNING_VM_IP:~/
 	sshpass -p ${VM_PSW} scp ${PATH_TO_MEAS_SCRIPTS}/resources_dockerstats.sh ${VM_USERNAME}@$MOTIONPLANNING_VM_IP:~/
 	sshpass -p ${VM_PSW} scp ${PATH_TO_MEAS_SCRIPTS}/resources_CPUtime.py ${VM_USERNAME}@$MOTIONPLANNING_VM_IP:~/
+	sshpass -p ${VM_PSW} scp ${PATH_TO_L7RTT_SCRIPTS}/*.py ${VM_USERNAME}@$MOTIONPLANNING_VM_IP:~/docker/niryo_one/Script_ApplicationRTT
 	echo -e "\t... the state VM"
 	sshpass -p ${VM_PSW} scp ${PATH_TO_MEAS_SCRIPTS}/CPU_measurements.sh ${VM_USERNAME}@$STATE_VM_IP:~/
 	sshpass -p ${VM_PSW} scp ${PATH_TO_MEAS_SCRIPTS}/RAM_measurements.sh ${VM_USERNAME}@$STATE_VM_IP:~/
 	sshpass -p ${VM_PSW} scp ${PATH_TO_MEAS_SCRIPTS}/resources_psutil.py ${VM_USERNAME}@$STATE_VM_IP:~/
 	sshpass -p ${VM_PSW} scp ${PATH_TO_MEAS_SCRIPTS}/resources_dockerstats.sh ${VM_USERNAME}@$STATE_VM_IP:~/
 	sshpass -p ${VM_PSW} scp ${PATH_TO_MEAS_SCRIPTS}/resources_CPUtime.py ${VM_USERNAME}@$STATE_VM_IP:~/
+	sshpass -p ${VM_PSW} scp ${PATH_TO_L7RTT_SCRIPTS}/*.py ${VM_USERNAME}@$STATE_VM_IP:~/docker/niryo_one/Script_ApplicationRTT
 	echo -e "\t... the control VM"
 	sshpass -p ${VM_PSW} scp ${PATH_TO_MEAS_SCRIPTS}/CPU_measurements.sh ${VM_USERNAME}@$CONTROLLER_VM_IP:~/
 	sshpass -p ${VM_PSW} scp ${PATH_TO_MEAS_SCRIPTS}/RAM_measurements.sh ${VM_USERNAME}@$CONTROLLER_VM_IP:~/
 	sshpass -p ${VM_PSW} scp ${PATH_TO_MEAS_SCRIPTS}/resources_psutil.py ${VM_USERNAME}@$CONTROLLER_VM_IP:~/
 	sshpass -p ${VM_PSW} scp ${PATH_TO_MEAS_SCRIPTS}/resources_dockerstats.sh ${VM_USERNAME}@$CONTROLLER_VM_IP:~/
 	sshpass -p ${VM_PSW} scp ${PATH_TO_MEAS_SCRIPTS}/resources_CPUtime.py ${VM_USERNAME}@$CONTROLLER_VM_IP:~/
+	sshpass -p ${VM_PSW} scp ${PATH_TO_L7RTT_SCRIPTS}/*.py ${VM_USERNAME}@$CONTROLLER_VM_IP:~/docker/niryo_one/Script_ApplicationRTT
 	echo -e "\t... the driver VM"
 	sshpass -p ${ROBOT_HOST_PASS} scp ${PATH_TO_MEAS_SCRIPTS}/CPU_measurements.sh ${ROBOT_HOST_USER}@$ROBOT_HOST_IP_LOCAL:~/Desktop/ROSNiryo/
 	sshpass -p ${ROBOT_HOST_PASS} scp ${PATH_TO_MEAS_SCRIPTS}/RAM_measurements.sh ${ROBOT_HOST_USER}@$ROBOT_HOST_IP_LOCAL:~/Desktop/ROSNiryo/
 	sshpass -p ${ROBOT_HOST_PASS} scp ${PATH_TO_MEAS_SCRIPTS}/resources_psutil.py ${ROBOT_HOST_USER}@$ROBOT_HOST_IP_LOCAL:~/Desktop/ROSNiryo/
 	sshpass -p ${ROBOT_HOST_PASS} scp ${PATH_TO_MEAS_SCRIPTS}/resources_dockerstats.sh ${ROBOT_HOST_USER}@$ROBOT_HOST_IP_LOCAL:~/Desktop/ROSNiryo/
 	sshpass -p ${ROBOT_HOST_PASS} scp ${PATH_TO_MEAS_SCRIPTS}/resources_CPUtime.py ${ROBOT_HOST_USER}@$ROBOT_HOST_IP_LOCAL:~/Desktop/ROSNiryo/
+	sshpass -p ${ROBOT_HOST_PASS} scp ${PATH_TO_L7RTT_SCRIPTS}/*.py ${ROBOT_HOST_USER}@$ROBOT_HOST_IP_LOCAL:~/Desktop/ROSNiryo/
 	sshpass -p ${ROBOT_HOST_PASS} ssh ${ROBOT_HOST_USER}@$ROBOT_HOST_IP_LOCAL ". /home/dell46/Desktop/ROSNiryo/send_measscripts_DRIVER.sh ${VM_PSW} ${VM_USERNAME} ${DRIVER_VM_IP}"
 
 	# ####################################################################################################################################
@@ -263,8 +294,10 @@ if [[ $# -eq 5 ]]; then
 	#Start radio link
 	#enb
 	echo -e "\n* * * * * * * * * * * * * * * * * * * * * *\nSTEP 10: Run the eNB"
-	# sh -c "nohup docker run -t --network=host --cap-add SYS_NICE --cap-add NET_ADMIN --cap-add SYS_ADMIN --device /dev/net/tun:/dev/net/tun --device /dev/bus/usb:/dev/bus/usb -v /tmp:/tmp --rm --name srsenb srslte:20.10 srsenb --rf.tx_gain $GAIN >/dev/null 2>&1 &"
+	# if you want to run the enb with docker:
 	sh -c "docker run -t --network=host --cap-add SYS_NICE --cap-add NET_ADMIN --cap-add SYS_ADMIN --device /dev/net/tun:/dev/net/tun --device /dev/bus/usb:/dev/bus/usb -v /tmp:/tmp --rm --name srsenb srslte:20.10.2 srsenb --scheduler.pdsch_max_prb 100 --rf.tx_gain $GAIN > 99LOG_enb_output.txt 2>&1 &"
+	# if you want to run the enb without docker:
+	# echo $EPC_PASS | sudo -S srsenb --scheduler.pdsch_max_prb 100 --rf.tx_gain $GAIN > 99LOG_enb_output.txt &
 	sleep 10
 	echo "eNB is now running (radio link started)"
 
@@ -325,7 +358,7 @@ if [[ $# -eq 5 ]]; then
 		# INPUT VAR 6 : tcp flag (if true, tcp, if not udp)
 		# INPUT VAR 7 : dualtest flag (if true, -d option is given)
 		# sshpass -p${ROBOT_HOST_PASS} ssh $ROBOT_HOST_USER@$ROBOT_HOST_IP_LOCAL "sh /home/dell46/Desktop/ROSNiryo/iperf_run_tests.sh $ENB_IP_LTE 128K 10 60 5 true true > /home/dell46/Desktop/ROSNiryo/iperf_client.out 2>&1 &" &>/dev/null &
-		sshpass -p${ROBOT_HOST_PASS} ssh $ROBOT_HOST_USER@$ROBOT_HOST_IP_LOCAL "bash /home/dell46/Desktop/ROSNiryo/iperf_run_tests.sh $ENB_IP_LTE 128K 20 60 5 true true > /home/dell46/Desktop/ROSNiryo/iperf_client.out &" &
+		sshpass -p${ROBOT_HOST_PASS} ssh $ROBOT_HOST_USER@$ROBOT_HOST_IP_LOCAL "bash /home/dell46/Desktop/ROSNiryo/iperf_run_tests.sh $ENB_IP_LTE 256K 20 60 5 true false > /home/dell46/Desktop/ROSNiryo/iperf_client.out &" &
 
 	fi
 
@@ -384,11 +417,19 @@ if [[ $# -eq 5 ]]; then
 
 	. ./Script_startRobots/mysleep.sh 20
 
-	sshpass -p${ROBOT_HOST_PASS} ssh $ROBOT_HOST_USER@$ROBOT_HOST_IP_LOCAL "pkill -9 iperf3"
-	pkill -9 iperf3
+	tmp=0; while [ $tmp -le 20 ]; do sshpass -p${ROBOT_HOST_PASS} ssh $ROBOT_HOST_USER@$ROBOT_HOST_IP_LOCAL "pkill -9 iperf3"; tmp=$(( tmp + 1 )); done
+	tmp=0; while [ $tmp -le 20 ]; do pkill -9 iperf3; tmp=$(( tmp + 1 )); done
 
 	sshpass -p$UE_PASS ssh -t $UE_USER@$UE_IP_LOCAL "echo $UE_PASS | sudo -S pkill -9 srsue  &>/dev/null" &>/dev/null
 	docker stop srsenb &>/dev/null
 	echo $EPC_PASS | sudo -S pkill -9 srsepc
+	
+	# save the L7 RTT logs --> change their name
+	# sshpass -p ${VM_PSW} ssh ${VM_USERNAME}@$CONTROLLER_VM_IP "mv ~/Output_script/output_publisher_DL.txt ~/Output_script/output_publisher_DL_$2_robot$1_freq$3.txt"
+	# sshpass -p ${VM_PSW} ssh ${VM_USERNAME}@$CONTROLLER_VM_IP "mv ~/Output_script/output_subscriber_UL.txt ~/Output_script/output_subscriber_UL_$2_robot$1_freq$3.txt"
+	sshpass -p ${VM_PSW} ssh ${VM_USERNAME}@$CONTROLLER_VM_IP "echo $VM_PSW | sudo -S mv ~/Output_script/output_publisher_DL.txt ~/Output_script/output_publisher_DL_"$2"_robot"$1"_freq"$3".txt"
+	sshpass -p ${VM_PSW} ssh ${VM_USERNAME}@$CONTROLLER_VM_IP "echo $VM_PSW | sudo -S mv ~/Output_script/output_subscriber_UL.txt ~/Output_script/output_subscriber_UL_"$2"_robot"$1"_freq"$3".txt"
+
+	sshpass -p $UE_PASS ssh -t $UE_USER@$UE_IP_LOCAL "bash /home/dell46/Desktop/ROSNiryo/rename_L7RTT_scripts.sh $1 $2 $3 $VM_PSW $VM_USERNAME $DRIVER_VM_IP"
 
 fi

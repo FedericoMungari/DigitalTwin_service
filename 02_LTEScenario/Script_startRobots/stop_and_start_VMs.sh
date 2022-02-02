@@ -44,4 +44,15 @@ VBoxManage startvm ROS_VNF_interface --type headless &>/dev/null
 . ./Script_startRobots/mysleep.sh 120
 
 echo -e "\n * * * All the VMs are now running * * *\n"
-echo -e "Remove background processes and services"
+
+echo -e "\nRun PTPD istances"
+
+sshpass -p ${VM_PSW} ssh ${VM_USERNAME}@$CONTROLLER_VM_IP "rm /home/ros/printtime.out" 
+sshpass -p ${VM_PSW} ssh ${VM_USERNAME}@$CONTROLLER_VM_IP 'i=0; while [ $i -le 50 ]; do python3 -c "import time; print(time.time())" >> /home/ros/printtime.out; i=$(( i + 1 )); sleep 1; done & ' &
+
+sshpass -p${ROBOT_HOST_PASS} ssh $ROBOT_HOST_USER@$ROBOT_HOST_IP_LOCAL "bash /home/dell46/Desktop/ROSNiryo/print_time_test.sh $VM_PSW $VM_USERNAME $DRIVER_VM_IP &" &
+
+sleep 5
+
+sshpass -p ${VM_PSW} ssh ${VM_USERNAME}@$CONTROLLER_VM_IP "echo ${VM_PSW} | sudo -S ptpd -i enp0s3 -m"
+sshpass -p ${VM_PSW} ssh ${VM_USERNAME}@$CONTROLLER_VM_IP "echo ptpdone >> /home/ros/printtime.out"

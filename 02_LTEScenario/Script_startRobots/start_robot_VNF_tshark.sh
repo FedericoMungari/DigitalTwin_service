@@ -15,6 +15,9 @@ NOF_ACTIVE_ROBOTS=0
 
 declare -a Interface_IP_Set
 
+# declare -a Driver_IP_Set
+# declare -a Controller_IP_Set
+
 function start_robot () {
 
 	NOF_ACTIVE_ROBOTS=$((NOF_ACTIVE_ROBOTS+1))
@@ -83,6 +86,9 @@ function start_robot () {
 
 	Interface_IP_Set+=( $INTERFACE_IP )
 
+	# Driver_IP_Set+=( $DRIVER_IP )
+	# Controller_IP_Set+=( $CONTROL_IP )
+
 }
 
 
@@ -105,7 +111,7 @@ INTERFACE_MASTER_DOCKER_SUBNET=10.1.1.0/24; ROBOTCOMMANDER_DOCKER_SUBNET=10.1.2.
 
 DRIVER_DOCKER_SUBNET=10.2.0.0/24
 
-INTERFACE_MASTER_VM_IP=10.0.3.6; ROBOTCOMMANDER_VM_IP=10.0.3.7; MOTIONPLANNING_VM_IP=10.0.3.4; STATE_VM_IP=10.0.3.5; CONTROLLER_VM_IP=10.0.3.3;
+INTERFACE_MASTER_VM_IP=10.0.3.5; ROBOTCOMMANDER_VM_IP=10.0.3.7; MOTIONPLANNING_VM_IP=10.0.3.6; STATE_VM_IP=10.0.3.4; CONTROLLER_VM_IP=10.0.3.3;
 DRIVER_VM_IP=10.0.4.3
 
 VM_USERNAME=ros; VM_PSW=ros
@@ -128,11 +134,27 @@ IDLEmeas_flag=$4
 meas_tool=$5
 
 # ##########################################################################################################################################################################
+# Send Application Level RTT measurement scripts to both DRIVER and CONTROL    ---> done in ROS_VNFsplit_srsTLE.sh
+# echo "Send publisher DL to the controller"
+# sshpass -p ${VM_PSW} scp /home/k8s-enb-node/Desktop/federico/DigitalTwin_service/02_LTEScenario/Script_ApplicationRTT/publisher_DL.py ${VM_USERNAME}@$CONTROLLER_VM_IP:/
+# echo "Send subscriber UL to the controller"
+# sshpass -p ${VM_PSW} scp /home/k8s-enb-node/Desktop/federico/DigitalTwin_service/02_LTEScenario/Script_ApplicationRTT/subscriber_UL.py ${VM_USERNAME}@$CONTROLLER_VM_IP:/
+
+# echo " "
+# echo "Send publisher UL to the robot physical machine"
+# sshpass -p ${UE_PASS} scp /home/k8s-enb-node/Desktop/federico/DigitalTwin_service/02_LTEScenario/Script_ApplicationRTT/publisher_UL.py ${UE_USER}@$UE_IP_LOCAL:/home/dell46/Desktop/ROSNiryo/
+# echo "Send subscriber DL to the robot physical machine"
+# sshpass -p ${UE_PASS} scp /home/k8s-enb-node/Desktop/federico/DigitalTwin_service/02_LTEScenario/Script_ApplicationRTT/subscriber_DL.py ${UE_USER}@$UE_IP_LOCAL:/home/dell46/Desktop/ROSNiryo/
+
+# sshpass -p ${UE_PASS} ssh ${UE_USER}@$UE_IP_LOCAL "sh /home/dell46/Desktop/ROSNiryo/send_L7RTT_scripts_DRIVER.sh $VM_PSW $VM_USERNAME $DRIVER_VM_IP"
+
+# ##########################################################################################################################################################################
 # Start capturing with tshark
 capturing_time=$(echo $n_robots*60+120 |  bc -l)
 sshpass -p ${UE_PASS} scp /home/k8s-enb-node/Desktop/federico/DigitalTwin_service/02_LTEScenario/Script_tshark/script_tshark.sh ${UE_USER}@$UE_IP_LOCAL:/home/dell46/Desktop/ROSNiryo/
 sshpass -p ${UE_PASS} scp /home/k8s-enb-node/Desktop/federico/DigitalTwin_service/02_LTEScenario/Script_measurements/CPU_driver.sh ${UE_USER}@$UE_IP_LOCAL:/home/dell46/Desktop/ROSNiryo/
-sh /home/k8s-enb-node/Desktop/federico/DigitalTwin_service/02_LTEScenario/Script_tshark/script_tshark.sh /home/k8s-enb-node/Desktop/federico/DigitalTwin_service/02_LTEScenario/Output/tshark_traces/robot_istantiation_$((n_robots))_$commandname.pcapng srs_spgw_sgi $capturing_time &
+sshpass -p ${UE_PASS} scp /home/k8s-enb-node/Desktop/federico/DigitalTwin_service/02_LTEScenario/Script_measurements/resources_CPUtime_PID.py ${UE_USER}@$UE_IP_LOCAL:/home/dell46/Desktop/ROSNiryo/
+sh /home/k8s-enb-node/Desktop/federico/DigitalTwin_service/02_LTEScenario/Script_tshark/script_tshark.sh /home/k8s-enb-node/Desktop/federico/tshark_traces/robot_istantiation_$((n_robots))_$commandname.pcapng srs_spgw_sgi $capturing_time &
 sshpass -p ${UE_PASS} ssh ${UE_USER}@$UE_IP_LOCAL "sh /home/dell46/Desktop/ROSNiryo/script_tshark.sh /home/dell46/Desktop/ROSNiryo/tshark_traces/robot_istantiation_$((n_robots))_$commandname.pcapng tun_srsue $capturing_time &" &
 
 # ##########################################################################################################################################################################
@@ -473,19 +495,51 @@ if true; then
 		fi
 	fi
 
+	# echo "RUN subscriber_UL.py at the controller"
+	# for ipinterface in "${Controller_IP_Set[@]}"
+	# do
+	# 	sshpass -p root ssh root@$ipcontroller 'source /root/catkin_ws/devel/setup.bash && export PYTHONPATH=${PYTHONPATH}:/root/catkin_ws/src/niryo_one_python_api/src/niryo_python_api &&'"python -u /subscriber_UL.py > /Output_script/script_$commandname_output_robots$((NOF_ACTIVE_ROBOTS))_freq$((wait_between_comm)).txt &" &
+	# done
+	# echo "RUN subscriber_DL.py at the driver"
+	# for ipinterface in "${Driver_IP_Set[@]}"
+	# do
+	# 	sshpass -p root ssh root@$ipdriver 'source /root/catkin_ws/devel/setup.bash && export PYTHONPATH=${PYTHONPATH}:/root/catkin_ws/src/niryo_one_python_api/src/niryo_python_api &&'"python -u /subscriber_DL.py > /Output_script/script_$commandname_output_robots$((NOF_ACTIVE_ROBOTS))_freq$((wait_between_comm)).txt $" &
+	# done
+	# echo "RUN publisher_DL.py at the controller"
+	# for ipinterface in "${Controller_IP_Set[@]}"
+	# do
+	# 	sshpass -p root ssh root@$ipcontroller 'source /root/catkin_ws/devel/setup.bash && export PYTHONPATH=${PYTHONPATH}:/root/catkin_ws/src/niryo_one_python_api/src/niryo_python_api &&'"python -u /publisher_DL.py --duration 105 > /Output_script/script_$commandname_output_robots$((NOF_ACTIVE_ROBOTS))_freq$((wait_between_comm)).txt &" &
+	# done
+	# echo "RUN publisher_UL.py at the driver"
+	# for ipinterface in "${Driver_IP_Set[@]}"
+	# do
+	# 	sshpass -p root ssh root@$ipdriver 'source /root/catkin_ws/devel/setup.bash && export PYTHONPATH=${PYTHONPATH}:/root/catkin_ws/src/niryo_one_python_api/src/niryo_python_api &&'"python -u /publisher_UL.py --duration 105 > /Output_script/script_$commandname_output_robots$((NOF_ACTIVE_ROBOTS))_freq$((wait_between_comm)).txt &" &
+	# done
+
 	echo -e "\t\t. . . tshark capturing with active VMs . . ."
 	capturing_time=$(echo $measurement_iteration*$measurement_period |  bc -l | awk '{print int($1)}')
-	sh /home/k8s-enb-node/Desktop/federico/DigitalTwin_service/02_LTEScenario/Script_tshark/script_tshark.sh /home/k8s-enb-node/Desktop/federico/DigitalTwin_service/02_LTEScenario/Output/tshark_traces/robot_active_$((n_robots))_$commandname.pcapng srs_spgw_sgi $capturing_time &
+	sh /home/k8s-enb-node/Desktop/federico/DigitalTwin_service/02_LTEScenario/Script_tshark/script_tshark.sh /home/k8s-enb-node/Desktop/federico/tshark_traces/robot_active_$((n_robots))_$commandname.pcapng srs_spgw_sgi $capturing_time &
 	sshpass -p ${UE_PASS} ssh ${UE_USER}@$UE_IP_LOCAL "sh /home/dell46/Desktop/ROSNiryo/script_tshark.sh /home/dell46/Desktop/ROSNiryo/tshark_traces/robot_active_$((n_robots))_$commandname.pcapng tun_srsue $capturing_time &" &
 
 
 	echo -e "\t\t. . . LTE profiling with active VMs . . ."
-	capturing_time=$(echo $measurement_iteration*$measurement_period |  bc -l | awk '{print int($1)}')
-	measurement_period_lte=$( echo $measurement_period | tr '.' ',' )
-	sh /home/k8s-enb-node/Desktop/federico/DigitalTwin_service/02_LTEScenario/CPU_edge.sh /home/k8s-enb-node/Desktop/federico/DigitalTwin_service/02_LTEScenario/Output/LTE_profiling/epc_profiling_robots$((n_robots))_$commandname.csv /home/k8s-enb-node/Desktop/federico/DigitalTwin_service/02_LTEScenario/Output/LTE_profiling/enb_profiling_robots$((n_robots))_$commandname.csv $measurement_iteration $measurement_period_lte &
-	sshpass -p ${UE_PASS} ssh ${UE_USER}@$UE_IP_LOCAL "sh /home/dell46/Desktop/ROSNiryo/CPU_driver.sh /home/dell46/Desktop/ROSNiryo/LTE_profiling/ue_profiling_robots$((n_robots))_$commandname.csv $measurement_iteration $measurement_period_lte &" &
+	# if top
+	# 	capturing_time=$(echo $measurement_iteration*$measurement_period |  bc -l | awk '{print int($1)}')
+	# 	measurement_period_lte=$( echo $measurement_period | tr '.' ',' )
+	# 	sh /home/k8s-enb-node/Desktop/federico/DigitalTwin_service/02_LTEScenario/Script_measurements/CPU_edge.sh /home/k8s-enb-node/Desktop/federico/DigitalTwin_service/02_LTEScenario/Output/LTE_profiling/epc_profiling_robots$((n_robots))_$commandname.csv /home/k8s-enb-node/Desktop/federico/DigitalTwin_service/02_LTEScenario/Output/LTE_profiling/enb_profiling_robots$((n_robots))_$commandname.csv $measurement_iteration $measurement_period_lte &
+	# 	sshpass -p ${UE_PASS} ssh ${UE_USER}@$UE_IP_LOCAL "sh /home/dell46/Desktop/ROSNiryo/CPU_driver.sh /home/dell46/Desktop/ROSNiryo/LTE_profiling/ue_profiling_robots$((n_robots))_$commandname.csv $measurement_iteration $measurement_period_lte &" &
+	# if psutil
+	pid1=$(pgrep srsepc)
+	pid2=$(pgrep srsenb)
+	pid3=$(sshpass -p ${UE_PASS} ssh ${UE_USER}@$UE_IP_LOCAL 'pgrep srsue')
+	echo "LTE profiling of the EPC - pid="$pid1
+	python3 -u /home/k8s-enb-node/Desktop/federico/DigitalTwin_service/02_LTEScenario/Script_measurements/resources_CPUtime_PID.py $measurement_iteration $measurement_period $pid1 1> /home/k8s-enb-node/Desktop/federico/DigitalTwin_service/02_LTEScenario/Output/LTE_profiling/LTE_srsepc_resources_psutil_CPUtime_$commandname_$((NOF_ACTIVE_ROBOTS))ACTIVE_freq$((wait_between_comm)).out &
+	echo "LTE profiling of the eNB - pid="$pid2
+	python3 -u /home/k8s-enb-node/Desktop/federico/DigitalTwin_service/02_LTEScenario/Script_measurements/resources_CPUtime_PID.py $measurement_iteration $measurement_period $pid2 1> /home/k8s-enb-node/Desktop/federico/DigitalTwin_service/02_LTEScenario/Output/LTE_profiling/LTE_srsenb_resources_psutil_CPUtime_$commandname_$((NOF_ACTIVE_ROBOTS))ACTIVE_freq$((wait_between_comm)).out &
+	echo "LTE profiling of the UE - pid="$pid3
+	sshpass -p ${UE_PASS} ssh ${UE_USER}@$UE_IP_LOCAL "python3 -u /home/dell46/Desktop/ROSNiryo/resources_CPUtime_PID.py $measurement_iteration $measurement_period $pid3 1> /home/dell46/Desktop/ROSNiryo/LTE_profiling/LTE_srsue_resources_psutil_CPUtime_$commandname_$((NOF_ACTIVE_ROBOTS))ACTIVE_freq$((wait_between_comm)).out &" &
 
-	. ./Script_startRobots/mysleep.sh $(echo "$measurement_iteration*$measurement_period+180" | bc)
+	. ./Script_startRobots/mysleep.sh $(echo "$measurement_iteration*$measurement_period+180" | bc) 
 
 	pkill tshark
 	sshpass -p ${UE_PASS} ssh ${UE_USER}@$UE_IP_LOCAL "pkill tshark"

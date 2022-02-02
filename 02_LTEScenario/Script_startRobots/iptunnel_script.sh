@@ -13,6 +13,7 @@ sshpass -p${ROBOT_HOST_PASS} ssh $ROBOT_HOST_USER@$ROBOT_HOST_IP_LOCAL "echo $RO
 echo -e "\nIP tunnel definition the laptop hosting the edge"
 
 echo $EDGE_HOST_PASS | sudo -S ip tunnel add rostunnel mode ipip remote $UE_IP_LTE local $ENB_IP_LTE &>/dev/null
+# echo $EDGE_HOST_PASS | sudo -S ip tunnel add rostunnel mode ipip remote 10.0.1.46 local 10.0.1.44 &>/dev/null
 echo $EDGE_HOST_PASS | sudo -S ifconfig rostunnel $VM_EDGE_GW &>/dev/null
 echo $EDGE_HOST_PASS | sudo -S ip link set rostunnel up &>/dev/null
 
@@ -22,5 +23,6 @@ echo $EDGE_HOST_PASS | sudo -S ip link set rostunnel up &>/dev/null
 echo -e "\nIP tunnel definition the laptop hosting the driver"
 
 sshpass -p${ROBOT_HOST_PASS} ssh $ROBOT_HOST_USER@$ROBOT_HOST_IP_LOCAL "echo $ROBOT_HOST_PASS | sudo -S ip tunnel add rostunnel mode ipip local $UE_IP_LTE remote $ENB_IP_LTE" &>/dev/null
+# sshpass -p${ROBOT_HOST_PASS} ssh $ROBOT_HOST_USER@$ROBOT_HOST_IP_LOCAL "echo $ROBOT_HOST_PASS | sudo -S ip tunnel add rostunnel mode ipip local 10.0.1.46 remote 10.0.1.44" &>/dev/null
 sshpass -p${ROBOT_HOST_PASS} ssh $ROBOT_HOST_USER@$ROBOT_HOST_IP_LOCAL "echo $ROBOT_HOST_PASS | sudo -S ifconfig rostunnel $VM_LOCAL_GW" &>/dev/null
 sshpass -p${ROBOT_HOST_PASS} ssh $ROBOT_HOST_USER@$ROBOT_HOST_IP_LOCAL "echo $ROBOT_HOST_PASS | sudo -S ip link set rostunnel up" &>/dev/null

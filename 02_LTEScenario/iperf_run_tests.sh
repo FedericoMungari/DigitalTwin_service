@@ -46,7 +46,7 @@ then
 
 	fi
 
-elif [ "$7" ==  "false" ]
+elif [ "$6" ==  "false" ]
 then
 
 	if [ "$7" ==  "true" ]

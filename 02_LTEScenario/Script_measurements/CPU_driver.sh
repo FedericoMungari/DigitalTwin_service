@@ -1,17 +1,17 @@
 #|/bin/bash
 
-# $1 number of samples
-# $2 sampling period
+# $1 ue outputfile.csv
+# $2 number of samples 
+# 		--> (ex. want 10 measure samples, then $3=10)
+# $3 sampling period 
+# 		--> (ex. want to take a measure sample every 0.5 seconds, then $4=0.5)
 
 
-pid1=$(pgrep srsepc)
-pid2=$(pgrep srsenb)
+pid1=$(pgrep srsue)
 
-top -b -n $1 -d $2 -p $pid1 >> ./epc_profiling.txt
-top -b -n $1 -d $2 -p $pid2 >> ./enb_profiling.txt
+top -b -n $2 -d $3 -p $pid1 >> ue_profiling.txt
 
-cat ./epc_profiling.txt | grep root | tail -n+2  | tr -s " " | cut -d " " -f 10,11  | tr ',' '.'  | tr ' ' ',' >> ./epc_profiling.csv
-cat ./epc_profiling.txt | grep root | tail -n+2  | tr -s " " | cut -d " " -f 10,11  | tr ',' '.'  | tr ' ' ',' >> ./epc_profiling.csv
+echo "%CPU,%MEM" > $1 # ./ue_profiling.csv
+cat ue_profiling.txt | grep root | tail -n+2  | tr -s " " | cut -d " " -f 9,10  | tr ',' '.'  | tr ' ' ',' >> $1
 
-rm epc_profiling.txt
-rm enb_profiling.txt
+rm ue_profiling.txt

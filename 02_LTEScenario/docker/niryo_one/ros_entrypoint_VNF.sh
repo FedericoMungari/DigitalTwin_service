@@ -26,10 +26,19 @@ if [ $# -eq 1 ]; then
 		exit
 	elif [ $1 = "driver" ] ; then
 		echo -e "\nDRIVER WILL BE EXECUTED\n"
+		sleep 120
+		source /root/catkin_ws/devel/setup.bash
+		python -u /subscriber_DL.py > /Output_script/output_subscriber_DL.txt &
+		python -u /publisher_UL.py > /Output_script/output_publisher_UL.txt &
 		exec "bash"
 		exit
 	elif [ $1 = "control" ] ; then
 		echo -e "\nCONTROL WILL BE EXECUTED\n"
+		# exec "bash 'ls -l /; sleep 120; source /root/catkin_ws/devel/setup.bash && python -u /subscriber_UL.py > /Output_script/output_subscriber_UL.txt & && python -u /publisher_DL.py > /Output_script/output_publisher_DL.txt &'"
+		sleep 120
+		source /root/catkin_ws/devel/setup.bash
+		python -u /subscriber_UL.py > /Output_script/output_subscriber_UL.txt &
+		python -u /publisher_DL.py > /Output_script/output_publisher_DL.txt &
 		exec "bash"
 		exit
 	elif [ $1 = "state" ] ; then
