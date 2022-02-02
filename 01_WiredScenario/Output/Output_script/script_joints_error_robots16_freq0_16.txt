@@ -1,1 +1,27 @@
-python: can't open file '/script_joints.py': [Errno 2] No such file or directory
+Traceback (most recent call last):
+  File "/script_joints.py", line 240, in <module>
+    print("%d,%s,%d,%d,%f" %(i,datestring,old_pos,curr_pos,time.time()-t1))
+NameError: name 'i' is not defined
+Unhandled exception in thread started by 
+sys.excepthook is missing
+lost sys.stderr
+Exception in thread /niryo_one/current_tool_id (most likely raised during interpreter shutdown):
+Traceback (most recent call last):
+  File "/usr/lib/python2.7/threading.py", line 801, in __bootstrap_inner
+  File "/usr/lib/python2.7/threading.py", line 754, in run
+  File "/opt/ros/kinetic/lib/python2.7/dist-packages/rospy/impl/tcpros_pubsub.py", line 185, in robust_connect_subscriber
+  File "/opt/ros/kinetic/lib/python2.7/dist-packages/rospy/impl/tcpros_base.py", line 824, in receive_loop
+<type 'exceptions.TypeError'>: 'NoneType' object is not callable
+Exception in thread Thread-4 (most likely raised during interpreter shutdown):
+Traceback (most recent call last):
+  File "/usr/lib/python2.7/threading.py", line 801, in __bootstrap_inner
+  File "/usr/lib/python2.7/threading.py", line 754, in runException in thread /joint_states (most likely raised during interpreter shutdown):
+Traceback (most recent call last):
+  File "/usr/lib/python2.7/threading.py", line 801, in __bootstrap_inner
+  File "/usr/lib/python2.7/threading.py", line 754, in run
+  File "/opt/ros/kinetic/lib/python2.7/dist-packages/rospy/impl/tcpros_pubsub.py", line 185, in robust_connect_subscriber
+  File "/opt/ros/kinetic/lib/python2.7/dist-packages/rospy/impl/tcpros_base.py", line 824, in receive_loop
+<type 'exceptions.TypeError'>: 'NoneType' object is not callable
+
+  File "/opt/ros/kinetic/lib/python2.7/dist-packages/rospy/impl/tcpros_base.py", line 154, in run
+<type 'exceptions.AttributeError'>: 'NoneType' object has no attribute 'timeout'

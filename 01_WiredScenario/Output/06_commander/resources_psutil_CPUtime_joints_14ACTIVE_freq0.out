@@ -1,0 +1,4 @@
+MACHINE,meas_samples,meas_periodicity,date,time,user,nice,system,idle,iowait,irq,softirq,steal,guest,guest_nice
+ROS_VNF_command,3600.0,0.5,2022-01-28,02:17:24,369.34,0.0,147.6,3179.37,929.21,0.0,364.98,0.0,0.0,0.0
+ROS_VNF_command,3600.0,0.5,2022-01-28,02:47:24,940.04,0.0,353.38,4753.38,991.71,0.0,953.99,0.0,0.0,0.0
+ROS_VNF_command,3600.0,0.5,2022-01-28,02:47:24,570.7,0.0,205.78,1574.0100000000002,62.5,62.5,589.01,0.0,0.0,0.0
