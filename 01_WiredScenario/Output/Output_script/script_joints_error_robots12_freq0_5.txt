@@ -1,0 +1,7 @@
+Traceback (most recent call last):
+  File "/opt/ros/kinetic/lib/python2.7/dist-packages/rospy/core.py", line 477, in signal_shutdown
+    h(reason)
+  File "/opt/ros/kinetic/lib/python2.7/dist-packages/rospy/impl/registration.py", line 376, in cleanup
+    (errno, msg) = se.args
+ValueError: need more than 1 value to unpack
+Exception in thread /niryo_one/current_tool_id (most likely raised during interpreter shutdown):Exception in thread /niryo_one/commander/robot_action/status (most likely raised during interpreter shutdown):

@@ -6,10 +6,15 @@ RUN mkdir -p ~/catkin_ws/src && cd ~/catkin_ws/src && git clone https://github.c
 
 RUN /bin/bash -c ". /opt/ros/kinetic/setup.bash && cd ~/catkin_ws && catkin_make && echo 'root:root' | chpasswd && sed -i 's/PermitRootLogin prohibit-password/PermitRootLogin yes/' /etc/ssh/sshd_config"
 
+ADD ./Script_ApplicationRTT /
 COPY ./ros_entrypoint.sh /ros_entrypoint.sh
+RUN true
 COPY ./ros_entrypoint_VNF.sh /ros_entrypoint_VNF.sh
+RUN true
 COPY ./desktop_rviz_simulation_cmd.launch /root/catkin_ws/src/niryo_one_bringup/.
+RUN true
 COPY ./simulation_driver_split.launch /root/catkin_ws/src/niryo_one_bringup/.
+RUN true
 COPY ./simulation_vnf_split.launch /root/catkin_ws/src/niryo_one_bringup/.
 ENV ROS_MASTER_URI=http://master:11311
 ENV ROSLAUNCH_SSH_UNKNOWN=1

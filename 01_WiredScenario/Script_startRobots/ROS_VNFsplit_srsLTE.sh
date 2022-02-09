@@ -105,42 +105,49 @@ if [[ $# -eq 5 ]]; then
 
 	# ####################################################################################################################################
 	echo -e "\n* * * * * * * * * * * * * * * * * * * * * *\nSTEP 4: Sending CPU and RAM measurement scripts to ..."
+	PATH_TO_L7RTT_SCRIPTS="/home/k8s-cloud-node/Desktop/Federico/DigitalTwin_service/01_WiredScenario/Script_ApplicationRTT"
 	echo -e "\t... the interface VM"
 	sshpass -p ${VM_PSW} scp ./Script_measurements/CPU_measurements.sh ${VM_USERNAME}@$INTERFACE_MASTER_VM_IP:~/
 	sshpass -p ${VM_PSW} scp ./Script_measurements/RAM_measurements.sh ${VM_USERNAME}@$INTERFACE_MASTER_VM_IP:~/
 	sshpass -p ${VM_PSW} scp ./Script_measurements/resources_psutil.py ${VM_USERNAME}@$INTERFACE_MASTER_VM_IP:~/
 	sshpass -p ${VM_PSW} scp ./Script_measurements/resources_dockerstats.sh ${VM_USERNAME}@$INTERFACE_MASTER_VM_IP:~/
 	sshpass -p ${VM_PSW} scp ./Script_measurements/resources_CPUtime.py ${VM_USERNAME}@$INTERFACE_MASTER_VM_IP:~/
+	sshpass -p ${VM_PSW} scp ${PATH_TO_L7RTT_SCRIPTS}/*.py ${VM_USERNAME}@$INTERFACE_MASTER_VM_IP:~/docker/niryo_one/Script_ApplicationRTT
 	echo -e "\t... the commander VM"
 	sshpass -p ${VM_PSW} scp ./Script_measurements/CPU_measurements.sh ${VM_USERNAME}@$ROBOTCOMMANDER_VM_IP:~/
 	sshpass -p ${VM_PSW} scp ./Script_measurements/RAM_measurements.sh ${VM_USERNAME}@$ROBOTCOMMANDER_VM_IP:~/
 	sshpass -p ${VM_PSW} scp ./Script_measurements/resources_psutil.py ${VM_USERNAME}@$ROBOTCOMMANDER_VM_IP:~/
 	sshpass -p ${VM_PSW} scp ./Script_measurements/resources_dockerstats.sh ${VM_USERNAME}@$ROBOTCOMMANDER_VM_IP:~/
 	sshpass -p ${VM_PSW} scp ./Script_measurements/resources_CPUtime.py ${VM_USERNAME}@$ROBOTCOMMANDER_VM_IP:~/
+	sshpass -p ${VM_PSW} scp ${PATH_TO_L7RTT_SCRIPTS}/*.py ${VM_USERNAME}@$ROBOTCOMMANDER_VM_IP:~/docker/niryo_one/Script_ApplicationRTT
 	echo -e "\t... the motion planning VM"
 	sshpass -p ${VM_PSW} scp ./Script_measurements/CPU_measurements.sh ${VM_USERNAME}@$MOTIONPLANNING_VM_IP:~/
 	sshpass -p ${VM_PSW} scp ./Script_measurements/RAM_measurements.sh ${VM_USERNAME}@$MOTIONPLANNING_VM_IP:~/
 	sshpass -p ${VM_PSW} scp ./Script_measurements/resources_psutil.py ${VM_USERNAME}@$MOTIONPLANNING_VM_IP:~/
 	sshpass -p ${VM_PSW} scp ./Script_measurements/resources_dockerstats.sh ${VM_USERNAME}@$MOTIONPLANNING_VM_IP:~/
 	sshpass -p ${VM_PSW} scp ./Script_measurements/resources_CPUtime.py ${VM_USERNAME}@$MOTIONPLANNING_VM_IP:~/
+	sshpass -p ${VM_PSW} scp ${PATH_TO_L7RTT_SCRIPTS}/*.py ${VM_USERNAME}@$MOTIONPLANNING_VM_IP:~/docker/niryo_one/Script_ApplicationRTT
 	echo -e "\t... the state VM"
 	sshpass -p ${VM_PSW} scp ./Script_measurements/CPU_measurements.sh ${VM_USERNAME}@$STATE_VM_IP:~/
 	sshpass -p ${VM_PSW} scp ./Script_measurements/RAM_measurements.sh ${VM_USERNAME}@$STATE_VM_IP:~/
 	sshpass -p ${VM_PSW} scp ./Script_measurements/resources_psutil.py ${VM_USERNAME}@$STATE_VM_IP:~/
 	sshpass -p ${VM_PSW} scp ./Script_measurements/resources_dockerstats.sh ${VM_USERNAME}@$STATE_VM_IP:~/
 	sshpass -p ${VM_PSW} scp ./Script_measurements/resources_CPUtime.py ${VM_USERNAME}@$STATE_VM_IP:~/
+	sshpass -p ${VM_PSW} scp ${PATH_TO_L7RTT_SCRIPTS}/*.py ${VM_USERNAME}@$STATE_VM_IP:~/docker/niryo_one/Script_ApplicationRTT
 	echo -e "\t... the control VM"
 	sshpass -p ${VM_PSW} scp ./Script_measurements/CPU_measurements.sh ${VM_USERNAME}@$CONTROLLER_VM_IP:~/
 	sshpass -p ${VM_PSW} scp ./Script_measurements/RAM_measurements.sh ${VM_USERNAME}@$CONTROLLER_VM_IP:~/
 	sshpass -p ${VM_PSW} scp ./Script_measurements/resources_psutil.py ${VM_USERNAME}@$CONTROLLER_VM_IP:~/
 	sshpass -p ${VM_PSW} scp ./Script_measurements/resources_dockerstats.sh ${VM_USERNAME}@$CONTROLLER_VM_IP:~/
 	sshpass -p ${VM_PSW} scp ./Script_measurements/resources_CPUtime.py ${VM_USERNAME}@$CONTROLLER_VM_IP:~/
+	sshpass -p ${VM_PSW} scp ${PATH_TO_L7RTT_SCRIPTS}/*.py ${VM_USERNAME}@$CONTROLLER_VM_IP:~/docker/niryo_one/Script_ApplicationRTT
 	echo -e "\t... the driver VM"
 	sshpass -p ${VM_PSW} scp ./Script_measurements/CPU_measurements.sh ${VM_USERNAME}@$DRIVER_VM_IP:~/
 	sshpass -p ${VM_PSW} scp ./Script_measurements/RAM_measurements.sh ${VM_USERNAME}@$DRIVER_VM_IP:~/
 	sshpass -p ${VM_PSW} scp ./Script_measurements/resources_psutil.py ${VM_USERNAME}@$DRIVER_VM_IP:~/
 	sshpass -p ${VM_PSW} scp ./Script_measurements/resources_dockerstats.sh ${VM_USERNAME}@$DRIVER_VM_IP:~/
 	sshpass -p ${VM_PSW} scp ./Script_measurements/resources_CPUtime.py ${VM_USERNAME}@$DRIVER_VM_IP:~/
+	sshpass -p ${VM_PSW} scp ${PATH_TO_L7RTT_SCRIPTS}/*.py ${VM_USERNAME}@$DRIVER_VM_IP:~/docker/niryo_one/Script_ApplicationRTT
 
 	# ####################################################################################################################################
 	echo -e "\n* * * * * * * * * * * * * * * * * * * * * *\nSTEP 5: CPU and RAM measurements with idle VM (containers were not even istantiated)"
@@ -189,9 +196,9 @@ if [[ $# -eq 5 ]]; then
 	/bin/bash ./Script_startRobots/start_robot_VNF.sh $1 $2 $3 $4 $5
 	# sleep 20
 
-	echo -e "\nMAIN CODE ENDED"
+	echo -e "\nMAIN CODE ENDED"	
 
-	. ./Script_startRobots/mysleep.sh 60
+	sleep 5
 
 	# VMs STOPPING
 	# echo "..Stopping the robot driver"
@@ -211,6 +218,13 @@ if [[ $# -eq 5 ]]; then
 	# sleep 1
 	# echo "..Stopping the robot interface"
 	# VBoxManage controlvm ROS_VNF_interface poweroff &>/dev/null
+
+	# sshpass -p ${VM_PSW} ssh ${VM_USERNAME}@$CONTROLLER_VM_IP "echo $VM_PSW | sudo -S mv ~/Output_script/output_publisher_DL.txt ~/Output_script/output_publisher_DL_"$2"_robot"$1"_freq"$3".txt"
+	# sshpass -p ${VM_PSW} ssh ${VM_USERNAME}@$CONTROLLER_VM_IP "echo $VM_PSW | sudo -S mv ~/Output_script/output_subscriber_UL.txt ~/Output_script/output_subscriber_UL_"$2"_robot"$1"_freq"$3".txt"
+
+	# sshpass -p ${VM_PSW} ssh ${VM_USERNAME}@$DRIVER_VM_IP "echo $VM_PSW | sudo -S mv ~/Output_script/output_publisher_UL.txt ~/Output_script/output_publisher_UL_"$2"_robot"$1"_freq"$3".txt"
+	# sshpass -p ${VM_PSW} ssh ${VM_USERNAME}@$DRIVER_VM_IP "echo $VM_PSW | sudo -S mv ~/Output_script/output_subscriber_DL.txt ~/Output_script/output_subscriber_DL_"$2"_robot"$1"_freq"$3".txt"
+
 
 
 	VBoxManage controlvm ROS_VNF_state poweroff

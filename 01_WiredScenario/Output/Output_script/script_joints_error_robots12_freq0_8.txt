@@ -1,1 +1,6 @@
-[WARN] [1643318609.930601]: Inbound TCP/IP connection failed: connection from sender terminated before handshake header received. 0 bytes were received. Please check sender for additional details.
+Traceback (most recent call last):
+  File "/opt/ros/kinetic/lib/python2.7/dist-packages/rospy/core.py", line 477, in signal_shutdown
+    h(reason)
+  File "/opt/ros/kinetic/lib/python2.7/dist-packages/rospy/impl/registration.py", line 376, in cleanup
+    (errno, msg) = se.args
+ValueError: need more than 1 value to unpack

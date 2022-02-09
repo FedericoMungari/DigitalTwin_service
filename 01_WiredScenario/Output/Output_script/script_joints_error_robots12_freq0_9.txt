@@ -1,0 +1,32 @@
+Traceback (most recent call last):
+  File "/opt/ros/kinetic/lib/python2.7/dist-packages/rospy/core.py", line 477, in signal_shutdown
+    h(reason)
+  File "/opt/ros/kinetic/lib/python2.7/dist-packages/rospy/impl/registration.py", line 376, in cleanup
+    (errno, msg) = se.args
+ValueError: need more than 1 value to unpack
+Exception in thread /niryo_one/commander/robot_action/status (most likely raised during interpreter shutdown):Exception in thread /niryo_one/current_tool_id (most likely raised during interpreter shutdown):
+Traceback (most recent call last):
+  File "/usr/lib/python2.7/threading.py", line 801, in __bootstrap_inner
+  File "/usr/lib/python2.7/threading.py", line 754, in run
+  File "/opt/ros/kinetic/lib/python2.7/dist-packages/rospy/impl/tcpros_pubsub.py", line 185, in robust_connect_subscriber
+  File "/opt/ros/kinetic/lib/python2.7/dist-packages/rospy/impl/tcpros_base.py", line 827, in receive_loop
+  File "/opt/ros/kinetic/lib/python2.7/dist-packages/rospy/impl/tcpros_base.py", line 842, in close
+  File "/opt/ros/kinetic/lib/python2.7/dist-packages/rospy/impl/transport.py", line 104, in close
+  File "/opt/ros/kinetic/lib/python2.7/dist-packages/rospy/topics.py", line 478, in remove_connection
+  File "/opt/ros/kinetic/lib/python2.7/dist-packages/rospy/core.py", line 138, in rospyinfo
+  File "/usr/lib/python2.7/logging/__init__.py", line 1167, in info
+  File "/usr/lib/python2.7/logging/__init__.py", line 1286, in _log
+  File "/usr/lib/python2.7/logging/__init__.py", line 1296, in handle
+  File "/usr/lib/python2.7/logging/__init__.py", line 1336, in callHandlers
+  File "/usr/lib/python2.7/logging/__init__.py", line 761, in handle
+  File "/usr/lib/python2.7/logging/__init__.py", line 715, in release
+  File "/usr/lib/python2.7/threading.py", line 203, in release
+<type 'exceptions.TypeError'>: 'NoneType' object is not callable
+
+Traceback (most recent call last):
+  File "/usr/lib/python2.7/threading.py", line 801, in __bootstrap_inner
+  File "/usr/lib/python2.7/threading.py", line 754, in run
+  File "/opt/ros/kinetic/lib/python2.7/dist-packages/rospy/impl/tcpros_pubsub.py", line 185, in robust_connect_subscriber
+  File "/opt/ros/kinetic/lib/python2.7/dist-packages/rospy/impl/tcpros_base.py", line 827, in receive_loop
+  File "/opt/ros/kinetic/lib/python2.7/dist-packages/rospy/impl/tcpros_base.py", line 842, in close
+<type 'exceptions.TypeError'>: 'NoneType' object is not callable

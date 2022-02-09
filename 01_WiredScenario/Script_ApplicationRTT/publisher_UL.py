@@ -7,7 +7,7 @@ import datetime
 import argparse
 
 parser = argparse.ArgumentParser()
-parser.add_argument('--duration', help="duration in seconds of the command in loop",type=int,default=60)
+parser.add_argument('--duration', help="duration in seconds of the command in loop",type=int,default=120)
 args = parser.parse_args()
 duration=args.duration
 
@@ -18,7 +18,7 @@ def talker():
 
     pub = rospy.Publisher('chatter_UL', String, queue_size=10)
     rospy.init_node('talker_UL', anonymous=True)
-    rate = rospy.Rate(1) # 10hz
+    rate = rospy.Rate(10) # 10hz
     while ((time.time() - init_time)<duration and (not rospy.is_shutdown())):
         now=rospy.get_rostime()
         rtime=now.secs * 1000000000 + now.nsecs
