@@ -13,7 +13,6 @@ import argparse
 
 parser = argparse.ArgumentParser()
 parser.add_argument('--duration', help="duration in seconds of the command in loop",type=int,default=60)
-parser.add_argument('--key_offset',help="offset between each command",type=float,default=0.010)
 args = parser.parse_args()
 
 duration=args.duration
@@ -27,10 +26,12 @@ if True:
 		# print "--- Start"
 		n = NiryoOne()
 
-		seed(176)
+		seed(80)
 
 		# Calibrate robot first
+
 		n.calibrate_auto()
+
 		#n.calibrate_manual()
 		# print "Calibration finished !\n"
 	
@@ -45,65 +46,75 @@ if True:
 		n.set_arm_max_velocity(100)
 	
 		# JOINTS
+		p1 = [-2.171, -1.45, 0.102, -2.333, 0.859, 1.45]
+		p2 = [-1.405,-0.481,-0.882,-1.145,0.555,-0.833]
+		p3 = [1.611, -0.938, -0.461, -0.261, -0.131, 1.504]
+		p4 = [0.918, -0.958, 0.625, 2.252, -0.641, 0.145]
+		p5 = [2.287, 0.318, -0.831, 2.521, -0.241, 1.971]
+		p6 = [-2.271, 0.325, 1.063, 2.321, 1.667, 2.175]	
+		p7 = [-0.781, -1.265, -0.065, -1.647, -0.059, -0.541]
+		p8 = [-1.873, -1.475, -0.419, 1.282, 0.399, 0.481]
+		
+		# p1 = [-2.17, -1.45, 0.10, -2.33, 0.85, 1.45]
+		# p2 = [-1.40,-0.48,-0.88,-1.14,0.55,-0.83]
+		# p3 = [1.61, -0.93, -0.46, -0.26, -0.13, 1.50]
+		# p4 = [0.91, -0.95, 0.62, 2.25, -0.64, 0.14]
+		# p5 = [2.28, 0.31, -0.83, 2.52, -0.24, 1.97]
+		# p6 = [-2.27, 0.32, 1.06, 2.32, 1.66, 2.17]
+		# p7 = [-0.78, -1.26, -0.06, -1.64, -0.05, -0.54]
+		# p8 = [-1.87, -1.47, -0.41, 1.28, 0.39, 0.48]
+
+		p1 = [0.290, -0.625, -0.611, -0.8, -0.142, -0.246]
+		p2 = [0.041, -0.766, -0.488, -1.022, -0.288, -0.406]
+		p3 = [0.552, -0.762, -0.038, -0.097, -0.395, -1.241]
+		p4 = [-1.328, -1.038, -0.374, -1.112, -0.083, -0.785]
+		p5 = [-0.069, -1.207, -0.169, -0.842, -0.786, -0.726]
+		p6 = [-0.067, -0.510, 0.264, -0.103, -0.623, -0.466]
+		p7 = [-2.006, -1.449, -0.486, 2.09, -0.402, -2.094]
+		p8 = [-0.085, -1.332, -0.164, -1.670, -0.083, 0.824]
+		p9 = [-0.085, -0.382, 0.159, -1.292, -0.277, -0.102]
 			
-		position = [0.0, 0.0, 0.0, 0.0, 0.0, 0.0]
+		p_tot = [p1, p2, p3, p4, p5, p6, p7, p8]
+		p_tot = [p1, p2, p3, p4, p5, p6, p7, p8, p9]
+		
+		a = 0
+		b = len(p_tot)-1
+
+		old_pos = -1
+		curr_pos = -1
+		
+		i=0
 
 		print("iteration,date,executiontime")
-
-		positions=[]
-		indeces=[]
-		# back_indeces=[]
-
-		# i=0
-		# j=19
-		x=[-0.11,-0.11,-0.11,0.0,0.0,0.0]
-		for _ in range(21):
-			x[0]=x[0]+0.01
-			x[0]=round(x[0],2)
-			x[1]=x[1]+0.01
-			x[1]=round(x[1],2)
-			x[2]=x[2]+0.01
-			x[2]=round(x[2],2)
-			positions.append(x[:])
-
-			# indeces.append(i)
-			# back_indeces.append(j)
-			# i=i+1
-			# j=j-1
-
-		#indeces=indeces+back_indeces
-		indeces=[0,1,2,3,4,5,6,7,8,9,10,11,12,13,14,15,16,17,18,19,20,19,18,17,16,15,14,13,12,11,10,9,8,7,6,5,4,3,2,1]
-		
-		# print(positions)
-		# print(indeces)
-
-		iterat=0
-		curr_position=0
 
 		t_start = time.time()
 		
 		while(time.time() - t_start < duration):
-
-			iterat=iterat+1
-			
-			# print(positions[indeces[curr_position]])
+		
+			while(1):
+				_ = randint(a, b)
+				if _ != old_pos:
+					curr_pos = _
+					break
 			t1 = time.time()
-
-			n.move_joints(positions[indeces[curr_position]])
-
+			n.move_joints(p_tot[curr_pos])
 			t2 = time.time()
+			
+			i=i+1
+			n.wait(0)
 
 			datestring=datetime.now().strftime("%Y-%m-%d-%H:%M:%S")
-			print("%d,%s,%f" %(iterat,datestring,t2-t1))
+			
+			print("%d,%s,%f" %(i, datestring, t2-t1))
 
-			curr_position=curr_position+1
-			if curr_position==len(indeces)-1:
-				curr_position=0
-			n.wait(0)
+			old_pos = curr_pos
+	
+		# print "--- End"
 	
 	except NiryoOneException as e:
+		print("ERROR")
 		datestring=datetime.now().strftime("%Y-%m-%d,%H:%M:%S")
-		print("%d,%s,%f" %(iterat,datestring,time.time()-t1))
+		print("%d,%s,%f" %(i,datestring,time.time()-t1))
 		print e
 		# handle exception here
 		# you can also make a try/except for each command separately

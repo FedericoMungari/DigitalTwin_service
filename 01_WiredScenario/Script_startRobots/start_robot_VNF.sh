@@ -201,19 +201,19 @@ then
 
 	if [[ $meas_tool ==  "psutil" ]]; then
 		sshpass -p ${VM_PSW} ssh ${VM_USERNAME}@$INTERFACE_MASTER_VM_IP "python3 -u ~/resources_psutil.py $measurement_iteration $measurement_period ROS_VNF_interface 1> resources_psutil_IDLE_$((n_robots))containers.out" 1>/dev/null &
-		sshpass -p ${VM_PSW} ssh ${VM_USERNAME}@$INTERFACE_MASTER_VM_IP "python3 -u ~/resources_CPUtime.py "$measurement_iteration" "$measurement_period" ROS_VNF_interface 1> resources_psutil_CPUtime_IDLE_$((n_robots))containers.out" 1>/dev/null &
+		sshpass -p ${VM_PSW} ssh ${VM_USERNAME}@$INTERFACE_MASTER_VM_IP "python3 -u ~/resources_CPUtime.py $measurement_iteration $measurement_period ROS_VNF_interface 1> resources_psutil_CPUtime_IDLE_$((n_robots))containers.out" 1>/dev/null &
 		sshpass -p ${VM_PSW} ssh ${VM_USERNAME}@$ROBOTCOMMANDER_VM_IP "python3 -u ~/resources_psutil.py $measurement_iteration $measurement_period ROS_VNF_command 1> resources_psutil_IDLE_$((n_robots))containers.out" 1>/dev/null &
-		sshpass -p ${VM_PSW} ssh ${VM_USERNAME}@$ROBOTCOMMANDER_VM_IP "python3 -u ~/resources_CPUtime.py "$measurement_iteration" "$measurement_period" ROS_VNF_command 1> resources_psutil_CPUtime_IDLE_$((n_robots))containers.out" 1>/dev/null &
+		sshpass -p ${VM_PSW} ssh ${VM_USERNAME}@$ROBOTCOMMANDER_VM_IP "python3 -u ~/resources_CPUtime.py $measurement_iteration $measurement_period ROS_VNF_command 1> resources_psutil_CPUtime_IDLE_$((n_robots))containers.out" 1>/dev/null &
 		sshpass -p ${VM_PSW} ssh ${VM_USERNAME}@$MOTIONPLANNING_VM_IP "python3 -u ~/resources_psutil.py $measurement_iteration $measurement_period ROS_VNF_motionplanning 1> resources_psutil_IDLE_$((n_robots))containers.out" 1>/dev/null &
-		sshpass -p ${VM_PSW} ssh ${VM_USERNAME}@$MOTIONPLANNING_VM_IP "python3 -u ~/resources_CPUtime.py "$measurement_iteration" "$measurement_period" ROS_VNF_motionplanning 1> resources_psutil_CPUtime_IDLE_$((n_robots))containers.out" 1>/dev/null &
+		sshpass -p ${VM_PSW} ssh ${VM_USERNAME}@$MOTIONPLANNING_VM_IP "python3 -u ~/resources_CPUtime.py $measurement_iteration $measurement_period ROS_VNF_motionplanning 1> resources_psutil_CPUtime_IDLE_$((n_robots))containers.out" 1>/dev/null &
 		sshpass -p ${VM_PSW} ssh ${VM_USERNAME}@$STATE_VM_IP "python3 -u ~/resources_psutil.py $measurement_iteration $measurement_period ROS_VNF_state 1> resources_psutil_IDLE_$((n_robots))containers.out" 1>/dev/null &
-		sshpass -p ${VM_PSW} ssh ${VM_USERNAME}@$STATE_VM_IP "python3 -u ~/resources_CPUtime.py "$measurement_iteration" "$measurement_period" ROS_VNF_state 1> resources_psutil_CPUtime_IDLE_$((n_robots))containers.out" 1>/dev/null &
+		sshpass -p ${VM_PSW} ssh ${VM_USERNAME}@$STATE_VM_IP "python3 -u ~/resources_CPUtime.py $measurement_iteration $measurement_period ROS_VNF_state 1> resources_psutil_CPUtime_IDLE_$((n_robots))containers.out" 1>/dev/null &
 		sshpass -p ${VM_PSW} ssh ${VM_USERNAME}@$CONTROLLER_VM_IP "python3 -u ~/resources_psutil.py $measurement_iteration $measurement_period ROS_VNF_control 1> resources_psutil_IDLE_$((n_robots))containers.out" 1>/dev/null &
-		sshpass -p ${VM_PSW} ssh ${VM_USERNAME}@$CONTROLLER_VM_IP "python3 -u ~/resources_CPUtime.py "$measurement_iteration" "$measurement_period" ROS_VNF_control 1> resources_psutil_CPUtime_IDLE_$((n_robots))containers.out" 1>/dev/null &
+		sshpass -p ${VM_PSW} ssh ${VM_USERNAME}@$CONTROLLER_VM_IP "python3 -u ~/resources_CPUtime.py $measurement_iteration $measurement_period ROS_VNF_control 1> resources_psutil_CPUtime_IDLE_$((n_robots))containers.out" 1>/dev/null &
 		sshpass -p ${VM_PSW} ssh ${VM_USERNAME}@$DRIVER_VM_IP "python3 -u ~/resources_psutil.py $measurement_iteration $measurement_period ROS_VNF_driver 1> resources_psutil_IDLE_$((n_robots))containers.out" 1>/dev/null &
-		sshpass -p ${VM_PSW} ssh ${VM_USERNAME}@$DRIVER_VM_IP "python3 -u ~/resources_CPUtime.py "$measurement_iteration" "$measurement_period" ROS_VNF_driver 1> resources_psutil_CPUtime_IDLE_$((n_robots))containers.out" 1>/dev/null &
+		sshpass -p ${VM_PSW} ssh ${VM_USERNAME}@$DRIVER_VM_IP "python3 -u ~/resources_CPUtime.py $measurement_iteration $measurement_period ROS_VNF_driver 1> resources_psutil_CPUtime_IDLE_$((n_robots))containers.out" 1>/dev/null &
 		python3 -u ./Script_measurements/resources_psutil.py $measurement_iteration $measurement_period LocalHost 1> ./Output/00_HostMetrics/resources_psutil_IDLE_$((n_robots))containers.out 2> /dev/null &
-		python3 -u ./Script_measurements/resources_CPUtime.py 1500 1> ./Output/00_HostMetrics/resources_psutil_CPUtime_IDLE_$((n_robots))containers.out $measurement_iteration $measurement_period LocalHost 2> /dev/null &
+		python3 -u ./Script_measurements/resources_CPUtime.py $measurement_iteration $measurement_period LocalHost 1> ./Output/00_HostMetrics/resources_psutil_CPUtime_IDLE_$((n_robots))containers.out $measurement_iteration $measurement_period LocalHost 2> /dev/null &
 	elif [[ $meas_tool ==  "dockerstats" ]]; then
 		sshpass -p ${VM_PSW} ssh ${VM_USERNAME}@$INTERFACE_MASTER_VM_IP "sh ~/resources_dockerstats.sh resources_dockerstats_IDLE_$((n_robots))containers.out ROS_VNF_interface" 1>/dev/null &
 		sshpass -p ${VM_PSW} ssh ${VM_USERNAME}@$ROBOTCOMMANDER_VM_IP "sh ~/resources_dockerstats.sh resources_dockerstats_IDLE_$((n_robots))containers.out ROS_VNF_command" 1>/dev/null &
@@ -246,20 +246,20 @@ if [[ $commandname ==  "joints" ]]; then
 	# read -p $'\nPress the waiting time between move joint commands to the robot\n' wait_between_comm
 	echo "A move joint command will be sent to the robots after $wait_between_comm seconds since the last movement"
 
-	sed -i "s/n.wait(\([0-9]\+\))/n.wait($wait_between_comm)/g" ./Script_python/script_joints_logfile.py
+	sed -i "s/n.wait(\([0-9]\+\))/n.wait($wait_between_comm)/g" ./Script_python/script_joints.py
 
 	script_running=0
 	for ipinterface in "${Interface_IP_Set[@]}"
 	do
 		script_running=$((script_running+1))
-		sed -i "s/seed(\([0-9]\+\))/seed($(echo "$script_running*8" | bc))/g" ./Script_python/script_joints_logfile.py
-		echo "Sending script_joints_logfile.py to $ipinterface"
-		sshpass -p root scp ./Script_python/script_joints_logfile.py root@$ipinterface:/
+		sed -i "s/seed(\([0-9]\+\))/seed($(echo "$script_running*8" | bc))/g" ./Script_python/script_joints.py
+		echo "Sending script_joints.py to $ipinterface"
+		sshpass -p root scp ./Script_python/script_joints.py root@$ipinterface:/
 		# echo "Making script.py executable"
-		sshpass -p root ssh root@$ipinterface 'echo "root" | sudo -S chmod +x /script_joints_logfile.py'
+		sshpass -p root ssh root@$ipinterface 'echo "root" | sudo -S chmod +x /script_joints.py'
 		# echo "Running script.py"
-		(sshpass -p root ssh root@$ipinterface 'source /root/catkin_ws/devel/setup.bash && export PYTHONPATH=${PYTHONPATH}:/root/catkin_ws/src/niryo_one_python_api/src/niryo_python_api &&'"python -u /script_joints_logfile.py --filename /Output_script/script_joints_output_robots$((NOF_ACTIVE_ROBOTS))_freq$((wait_between_comm))_$((script_running)).txt 2> /Output_script/script_joints_error_robots$((NOF_ACTIVE_ROBOTS))_freq$((wait_between_comm))_$((script_running)).txt" &)
-		# (sshpass -p root ssh root@$ipinterface 'source /root/catkin_ws/devel/setup.bash && export PYTHONPATH=${PYTHONPATH}:/root/catkin_ws/src/niryo_one_python_api/src/niryo_python_api &&'"python -u /script_joints.py --duration 3000 1> /Output_script/script_joints_output_robots$((NOF_ACTIVE_ROBOTS))_freq$((wait_between_comm))_$((script_running)).txt 2> /Output_script/script_joints_error_robots$((NOF_ACTIVE_ROBOTS))_freq$((wait_between_comm))_$((script_running)).txt" &)
+		# (sshpass -p root ssh root@$ipinterface 'source /root/catkin_ws/devel/setup.bash && export PYTHONPATH=${PYTHONPATH}:/root/catkin_ws/src/niryo_one_python_api/src/niryo_python_api &&'"python -u /script_joints_logfile.py --filename /Output_script/script_joints_output_robots$((NOF_ACTIVE_ROBOTS))_freq$((wait_between_comm))_$((script_running)).txt 2> /Output_script/script_joints_error_robots$((NOF_ACTIVE_ROBOTS))_freq$((wait_between_comm))_$((script_running)).txt" &)
+		(sshpass -p root ssh root@$ipinterface 'source /root/catkin_ws/devel/setup.bash && export PYTHONPATH=${PYTHONPATH}:/root/catkin_ws/src/niryo_one_python_api/src/niryo_python_api &&'"python -u /script_joints.py --duration 1200 1> /Output_script/script_joints_output_robots$((NOF_ACTIVE_ROBOTS))_freq$((wait_between_comm))_$((script_running)).txt 2> /Output_script/script_joints_error_robots$((NOF_ACTIVE_ROBOTS))_freq$((wait_between_comm))_$((script_running)).txt" &)
 		# &> script_output_((NOF_ACTIVE_ROBOTS)).txt
 	done
 
@@ -327,7 +327,7 @@ elif [[ $commandname ==  "rosapi2" ]]; then
 		sshpass -p root ssh root@$ipinterface 'echo "root" | sudo -S chmod +x /script_ROSAPI_2.py'
 		sshpass -p root ssh root@$ipinterface 'echo "root" | sudo -S chmod +x /ROSAPI_move_to_initposit.py'
 		# (sshpass -p root ssh root@$ipinterface 'source /root/catkin_ws/devel/setup.bash && export PYTHONPATH=${PYTHONPATH}:/root/catkin_ws/src/niryo_one_python_api/src/niryo_python_api && python /ROSAPI_move_to_initposit.py &&'"python /script_ROSAPI_2.py --cmd_speed 0.5 --duration 3000 --key_offset 0.1 --filename1 /Output_script/script_rosapi_2_subcommandoutput_robots$((NOF_ACTIVE_ROBOTS))_freq$((wait_between_comm))_$((script_running)).txt --filename2 /Output_script/script_rosapi_2_targetoutput_robots$((NOF_ACTIVE_ROBOTS))_freq$((wait_between_comm))_$((script_running)).txt 2> /Output_script/script_rosapi_2_error_robots$((NOF_ACTIVE_ROBOTS))_freq$((wait_between_comm))_$((script_running)).txt" &)
-		(sshpass -p root ssh root@$ipinterface 'source /root/catkin_ws/devel/setup.bash && export PYTHONPATH=${PYTHONPATH}:/root/catkin_ws/src/niryo_one_python_api/src/niryo_python_api && python /ROSAPI_move_to_initposit.py &&'"python -u /script_ROSAPI_2.py --cmd_speed 0.1 --duration 3000 --key_offset 0.1 --filename /Output_script/script_rosapi_2_output_robots$((NOF_ACTIVE_ROBOTS))_freq$((wait_between_comm))_$((script_running)).txt 2> /Output_script/script_rosapi_2_error_robots$((NOF_ACTIVE_ROBOTS))_freq$((wait_between_comm))_$((script_running)).txt" &)
+		(sshpass -p root ssh root@$ipinterface 'source /root/catkin_ws/devel/setup.bash && export PYTHONPATH=${PYTHONPATH}:/root/catkin_ws/src/niryo_one_python_api/src/niryo_python_api && python /ROSAPI_move_to_initposit.py &&'"python -u /script_ROSAPI_2.py --cmd_speed 0.05 --duration 3000 --key_offset 0.1 --filename /Output_script/script_rosapi_2_output_robots$((NOF_ACTIVE_ROBOTS))_freq$((wait_between_comm))_$((script_running)).txt 2> /Output_script/script_rosapi_2_error_robots$((NOF_ACTIVE_ROBOTS))_freq$((wait_between_comm))_$((script_running)).txt" &)
 		# source /root/catkin_ws/devel/setup.bash && export PYTHONPATH=${PYTHONPATH}:/root/catkin_ws/src/niryo_one_python_api/src/niryo_python_api && python /ROSAPI_move_to_initposit.py && python -u /script_ROSAPI_2.py --cmd_speed 0.1 --duration 30 --key_offset 0.1 --filename prova 
 	done
 
@@ -339,22 +339,21 @@ else
 	# read -p $'\nPress the waiting time between move pose commands to the robot\n' wait_between_comm
 	echo "A move pose command will be sent to the robots after $wait_between_comm seconds since the last movement"
 
-	sed -i "s/n.wait(\([0-9]\+\))/n.wait($wait_between_comm)/g" ./Script_python/script_pose_logfile.py
+	sed -i "s/n.wait(\([0-9]\+\))/n.wait($wait_between_comm)/g" ./Script_python/script_pose.py
 
 	script_running=0
 	for ipinterface in "${Interface_IP_Set[@]}"
 	do
 		script_running=$((script_running+1))
-		sed -i "s/seed(\([0-9]\+\))/seed($(echo "$script_running*8" | bc))/g" ./Script_python/script_pose_logfile.py
-		echo "Sending script_pose_logfile.py to $ipinterface"
-		sshpass -p root scp ./Script_python/script_pose_logfile.py root@$ipinterface:/
+		sed -i "s/seed(\([0-9]\+\))/seed($(echo "$script_running*8" | bc))/g" ./Script_python/script_pose.py
+		echo "Sending script_pose.py to $ipinterface"
+		sshpass -p root scp ./Script_python/script_pose.py root@$ipinterface:/
 		# echo "Making script.py executable"
-		sshpass -p root ssh root@$ipinterface 'echo "root" | sudo -S chmod +x /script_pose_logfile.py'
+		sshpass -p root ssh root@$ipinterface 'echo "root" | sudo -S chmod +x /script_pose.py'
 		# echo "Running script.py"
-		#(sshpass -p root ssh root@$ipinterface 'source /root/catkin_ws/devel/setup.bash && export PYTHONPATH=${PYTHONPATH}:/root/catkin_ws/src/niryo_one_python_api/src/niryo_python_api && python /script_pose_logfile.py' 1> ./Output_script/script_pose_output_robots$((NOF_ACTIVE_ROBOTS))_freq$((wait_between_comm))_$((script_running)).txt 2> ./Output_script/script_pose_error_robots$((NOF_ACTIVE_ROBOTS))_freq$((wait_between_comm))_$((script_running)).txt &)
-		(sshpass -p root ssh root@$ipinterface 'source /root/catkin_ws/devel/setup.bash && export PYTHONPATH=${PYTHONPATH}:/root/catkin_ws/src/niryo_one_python_api/src/niryo_python_api &&'"python -u /script_pose_logfile.py --filename /Output_script/script_pose_output_robots$((NOF_ACTIVE_ROBOTS))_freq$((wait_between_comm))_$((script_running)).txt 2> /Output_script/script_pose_error_robots$((NOF_ACTIVE_ROBOTS))_freq$((wait_between_comm))_$((script_running)).txt" &)
-		# (sshpass -p root ssh root@$ipinterface 'source /root/catkin_ws/devel/setup.bash && export PYTHONPATH=${PYTHONPATH}:/root/catkin_ws/src/niryo_one_python_api/src/niryo_python_api &&'"python -u /script_pose.py --duration 3000 1> /Output_script/script_pose_output_robots$((NOF_ACTIVE_ROBOTS))_freq$((wait_between_comm))_$((script_running)).txt 2> /Output_script/script_pose_error_robots$((NOF_ACTIVE_ROBOTS))_freq$((wait_between_comm))_$((script_running)).txt" &)
-
+		#(sshpass -p root ssh root@$ipinterface 'source /root/catkin_ws/devel/setup.bash && export PYTHONPATH=${PYTHONPATH}:/root/catkin_ws/src/niryo_one_python_api/src/niryo_python_api && python /script_pose.py' 1> ./Output_script/script_pose_output_robots$((NOF_ACTIVE_ROBOTS))_freq$((wait_between_comm))_$((script_running)).txt 2> ./Output_script/script_pose_error_robots$((NOF_ACTIVE_ROBOTS))_freq$((wait_between_comm))_$((script_running)).txt &)
+		# (sshpass -p root ssh root@$ipinterface 'source /root/catkin_ws/devel/setup.bash && export PYTHONPATH=${PYTHONPATH}:/root/catkin_ws/src/niryo_one_python_api/src/niryo_python_api &&'"python -u /script_pose_logfile.py --filename /Output_script/script_pose_output_robots$((NOF_ACTIVE_ROBOTS))_freq$((wait_between_comm))_$((script_running)).txt 2> /Output_script/script_pose_error_robots$((NOF_ACTIVE_ROBOTS))_freq$((wait_between_comm))_$((script_running)).txt" &)
+		(sshpass -p root ssh root@$ipinterface 'source /root/catkin_ws/devel/setup.bash && export PYTHONPATH=${PYTHONPATH}:/root/catkin_ws/src/niryo_one_python_api/src/niryo_python_api &&'"python -u /script_pose.py --duration 3000 1> /Output_script/script_pose_output_robots$((NOF_ACTIVE_ROBOTS))_freq$((wait_between_comm))_$((script_running)).txt 2> /Output_script/script_pose_error_robots$((NOF_ACTIVE_ROBOTS))_freq$((wait_between_comm))_$((script_running)).txt" &)
 		# &> script_output_((NOF_ACTIVE_ROBOTS)).txt
 	done
 fi

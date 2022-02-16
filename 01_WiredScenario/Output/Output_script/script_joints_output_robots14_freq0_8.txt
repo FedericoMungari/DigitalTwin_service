@@ -1,1 +1,4 @@
-"iteration,date,init_position,final_position,time"
+iteration,date,executiontime
+ERROR
+0,2022-02-13,00:23:36,12.104374
+Goal has been aborted : Please restart the robot and try again.

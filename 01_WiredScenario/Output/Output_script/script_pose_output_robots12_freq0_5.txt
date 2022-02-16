@@ -1,2 +1,3 @@
-"iteration,date,executiontime"
-0,2022-02-09-06:57:20,2.61508
+ERROR
+0,2022-02-12,16:04:52,155.476183
+timeout exceeded while waiting for message on topic niryo_one/hardware_status

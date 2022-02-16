@@ -31,7 +31,7 @@ from trajectory_msgs.msg import JointTrajectoryPoint
 
 from random import randint,seed
 
-seed(112)
+seed(96)
 
 name = socket.gethostbyname(socket.gethostname())
 last_position = [0, 0, 0, 0, 0, 0]
