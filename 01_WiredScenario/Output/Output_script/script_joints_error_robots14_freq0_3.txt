@@ -1,0 +1,3 @@
+Exception in thread Thread-3 (most likely raised during interpreter shutdown):Unhandled exception in thread started by 
+sys.excepthook is missing
+lost sys.stderr

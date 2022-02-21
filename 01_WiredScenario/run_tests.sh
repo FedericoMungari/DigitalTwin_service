@@ -4,10 +4,10 @@ VBoxManage controlvm ROS_VNF_state poweroff 1>/dev/null 2>/dev/null
 
 
 # NUM_ROBOTS_LIST="1 2 4 6 8 10"
-NUM_ROBOTS_LIST="1"
+NUM_ROBOTS_LIST="1 2 4 6 8 10 12 14"
 
 # COMMAND_LIST="rosapi2 joints pose"
-COMMAND_LIST="L7RTT"
+COMMAND_LIST="rosapi2 joints pose"
 
 WAITINGTIME_LIST="0"
 
@@ -38,6 +38,15 @@ for num_robots_value in $NUM_ROBOTS_LIST; do
 					. ./Script_startRobots/ROS_VNFsplit_srsLTE.sh $num_robots_value $command_value $waitingtime_value "IDLEYES" $MEASUREMENT_TOOL
 					firstime=0
 				else
+					echo " "
+					echo "*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*"
+					echo "-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-"
+					echo -e "\t\t\t\t     Number of robots: $num_robots_value"
+					echo -e "\t\t\t\t  Command type of robots: $command_value"
+					echo -e "\t\t\t\tWaiting time between commands: $waitingtime_value"
+					echo "-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-"
+					echo "*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*"
+
 					. ./Script_startRobots/ROS_VNFsplit_srsLTE.sh $num_robots_value $command_value $waitingtime_value "IDLENO" $MEASUREMENT_TOOL
 				fi
 				for i in $(seq $num_robots_value)

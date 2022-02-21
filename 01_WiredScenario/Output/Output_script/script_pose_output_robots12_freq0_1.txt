@@ -1,1 +1,4 @@
-"iteration,date,init_position,final_position,time"
+iteration,date,executiontime
+ERROR
+0,2022-02-12,16:01:52,2.739561
+Action Server is not up : niryo_one/commander/robot_action
